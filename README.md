@@ -1,3 +1,3 @@
 # FrostTrain
 
-### Ссылка на Yandex Game version: clck.ru/38mtwN
+### Ссылка на Yandex Game version: https://yandex.ru/games/app/210436
