@@ -170,15 +170,15 @@ public class StationScripts : MonoBehaviour
                 {
                     GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR0[4];
                 }
-                if (GM.TextureTrain == 1)
+                else if (GM.TextureTrain == 1)
                 {
                     GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[4];
                 }
-                if (GM.TextureTrain == 2)
+                else if (GM.TextureTrain == 2)
                 {
                     GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR2[4];
                 }
-                if (GM.TextureTrain == 3)
+                else if (GM.TextureTrain == 3)
                 {
                     GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR3[4];
                 }
@@ -194,15 +194,15 @@ public class StationScripts : MonoBehaviour
                 {
                     GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR0[8];
                 }
-                if (GM.TextureTrain == 1)
+                else if (GM.TextureTrain == 1)
                 {
                     GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[8];
                 }
-                if (GM.TextureTrain == 2)
+                else if (GM.TextureTrain == 2)
                 {
                     GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[8];
                 }
-                if (GM.TextureTrain == 3)
+                else if (GM.TextureTrain == 3)
                 {
                     GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[8];
                 }
@@ -264,7 +264,6 @@ public class StationScripts : MonoBehaviour
             {
                 GM.Money -= (300 * GM.WagonCol);
                 StartCoroutine(PlusMoney(0 - (300 * GM.WagonCol)));
-                //GM.BuyAddWagone();
                 GM.WagonCol++;
                 ResourceTextUpdate();
             }
@@ -273,74 +272,62 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(MoneyShow());
             }
         }
-        else
-        {
-            //
-        }
     }
     public void ActiveSlider(int index) // Активация слайдеров
     {
         if(index == 0)
         {
             SliderMarket[0].maxValue = GM.Coal; 
-            ColResourceText[0].text = SliderMarket[0].value.ToString();
             ColMoneyText[0].text = "+" + (SliderMarket[0].value * 1) + "$";
         }
-        if (index == 1)
+        else if (index == 1)
         {
             SliderMarket[1].maxValue = GM.Food;
-            ColResourceText[1].text = SliderMarket[1].value.ToString();
             ColMoneyText[1].text = "+" + (SliderMarket[1].value * 18) + "$";
         }
-        if (index == 2)
+        else if (index == 2)
         {
             SliderMarket[2].maxValue = GM.Water;
-            ColResourceText[2].text = SliderMarket[2].value.ToString();
             ColMoneyText[2].text = "+" + (SliderMarket[2].value * 15) + "$";
         }
-        if (index == 3)
+        else if (index == 3)
         {
             SliderMarket[3].maxValue = GM.Warm;
-            ColResourceText[3].text = SliderMarket[3].value.ToString();
             ColMoneyText[3].text = "+" + (SliderMarket[3].value * 8) + "$";
         }
-        if (index == 4)
+        else if (index == 4)
         {
             SliderMarket[4].maxValue = GM.Worker;
-            ColResourceText[4].text = SliderMarket[4].value.ToString();
             ColMoneyText[4].text = "+" + (SliderMarket[4].value * 40) + "$";
         }
-        if (index == 5)
+        else if (index == 5)
         {
             SliderMarket[5].maxValue = GM.CoalMax - GM.Coal;
-            ColResourceText[5].text = SliderMarket[5].value.ToString();
             ColMoneyText[5].text = "-" + (SliderMarket[5].value * 2) + "$";
         }
-        if (index == 6)
+        else if (index == 6)
         {
             SliderMarket[6].maxValue = GM.FoodMax - GM.Food;
-            ColResourceText[6].text = SliderMarket[6].value.ToString();
             ColMoneyText[6].text = "-" + (SliderMarket[6].value * 30) + "$";
         }
-        if (index == 7)
+        else if (index == 7)
         {
             SliderMarket[7].maxValue = GM.WaterMax - GM.Water;
-            ColResourceText[7].text = SliderMarket[7].value.ToString();
             ColMoneyText[7].text = "-" + (SliderMarket[7].value * 25) + "$";
         }
-        if (index == 8)
+        else if (index == 8)
         {
             SliderMarket[8].maxValue = GM.WarmMax - GM.Warm;
-            ColResourceText[8].text = SliderMarket[8].value.ToString();
             ColMoneyText[8].text = "-" + (SliderMarket[8].value * 20) + "$";
         }
-        if (index == 9)
+        else if (index == 9)
         {
             SliderMarket[9].maxValue = GM.WorkerMax - GM.AllPeople;
-            ColResourceText[9].text = SliderMarket[9].value.ToString();
             ColMoneyText[9].text = "-" + (SliderMarket[9].value * 100) + "$";
         }
+        ColResourceText[index].text = SliderMarket[index].value.ToString();
     }
+
     public void BuySellResource(int index) // Покупка / Продажа Ресурсов на рынке
     {
         if(index == 0)
@@ -359,7 +346,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(MoneyShow());
             }
         }
-        if (index == 1)
+        else if (index == 1)
         {
             if (GM.Money >= SliderMarket[6].value * 30)
             {
@@ -375,7 +362,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(MoneyShow());
             }
         }
-        if (index == 2)
+        else if (index == 2)
         {
             if (GM.Money >= SliderMarket[7].value * 25)
             {
@@ -391,7 +378,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(MoneyShow());
             }
         }
-        if (index == 3)
+        else if (index == 3)
         {
             if (GM.Money >= SliderMarket[8].value * 20)
             {
@@ -407,7 +394,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(MoneyShow());
             }
         }
-        if (index == 4)
+        else if (index == 4)
         {
             if (GM.Money >= SliderMarket[9].value * 100)
             {
@@ -425,7 +412,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(MoneyShow());
             }
         }
-        if (index == 5)
+        else if (index == 5)
         {
             GM.Money += (int)SliderMarket[0].value * 1;
             GM.MoneyPlusStatistic += (int)SliderMarket[0].value * 1;
@@ -435,7 +422,7 @@ public class StationScripts : MonoBehaviour
             SliderMarket[0].value = 0;
             ResourceTextUpdate();
         }
-        if (index == 6)
+        else if (index == 6)
         {
             GM.Money += (int)SliderMarket[1].value * 18;
             GM.MoneyPlusStatistic += (int)SliderMarket[1].value * 18;
@@ -445,7 +432,7 @@ public class StationScripts : MonoBehaviour
             SliderMarket[1].value = 0;
             ResourceTextUpdate();
         }
-        if (index == 7)
+        else if (index == 7)
         {
             GM.Money += (int)SliderMarket[2].value * 15;
             GM.MoneyPlusStatistic += (int)SliderMarket[2].value * 15;
@@ -455,7 +442,7 @@ public class StationScripts : MonoBehaviour
             SliderMarket[2].value = 0;
             ResourceTextUpdate();
         }
-        if (index == 8)
+        else if (index == 8)
         {
             GM.Money += (int)SliderMarket[3].value * 8;
             GM.MoneyPlusStatistic += (int)SliderMarket[3].value * 8;
@@ -465,7 +452,7 @@ public class StationScripts : MonoBehaviour
             SliderMarket[3].value = 0;
             ResourceTextUpdate();
         }
-        if (index == 9)
+        else if (index == 9)
         {
             GM.Money += (int)SliderMarket[4].value * 40;
             GM.MoneyPlusStatistic += (int)SliderMarket[4].value * 40;
@@ -492,7 +479,7 @@ public class StationScripts : MonoBehaviour
             TrainPan.SetActive(false);
             QuestPan.SetActive(false);
         }
-        if (index == 1)
+        else if (index == 1)
         {
             MarketPan.SetActive(false);
             TrainPan.SetActive(true);
@@ -502,14 +489,14 @@ public class StationScripts : MonoBehaviour
                 LocoUpdateText[0].text = "Приобретено";
                 LocoUpdateText[1].text = "Текущий";
             }
-            if (GM.LevelLoco == 3)
+            else if (GM.LevelLoco == 3)
             {
                 LocoUpdateText[0].text = "Приобретено";
                 LocoUpdateText[1].text = "Приобретено";
                 LocoUpdateText[2].text = "Текущий";
             }
         }
-        if (index == 2)
+        else if (index == 2)
         {
             MarketPan.SetActive(false);
             TrainPan.SetActive(false);
@@ -524,7 +511,7 @@ public class StationScripts : MonoBehaviour
             ViewTrainPan.SetActive(false);
             SpecialWagPan.SetActive(false);
         }
-        if (index == 1)
+        else if (index == 1)
         {
             LocoBuyPan.SetActive(false);
             ViewTrainPan.SetActive(true);
@@ -537,11 +524,11 @@ public class StationScripts : MonoBehaviour
             {
                 TrainViewText[1].text = "Доступен";
             }
-            if (GM.Texture2 == true)
+            else if (GM.Texture2 == true)
             {
                 TrainViewText[2].text = "Доступен";
             }
-            if (GM.Texture3 == true)
+            else if (GM.Texture3 == true)
             {
                 TrainViewText[3].text = "Доступен";
             }
@@ -550,18 +537,18 @@ public class StationScripts : MonoBehaviour
                 TrainViewText[1].text = "Текущий";
                 TrainViewText[0].text = "Доступен";
             }
-            if (GM.TextureTrain == 2)
+            else if (GM.TextureTrain == 2)
             {
                 TrainViewText[2].text = "Текущий";
                 TrainViewText[0].text = "Доступен";
             }
-            if (GM.TextureTrain == 3)
+            else if (GM.TextureTrain == 3)
             {
                 TrainViewText[3].text = "Текущий";
                 TrainViewText[0].text = "Доступен";
             }
         }
-        if (index == 2)
+        else if (index == 2)
         {
             LocoBuyPan.SetActive(false);
             ViewTrainPan.SetActive(false);
@@ -580,16 +567,16 @@ public class StationScripts : MonoBehaviour
             {
                 TrainViewText[1].text = "Доступен";
             }
-            if (GM.Texture2 == true)
+            else if (GM.Texture2 == true)
             {
                 TrainViewText[2].text = "Доступен";
             }
-            if (GM.Texture3 == true)
+            else if (GM.Texture3 == true)
             {
                 TrainViewText[3].text = "Доступен";
             }
         }
-        if(index == 1)
+        else if(index == 1)
         {
             if (GM.Texture1 == true)
             {
@@ -598,11 +585,11 @@ public class StationScripts : MonoBehaviour
                 GM.ChoiceViewTrain(1);
                 TrainViewText[0].text = "Доступен";
             }
-            if (GM.Texture2 == true)
+            else if (GM.Texture2 == true)
             {
                 TrainViewText[2].text = "Доступен";
             }
-            if (GM.Texture3 == true)
+            else if (GM.Texture3 == true)
             {
                 TrainViewText[3].text = "Доступен";
             }
@@ -783,7 +770,7 @@ public class StationScripts : MonoBehaviour
             if (PTransport < 25)
             {
                 PTransport++;
-                PReward = PTransport * (GM.NextStationTime * 2) * 2; // Награда увеличина в 2 раза для акции!                                                   АКЦИЯ!!
+                PReward = PTransport * (GM.NextStationTime * 2);
                 PassTransportationUpdate();
             }
         }
@@ -883,7 +870,7 @@ public class StationScripts : MonoBehaviour
         {
             number = GM.Score;
         }
-        if (GM.Score > 10000)
+        else if (GM.Score > 10000)
         {
             number = 9999;
         }
@@ -1085,77 +1072,77 @@ public class StationScripts : MonoBehaviour
             GM.QuestionPoint[0] = true;
             TaskCounter = 0;
         }
-        if(GM.City == 9 & GM.ActiveTask == true & GM.CityTask == 9)
+        else if(GM.City == 9 & GM.ActiveTask == true & GM.CityTask == 9)
         {
             TaskPan[0].SetActive(true);
             TaskPan[3].SetActive(true);
             GM.ActiveTask = false;
             TaskCounter = 0;
         }
-        if (GM.City == 15 & GM.QuestionPoint[1] == false)
+        else if (GM.City == 15 & GM.QuestionPoint[1] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[4].SetActive(true);
             GM.QuestionPoint[1] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 13 & GM.QuestionPoint[2] == false)
+        else if (GM.City == 13 & GM.QuestionPoint[2] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[7].SetActive(true);
             GM.QuestionPoint[2] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 20 & GM.QuestionPoint[3] == false)
+        else if (GM.City == 20 & GM.QuestionPoint[3] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[8].SetActive(true);
             GM.QuestionPoint[3] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 19 & GM.QuestionPoint[4] == false)
+        else if (GM.City == 19 & GM.QuestionPoint[4] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[10].SetActive(true);
             GM.QuestionPoint[4] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 24 & GM.QuestionPoint[5] == false)
+        else if (GM.City == 24 & GM.QuestionPoint[5] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[11].SetActive(true);
             GM.QuestionPoint[5] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 6 & GM.ActiveTask == true & GM.CityTask == 6)
+        else if (GM.City == 6 & GM.ActiveTask == true & GM.CityTask == 6)
         {
             TaskPan[0].SetActive(true);
             TaskPan[13].SetActive(true);
             GM.ActiveTask = false;
             TaskCounter = 0;
         }
-        if (GM.City == 28 & GM.QuestionPoint[6] == false)
+        else if (GM.City == 28 & GM.QuestionPoint[6] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[14].SetActive(true);
             GM.QuestionPoint[6] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 32 & GM.QuestionPoint[7] == false)
+        else if (GM.City == 32 & GM.QuestionPoint[7] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[15].SetActive(true);
             GM.QuestionPoint[7] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 41 & GM.QuestionPoint[8] == false)
+        else if (GM.City == 41 & GM.QuestionPoint[8] == false)
         {
             TaskPan[0].SetActive(true);
             TaskPan[16].SetActive(true);
             GM.QuestionPoint[8] = true;
             TaskCounter = 0;
         }
-        if (GM.City == 44)
+        else if (GM.City == 44)
         {
             TaskPan[0].SetActive(true);
             TaskPan[18].SetActive(true);
@@ -1164,17 +1151,17 @@ public class StationScripts : MonoBehaviour
     }
     public void DismissQuestion()
     {
-        if(GM.City == 2) // Отказ в Москве
+        if (GM.City == 2) // Отказ в Москве
         {
             TaskPan[0].SetActive(false);
             TaskPan[1].SetActive(false);
         }
-        if(GM.City == 15) // Отказ в Новороссийск
+        else if(GM.City == 15) // Отказ в Новороссийск
         {
             TaskPan[0].SetActive(false);
             TaskPan[6].SetActive(false);
         }
-        if (GM.City == 24)
+        else if (GM.City == 24)
         {
             TaskPan[0].SetActive(false);
             TaskPan[11].SetActive(false);
@@ -1192,14 +1179,14 @@ public class StationScripts : MonoBehaviour
                 GM.CityTask = 9;
                 GM.CargoSpecTransportCount = 5;
             }
-            if (TaskCounter == 0)
+            else if (TaskCounter == 0)
             {
                 TaskPan[1].SetActive(false);
                 TaskPan[2].SetActive(true);
                 TaskCounter = 1;
             }
         }
-        if (GM.City == 9) // Награда за доставку в Краснодар из Москвы
+        else if (GM.City == 9) // Награда за доставку в Краснодар из Москвы
         {
             if (TaskCounter == 0)
             {
@@ -1211,14 +1198,14 @@ public class StationScripts : MonoBehaviour
                 ResourceTextUpdate();
             }
         }
-        if (GM.City == 15) // Диалог Новороссийск
+        else if (GM.City == 15) // Диалог Новороссийск
         {
             if (TaskCounter == 2)
             {
                 TaskPan[0].SetActive(false);
                 TaskPan[6].SetActive(false);
             }
-            if (TaskCounter == 1)
+            else if (TaskCounter == 1)
             {
                 TaskPan[5].SetActive(false);
                 TaskPan[6].SetActive(true);
@@ -1228,46 +1215,46 @@ public class StationScripts : MonoBehaviour
                     GM.Food -= 30;
                     StartCoroutine(PlusFood(0 - 30));
                 }
-                if (GM.Food < 30)
+                else if (GM.Food < 30)
                 {
                     GM.Food = 0;
                     StartCoroutine(PlusFood(0 - GM.Food));
                 }
             }
-            if (TaskCounter == 0)
+            else if (TaskCounter == 0)
             {
                 TaskPan[4].SetActive(false);
                 TaskPan[5].SetActive(true);
                 TaskCounter = 1;
             }
         }
-        if(GM.City == 13)
+        else if(GM.City == 13)
         {
             TaskPan[0].SetActive(false);
             TaskPan[7].SetActive(true);
         }
-        if (GM.City == 20)
+        else if (GM.City == 20)
         {
             if (TaskCounter == 1)
             {
                 TaskPan[0].SetActive(false);
                 TaskPan[9].SetActive(false);
             }
-            if (TaskCounter == 0)
+            else if (TaskCounter == 0)
             {
                 TaskPan[8].SetActive(false);
                 TaskPan[9].SetActive(true);
                 TaskCounter = 1;
             }
         }
-        if (GM.City == 19)
+        else if (GM.City == 19)
         {
             TaskPan[0].SetActive(false);
             TaskPan[10].SetActive(false);
             GM.Score += 20;
             ScoreCount();
         }
-        if (GM.City == 24)
+        else if (GM.City == 24)
         {
             if (TaskCounter == 1)
             {
@@ -1277,14 +1264,14 @@ public class StationScripts : MonoBehaviour
                 GM.CityTask = 6;
                 GM.CargoSpec1TransportCount = 9;
             }
-            if (TaskCounter == 0)
+            else if (TaskCounter == 0)
             {
                 TaskPan[11].SetActive(false);
                 TaskPan[12].SetActive(true);
                 TaskCounter = 1;
             }
         }
-        if (GM.City == 6) // Награда за доставку в Саратов из Уренгой
+        else if (GM.City == 6) // Награда за доставку в Саратов из Уренгой
         {
             if (TaskCounter == 0)
             {
@@ -1294,7 +1281,7 @@ public class StationScripts : MonoBehaviour
                 GM.AirShipActive = true;
             }
         }
-        if (GM.City == 28)
+        else if (GM.City == 28)
         {
             TaskPan[0].SetActive(false);
             TaskPan[14].SetActive(false);
@@ -1302,35 +1289,35 @@ public class StationScripts : MonoBehaviour
             StartCoroutine(PlusMoney(2000));
             ResourceTextUpdate();
         }
-        if (GM.City == 32)
+        else if (GM.City == 32)
         {
             TaskPan[0].SetActive(false);
             TaskPan[15].SetActive(false);
             GM.Score += 20;
             ScoreCount();
         }
-        if (GM.City == 41)
+        else if (GM.City == 41)
         {
             if (TaskCounter == 1)
             {
                 TaskPan[0].SetActive(false);
                 TaskPan[17].SetActive(false);
             }
-            if (TaskCounter == 0)
+            else if (TaskCounter == 0)
             {
                 TaskPan[16].SetActive(false);
                 TaskPan[17].SetActive(true);
                 TaskCounter = 1;
             }
         }
-        if(GM.City == 44)
+        else if(GM.City == 44)
         {
             if (TaskCounter == 1)
             {
                 TaskPan[0].SetActive(false);
                 TaskPan[19].SetActive(false);
             }
-            if (TaskCounter == 0)
+            else if (TaskCounter == 0)
             {
                 TaskPan[18].SetActive(false);
                 TaskPan[19].SetActive(true);

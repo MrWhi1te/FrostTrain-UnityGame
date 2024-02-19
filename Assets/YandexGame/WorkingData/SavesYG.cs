@@ -68,7 +68,7 @@ namespace YG
         public bool ActiveTask; //
         public int CityTask; //
 
-        public int[] WagoneActive = new int[50]; // Активация скрипта вагона
+        public bool[] WagoneActive = new bool[50]; // Активация скрипта вагона
         public string[] Name = new string[50]; // Название вагона (Назначение)
         public int[] LevelWagone = new int[50]; // Уровень вагона
         public int[] TimerActiveProduction = new int[50]; // Текующее время для таймера производства

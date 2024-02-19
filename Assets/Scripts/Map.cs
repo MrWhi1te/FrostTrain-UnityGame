@@ -64,1073 +64,327 @@ public class Map : MonoBehaviour
         {
             if(index == 1)
             {
-                PointCity[1].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 1;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity]*10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 1)
+        else if (GM.City == 1)
         {
-            if (index == 0)
+            if (index == 0 || index == 2 || index == 3)
             {
-                PointCity[0].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 0;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 2)
-            {
-                PointCity[2].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 2;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 3)
-            {
-                PointCity[3].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 3;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 2)
+        else if (GM.City == 2)
         {
-            if (index == 1)
+            if (index == 1 || index == 3 || index == 4 || index == 5 || index == 6 || index == 7)
             {
-                PointCity[1].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 1;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 3)
-            {
-                PointCity[3].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 3;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 4)
-            {
-                PointCity[4].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 4;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 5)
-            {
-                PointCity[5].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 5;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 6)
-            {
-                PointCity[6].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 6;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 7)
-            {
-                PointCity[7].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 7;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 3)
+        else if (GM.City == 3)
         {
-            if (index == 1)
+            if (index == 1 || index == 2 || index == 8)
             {
-                PointCity[1].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 1;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 2)
-            {
-                PointCity[2].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 2;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 8)
-            {
-                PointCity[8].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 8;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 4)
+        else if (GM.City == 4)
         {
-            if (index == 2)
+            if (index == 2 || index == 9)
             {
-                PointCity[2].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 2;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 9)
-            {
-                PointCity[9].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 9;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 5)
+        else if (GM.City == 5)
         {
-            if (index == 2)
+            if (index == 2 || index == 6 || index == 10)
             {
-                PointCity[2].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 2;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 6)
-            {
-                PointCity[6].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 6;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 10)
-            {
-                PointCity[10].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 10;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 6)
+        else if (GM.City == 6)
         {
-            if (index == 2)
+            if (index == 2 || index == 5 || index == 11)
             {
-                PointCity[2].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 2;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 5)
-            {
-                PointCity[5].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 5;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 11)
-            {
-                PointCity[11].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 11;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 7)
+        else if (GM.City == 7)
         {
-            if (index == 2)
+            if (index == 2 || index == 8 || index == 12)
             {
-                PointCity[2].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 2;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 8)
-            {
-                PointCity[8].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 8;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 12)
-            {
-                PointCity[12].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 12;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 8)
+        else if (GM.City == 8)
         {
-            if (index == 3)
+            if (index == 3 || index == 7 || index == 13 || index == 14)
             {
-                PointCity[3].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 3;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 7)
-            {
-                PointCity[7].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 7;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 13)
-            {
-                PointCity[13].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 13;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 14)
-            {
-                PointCity[14].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 14;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 9)
+        else if (GM.City == 9)
         {
-            if (index == 4)
+            if (index == 4 || index == 15)
             {
-                PointCity[4].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 4;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 15)
-            {
-                PointCity[15].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 15;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 10)
+        else if (GM.City == 10)
         {
             if (index == 5)
             {
-                PointCity[5].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 5;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 11)
+        else if (GM.City == 11)
         {
-            if (index == 6)
+            if (index == 6 || index == 12 || index == 16)
             {
-                PointCity[6].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 6;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 12)
-            {
-                PointCity[12].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 12;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 16)
-            {
-                PointCity[16].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 16;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 12)
+        else if (GM.City == 12)
         {
-            if (index == 7)
+            if (index == 7 || index == 11 || index == 16)
             {
-                PointCity[7].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 7;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 11)
-            {
-                PointCity[11].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 11;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 16)
-            {
-                PointCity[16].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 16;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 13)
+        else if (GM.City == 13)
         {
             if (index == 8)
             {
-                PointCity[8].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 8;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 14)
+        else if (GM.City == 14)
         {
-            if (index == 8)
+            if (index == 8 || index == 16 || index == 17)
             {
-                PointCity[8].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 8;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 16)
-            {
-                PointCity[16].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 16;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 17)
-            {
-                PointCity[17].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 17;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 15)
+        else if (GM.City == 15)
         {
             if (index == 9)
             {
-                PointCity[9].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 9;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 16)
+        else if (GM.City == 16)
         {
-            if (index == 11)
+            if (index == 11 || index == 12 || index == 14 || index == 18)
             {
-                PointCity[11].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 11;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 12)
-            {
-                PointCity[12].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 12;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 14)
-            {
-                PointCity[14].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 14;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 18)
-            {
-                PointCity[18].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 18;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 17)
+        else if (GM.City == 17)
         {
-            if (index == 14)
+            if (index == 14 || index == 18 || index == 19)
             {
-                PointCity[14].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 14;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 18)
-            {
-                PointCity[18].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 18;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 19)
-            {
-                PointCity[19].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 19;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 18)
+        else if (GM.City == 18)
         {
-            if (index == 16)
+            if (index == 16 || index == 17 || index == 20)
             {
-                PointCity[16].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 16;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 17)
-            {
-                PointCity[17].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 17;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 20)
-            {
-                PointCity[20].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 20;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 19)
+        else if (GM.City == 19)
         {
-            if (index == 17)
+            if (index == 17 || index == 21 || index == 22)
             {
-                PointCity[17].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 17;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 21)
-            {
-                PointCity[21].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 21;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 22)
-            {
-                PointCity[22].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 22;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 20)
+        else if (GM.City == 20)
         {
             if (index == 18)
             {
-                PointCity[18].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 18;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 21)
+        else if (GM.City == 21)
         {
-            if (index == 19)
+            if (index == 19 || index == 23 || index == 24 || index == 25)
             {
-                PointCity[19].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 19;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 23)
-            {
-                PointCity[23].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 23;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 24)
-            {
-                PointCity[24].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 24;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 25)
-            {
-                PointCity[25].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 25;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 22)
+        else if (GM.City == 22)
         {
-            if (index == 19)
+            if (index == 19 || index == 26)
             {
-                PointCity[19].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 19;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 26)
-            {
-                PointCity[26].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 26;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 23)
+        else if (GM.City == 23)
         {
             if (index == 21)
             {
-                PointCity[21].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 21;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 24)
+        else if (GM.City == 24)
         {
             if (index == 21)
             {
-                PointCity[21].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 21;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 25)
+        else if (GM.City == 25)
         {
             if (index == 21)
             {
-                PointCity[21].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 21;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 26)
+        else if (GM.City == 26)
         {
-            if (index == 22)
+            if (index == 22 || index == 27 || index == 28 || index == 29)
             {
-                PointCity[22].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 22;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 27)
-            {
-                PointCity[27].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 27;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 28)
-            {
-                PointCity[28].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 28;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 29)
-            {
-                PointCity[29].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 29;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 27)
+        else if (GM.City == 27)
         {
             if (index == 26)
             {
-                PointCity[26].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 26;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 28)
+        else if (GM.City == 28)
         {
             if (index == 26)
             {
-                PointCity[26].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 26;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 29)
+        else if (GM.City == 29)
         {
-            if (index == 26)
+            if (index == 26 || index == 30)
             {
-                PointCity[26].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 26;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 30)
-            {
-                PointCity[30].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 30;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 30)
+        else if (GM.City == 30)
         {
-            if (index == 29)
+            if (index == 29 || index == 31)
             {
-                PointCity[29].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 29;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 31)
-            {
-                PointCity[31].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 31;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 31)
+        else if (GM.City == 31)
         {
-            if (index == 30)
+            if (index == 30 || index == 32)
             {
-                PointCity[30].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 30;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 32)
-            {
-                PointCity[32].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 32;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 32)
+        else if (GM.City == 32)
         {
-            if (index == 31)
+            if (index == 31 || index == 33)
             {
-                PointCity[31].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 31;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 33)
-            {
-                PointCity[33].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 33;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 33)
+        else if (GM.City == 33)
         {
-            if (index == 32)
+            if (index == 32 || index == 34)
             {
-                PointCity[32].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 32;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 34)
-            {
-                PointCity[34].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 34;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 34)
+        else if (GM.City == 34)
         {
-            if (index == 33)
+            if (index == 33 || index == 35 || index == 36)
             {
-                PointCity[33].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 33;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 35)
-            {
-                PointCity[35].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 35;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 36)
-            {
-                PointCity[36].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 36;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 35)
+        else if (GM.City == 35)
         {
             if (index == 34)
             {
-                PointCity[34].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 34;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 36)
+        else if (GM.City == 36)
         {
-            if (index == 34)
+            if (index == 34 || index == 37 || index == 38)
             {
-                PointCity[34].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 34;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 37)
-            {
-                PointCity[37].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 37;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 38)
-            {
-                PointCity[38].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 38;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 37)
+        else if (GM.City == 37)
         {
-            if (index == 36)
+            if (index == 36 || index == 39)
             {
-                PointCity[36].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 36;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 39)
-            {
-                PointCity[39].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 39;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 38)
+        else if (GM.City == 38)
         {
-            if (index == 36)
+            if (index == 36 || index == 40)
             {
-                PointCity[36].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 36;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 40)
-            {
-                PointCity[40].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 40;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 39)
+        else if (GM.City == 39)
         {
-            if (index == 37)
+            if (index == 37 || index == 41)
             {
-                PointCity[37].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 37;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 41)
-            {
-                PointCity[41].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 41;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 40)
+        else if (GM.City == 40)
         {
-            if (index == 38)
+            if (index == 38 || index == 42 || index == 43 || index == 44)
             {
-                PointCity[38].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 38;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 42)
-            {
-                PointCity[42].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 42;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 43)
-            {
-                PointCity[43].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 43;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 44)
-            {
-                PointCity[44].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 44;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 41)
+        else if (GM.City == 41)
         {
             if (index == 39)
             {
-                PointCity[39].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 39;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 42)
+        else if (GM.City == 42)
+        {
+            if (index == 40 || index == 43)
+            {
+                GetNextStation(index);
+            }
+        }
+        else if (GM.City == 43)
+        {
+            if (index == 40 || index == 42)
+            {
+                GetNextStation(index);
+            }
+        }
+        else if (GM.City == 44)
         {
             if (index == 40)
             {
-                PointCity[40].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 40;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 43)
-            {
-                PointCity[43].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 43;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+                GetNextStation(index);
             }
         }
-        if (GM.City == 43)
-        {
-            if (index == 40)
-            {
-                PointCity[40].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 40;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-            if (index == 42)
-            {
-                PointCity[42].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 42;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-        }
-        if (GM.City == 44)
-        {
-            if (index == 40)
-            {
-                PointCity[40].color = new Color(36, 255, 0, 255);
-                GM.ChoiceCity = 40;
-                NextStation.enabled = true;
-                ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
-                ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-                ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
-            }
-        }
+    }
+
+    void GetNextStation(int index)
+    {
+        PointCity[index].color = new Color(36, 255, 0, 255);
+        GM.ChoiceCity = index;
+        NextStation.enabled = true;
+        ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
+        ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
+        ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
     }
 
     public void NextStationGO()

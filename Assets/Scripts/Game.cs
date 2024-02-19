@@ -171,7 +171,6 @@ public class Game : MonoBehaviour
     public Text TimerAirShipText1; //
     public bool AirShipActive; //
     public int TimerAirShip = 900; //
-    int PanAirShipOpenClosed;
     [Header("Thanks")]
     public GameObject ThanksPan;//
     public bool Thanks; //
@@ -272,7 +271,7 @@ public class Game : MonoBehaviour
             Thanks = YandexGame.savesData.Thanks;
             for (int i = 0; i < WagonCol; i++)
             {
-                WagoneData[i].WagoneActive = 0;// YandexGame.savesData.WagoneActive[i];
+                WagoneData[i].WagoneActive = false;// YandexGame.savesData.WagoneActive[i];
                 WagoneData[i].Name = YandexGame.savesData.Name[i];
                 WagoneData[i].LevelWagone = YandexGame.savesData.LevelWagone[i];
                 WagoneData[i].TimerActiveProduction = YandexGame.savesData.TimerActiveProduction[i];
@@ -326,15 +325,15 @@ public class Game : MonoBehaviour
                 {
                     PTransportWagone[i].GetComponent<Image>().sprite = SPR0[4];
                 }
-                if (TextureTrain == 1)
+                else if (TextureTrain == 1)
                 {
                     PTransportWagone[i].GetComponent<Image>().sprite = SPR1[4];
                 }
-                if (TextureTrain == 2)
+                else if (TextureTrain == 2)
                 {
                     PTransportWagone[i].GetComponent<Image>().sprite = SPR2[4];
                 }
-                if (TextureTrain == 3)
+                else if (TextureTrain == 3)
                 {
                     PTransportWagone[i].GetComponent<Image>().sprite = SPR3[4];
                 }
@@ -350,15 +349,15 @@ public class Game : MonoBehaviour
                 {
                     CargoTransportWagone[i].GetComponent<Image>().sprite = SPR0[8];
                 }
-                if (TextureTrain == 1)
+                else if (TextureTrain == 1)
                 {
                     CargoTransportWagone[i].GetComponent<Image>().sprite = SPR1[8];
                 }
-                if (TextureTrain == 2)
+                else if (TextureTrain == 2)
                 {
                     CargoTransportWagone[i].GetComponent<Image>().sprite = SPR1[8];
                 }
-                if (TextureTrain == 3)
+                else if (TextureTrain == 3)
                 {
                     CargoTransportWagone[i].GetComponent<Image>().sprite = SPR1[8];
                 }
@@ -386,7 +385,7 @@ public class Game : MonoBehaviour
             {
                 AirShipObj.GetComponent<Image>().sprite = SPR0[9];
             }
-            if (TextureTrain >= 1)
+            else if (TextureTrain >= 1)
             {
                 AirShipObj.GetComponent<Image>().sprite = SPR1[11];
             }
@@ -403,13 +402,13 @@ public class Game : MonoBehaviour
                 WagoneData[a].WagoneObj.SetActive(true);
             }
         }
-        for (int a = 0; a < WagonCol; a++)
-        {
-            if (WagoneData[a].Name == "")
-            {
-                WagoneData[a].WagoneObj.SetActive(true);
-            }
-        }
+        //for (int a = 0; a < WagonCol; a++)
+        //{
+        //    if (WagoneData[a].Name == "")
+        //    {
+        //        WagoneData[a].WagoneObj.SetActive(true);
+        //    }
+        //}
     }
     public void StartNextStation()
     {
@@ -756,16 +755,8 @@ public class Game : MonoBehaviour
 
     public void ClickLocoPan() // Открытие и закрытие панели локомотива
     {
-        if(PanLocoOpenClosed == 1)
-        {
-            LocoPan.SetActive(false);
-            PanLocoOpenClosed = 0;
-        }
-        else
-        {
-            LocoPan.SetActive(true);
-            PanLocoOpenClosed = 1;
-        }
+        if(!LocoPan.activeInHierarchy) LocoPan.SetActive(true);
+        else LocoPan.SetActive(false);
     }
     public void OpenLocoUpgradePan() // Открытие панели улучшения локомотива
     {
@@ -861,11 +852,10 @@ public class Game : MonoBehaviour
         {
             WagoneData[WagonCol].WagoneImage = SPR0[0];
         }
-        if (TextureTrain == 1)
+        else if (TextureTrain == 1)
         {
             WagoneData[WagonCol].WagoneImage = SPR1[0];
         }
-        //WagoneData[1].WagoneObj.GetComponent<Image>().sprite = SPR0[1]; // ТЕСТ СМЕНА СПРАЙТА ИЗ СКРИПТА!
     }
     public void MaxStorageWagone() // Максимальная вместимость ресурсов. Зависит от грузовых вагонов
     {
@@ -878,11 +868,11 @@ public class Game : MonoBehaviour
                 {
                     StorageCount += 50;
                 }
-                if(WagoneData[i].LevelWagone == 2)
+                else if(WagoneData[i].LevelWagone == 2)
                 {
                     StorageCount += 75;
                 }
-                if(WagoneData[i].LevelWagone == 3)
+                else if(WagoneData[i].LevelWagone == 3)
                 {
                     StorageCount += 100;
                 }
@@ -904,11 +894,11 @@ public class Game : MonoBehaviour
                 {
                     StorageCount += 10;
                 }
-                if (WagoneData[i].LevelWagone == 2)
+                else if (WagoneData[i].LevelWagone == 2)
                 {
                     StorageCount += 15;
                 }
-                if (WagoneData[i].LevelWagone == 3)
+                else if (WagoneData[i].LevelWagone == 3)
                 {
                     StorageCount += 20;
                 }
@@ -933,11 +923,11 @@ public class Game : MonoBehaviour
                     {
                         r = 10 - WagoneData[i].WorkerInWagone;
                     }
-                    if (WagoneData[i].LevelWagone == 2)
+                    else if (WagoneData[i].LevelWagone == 2)
                     {
                         r = 15 - WagoneData[i].WorkerInWagone;
                     }
-                    if (WagoneData[i].LevelWagone == 3)
+                    else if (WagoneData[i].LevelWagone == 3)
                     {
                         r = 20 - WagoneData[i].WorkerInWagone;
                     }
@@ -948,7 +938,7 @@ public class Game : MonoBehaviour
                             WagoneData[i].WorkerInWagone += DontPeopleWagone;
                             DontPeopleWagone = 0;
                         }
-                        if(DontPeopleWagone >= r)
+                        else if(DontPeopleWagone >= r)
                         {
                             WagoneData[i].WorkerInWagone += r;
                             DontPeopleWagone -= r;
@@ -958,93 +948,6 @@ public class Game : MonoBehaviour
             }
         }
     } // Размещение людей по пустым вагонам
-    //public void CountPeopleTrain(int needfood, int needPeople) // Удаление Недоедающих людей
-    //{
-    //    if(needfood > Worker) // Если недоедающих людей больше чем свободных рабочих 
-    //    {
-    //        needfood -= Worker;
-    //        Worker = 0;
-    //        for(int i = 0; i < WagonCol; i++) // Проходимся по поезду
-    //        {
-    //            if(WagoneData[i].Name == "Food" || WagoneData[i].Name == "Water" || WagoneData[i].Name == "Boiler") // Вагоны с работниками
-    //            {
-    //                if(WagoneData[i].WorkerInWagone >= 1 & WagoneData[i].WorkerInWagone < needfood) // Если в вагоне 1 и больше рбаотников и работноков меньше чем недоедающих
-    //                {
-    //                    for(int a=0; a < WagonCol; a++) // Проходимся по поезду
-    //                    {
-    //                        if(WagoneData[a].Name == "Pass") // Находим пассажирский вагон
-    //                        {
-    //                            if(needPeople <= WagoneData[a].WorkerInWagone) // Если недоедающих меньше или равно количеству людей живущих в вагоне
-    //                            {
-    //                                WagoneData[a].WorkerInWagone -= needPeople; // Отнимаем от проживающих ,тех кто умерли и закрываем.
-    //                                StartPlusWorker(0- needPeople);
-    //                                break;
-    //                            }
-    //                            if (needPeople > WagoneData[a].WorkerInWagone) // Если недоедающих больше количества людей живущих в вагоне
-    //                            {
-    //                                needPeople -= WagoneData[a].WorkerInWagone; // Отнимаем людей из вагона и на второй круг
-    //                                StartPlusWorker(0 - WagoneData[a].WorkerInWagone);
-    //                                WagoneData[a].WorkerInWagone = 0;
-    //                            }
-    //                        }
-    //                    }
-    //                    needfood -= WagoneData[i].WorkerInWagone;
-    //                    WagoneData[i].WorkerInWagone = 0;
-    //                    MaxWorkerWagone();
-    //                }
-    //                if(WagoneData[i].WorkerInWagone >= 1 & WagoneData[i].WorkerInWagone >= needfood)
-    //                {
-    //                    WagoneData[i].WorkerInWagone -= needfood;
-    //                    for (int a = 0; a < WagonCol; a++) // Проходимся по поезду
-    //                    {
-    //                        if (WagoneData[a].Name == "Pass") // Находим пассажирский вагон
-    //                        {
-    //                            if (needfood <= WagoneData[a].WorkerInWagone) // Если недоедающих меньше или равно количеству людей живущих в вагоне
-    //                            {
-    //                                WagoneData[a].WorkerInWagone -= needfood; // Отнимаем от проживающих ,тех кто умерли и закрываем.
-    //                                StartPlusWorker(0 - needfood);
-    //                                break;
-    //                            }
-    //                            if (needfood > WagoneData[a].WorkerInWagone) // Если недоедающих больше количества людей живущих в вагоне
-    //                            {
-    //                                needfood -= WagoneData[a].WorkerInWagone; // Отнимаем людей из вагона и на второй круг
-    //                                StartPlusWorker(0 - WagoneData[a].WorkerInWagone);
-    //                                WagoneData[a].WorkerInWagone = 0;
-    //                            }
-    //                        }
-    //                    }
-    //                    MaxWorkerWagone();
-    //                    break;
-    //                }
-    //            }
-    //        }
-    //    }
-    //    if(needfood <= Worker) // Если недоедающих меньше или равно свобоным рабочим
-    //    {
-    //        Worker -= needfood;
-    //        for (int a = 0; a < WagoneData.Capacity; a++)
-    //        {
-    //            if (WagoneData[a].Name == "Pass")
-    //            {
-    //                if (needfood <= WagoneData[a].WorkerInWagone)
-    //                {
-    //                    WagoneData[a].WorkerInWagone -= needfood;
-    //                    break;
-    //                }
-    //                if (needfood > WagoneData[a].WorkerInWagone)
-    //                {
-    //                    needfood -= WagoneData[a].WorkerInWagone;
-    //                    WagoneData[a].WorkerInWagone = 0;
-    //                }
-    //            }
-    //        }
-    //    }
-    //}
-
-    //
-
-    //Закоыьие вагонов!
-
 
     public void CountPeopleTrain1()
     {
@@ -1060,7 +963,7 @@ public class Game : MonoBehaviour
                         People = 0;
                         break;
                     }
-                    if(WagoneData[i].WorkerInWagone < People)
+                    else if(WagoneData[i].WorkerInWagone < People)
                     {
                         People -= WagoneData[i].WorkerInWagone;
                         WagoneData[i].WorkerInWagone = 0;
@@ -1095,7 +998,7 @@ public class Game : MonoBehaviour
                 for (int i = 0; i < WagonCol; i++)
                 {
                     WagoneData[i].WagoneObj.SetActive(false);
-                    WagoneData[i].WagoneActive = 0;
+                    WagoneData[i].WagoneActive = false;
                 }
                 SmokeParticle.SetActive(false);
                 GamePan.SetActive(false);
@@ -1106,7 +1009,7 @@ public class Game : MonoBehaviour
                 YandexGame.FullscreenShow();
                 break;
             }
-            if(NextStationTime > 0 & Coal >= NeedCoal) //
+            else if(NextStationTime > 0 & Coal >= NeedCoal) //
             {
                 ActiveTimerLoco--;
                 S++;
@@ -1361,7 +1264,6 @@ public class Game : MonoBehaviour
                 if (WagoneData[i].Name == "")
                 {
                     WagoneData[i].WagoneImage = SPR0[0];
-                    //WagoneData[1].WagoneObj.GetComponent<Image>().sprite = WagoneData[i].WagoneImage;
                 }
                 if (WagoneData[i].Name == "Food")
                 {
@@ -1459,19 +1361,19 @@ public class Game : MonoBehaviour
             ViewLoco();
             UpdateViewTrain();
         }
-        if (index == 1)
+        else if (index == 1)
         {
             TextureTrain = 1;
             ViewLoco();
             UpdateViewTrain();
         }
-        if (index == 2)
+        else if (index == 2)
         {
             TextureTrain = 2;
             ViewLoco();
             UpdateViewTrain();
         }
-        if (index == 3)
+        else if (index == 3)
         {
             TextureTrain = 3;
             ViewLoco();
@@ -1499,7 +1401,7 @@ public class Game : MonoBehaviour
             TrainPan[37].SetActive(false);
             TrainPan[38].SetActive(false);
         }
-        if (TrainCount == 16)
+        else if (TrainCount == 16)
         {
             TrainPan[33].SetActive(false);
             TrainPan[34].SetActive(false);
@@ -1507,7 +1409,7 @@ public class Game : MonoBehaviour
             TrainPan[36].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 15)
+        else if (TrainCount == 15)
         {
             TrainPan[20].SetActive(false);
             TrainPan[27].SetActive(false);
@@ -1516,7 +1418,7 @@ public class Game : MonoBehaviour
             TrainPan[34].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 14)
+        else if (TrainCount == 14)
         {
             TrainPan[27].SetActive(false);
             TrainPan[30].SetActive(true);
@@ -1524,7 +1426,7 @@ public class Game : MonoBehaviour
             TrainPan[32].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 13)
+        else if (TrainCount == 13)
         {
             TrainPan[24].SetActive(false);
             TrainPan[27].SetActive(true);
@@ -1532,7 +1434,7 @@ public class Game : MonoBehaviour
             TrainPan[29].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 12)
+        else if (TrainCount == 12)
         {
             TrainPan[21].SetActive(false);
             TrainPan[24].SetActive(true);
@@ -1540,7 +1442,7 @@ public class Game : MonoBehaviour
             TrainPan[26].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 11)
+        else if (TrainCount == 11)
         {
             TrainPan[19].SetActive(false);
             TrainPan[21].SetActive(true);
@@ -1548,28 +1450,28 @@ public class Game : MonoBehaviour
             TrainPan[23].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 10)
+        else if (TrainCount == 10)
         {
             TrainPan[18].SetActive(false);
             TrainPan[19].SetActive(true);
             TrainPan[20].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 9)
+        else if (TrainCount == 9)
         {
             Time.timeScale = 1;
             TrainPan[0].SetActive(false);
             TrainPan[17].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 8)
+        else if (TrainCount == 8)
         {
             TrainPan[14].SetActive(false);
             TrainPan[15].SetActive(false);
             TrainPan[16].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 7)
+        else if (TrainCount == 7)
         {
             TrainPan[12].SetActive(false);
             TrainPan[13].SetActive(false);
@@ -1577,7 +1479,7 @@ public class Game : MonoBehaviour
             TrainPan[15].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 6)
+        else if (TrainCount == 6)
         {
             TrainPan[9].SetActive(false);
             TrainPan[10].SetActive(false);
@@ -1586,7 +1488,7 @@ public class Game : MonoBehaviour
             TrainPan[13].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 5)
+        else if (TrainCount == 5)
         {
             TrainPan[7].SetActive(false);
             TrainPan[8].SetActive(false);
@@ -1595,7 +1497,7 @@ public class Game : MonoBehaviour
             TrainPan[11].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 4)
+        else if (TrainCount == 4)
         {
             TrainPan[5].SetActive(false);
             TrainPan[6].SetActive(false);
@@ -1603,26 +1505,26 @@ public class Game : MonoBehaviour
             TrainPan[8].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 3)
+        else if (TrainCount == 3)
         {
             TrainPan[4].SetActive(false);
             TrainPan[5].SetActive(true);
             TrainPan[6].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 2)
+        else if (TrainCount == 2)
         {
             TrainPan[3].SetActive(false);
             TrainPan[4].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 1)
+        else if (TrainCount == 1)
         {
             TrainPan[2].SetActive(false);
             TrainPan[3].SetActive(true);
             TrainCount++;
         }
-        if (TrainCount == 0)
+        else if (TrainCount == 0)
         {
             TrainPan[1].SetActive(false);
             TrainPan[2].SetActive(true);
@@ -1674,13 +1576,13 @@ public class Game : MonoBehaviour
             WagoneHelp.SetActive(false);
             LocomotiveHelp.SetActive(false);
         }
-        if (index == 1)
+        else if (index == 1)
         {
             TargetHelp.SetActive(false);
             WagoneHelp.SetActive(true);
             LocomotiveHelp.SetActive(false);
         }
-        if (index == 2)
+        else if (index == 2)
         {
             TargetHelp.SetActive(false);
             WagoneHelp.SetActive(false);
@@ -1774,7 +1676,7 @@ public class Game : MonoBehaviour
             StartPlusCoal(350);
             ResourceTextUpdate();
         }
-        if (350 >= Razn)
+        else if (350 >= Razn)
         {
             Coal += Razn;
             StartPlusCoal(350);
@@ -1937,16 +1839,8 @@ public class Game : MonoBehaviour
     // AIRSHIPS
     public void ClickAirShipPan() // Открытие и закрытие панели локомотива
     {
-        if (PanAirShipOpenClosed == 1)
-        {
-            AirShipPan.SetActive(false);
-            PanAirShipOpenClosed = 0;
-        }
-        else
-        {
-            AirShipPan.SetActive(true);
-            PanAirShipOpenClosed = 1;
-        }
+        if(!AirShipPan.activeInHierarchy) AirShipPan.SetActive(true);
+        else AirShipPan.SetActive(false);
     }
     public void StartTimerAirShip() //
     {
@@ -2117,55 +2011,55 @@ public class Game : MonoBehaviour
             TaskDone.interactable = false;
             TaskText.text = "Улучшите тендер Локомотива";
         }
-        if (TaskCount == 1)
+        else if (TaskCount == 1)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = true;
             TaskText.text = "Собрать награду";
         }
-        if (TaskCount == 2)
+        else if (TaskCount == 2)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = false;
             TaskText.text = "Соберите любой ресурс";
         }
-        if (TaskCount == 3)
+        else if (TaskCount == 3)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = true;
             TaskText.text = "Собрать награду";
         }
-        if (TaskCount == 4)
+        else if (TaskCount == 4)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = false;
             TaskText.text = "Выполните задание по доставке";
         }
-        if (TaskCount == 5)
+        else if (TaskCount == 5)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = true;
             TaskText.text = "Собрать награду";
         }
-        if (TaskCount == 6)
+        else if (TaskCount == 6)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = false;
             TaskText.text = "Улучшите вагон";
         }
-        if (TaskCount == 7)
+        else if (TaskCount == 7)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = true;
             TaskText.text = "Собрать награду";
         }
-        if (TaskCount == 8)
+        else if (TaskCount == 8)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = false;
             TaskText.text = "Ускорьте время до станции";
         }
-        if (TaskCount == 9)
+        else if (TaskCount == 9)
         {
             TaskPan.SetActive(true);
             TaskDone.interactable = true;
@@ -2181,28 +2075,28 @@ public class Game : MonoBehaviour
             TaskCount++;
             TaskCounter();
         }
-        if (TaskCount == 3)
+        else if (TaskCount == 3)
         {
             Money += 500;
             PlusMoney(500);
             TaskCount++;
             TaskCounter();
         }
-        if (TaskCount == 5)
+        else if (TaskCount == 5)
         {
             Money += 1000;
             PlusMoney(1000);
             TaskCount++;
             TaskCounter();
         }
-        if (TaskCount == 7)
+        else if (TaskCount == 7)
         {
             Money += 800;
             PlusMoney(800);
             TaskCount++;
             TaskCounter();
         }
-        if (TaskCount == 9)
+        else if (TaskCount == 9)
         {
             Diamond++;
             TaskCount++;
@@ -2245,7 +2139,7 @@ public class Game : MonoBehaviour
 [Serializable]
 public class WagoneData // Данные вагона
 {
-    public int WagoneActive; // Активация скрипта вагона
+    public bool WagoneActive; // Активация скрипта вагона
     public GameObject WagoneObj; // Активация обьекта вагона
     public string Name; // Название вагона (Назначение)
     public int LevelWagone; // Уровень вагона
