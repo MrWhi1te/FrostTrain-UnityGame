@@ -20,17 +20,15 @@ public class Game : MonoBehaviour
     public bool Texture1; // Открыта ли цветной вид поезда
     public bool Texture2; // Открыта ли золотой вид поезда
     public bool Texture3; // Открыта ли фиолетовый вид поезда
+    
     [Header("Ресурсы")]
     public int Money; // Количество денег
     public int Diamond; // Роскошь
     public int Score; // Очки
     public int Coal; // Количество угля
     public int CoalMax; // Максимум угля для хранения
-    public int Worker; // Количество свободных рабочих
-    public int People; // Количество занятых на работе людей в поезде
-    public int AllPeople; // Количество всего рабочих в поезде
-    public int DontPeopleWagone; // Людей без вагона
-    public int WorkerMax; // Максимум Рабочих в поезде.
+    public int FreeWorker; // Количество свободных рабочих
+    public int AllWorker; // Количество всего рабочих в поезде
     public int Warm; // Количество тепла
     public int WarmMax; // Максимум тепла для хранения
     public int Food; // Количество еды
@@ -52,9 +50,12 @@ public class Game : MonoBehaviour
     public Text PlusMoneyText; // 
     int StorageCount = 50; // Емкость хранилища
     public Slider[] SliderResource; // Слайдер ресурсов (В наличие и макс)
+    public GameObject[] CollectResources; //
+    
     [Header("Температура")]
     public int TemperatureOnStreet; // Температура за бортом
     public Text TermometrText; // Текст термометра температуры за бортом
+   
     [Header("ТаймерСтанции")]
     public Slider NextStationSlide; // Слайдер (прогресс) следующей станции
     public Text NextStationTimeText; // Текст времени до следующей станции
@@ -65,6 +66,7 @@ public class Game : MonoBehaviour
     int x2Pan; //
     float Timer = 1; //
     int StationCount; // Количество станций
+    
     [Header("Локомотив")]
     public Text LevelLocoText; // Текст уроень локомотива
     public Text StorageCoalText; // Текст Хранилище угля
@@ -81,20 +83,18 @@ public class Game : MonoBehaviour
     int NeedCoal;// Сколько потребляет угля
     int TimerLoco;// Таймер за сколько потребляет уголь
     int ActiveTimerLoco; // Активный таймер локомотива
+    
     [Header("CoalFree")]
-    public GameObject CoalFree; // Объект бесплатного угля
-    public Text CoalFreeText; //
     public GameObject CoalADS; // Объект угля за рекламу
     public GameObject StartLocoEnginePan; // Запуск двигателя
     public GameObject CoalHelpObj; //
-    int CoalFreeCount; // количество бесплатного угля
+    public GameObject TreesClickParticle; //
+    int coalCountClick;
     bool CoalHelp; // Подсказка при первом появлении угля
+    
     [Header("Message")]
     public Text Message; // Текст сообщений
-    public Text WorkerMessageText; // Сообщение о людях без вагона
-    public GameObject WorkerMessageObj; // объект слайдера людей без вагона
-    public Slider WorkerMessageSlide; // Слайдер людей без вагона
-    public int WorkerMessageCount; // Счетчик сколько люди находяться без вагона
+   
     [Header("Улучшение локомотива")]
     public Text LevelEngineText; // Уровень Котла
     public Text LevelCoalStorageText; // Уровень Тендера
@@ -105,55 +105,70 @@ public class Game : MonoBehaviour
     int LevelCostCoalStorage; // Стоимость улучшения тендера локо 
     public int LevelChassis = 1; // Уровень шасси локомотива
     int LevelCostChassis; // Стоимость улучшения шасси локо 
+    
     [Header("PassTrasport")]
     public GameObject[] PTransportWagone; // Обьекты вагонов задания перевозки
     public int PTransportCount; // Количество вагонов
     public int RewardPTransport; // Награда за доставку
+   
     [Header("CargoTrasport")]
     public GameObject[] CargoTransportWagone; // Обьекты вагонов задания перевозки
     public int CargoTransportCount; // Количество вагонов
     public int RewardCargoTransport; // Награда за доставку
+   
     [Header("CargoSpecTrasport")]
     public GameObject[] CargoSpecTransportWagone; // Обьекты вагонов задания перевозки
     public int CargoSpecTransportCount; // Количество вагонов
     public int RewardCargoSpecTransport; // Награда за доставку
+   
     [Header("CargoSpec1Trasport")]
     public GameObject[] CargoSpec1TransportWagone; // Обьекты вагонов задания перевозки
     public int CargoSpec1TransportCount; // Количество вагонов
     public int RewardCargoSpec1Transport; // Награда за доставку
+   
     [Header("Город")]
     public int City; // Текущий город
     public int ChoiceCity; // Выбор города
     public string[] NameCity; // Название выбранного города
     public int[] TimeForCity; // Время до следующего города
     public int[] TemperatureForCity; // Температура до следующего города
+   
     [Header("Background")]
     public int SpeedFon; // Скорость движения фона
-    public Image[] BackgroundImage; //
-    public Sprite[] BackgroundSprite; //
+    public GameObject[] ParallaxObj; //
+
+    [Header("Barrier")]
+    public GameObject BarrierObj; //
+    int clickCountBarrier; //
+   
     [Header("Trainer")]
     public bool[] Trainer; //
     public bool[] WagoneTrainerChoice; //
     public int TrainCount; //
     public GameObject[] TrainPan; //
+    
     [Header("Help")]
     public GameObject HelpPan; //
     public GameObject TargetHelp; //
     public GameObject WagoneHelp; //
     public GameObject LocomotiveHelp; //
+   
     [Header("ADS")]
     public GameObject ShopPan; //
     public GameObject ADSMoneyActivePan; // Панель предложения денег за рекламу
     public Slider ADSMoneyActiveSlide; // слайдер таймера денег за рекламу
     public Text ADSMoneyActiveText; // текст денег за рекламу
     int ADSMoneyCol; // награда денег за рекламу
+    
     [Header("SAVE")]
     public Text SaveText; //
     public bool Saver;
     public GameObject DeletePan;
+    
     [Header("Menu")]
     public GameObject MenuPan; //
     public Text ScoreMenu; // 
+    
     [Header("Task")]
     public bool[] QuestionPoint; //
     public bool ActiveTask; //
@@ -190,7 +205,7 @@ public class Game : MonoBehaviour
     //
     public string Lang;
 
-    int PanLocoOpenClosed; // Переменная открытия/закрытия панели при нажатии на Локомотив
+    public GameObject PanWagon; // Открытая панель вагона
 
 
     private void OnEnable()
@@ -224,11 +239,8 @@ public class Game : MonoBehaviour
             Food = YandexGame.savesData.Food;
             Water = YandexGame.savesData.Water;
             Warm = YandexGame.savesData.Warm;
-            Worker = YandexGame.savesData.Worker;
-            WorkerMax = YandexGame.savesData.WorkerMax;
-            People = YandexGame.savesData.People;
-            AllPeople = YandexGame.savesData.AllPeople;
-            DontPeopleWagone = YandexGame.savesData.DontPeopleWagone;
+            FreeWorker = YandexGame.savesData.Worker;
+            AllWorker = YandexGame.savesData.AllPeople;
             //
             TemperatureOnStreet = YandexGame.savesData.TemperatureOnStreet;
             NextStationTime = YandexGame.savesData.NextStationTime;
@@ -311,7 +323,6 @@ public class Game : MonoBehaviour
         ActiveWagone();
         ViewLoco();
         MaxStorageWagone();
-        MaxWorkerWagone();
         LevelLocoUpdater();
         TextLoco();
         ResourceTextUpdate();
@@ -402,13 +413,13 @@ public class Game : MonoBehaviour
                 WagoneData[a].WagoneObj.SetActive(true);
             }
         }
-        //for (int a = 0; a < WagonCol; a++)
-        //{
-        //    if (WagoneData[a].Name == "")
-        //    {
-        //        WagoneData[a].WagoneObj.SetActive(true);
-        //    }
-        //}
+        for (int a = 0; a < WagonCol; a++)
+        {
+            if (WagoneData[a].Name == "")
+            {
+                WagoneData[a].WagoneObj.SetActive(true);
+            }
+        }
     }
     public void StartNextStation()
     {
@@ -783,65 +794,18 @@ public class Game : MonoBehaviour
         MoneyText.text = Money + "$";
         DiamondText.text = Diamond.ToString();
         CoalText.text = Coal + "/" + CoalMax;
-        WorkerText.text = Worker + "/" + AllPeople + "(" + WorkerMax + ")";
+        WorkerText.text = FreeWorker + "/" + AllWorker;
         WarmText.text = Warm + "/" + WarmMax;
         FoodText.text = Food + "/" + FoodMax;
         WaterText.text = Water + "/" + WaterMax;
         SliderResource[0].maxValue = FoodMax;
         SliderResource[1].maxValue = WaterMax;
         SliderResource[2].maxValue = WarmMax;
-        SliderResource[3].maxValue = WorkerMax;
         SliderResource[4].maxValue = CoalMax;
         SliderResource[0].value = Food;
         SliderResource[1].value = Water;
         SliderResource[2].value = Warm;
-        SliderResource[3].value = Worker;
         SliderResource[4].value = Coal;
-        if(DontPeopleWagone >= 1)
-        {
-            WorkerMessageObj.SetActive(true);
-            WorkerMessageText.text = "Для " + DontPeopleWagone + " рабочих не хватает места!";
-            WorkerMessageCount++;
-            WorkerMessageSlide.value = WorkerMessageCount;
-            if (WorkerMessageCount >= 20)
-            {
-                AllPeople -= DontPeopleWagone;
-                if(Worker >= DontPeopleWagone)
-                {
-                    Worker -= DontPeopleWagone;
-                    DontPeopleWagone = 0;
-                }
-                if (Worker < DontPeopleWagone)
-                {
-                    DontPeopleWagone -= Worker;
-                    for(int i = 0; i < WagonCol; i++)
-                    {
-                        if (WagoneData[i].Name == "Food" || WagoneData[i].Name == "Water" || WagoneData[i].Name == "Boiler")
-                        {
-                            if(WagoneData[i].WorkerInWagone >= DontPeopleWagone)
-                            {
-                                WagoneData[i].WorkerInWagone -= DontPeopleWagone;
-                                break;
-                            }
-                            if(WagoneData[i].WorkerInWagone < DontPeopleWagone)
-                            {
-                                DontPeopleWagone -= WagoneData[i].WorkerInWagone;
-                                WagoneData[i].WorkerInWagone = 0;
-                            }
-                        }
-                    }
-                }
-                DontPeopleWagone = 0;
-                WorkerMessageCount = 0;
-            }
-        }
-        if(DontPeopleWagone <= 0)
-        {
-            WorkerMessageObj.SetActive(false);
-            WorkerMessageText.text = "";
-            WorkerMessageCount = 0;
-            WorkerMessageSlide.value = 0;
-        }
     }
     public void BuyAddWagone() // Покупка и добавление пустого вагона
     {
@@ -883,115 +847,28 @@ public class Game : MonoBehaviour
         SliderResource[0].value = Food; SliderResource[1].value = Water; SliderResource[2].value = Warm;
         ResourceTextUpdate();
     }
-    public void MaxWorkerWagone() // Максимальное количество людей в поезде
-    {
-        int StorageCount = 0; // Счет на вместимость поезда
-        for (int i = 0; i < WagonCol; i++)
-        {
-            if (WagoneData[i].Name == "Pass") // По пассажирским вагонам смотрим максимальное количество мест для людей
-            {
-                if (WagoneData[i].LevelWagone == 1)
-                {
-                    StorageCount += 10;
-                }
-                else if (WagoneData[i].LevelWagone == 2)
-                {
-                    StorageCount += 15;
-                }
-                else if (WagoneData[i].LevelWagone == 3)
-                {
-                    StorageCount += 20;
-                }
-            }
-        }
-        WorkerMax = StorageCount;
-        Worker = AllPeople - People; // От количества людей в поезде отнимаем активных работников и получаем доступных свободных.
-        SliderResource[3].maxValue = WorkerMax;
-        SliderResource[3].value = Worker;
-    }
-
-    public void PostWagonePeople()
-    {
-        if (DontPeopleWagone >= 1)
-        {
-            for(int i = 0; i < WagonCol; i++)
-            {
-                if(WagoneData[i].Name == "Pass")
-                {
-                    int r = 0;
-                    if (WagoneData[i].LevelWagone == 1)
-                    {
-                        r = 10 - WagoneData[i].WorkerInWagone;
-                    }
-                    else if (WagoneData[i].LevelWagone == 2)
-                    {
-                        r = 15 - WagoneData[i].WorkerInWagone;
-                    }
-                    else if (WagoneData[i].LevelWagone == 3)
-                    {
-                        r = 20 - WagoneData[i].WorkerInWagone;
-                    }
-                    if(r >= 1)
-                    {
-                        if(DontPeopleWagone < r)
-                        {
-                            WagoneData[i].WorkerInWagone += DontPeopleWagone;
-                            DontPeopleWagone = 0;
-                        }
-                        else if(DontPeopleWagone >= r)
-                        {
-                            WagoneData[i].WorkerInWagone += r;
-                            DontPeopleWagone -= r;
-                        }
-                    }
-                }
-            }
-        }
-    } // Размещение людей по пустым вагонам
-
-    public void CountPeopleTrain1()
-    {
-        for (int i = 0; i < WagonCol; i++)
-        {
-            if(People > AllPeople)
-            {
-                if (WagoneData[i].Name == "Food" || WagoneData[i].Name == "Water" || WagoneData[i].Name == "Boiler")
-                {
-                    if(WagoneData[i].WorkerInWagone >= People)
-                    {
-                        WagoneData[i].WorkerInWagone -= People;
-                        People = 0;
-                        break;
-                    }
-                    else if(WagoneData[i].WorkerInWagone < People)
-                    {
-                        People -= WagoneData[i].WorkerInWagone;
-                        WagoneData[i].WorkerInWagone = 0;
-                    }
-                }
-            }
-            else
-            {
-                break;
-            }
-        }
-    }
 
     // Таймер до следующей станции
     IEnumerator TimerNextStation() //
     {
-        int B = 0; // таймер смены фона
         int S = 0; // таймер скорости фона
         int ADS = 0; // таймер денег за рекламу
+        int R = UnityEngine.Random.Range(10, 300);
         NextStationSlide.maxValue = NextStationTimeCount;
         while (true)
         {
+            R--;
             NextStationTime--;
             DistancePlusStatistic++;
             int Min = NextStationTime / 60;
             int Sec = NextStationTime - (Min * 60);
             NextStationTimeText.text = Min + "мин. " + Sec + "сек.";
             NextStationSlide.value = NextStationTimeCount - NextStationTime;
+            if (R <= 0)
+            {
+                BarrierObj.SetActive(true);
+                break;
+            }
             if (NextStationTime <= 0)
             {
                 Station.SetActive(true);
@@ -1013,7 +890,6 @@ public class Game : MonoBehaviour
             {
                 ActiveTimerLoco--;
                 S++;
-                B++;
                 ADS++;
                 if(ActiveTimerLoco <= 0) //
                 {
@@ -1023,12 +899,7 @@ public class Game : MonoBehaviour
                     TextLoco();
                     ActiveTimerLoco = TimerLoco;
                 }
-                if (B >= 130)
-                {
-                    RandomBackground();
-                    B = 0;
-                }
-                if (S >= 30 & SpeedFon <= 8)
+                if (S >= 30 & SpeedFon <= 3)
                 {
                     SpeedFon++;
                     S = 0;
@@ -1057,8 +928,7 @@ public class Game : MonoBehaviour
             else
             {
                 SpeedFon = 0;
-                CoalFree.SetActive(true); //
-                if (CoalHelp == false)
+                if (!CoalHelp)
                 {
                     CoalHelpObj.SetActive(true);
                 }
@@ -1070,34 +940,39 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void ClickCoalFree() // Клик по углю. Добавление и смена места
+    public void ClickBarrier()
     {
-        CoalFreeCount++;
+        TreesClickParticle.SetActive(false);
+        TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        TreesClickParticle.SetActive(true);
+        clickCountBarrier++;
+        if (clickCountBarrier >= 10)
+        {
+            clickCountBarrier = 0;
+            BarrierObj.SetActive(false);
+            StartEngineLoco();
+        }
+    }
+    public void ClickTreesCoalFree() // Клик по деревьям для угля
+    {
+        TreesClickParticle.SetActive(false);
+        TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        TreesClickParticle.SetActive(true);
+        coalCountClick++;
         Coal++;
         CoalPlusStatistic++;
-        StartCoroutine(CoalFreeTextV());
         ResourceTextUpdate();
         TextLoco();
-        if (CoalFreeCount >= 3)
+        if(coalCountClick >= 5)
         {
-            CoalADS.SetActive(true);
-            int x = UnityEngine.Random.Range(-7, 8);
-            int y = UnityEngine.Random.Range(-2, 5);
-            CoalFree.transform.position = new Vector3(x, y, 0f);
-            CoalFreeCount = 0;
+            coalCountClick = 0;
+            CollectResources[3].SetActive(false); CollectResources[03].SetActive(true);
         }
-        if (CoalHelp == false)
+        if (!CoalHelp)
         {
             CoalHelpObj.SetActive(false);
             CoalHelp = true;
         }
-    }
-    IEnumerator CoalFreeTextV()
-    {
-        CoalFreeText.text = "+1";
-        yield return new WaitForSeconds(1);
-        CoalFreeText.text = "";
-        yield break;
     }
     public void StartEngineLoco() // Запуск поезда, если достаточно угля
     {
@@ -1105,7 +980,6 @@ public class Game : MonoBehaviour
         {
             SpeedFon = 1;
             StartLocoEnginePan.SetActive(false);
-            CoalFree.SetActive(false);
             CoalADS.SetActive(false);
             StartCoroutine(TimerNextStation());
             SmokeParticle.SetActive(true);
@@ -1379,13 +1253,13 @@ public class Game : MonoBehaviour
             ViewLoco();
             UpdateViewTrain();
         }
-    } 
+    }
 
     public void RandomBackground() //
     {
-        int r = UnityEngine.Random.Range(0, BackgroundSprite.Length);
-        BackgroundImage[0].sprite = BackgroundSprite[r];
-        BackgroundImage[1].sprite = BackgroundSprite[r];
+        int r = UnityEngine.Random.Range(0, ParallaxObj.Length);
+        for(int i = 0; i < ParallaxObj.Length; i++) { ParallaxObj[i].SetActive(false); }
+        ParallaxObj[r].SetActive(true);    
     }
 
     // TRAINER!!!
@@ -1554,7 +1428,6 @@ public class Game : MonoBehaviour
     }
 
     // HELP!!!
-
     public void OpenHelpPan()
     {
         HelpPan.SetActive(true);
@@ -1592,7 +1465,6 @@ public class Game : MonoBehaviour
 
 
     // AD!!!
-
     public void ExampleOpenRewardAd(int id)
     {
         // Вызываем метод открытия видео рекламы
@@ -1713,7 +1585,6 @@ public class Game : MonoBehaviour
 
     
     // Корутины на тексты прибавления и отнимания ресурсов!
-
     public void StartPlusFood(int F)
     {
         StartCoroutine(PlusFood(F));
@@ -1888,11 +1759,8 @@ public class Game : MonoBehaviour
         YandexGame.savesData.Food = Food;
         YandexGame.savesData.Water = Water;
         YandexGame.savesData.Warm = Warm;
-        YandexGame.savesData.Worker = Worker;
-        YandexGame.savesData.WorkerMax = WorkerMax;
-        YandexGame.savesData.People = People;
-        YandexGame.savesData.AllPeople = AllPeople;
-        YandexGame.savesData.DontPeopleWagone = DontPeopleWagone;
+        YandexGame.savesData.Worker = FreeWorker;
+        YandexGame.savesData.AllPeople = AllWorker;
         //
         YandexGame.savesData.TemperatureOnStreet = TemperatureOnStreet;
         YandexGame.savesData.NextStationTime = NextStationTime;

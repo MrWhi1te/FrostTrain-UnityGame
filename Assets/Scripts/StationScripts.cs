@@ -229,7 +229,6 @@ public class StationScripts : MonoBehaviour
             GM.StartTimerAirShip();
         }
         GM.StartNextStation();
-        GM.PostWagonePeople();
         GM.City = GM.ChoiceCity;
         GM.ChoiceCity = 0;
         GM.SpeedFon = 1;
@@ -237,7 +236,6 @@ public class StationScripts : MonoBehaviour
         StationPan.SetActive(false);
         GM.Save();
         GM.TaskCounter();
-        GM.PostWagonePeople();
         if (YandexGame.EnvironmentData.deviceType == "mobile")
         {
             YandexGame.StickyAdActivity(true);
@@ -252,7 +250,7 @@ public class StationScripts : MonoBehaviour
         FoodText.text = GM.Food + "/" + GM.FoodMax;
         WaterText.text = GM.Water + "/" + GM.WaterMax;
         WarmText.text = GM.Warm + "/" + GM.WarmMax;
-        WorkerText.text = GM.Worker + "/" + GM.AllPeople + "(" + GM.WorkerMax + ")"; //
+        WorkerText.text = GM.FreeWorker + "/" + GM.AllWorker; //
         CountWagon.text = GM.WagonCol + " из " + GM.MaxWagone; //
         BuyWagoneText.text = (300 * GM.WagonCol) + "$";
     }
@@ -297,33 +295,23 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 4)
         {
-            SliderMarket[4].maxValue = GM.Worker;
-            ColMoneyText[4].text = "+" + (SliderMarket[4].value * 40) + "$";
+            SliderMarket[4].maxValue = GM.CoalMax - GM.Coal;
+            ColMoneyText[4].text = "-" + (SliderMarket[4].value * 2) + "$";
         }
         else if (index == 5)
         {
-            SliderMarket[5].maxValue = GM.CoalMax - GM.Coal;
-            ColMoneyText[5].text = "-" + (SliderMarket[5].value * 2) + "$";
+            SliderMarket[5].maxValue = GM.FoodMax - GM.Food;
+            ColMoneyText[5].text = "-" + (SliderMarket[5].value * 30) + "$";
         }
         else if (index == 6)
         {
-            SliderMarket[6].maxValue = GM.FoodMax - GM.Food;
-            ColMoneyText[6].text = "-" + (SliderMarket[6].value * 30) + "$";
+            SliderMarket[6].maxValue = GM.WaterMax - GM.Water;
+            ColMoneyText[6].text = "-" + (SliderMarket[6].value * 25) + "$";
         }
         else if (index == 7)
         {
-            SliderMarket[7].maxValue = GM.WaterMax - GM.Water;
-            ColMoneyText[7].text = "-" + (SliderMarket[7].value * 25) + "$";
-        }
-        else if (index == 8)
-        {
-            SliderMarket[8].maxValue = GM.WarmMax - GM.Warm;
-            ColMoneyText[8].text = "-" + (SliderMarket[8].value * 20) + "$";
-        }
-        else if (index == 9)
-        {
-            SliderMarket[9].maxValue = GM.WorkerMax - GM.AllPeople;
-            ColMoneyText[9].text = "-" + (SliderMarket[9].value * 100) + "$";
+            SliderMarket[7].maxValue = GM.WarmMax - GM.Warm;
+            ColMoneyText[7].text = "-" + (SliderMarket[7].value * 20) + "$";
         }
         ColResourceText[index].text = SliderMarket[index].value.ToString();
     }
@@ -396,24 +384,6 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 4)
         {
-            if (GM.Money >= SliderMarket[9].value * 100)
-            {
-                GM.Money -= (int)SliderMarket[9].value * 100;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[9].value * 100)));
-                GM.Worker += (int)SliderMarket[9].value;
-                StartCoroutine(PlusWorker((int)SliderMarket[9].value));
-                GM.AllPeople += (int)SliderMarket[9].value;
-                GM.DontPeopleWagone += (int)SliderMarket[9].value;
-                SliderMarket[9].value = 0;
-                ResourceTextUpdate();
-            }
-            else
-            {
-                StartCoroutine(MoneyShow());
-            }
-        }
-        else if (index == 5)
-        {
             GM.Money += (int)SliderMarket[0].value * 1;
             GM.MoneyPlusStatistic += (int)SliderMarket[0].value * 1;
             StartCoroutine(PlusMoney((int)SliderMarket[0].value * 1));
@@ -422,7 +392,7 @@ public class StationScripts : MonoBehaviour
             SliderMarket[0].value = 0;
             ResourceTextUpdate();
         }
-        else if (index == 6)
+        else if (index == 5)
         {
             GM.Money += (int)SliderMarket[1].value * 18;
             GM.MoneyPlusStatistic += (int)SliderMarket[1].value * 18;
@@ -432,7 +402,7 @@ public class StationScripts : MonoBehaviour
             SliderMarket[1].value = 0;
             ResourceTextUpdate();
         }
-        else if (index == 7)
+        else if (index == 6)
         {
             GM.Money += (int)SliderMarket[2].value * 15;
             GM.MoneyPlusStatistic += (int)SliderMarket[2].value * 15;
@@ -442,7 +412,7 @@ public class StationScripts : MonoBehaviour
             SliderMarket[2].value = 0;
             ResourceTextUpdate();
         }
-        else if (index == 8)
+        else if (index == 7)
         {
             GM.Money += (int)SliderMarket[3].value * 8;
             GM.MoneyPlusStatistic += (int)SliderMarket[3].value * 8;
@@ -450,17 +420,6 @@ public class StationScripts : MonoBehaviour
             GM.Warm -= (int)SliderMarket[3].value;
             StartCoroutine(PlusWarm(0 - (int)SliderMarket[3].value));
             SliderMarket[3].value = 0;
-            ResourceTextUpdate();
-        }
-        else if (index == 9)
-        {
-            GM.Money += (int)SliderMarket[4].value * 40;
-            GM.MoneyPlusStatistic += (int)SliderMarket[4].value * 40;
-            StartCoroutine(PlusMoney((int)SliderMarket[4].value * 40));
-            GM.Worker -= (int)SliderMarket[4].value;
-            GM.AllPeople -= (int)SliderMarket[4].value;
-            StartCoroutine(PlusWorker(0 -(int)SliderMarket[4].value));
-            SliderMarket[4].value = 0;
             ResourceTextUpdate();
         }
     }

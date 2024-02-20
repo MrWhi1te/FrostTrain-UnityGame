@@ -29,7 +29,6 @@ public class WagonScript : MonoBehaviour
     [Header("ПанельПасс")]
     public Text PassLevelText; // Уровень вагона
     public Text PassMaxCapacityText; // Максимальная вместимость вагона
-    public Text PassCapacityText; // Сколько проживает в вагоне
     public Text PassTermometrText; // Температура в вагоне
     public Text PassUpgradeText; // Улучшение вагона стоимость
     public Text PassNeedFoodText; //
@@ -103,28 +102,73 @@ public class WagonScript : MonoBehaviour
     {
         if (GM.WagoneData[IndexWag].Name == "") // Если вагон пуст
         {
-            if (!ChoiceWagonePan.activeInHierarchy) ChoiceWagonePan.SetActive(true);
-            else ChoiceWagonePan.SetActive(true);
+            if (!ChoiceWagonePan.activeInHierarchy)
+            {
+                if (GM.PanWagon != null) { GM.PanWagon.SetActive(false); }
+                ChoiceWagonePan.SetActive(true); 
+                GM.PanWagon = ChoiceWagonePan;
+            }
+            else
+            {
+                ChoiceWagonePan.SetActive(false);
+                GM.PanWagon = null;
+            }
         }
         else if (GM.WagoneData[IndexWag].Name == "Food" || GM.WagoneData[IndexWag].Name == "Water") // Если вагон еда\вода
         {
-            if (!FoodWaterWagonePan.activeInHierarchy) FoodWaterWagonePan.SetActive(true);
-            else FoodWaterWagonePan.SetActive(false);
+            if (!FoodWaterWagonePan.activeInHierarchy)
+            {
+                if (GM.PanWagon != null) { GM.PanWagon.SetActive(false); }
+                FoodWaterWagonePan.SetActive(true);
+                GM.PanWagon = FoodWaterWagonePan;
+            }
+            else
+            {
+                FoodWaterWagonePan.SetActive(false);
+                GM.PanWagon = null;
+            }
         }
         else if (GM.WagoneData[IndexWag].Name == "Pass") // Если вагон Пассажир
         {
-            if (!PassWagonePan.activeInHierarchy) PassWagonePan.SetActive(true);
-            else PassWagonePan.SetActive(false);
+            if (!PassWagonePan.activeInHierarchy)
+            {
+                if (GM.PanWagon != null) { GM.PanWagon.SetActive(false); }
+                PassWagonePan.SetActive(true);
+                GM.PanWagon = PassWagonePan;
+            }
+            else
+            {
+                PassWagonePan.SetActive(false);
+                GM.PanWagon = null;
+            }
         }
         else if (GM.WagoneData[IndexWag].Name == "Storage") // Если вагон грузовой
         {
-            if (!StorageWagonePan.activeInHierarchy) StorageWagonePan.SetActive(true);
-            else StorageWagonePan.SetActive(false);
+            if (!StorageWagonePan.activeInHierarchy)
+            {
+                if (GM.PanWagon != null) { GM.PanWagon.SetActive(false); }
+                StorageWagonePan.SetActive(true);
+                GM.PanWagon = StorageWagonePan;
+            }
+            else
+            {
+                StorageWagonePan.SetActive(false);
+                GM.PanWagon = null;
+            }
         }
         else if (GM.WagoneData[IndexWag].Name == "Boiler") // Если вагон котельная
         {
-            if (!BoilerWagonePan.activeInHierarchy) BoilerWagonePan.SetActive(true);
-            else BoilerWagonePan.SetActive(false);
+            if (!BoilerWagonePan.activeInHierarchy)
+            {
+                if (GM.PanWagon != null) { GM.PanWagon.SetActive(false); }
+                BoilerWagonePan.SetActive(true);
+                GM.PanWagon = BoilerWagonePan;
+            }
+            else
+            {
+                BoilerWagonePan.SetActive(false);
+                GM.PanWagon = null;
+            }
         }
     }
 
@@ -157,8 +201,7 @@ public class WagonScript : MonoBehaviour
         else if (index == 2)
         {
             GM.WagoneData[IndexWag].Name = "Pass";
-            GM.MaxWorkerWagone();
-            GM.PostWagonePeople();
+            GM.FreeWorker += GM.AllWorker += 10;
             StartCoroutine(PassFoodNeed()); // Запуск корутины потребления  еды.
             StartCoroutine(PassWaterNeed()); // Запуск корутины потребления  воды.
             StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагона
@@ -188,16 +231,17 @@ public class WagonScript : MonoBehaviour
         ViewWagone();
         WagoneDataCount();
         WagoneWorkData();
+        ChoiceWagonePan.SetActive(false);
+        GM.PanWagon = null;
     }
 
     // Добавление и удаление рабочих в вагоне производств
     public void AddWork() // Добавление рабочих от уровня
     {
-        if (GM.WagoneData[IndexWag].WorkerInWagone < (5 * GM.WagoneData[IndexWag].LevelWagone) & GM.Worker >=1)
+        if (GM.WagoneData[IndexWag].WorkerInWagone < (5 * GM.WagoneData[IndexWag].LevelWagone) & GM.FreeWorker >=1)
         {
             GM.WagoneData[IndexWag].WorkerInWagone++;
-            GM.Worker--;
-            GM.People++;
+            GM.FreeWorker--;
             WagoneDataCount();
             WagoneWorkData();
             GM.ResourceTextUpdate();
@@ -208,8 +252,7 @@ public class WagonScript : MonoBehaviour
         if (GM.WagoneData[IndexWag].WorkerInWagone > 0)
         {
             GM.WagoneData[IndexWag].WorkerInWagone--;
-            GM.Worker++;
-            GM.People--;
+            GM.FreeWorker++;
             WagoneDataCount();
             WagoneWorkData();
             GM.ResourceTextUpdate();
@@ -239,6 +282,7 @@ public class WagonScript : MonoBehaviour
                 GM.FoodPlusStatistic += Razn;
                 GM.StartPlusFood(Razn);
             }
+            GM.CollectResources[0].SetActive(false); GM.CollectResources[0].SetActive(true);
             StartCoroutine(FoodWorkWagone());
         }
         else if (GM.WagoneData[IndexWag].Name == "Water")
@@ -256,6 +300,7 @@ public class WagonScript : MonoBehaviour
                 GM.WaterPlusStatistic += Razn;
                 GM.StartPlusWater(Razn);
             }
+            GM.CollectResources[1].SetActive(false); GM.CollectResources[1].SetActive(true);
             StartCoroutine(FoodWorkWagone());
         }
         else if (GM.WagoneData[IndexWag].Name == "Boiler")
@@ -273,6 +318,7 @@ public class WagonScript : MonoBehaviour
                 GM.WarmPlusStatistic += Razn;
                 GM.StartPlusWarm(Razn);
             }
+            GM.CollectResources[2].SetActive(false); GM.CollectResources[2].SetActive(true);
             StartCoroutine(BoilerWorkWagone());
         }
 
@@ -315,7 +361,6 @@ public class WagonScript : MonoBehaviour
         {
             WagoneName.text = "Пассажирский";
             PassLevelText.text = GM.WagoneData[IndexWag].LevelWagone.ToString();
-            PassCapacityText.text = GM.WagoneData[IndexWag].WorkerInWagone.ToString();
             PassTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
             if (GM.TemperatureOnStreet == 0) { PassNeedWarmText.text = "-10"; }
             else if (GM.TemperatureOnStreet < 0) { PassNeedWarmText.text = GM.TemperatureOnStreet.ToString(); }
@@ -333,7 +378,6 @@ public class WagonScript : MonoBehaviour
         if (GM.WagoneData[IndexWag].Name == "Storage") //
         {
             WagoneName.text = "Склад";
-            WagoneImage.sprite = GM.WagoneData[IndexWag].WagoneImage;
             StorageLevelText.text = GM.WagoneData[IndexWag].LevelWagone.ToString();
         }
     }
@@ -505,26 +549,13 @@ public class WagonScript : MonoBehaviour
                 GM.ResourceTextUpdate();
                 if (CicleNeedFood >= 7) // Если 7 циклов и больше люди без еды
                 {
-                    GM.AllPeople -= NeedFoodPeople; // Отнимаем от всех проживающих людей, количество недоедающих
                     if(GM.WagoneData[IndexWag].WorkerInWagone >= NeedFoodPeople)
                     {
                         GM.WagoneData[IndexWag].WorkerInWagone -= NeedFoodPeople;
-                        if(GM.Worker >= NeedFoodPeople)
-                        {
-                            GM.Worker -= NeedFoodPeople;
-                            NeedFoodPeople = 0;
-                            GM.ResourceTextUpdate();
-                        }
-                        else if(GM.Worker < NeedFoodPeople)
-                        {
-                            NeedFoodPeople -= GM.Worker;
-                            GM.Worker = 0;
-                            GM.ResourceTextUpdate();
-                            GM.CountPeopleTrain1();
-                        }
+                        GM.FreeWorker += NeedFoodPeople;
+                        NeedFoodPeople = 0;
                     }
                     CicleNeedFood = 0;
-                    GM.PostWagonePeople();
                 }
                 yield return new WaitForSeconds(10);
             }
@@ -610,10 +641,7 @@ public class WagonScript : MonoBehaviour
         ClickOnWagone();
         if (GM.WagoneData[IndexWag].Name == "Pass")
         {
-            GM.DontPeopleWagone += GM.WagoneData[IndexWag].WorkerInWagone;
             GM.WagoneData[IndexWag].WorkerInWagone = 0;
-            GM.MaxWorkerWagone();
-            GM.PostWagonePeople();
             GM.ResourceTextUpdate();
         }
         else if(GM.WagoneData[IndexWag].Name == "Storage")
@@ -628,7 +656,7 @@ public class WagonScript : MonoBehaviour
         WagoneName.text = "Пустой";
         if (GM.WagoneData[IndexWag].WorkerInWagone >= 1)
         {
-            GM.Worker += GM.WagoneData[IndexWag].WorkerInWagone;
+            GM.FreeWorker += GM.WagoneData[IndexWag].WorkerInWagone;
             GM.WagoneData[IndexWag].WorkerInWagone = 0;
         }
     }
@@ -646,8 +674,6 @@ public class WagonScript : MonoBehaviour
                 WagoneWorkData();
                 if(GM.WagoneData[IndexWag].Name == "Pass")
                 {
-                    GM.MaxWorkerWagone();
-                    GM.PostWagonePeople();
                     GM.ResourceTextUpdate();
                 }
                 else if (GM.WagoneData[IndexWag].Name == "Storage")
@@ -676,8 +702,6 @@ public class WagonScript : MonoBehaviour
                 WagoneWorkData();
                 if (GM.WagoneData[IndexWag].Name == "Pass")
                 {
-                    GM.MaxWorkerWagone();
-                    GM.PostWagonePeople();
                     GM.ResourceTextUpdate();
                 }
                 else if (GM.WagoneData[IndexWag].Name == "Storage")
