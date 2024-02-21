@@ -89,6 +89,7 @@ public class Game : MonoBehaviour
     public GameObject StartLocoEnginePan; // Запуск двигателя
     public GameObject CoalHelpObj; //
     public GameObject TreesClickParticle; //
+    public GameObject TreesFreeObj; //
     int coalCountClick;
     bool CoalHelp; // Подсказка при первом появлении угля
     
@@ -308,7 +309,7 @@ public class Game : MonoBehaviour
         {
             TrainPan[0].SetActive(true);
             TrainPan[38].SetActive(true);
-            NextStationTimeCount = 40;
+            NextStationTimeCount = 60;
             NextStationSlide.maxValue = NextStationTimeCount;
             NextStationTime = NextStationTimeCount;
             Time.timeScale = 0;
@@ -327,6 +328,8 @@ public class Game : MonoBehaviour
         TextLoco();
         ResourceTextUpdate();
         StartCoroutine(TimerInGame());
+        StartCoroutine("PassFoodNeed");
+        StartCoroutine("PassFoodWater");
         if (PTransportCount >= 1) // Если активно Пассажирское задание
         {
             for (int i = 0; i < PTransportCount; i++)
@@ -766,8 +769,17 @@ public class Game : MonoBehaviour
 
     public void ClickLocoPan() // Открытие и закрытие панели локомотива
     {
-        if(!LocoPan.activeInHierarchy) LocoPan.SetActive(true);
-        else LocoPan.SetActive(false);
+        if (!LocoPan.activeInHierarchy) 
+        {
+            if (PanWagon != null) { PanWagon.SetActive(false); }
+            LocoPan.SetActive(true);
+            PanWagon = LocoPan;
+        } 
+        else
+        {
+            LocoPan.SetActive(false);
+            PanWagon = null;
+        }
     }
     public void OpenLocoUpgradePan() // Открытие панели улучшения локомотива
     {
@@ -853,7 +865,7 @@ public class Game : MonoBehaviour
     {
         int S = 0; // таймер скорости фона
         int ADS = 0; // таймер денег за рекламу
-        int R = UnityEngine.Random.Range(10, 300);
+        int R = UnityEngine.Random.Range(10, 500);
         NextStationSlide.maxValue = NextStationTimeCount;
         while (true)
         {
@@ -866,11 +878,14 @@ public class Game : MonoBehaviour
             NextStationSlide.value = NextStationTimeCount - NextStationTime;
             if (R <= 0)
             {
+                StartMessage("Препятствие на пути!");
                 BarrierObj.SetActive(true);
                 break;
             }
             if (NextStationTime <= 0)
             {
+                StopCoroutine("PassFoodNeed");
+                StopCoroutine("PassFoodWater");
                 Station.SetActive(true);
                 for (int i = 0; i < WagonCol; i++)
                 {
@@ -899,7 +914,7 @@ public class Game : MonoBehaviour
                     TextLoco();
                     ActiveTimerLoco = TimerLoco;
                 }
-                if (S >= 30 & SpeedFon <= 3)
+                if (S >= 45 & SpeedFon <= 3)
                 {
                     SpeedFon++;
                     S = 0;
@@ -932,6 +947,7 @@ public class Game : MonoBehaviour
                 {
                     CoalHelpObj.SetActive(true);
                 }
+                TreesFreeObj.SetActive(true);
                 SmokeParticle.SetActive(false);
                 StartLocoEnginePan.SetActive(true);
                 StartCoroutine(MessageView("Закончилось топливо!"));
@@ -955,14 +971,17 @@ public class Game : MonoBehaviour
     }
     public void ClickTreesCoalFree() // Клик по деревьям для угля
     {
+        if(Coal < CoalMax)
+        {
+            coalCountClick++;
+            Coal++;
+            CoalPlusStatistic++;
+            ResourceTextUpdate();
+            TextLoco();
+        }
         TreesClickParticle.SetActive(false);
         TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         TreesClickParticle.SetActive(true);
-        coalCountClick++;
-        Coal++;
-        CoalPlusStatistic++;
-        ResourceTextUpdate();
-        TextLoco();
         if(coalCountClick >= 5)
         {
             coalCountClick = 0;
@@ -981,6 +1000,7 @@ public class Game : MonoBehaviour
             SpeedFon = 1;
             StartLocoEnginePan.SetActive(false);
             CoalADS.SetActive(false);
+            TreesFreeObj.SetActive(false);
             StartCoroutine(TimerNextStation());
             SmokeParticle.SetActive(true);
         }
@@ -1069,6 +1089,133 @@ public class Game : MonoBehaviour
             }
         }
     }
+
+    IEnumerator PassFoodNeed() // Корутина пищи людей
+    {
+        int NeedFoodPeople = 0;
+        int CicleNeedFood = 0;
+        while (true)
+        {
+            if (AllWorker <= Food)
+            {
+                Food -= AllWorker;
+                ResourceTextUpdate();
+                StartPlusFood(0 - AllWorker);
+                NeedFoodPeople = 0;
+                CicleNeedFood = 0;
+                yield return new WaitForSeconds(10);
+            }
+            else if (AllWorker > Food)
+            {
+                StartMessage("Людям не хватает пищи!");
+                NeedFoodPeople = AllWorker - Food;
+                CicleNeedFood++;
+                StartPlusFood(0 - Food);
+                Food = 0;
+                ResourceTextUpdate();
+                if (CicleNeedFood >= 7) // Если 7 циклов и больше люди без еды
+                {
+                    for(int i = 0; i < WagoneData.Count; i++)
+                    {
+                        if (NeedFoodPeople <= 0) { break; }
+                        if (WagoneData[i].WorkerInWagone >= NeedFoodPeople)
+                        {
+                            WagoneData[i].WorkerInWagone -= NeedFoodPeople;
+                            FreeWorker += NeedFoodPeople;
+                            NeedFoodPeople = 0;
+                        }
+                        else
+                        {
+                            NeedFoodPeople -= WagoneData[i].WorkerInWagone;
+                            FreeWorker += WagoneData[i].WorkerInWagone;
+                            WagoneData[i].WorkerInWagone = 0;
+                        }
+                    }
+                    CicleNeedFood = 0;
+                }
+                yield return new WaitForSeconds(10);
+            }
+        }
+    }
+    IEnumerator PassFoodWater() // Корутина пищи людей
+    {
+        int NeedFoodPeople = 0;
+        int CicleNeedFood = 0;
+        while (true)
+        {
+            if (AllWorker <= Water)
+            {
+                Water -= AllWorker;
+                ResourceTextUpdate();
+                StartPlusFood(0 - AllWorker);
+                NeedFoodPeople = 0;
+                CicleNeedFood = 0;
+                yield return new WaitForSeconds(10);
+            }
+            else if (AllWorker > Water)
+            {
+                StartMessage("Людям не хватает воды!");
+                NeedFoodPeople = AllWorker - Water;
+                CicleNeedFood++;
+                StartPlusFood(0 - Water);
+                Water = 0;
+                ResourceTextUpdate();
+                if (CicleNeedFood >= 7) // Если 7 циклов и больше люди без еды
+                {
+                    for (int i = 0; i < WagoneData.Count; i++)
+                    {
+                        if (NeedFoodPeople <= 0) { break; }
+                        if (WagoneData[i].WorkerInWagone >= NeedFoodPeople)
+                        {
+                            WagoneData[i].WorkerInWagone -= NeedFoodPeople;
+                            FreeWorker += NeedFoodPeople;
+                            NeedFoodPeople = 0;
+                        }
+                        else
+                        {
+                            NeedFoodPeople -= WagoneData[i].WorkerInWagone;
+                            FreeWorker += WagoneData[i].WorkerInWagone;
+                            WagoneData[i].WorkerInWagone = 0;
+                        }
+                    }
+                    CicleNeedFood = 0;
+                }
+                yield return new WaitForSeconds(10);
+            }
+        }
+    }
+
+    public void DeleteWorkerTrain(int index)
+    {
+        int excessWorker = 5 * WagoneData[index].LevelWagone;
+        if (FreeWorker >= excessWorker)
+        {
+            FreeWorker -= excessWorker;
+            AllWorker -= excessWorker;
+        }
+        else
+        {
+            excessWorker -= FreeWorker;
+            AllWorker -= FreeWorker;
+            FreeWorker = 0;
+            AllWorker -= excessWorker;
+            for(int i = 0; i < WagoneData.Count; i++)
+            {
+                if(excessWorker <= 0) { break; }
+                if (WagoneData[i].WorkerInWagone >= excessWorker)
+                {
+                    WagoneData[i].WorkerInWagone -= excessWorker;
+                    excessWorker = 0;
+                }
+                else
+                {
+                    excessWorker -= WagoneData[i].WorkerInWagone;
+                    WagoneData[i].WorkerInWagone = 0;
+                }
+            }
+        }
+    }
+
     public void ViewLoco() // Вид локомотива от уровня и выбранной текстуры
     {
         if(LevelLoco == 1)

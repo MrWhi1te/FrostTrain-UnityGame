@@ -251,7 +251,7 @@ public class StationScripts : MonoBehaviour
         WaterText.text = GM.Water + "/" + GM.WaterMax;
         WarmText.text = GM.Warm + "/" + GM.WarmMax;
         WorkerText.text = GM.FreeWorker + "/" + GM.AllWorker; //
-        CountWagon.text = GM.WagonCol + " из " + GM.MaxWagone; //
+        CountWagon.text = "Вагонов: " + GM.WagonCol + " из " + GM.MaxWagone; //
         BuyWagoneText.text = (300 * GM.WagonCol) + "$";
     }
     public void BuyWagone() // Покупка вагонов / Добавление
@@ -281,17 +281,17 @@ public class StationScripts : MonoBehaviour
         else if (index == 1)
         {
             SliderMarket[1].maxValue = GM.Food;
-            ColMoneyText[1].text = "+" + (SliderMarket[1].value * 18) + "$";
+            ColMoneyText[1].text = "+" + (SliderMarket[1].value * 9) + "$";
         }
         else if (index == 2)
         {
             SliderMarket[2].maxValue = GM.Water;
-            ColMoneyText[2].text = "+" + (SliderMarket[2].value * 15) + "$";
+            ColMoneyText[2].text = "+" + (SliderMarket[2].value * 8) + "$";
         }
         else if (index == 3)
         {
             SliderMarket[3].maxValue = GM.Warm;
-            ColMoneyText[3].text = "+" + (SliderMarket[3].value * 8) + "$";
+            ColMoneyText[3].text = "+" + (SliderMarket[3].value * 5) + "$";
         }
         else if (index == 4)
         {
@@ -320,13 +320,13 @@ public class StationScripts : MonoBehaviour
     {
         if(index == 0)
         {
-            if(GM.Money >= SliderMarket[5].value * 2)
+            if(GM.Money >= SliderMarket[4].value * 2)
             {
-                GM.Money -= (int)SliderMarket[5].value * 2;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[5].value * 2)));
-                GM.Coal += (int)SliderMarket[5].value;
-                StartCoroutine(PlusCoal((int)SliderMarket[5].value));
-                SliderMarket[5].value = 0;
+                GM.Money -= (int)SliderMarket[4].value * 2;
+                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[4].value * 2)));
+                GM.Coal += (int)SliderMarket[4].value;
+                StartCoroutine(PlusCoal((int)SliderMarket[4].value));
+                SliderMarket[4].value = 0;
                 ResourceTextUpdate();
             }
             else
@@ -336,13 +336,13 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 1)
         {
-            if (GM.Money >= SliderMarket[6].value * 30)
+            if (GM.Money >= SliderMarket[5].value * 30)
             {
-                GM.Money -= (int)SliderMarket[6].value * 30;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[6].value * 30)));
-                GM.Food += (int)SliderMarket[6].value;
-                StartCoroutine(PlusFood((int)SliderMarket[6].value));
-                SliderMarket[6].value = 0;
+                GM.Money -= (int)SliderMarket[5].value * 30;
+                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[5].value * 30)));
+                GM.Food += (int)SliderMarket[5].value;
+                StartCoroutine(PlusFood((int)SliderMarket[5].value));
+                SliderMarket[5].value = 0;
                 ResourceTextUpdate();
             }
             else
@@ -352,13 +352,13 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 2)
         {
-            if (GM.Money >= SliderMarket[7].value * 25)
+            if (GM.Money >= SliderMarket[6].value * 25)
             {
-                GM.Money -= (int)SliderMarket[7].value * 25;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[7].value * 25)));
-                GM.Water += (int)SliderMarket[7].value;
-                StartCoroutine(PlusWater((int)SliderMarket[7].value));
-                SliderMarket[7].value = 0;
+                GM.Money -= (int)SliderMarket[6].value * 25;
+                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[6].value * 25)));
+                GM.Water += (int)SliderMarket[6].value;
+                StartCoroutine(PlusWater((int)SliderMarket[6].value));
+                SliderMarket[6].value = 0;
                 ResourceTextUpdate();
             }
             else
@@ -368,13 +368,13 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 3)
         {
-            if (GM.Money >= SliderMarket[8].value * 20)
+            if (GM.Money >= SliderMarket[7].value * 20)
             {
-                GM.Money -= (int)SliderMarket[8].value * 20;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[8].value * 20)));
-                GM.Warm += (int)SliderMarket[8].value;
-                StartCoroutine(PlusWarm((int)SliderMarket[8].value));
-                SliderMarket[8].value = 0;
+                GM.Money -= (int)SliderMarket[7].value * 20;
+                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[7].value * 20)));
+                GM.Warm += (int)SliderMarket[7].value;
+                StartCoroutine(PlusWarm((int)SliderMarket[7].value));
+                SliderMarket[7].value = 0;
                 ResourceTextUpdate();
             }
             else
@@ -394,9 +394,9 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 5)
         {
-            GM.Money += (int)SliderMarket[1].value * 18;
-            GM.MoneyPlusStatistic += (int)SliderMarket[1].value * 18;
-            StartCoroutine(PlusMoney((int)SliderMarket[1].value * 18));
+            GM.Money += (int)SliderMarket[1].value * 9;
+            GM.MoneyPlusStatistic += (int)SliderMarket[1].value * 9;
+            StartCoroutine(PlusMoney((int)SliderMarket[1].value * 9));
             GM.Food -= (int)SliderMarket[1].value;
             StartCoroutine(PlusFood(0 - (int)SliderMarket[1].value));
             SliderMarket[1].value = 0;
@@ -404,9 +404,9 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 6)
         {
-            GM.Money += (int)SliderMarket[2].value * 15;
-            GM.MoneyPlusStatistic += (int)SliderMarket[2].value * 15;
-            StartCoroutine(PlusMoney((int)SliderMarket[2].value * 15));
+            GM.Money += (int)SliderMarket[2].value * 8;
+            GM.MoneyPlusStatistic += (int)SliderMarket[2].value * 8;
+            StartCoroutine(PlusMoney((int)SliderMarket[2].value * 8));
             GM.Water -= (int)SliderMarket[2].value;
             StartCoroutine(PlusWater(0 - (int)SliderMarket[2].value));
             SliderMarket[2].value = 0;
@@ -414,9 +414,9 @@ public class StationScripts : MonoBehaviour
         }
         else if (index == 7)
         {
-            GM.Money += (int)SliderMarket[3].value * 8;
-            GM.MoneyPlusStatistic += (int)SliderMarket[3].value * 8;
-            StartCoroutine(PlusMoney((int)SliderMarket[3].value * 8));
+            GM.Money += (int)SliderMarket[3].value * 5;
+            GM.MoneyPlusStatistic += (int)SliderMarket[3].value * 5;
+            StartCoroutine(PlusMoney((int)SliderMarket[3].value * 5));
             GM.Warm -= (int)SliderMarket[3].value;
             StartCoroutine(PlusWarm(0 - (int)SliderMarket[3].value));
             SliderMarket[3].value = 0;
