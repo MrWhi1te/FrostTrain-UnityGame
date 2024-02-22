@@ -12,7 +12,6 @@ public class Map : MonoBehaviour
     public Text ChoiceCityTemperatureText; //
     public Text ChoiceCityTimeText; //
     public Text ChoiceCityBttnText; //
-    public GameObject[] MapLock; // Блокировка карты
     public GameObject[] QuestionPoint; // Точки вопросов
     public GameObject TaskPoint; // Точка задания
 
@@ -28,14 +27,6 @@ public class Map : MonoBehaviour
         PointCity[GM.City].color = new Color(0, 150, 255, 255);
         NextStation.enabled = false;
         ScoreCount();
-        if(GM.Score >= 500)
-        {
-            MapLock[0].SetActive(false);
-        }
-        if (GM.Score >= 1000)
-        {
-            MapLock[1].SetActive(false);
-        }
         for(int i = 0; i < QuestionPoint.Length; i++)
         {
             if(GM.QuestionPoint[i] == true)

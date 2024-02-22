@@ -66,12 +66,12 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 1024
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
     compressionQuality: 50
-    crunchedCompression: 0
+    crunchedCompression: 1
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
@@ -1316,7 +1316,6 @@ TextureImporter:
     nameFileIdTable:
       UIartdeco_PIPO_pack2_white_47: -1280526612
       UIartdeco_PIPO_pack2_white_51: -314796940
-      UIartdeco_PIPO_pack2_white_50: 1150929701
       UIartdeco_PIPO_pack2_white_12: -1765256332
       UIartdeco_PIPO_pack2_white_36: -1632646355
       UIartdeco_PIPO_pack2_white_15: 1140094250
@@ -1367,6 +1366,7 @@ TextureImporter:
       UIartdeco_PIPO_pack2_white_8: -105923952
       UIartdeco_PIPO_pack2_white_33: -475550963
       UIartdeco_PIPO_pack2_white_43: 362045032
+      UIartdeco_PIPO_pack2_white_50: 1150929701
       UIartdeco_PIPO_pack2_white_2: -427857940
       UIartdeco_PIPO_pack2_white_5: 59755790
       UIartdeco_PIPO_pack2_white_45: 1416147490

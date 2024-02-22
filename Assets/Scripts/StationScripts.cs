@@ -22,17 +22,9 @@ public class StationScripts : MonoBehaviour
     public Text[] LocoUpdateText; //
     [Header("QuestPass")]
     public GameObject QuestPan; // Панель заданий
-    public GameObject PassQuestPan; //
     public GameObject StartRewardQuestPan; //
     public Text StartRewardQuestText; //
-    public Text PWagoneTransport; //
-    public Text PWagoneFood; //
-    public Text PWagoneWater; //
-    public Text PWagoneWarm; //
-    public Text PWagoneReward; //
     public Text ActiveTextQuest; //
-    int PTransport; //
-    int PReward; //
     [Header("QuestCargo")]
     public GameObject CargoQuestPan; //
     public Text CargoWagoneTransport; //
@@ -103,22 +95,16 @@ public class StationScripts : MonoBehaviour
         {
             ActiveSlider(i);
         }
-        if (GM.PTransportCount >= 1 || GM.CargoTransportCount >= 1)
+        if (GM.CargoTransportCount >= 1)
         {
-            PTransport = GM.PTransportCount;
             CargoTransport = GM.CargoTransportCount;
-            for (int i = 0; i < GM.PTransportCount; i++)
-            {
-                GM.PTransportWagone[i].SetActive(false);
-            }
             for (int i = 0; i < GM.CargoTransportCount; i++)
             {
                 GM.CargoTransportWagone[i].SetActive(false);
             }
-            GM.PTransportCount = 0;
             GM.CargoTransportCount = 0;
             StartRewardQuestPan.SetActive(true);
-            StartRewardQuestText.text = "Вы доставили: " + (PTransport + CargoTransport) + " вагонов. Награда составила: " + (GM.RewardPTransport + GM.RewardCargoTransport) + "$";
+            StartRewardQuestText.text = "Вы доставили: " + CargoTransport + " вагонов. Награда составила: " + GM.RewardCargoTransport + "$";
             if(GM.TaskCount == 4)
             {
                 GM.TaskCount = 5;
@@ -160,30 +146,6 @@ public class StationScripts : MonoBehaviour
             {
                 GM.WagoneData[a].WagoneObj.SetActive(true);
             }
-        }
-        if (GM.PTransportCount >= 1) // Если активно Пассажирское задание
-        {
-            for (int i = 0; i < GM.PTransportCount; i++)
-            {
-                GM.PTransportWagone[i].SetActive(true);
-                if (GM.TextureTrain == 0)
-                {
-                    GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR0[4];
-                }
-                else if (GM.TextureTrain == 1)
-                {
-                    GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[4];
-                }
-                else if (GM.TextureTrain == 2)
-                {
-                    GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR2[4];
-                }
-                else if (GM.TextureTrain == 3)
-                {
-                    GM.PTransportWagone[i].GetComponent<Image>().sprite = GM.SPR3[4];
-                }
-            }
-            GM.StartTransportWagoneQuest();
         }
         if (GM.CargoTransportCount >= 1) // Если активно грузовое задание
         {
@@ -698,76 +660,27 @@ public class StationScripts : MonoBehaviour
         }
     }
     
-    // TRANSPORT PASS!!!
 
-    public void OpenTransportPan(int index)
-    {
-        if(index == 0)
-        {
-            PassQuestPan.SetActive(true);
-            CargoQuestPan.SetActive(false);
-        }
-        if (index == 1)
-        {
-            PassQuestPan.SetActive(false);
-            CargoQuestPan.SetActive(true);
-        }
-    }
 
-    void PassTransportationUpdate() // Обнвление панели доставки
-    {
-        PWagoneTransport.text = PTransport.ToString();
-        PWagoneFood.text = "-" + PTransport * 10;
-        PWagoneWater.text = "-" + PTransport * 10;
-        PWagoneWarm.text = "-" + PTransport * 10;
-        PWagoneReward.text = PReward + "$";
-    }
-    public void AddPTransport() // Добавить вагон доставки
-    {
-        if(StationVibor == true)
-        {
-            if (PTransport < 25)
-            {
-                PTransport++;
-                PReward = PTransport * (GM.NextStationTime * 2);
-                PassTransportationUpdate();
-            }
-        }
-        else
-        {
-            PWagoneReward.text = "Для начала выберите станцию назначения!";
-        }
-    }
-    public void RemovePTransport() // Минус вагон доставки
-    {
-        if (PTransport > 0)
-        {
-            PTransport--;
-            PReward = PTransport * (GM.NextStationTime * 2) * 2; // Награда увеличина в 2 раза для акции!
-            PassTransportationUpdate();
-        }
-    }
+
     public void EnterQuestPass() // Принять задание
     {
-        GM.PTransportCount = PTransport;
-        GM.RewardPTransport = PReward;
-        if (PTransport >= 1 || CargoTransport >= 1)
+        if (CargoTransport >= 1)
         {
-            ActiveTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + (PTransport + CargoTransport);
+            ActiveTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + CargoTransport;
         }
         else { ActiveTextQuest.text = ""; }
     }
     public void EnterRewardQuest() // Принять награду за доставку
     {
-        GM.Money += GM.RewardPTransport + GM.RewardCargoTransport;
-        GM.MoneyPlusStatistic += GM.RewardPTransport + GM.RewardCargoTransport;
-        StartCoroutine(PlusMoney(GM.RewardPTransport + GM.RewardCargoTransport));
-        PTransport = 0;
+        GM.Money += GM.RewardCargoTransport;
+        GM.MoneyPlusStatistic += GM.RewardCargoTransport;
+        StartCoroutine(PlusMoney(GM.RewardCargoTransport));
         CargoTransport = 0;
         StartRewardQuestPan.SetActive(false);
         ActiveTextQuest.text = "";
         ResourceTextUpdate();
-        GM.Score += (GM.RewardPTransport/50) + (GM.RewardCargoTransport/50);
+        GM.Score += GM.RewardCargoTransport/50;
         ScoreCount();
     }
 
@@ -807,9 +720,9 @@ public class StationScripts : MonoBehaviour
     {
         GM.CargoTransportCount = CargoTransport;
         GM.RewardCargoTransport = CargoReward;
-        if (CargoTransport >= 1 || PTransport >= 1)
+        if (CargoTransport >= 1)
         {
-            ActiveTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + (PTransport + CargoTransport);
+            ActiveTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + CargoTransport;
         }
         else { ActiveTextQuest.text = ""; }
     }

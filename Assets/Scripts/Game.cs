@@ -106,11 +106,9 @@ public class Game : MonoBehaviour
     int LevelCostCoalStorage; // Стоимость улучшения тендера локо 
     public int LevelChassis = 1; // Уровень шасси локомотива
     int LevelCostChassis; // Стоимость улучшения шасси локо 
-    
-    [Header("PassTrasport")]
-    public GameObject[] PTransportWagone; // Обьекты вагонов задания перевозки
-    public int PTransportCount; // Количество вагонов
-    public int RewardPTransport; // Награда за доставку
+
+    [Header("Passengers")]
+    public List<Passengers> Passengers = new();
    
     [Header("CargoTrasport")]
     public GameObject[] CargoTransportWagone; // Обьекты вагонов задания перевозки
@@ -254,9 +252,6 @@ public class Game : MonoBehaviour
             //
             CoalHelp = YandexGame.savesData.CoalHelp;
             //
-            PTransportCount = YandexGame.savesData.PTransportCount;
-            RewardPTransport = YandexGame.savesData.RewardPTransport;
-            //
             CargoTransportCount = YandexGame.savesData.CargoTransportCount;
             RewardCargoTransport = YandexGame.savesData.RewardCargoTransport;
             //
@@ -330,30 +325,6 @@ public class Game : MonoBehaviour
         StartCoroutine(TimerInGame());
         StartCoroutine("PassFoodNeed");
         StartCoroutine("PassFoodWater");
-        if (PTransportCount >= 1) // Если активно Пассажирское задание
-        {
-            for (int i = 0; i < PTransportCount; i++)
-            {
-                PTransportWagone[i].SetActive(true);
-                if (TextureTrain == 0)
-                {
-                    PTransportWagone[i].GetComponent<Image>().sprite = SPR0[4];
-                }
-                else if (TextureTrain == 1)
-                {
-                    PTransportWagone[i].GetComponent<Image>().sprite = SPR1[4];
-                }
-                else if (TextureTrain == 2)
-                {
-                    PTransportWagone[i].GetComponent<Image>().sprite = SPR2[4];
-                }
-                else if (TextureTrain == 3)
-                {
-                    PTransportWagone[i].GetComponent<Image>().sprite = SPR3[4];
-                }
-            }
-            StartTransportWagoneQuest();
-        }
         if (CargoTransportCount >= 1) // Если активно грузовое задание
         {
             for (int i = 0; i < CargoTransportCount; i++)
@@ -1017,50 +988,9 @@ public class Game : MonoBehaviour
         Message.text = "";
         yield break;
     }
-    public void StartTransportWagoneQuest() //Запуск задания по транспортивке
-    {
-        StartCoroutine(WorkTransportWagone());
-    }
     public void StartTransportCargoWagoneQuest() //Запуск задания по транспортивке
     {
         StartCoroutine(WorkTransportCargoWagone());
-    }
-    IEnumerator WorkTransportWagone() // Корутина расхода ресурсов транспортировки
-    {
-        while (true)
-        {
-            if (NextStationTime <= 0 || PTransportCount<=0)
-            {
-                break;
-            }
-            if(NextStationTime > 0 & PTransportCount >= 1)
-            {
-                if(Food < PTransportCount*10||Water < PTransportCount * 10||Warm < PTransportCount * 10)
-                {
-                    RewardPTransport -= 30;
-                    Food -= PTransportCount * 10;
-                    Water -= PTransportCount * 10;
-                    Warm -= PTransportCount * 10;
-                    StartPlusFood(0 - (PTransportCount * 10));
-                    StartPlusWater(0 - (PTransportCount * 10));
-                    StartPlusWarm(0 - (PTransportCount * 10));
-                    if (Food < 0) { Food = 0; }
-                    if (Water < 0) { Water = 0; }
-                    if (Warm < 0) { Warm = 0; }
-                    yield return new WaitForSeconds(30);
-                }
-                else
-                {
-                    Food -= PTransportCount * 10;
-                    Water -= PTransportCount * 10;
-                    Warm -= PTransportCount * 10;
-                    StartPlusFood(0 - (PTransportCount * 10));
-                    StartPlusWater(0 - (PTransportCount * 10));
-                    StartPlusWarm(0 - (PTransportCount * 10));
-                    yield return new WaitForSeconds(30);
-                }
-            }
-        }
     }
     IEnumerator WorkTransportCargoWagone() // Корутина расхода ресурсов транспортировки Грузовой
     {
@@ -1920,9 +1850,6 @@ public class Game : MonoBehaviour
         //
         YandexGame.savesData.CoalHelp = CoalHelp;
         //
-        YandexGame.savesData.PTransportCount = PTransportCount;
-        YandexGame.savesData.RewardPTransport = RewardPTransport;
-        //
         YandexGame.savesData.CargoTransportCount = CargoTransportCount;
         YandexGame.savesData.RewardCargoTransport = RewardCargoTransport;
         //
@@ -2162,4 +2089,17 @@ public class WagoneData // Данные вагона
     public int WorkerInWagone; // Количество активных работников и проживающих в пасс в вагоне (Кол. материалов в грузвом)
     public int TemperatureWagone; // Температура в вагоне
     public Sprite WagoneImage; // Спрайт вагона (Внешний вид)
+}
+
+[Serializable]
+public class Passengers
+{
+    public Sprite photoPass;
+    public string namePass;
+    public string descriptionPass;
+    public string requestPass;
+    public string cityLocation;
+    public int statusPass; // 1 = Пассажира взяли на поезд / 2 = Пассажира не взяли на поезд
+    public GameObject eventPass; // Объект события для пассажира
+    public int statusEvent; // 1 = событие происходит если не взял пассажира / 2 = событие происходит если взял пассажира
 }
