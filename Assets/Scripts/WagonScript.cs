@@ -74,11 +74,11 @@ public class WagonScript : MonoBehaviour
                         StartCoroutine(FoodWorkWagone()); // Запуск корутины Производства еды/воды
                         StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагона
                     }
-                    if (GM.WagoneData[IndexWag].Name == "Boiler")
+                    else if (GM.WagoneData[IndexWag].Name == "Boiler")
                     {
                         StartCoroutine(BoilerWorkWagone()); // Запуск корутины производства тепла
                     }
-                    if (GM.WagoneData[IndexWag].Name == "Pass")
+                    else if (GM.WagoneData[IndexWag].Name == "Pass")
                     {
                         StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагона
                     }
@@ -356,7 +356,7 @@ public class WagonScript : MonoBehaviour
         }
         else if (GM.WagoneData[IndexWag].Name == "Pass") //
         {
-            WagoneName.text = "Пассажирский";
+            WagoneName.text = "Рабочий";
             PassLevelText.text = GM.WagoneData[IndexWag].LevelWagone.ToString();
             PassTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
             if (GM.TemperatureOnStreet == 0) { PassNeedWarmText.text = "-10"; }
@@ -694,114 +694,6 @@ public class WagonScript : MonoBehaviour
     // VIEW WAGONE
     void ViewWagone()
     {
-        if (GM.TextureTrain == 0)
-        {
-            if (GM.WagoneData[IndexWag].Name == "")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR0[0];
-            }
-            else if (GM.WagoneData[IndexWag].Name == "Food")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR0[0];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Water")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR0[1];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Pass")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR0[2];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Boiler")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR0[3];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Storage")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR0[0];
-            }
-        }
-        else if(GM.TextureTrain == 1)
-        {
-            if (GM.WagoneData[IndexWag].Name == "")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR1[0];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Food")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR1[0];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Water")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR1[1];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Pass")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR1[2];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Boiler")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR1[3];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Storage")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR1[0];
-            }
-        }
-        else if(GM.TextureTrain == 2)
-        {
-            if (GM.WagoneData[IndexWag].Name == "")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR2[0];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Food")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR2[0];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Water")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR2[1];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Pass")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR2[2];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Boiler")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR2[3];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Storage")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR2[0];
-            }
-        }
-        else if(GM.TextureTrain == 3)
-        {
-            if (GM.WagoneData[IndexWag].Name == "")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR3[0];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Food")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR3[0];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Water")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR3[1];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Pass")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR3[2];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Boiler")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR3[3];
-            }
-            else if(GM.WagoneData[IndexWag].Name == "Storage")
-            {
-                GM.WagoneData[IndexWag].WagoneImage = GM.SPR3[0];
-            }
-        }
-        WagoneImage.sprite = GM.WagoneData[IndexWag].WagoneImage;
+        WagoneImage.sprite = GM.WagoneData[IndexWag].WagoneImage = GM.wagoneSprites[GM.WagoneData[IndexWag].Name][GM.TextureTrain];
     }
 }

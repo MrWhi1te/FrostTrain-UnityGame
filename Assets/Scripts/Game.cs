@@ -106,9 +106,6 @@ public class Game : MonoBehaviour
     int LevelCostCoalStorage; // Стоимость улучшения тендера локо 
     public int LevelChassis = 1; // Уровень шасси локомотива
     int LevelCostChassis; // Стоимость улучшения шасси локо 
-
-    [Header("Passengers")]
-    public List<Passengers> Passengers = new();
    
     [Header("CargoTrasport")]
     public GameObject[] CargoTransportWagone; // Обьекты вагонов задания перевозки
@@ -206,6 +203,7 @@ public class Game : MonoBehaviour
 
     public GameObject PanWagon; // Открытая панель вагона
 
+    public Dictionary<string, Sprite[]> wagoneSprites = new();
 
     private void OnEnable()
     {
@@ -316,6 +314,12 @@ public class Game : MonoBehaviour
             StartCoroutine(AutoSave());
             TaskCounter();
         }
+        wagoneSprites.Add("", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
+        wagoneSprites.Add("Food", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
+        wagoneSprites.Add("Water", new Sprite[] { SPR0[1], SPR1[1], SPR2[1], SPR3[1] });
+        wagoneSprites.Add("Pass", new Sprite[] { SPR0[2], SPR1[2], SPR2[2], SPR3[2] });
+        wagoneSprites.Add("Boiler", new Sprite[] { SPR0[3], SPR1[3], SPR2[3], SPR3[3] });
+        wagoneSprites.Add("Storage", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
         ActiveWagone();
         ViewLoco();
         MaxStorageWagone();
@@ -2089,17 +2093,4 @@ public class WagoneData // Данные вагона
     public int WorkerInWagone; // Количество активных работников и проживающих в пасс в вагоне (Кол. материалов в грузвом)
     public int TemperatureWagone; // Температура в вагоне
     public Sprite WagoneImage; // Спрайт вагона (Внешний вид)
-}
-
-[Serializable]
-public class Passengers
-{
-    public Sprite photoPass;
-    public string namePass;
-    public string descriptionPass;
-    public string requestPass;
-    public string cityLocation;
-    public int statusPass; // 1 = Пассажира взяли на поезд / 2 = Пассажира не взяли на поезд
-    public GameObject eventPass; // Объект события для пассажира
-    public int statusEvent; // 1 = событие происходит если не взял пассажира / 2 = событие происходит если взял пассажира
 }
