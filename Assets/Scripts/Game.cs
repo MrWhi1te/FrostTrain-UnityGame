@@ -10,8 +10,8 @@ public class Game : MonoBehaviour
 {
     public List<WagoneData> WagoneData = new List<WagoneData>(); // Лист с данными вагонов
     public int WagonCol; // Количество активных вагонов
-    public GameObject Station; //
-    public GameObject GamePan; //
+    [SerializeField] private GameObject Station; //
+    [SerializeField] private GameObject GamePan; //
     public Sprite[] SPR0; // Вид вагона стандарт
     public Sprite[] SPR1; // Вид вагона цветной
     public Sprite[] SPR2; // Вид вагона Золотой
@@ -204,6 +204,7 @@ public class Game : MonoBehaviour
     public GameObject PanWagon; // Открытая панель вагона
 
     public Dictionary<string, Sprite[]> wagoneSprites = new();
+    private Dictionary<int, Sprite[]> LocoSprites = new();
 
     private void OnEnable()
     {
@@ -305,7 +306,6 @@ public class Game : MonoBehaviour
             NextStationTimeCount = 60;
             NextStationSlide.maxValue = NextStationTimeCount;
             NextStationTime = NextStationTimeCount;
-            Time.timeScale = 0;
             ActiveTimerLoco = TimerLoco;
         }
         if(Trainer[0] == true)
@@ -320,6 +320,9 @@ public class Game : MonoBehaviour
         wagoneSprites.Add("Pass", new Sprite[] { SPR0[2], SPR1[2], SPR2[2], SPR3[2] });
         wagoneSprites.Add("Boiler", new Sprite[] { SPR0[3], SPR1[3], SPR2[3], SPR3[3] });
         wagoneSprites.Add("Storage", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
+        LocoSprites.Add(1, new Sprite[] { SPR0[5], SPR1[5], SPR2[5], SPR3[5] });
+        LocoSprites.Add(2, new Sprite[] { SPR0[6], SPR1[6], SPR2[6], SPR3[6] });
+        LocoSprites.Add(3, new Sprite[] { SPR0[7], SPR1[7], SPR2[7], SPR3[7] });
         ActiveWagone();
         ViewLoco();
         MaxStorageWagone();
@@ -1152,188 +1155,20 @@ public class Game : MonoBehaviour
 
     public void ViewLoco() // Вид локомотива от уровня и выбранной текстуры
     {
-        if(LevelLoco == 1)
-        {
-            if(TextureTrain == 0)
-            {
-                LocoSprite.sprite = SPR0[5];
-            }
-            if (TextureTrain == 1)
-            {
-                LocoSprite.sprite = SPR1[5];
-            }
-            if (TextureTrain == 2)
-            {
-                LocoSprite.sprite = SPR2[5];
-            }
-            if (TextureTrain == 3)
-            {
-                LocoSprite.sprite = SPR3[5];
-            }
-        }
-        if (LevelLoco == 2)
-        {
-            if (TextureTrain == 0)
-            {
-                LocoSprite.sprite = SPR0[6];
-            }
-            if (TextureTrain == 1)
-            {
-                LocoSprite.sprite = SPR1[6];
-            }
-            if (TextureTrain == 2)
-            {
-                LocoSprite.sprite = SPR2[6];
-            }
-            if (TextureTrain == 3)
-            {
-                LocoSprite.sprite = SPR3[6];
-            }
-        }
-        if(LevelLoco == 3)
-        {
-            if (TextureTrain == 0)
-            {
-                LocoSprite.sprite = SPR0[7];
-            }
-            if (TextureTrain == 1)
-            {
-                LocoSprite.sprite = SPR1[7];
-            }
-            if (TextureTrain == 2)
-            {
-                LocoSprite.sprite = SPR2[7];
-            }
-            if (TextureTrain == 3)
-            {
-                LocoSprite.sprite = SPR3[7];
-            }
-        }
+        LocoSprite.sprite = LocoSprites[LevelLoco][TextureTrain];
     }
     public void UpdateViewTrain() // Обновление вида вагонов
     {
-        for(int i = 0; i < WagonCol; i++)
+        for (int i = 0; i < WagonCol; i++)
         {
-            if(TextureTrain == 0)
-            {
-                if (WagoneData[i].Name == "")
-                {
-                    WagoneData[i].WagoneImage = SPR0[0];
-                }
-                if (WagoneData[i].Name == "Food")
-                {
-                    WagoneData[i].WagoneImage = SPR0[0];
-                }
-                if (WagoneData[i].Name == "Water")
-                {
-                    WagoneData[i].WagoneImage = SPR0[1];
-                }
-                if (WagoneData[i].Name == "Pass")
-                {
-                    WagoneData[i].WagoneImage = SPR0[2];
-                }
-                if (WagoneData[i].Name == "Boiler")
-                {
-                    WagoneData[i].WagoneImage = SPR0[3];
-                }
-            }
-            if (TextureTrain == 1)
-            {
-                if (WagoneData[i].Name == "")
-                {
-                    WagoneData[i].WagoneImage = SPR1[0];
-                }
-                if (WagoneData[i].Name == "Food")
-                {
-                    WagoneData[i].WagoneImage = SPR1[0];
-                }
-                if (WagoneData[i].Name == "Water")
-                {
-                    WagoneData[i].WagoneImage = SPR1[1];
-                }
-                if (WagoneData[i].Name == "Pass")
-                {
-                    WagoneData[i].WagoneImage = SPR1[2];
-                }
-                if (WagoneData[i].Name == "Boiler")
-                {
-                    WagoneData[i].WagoneImage = SPR1[3];
-                }
-            }
-            if (TextureTrain == 2)
-            {
-                if (WagoneData[i].Name == "")
-                {
-                    WagoneData[i].WagoneImage = SPR2[0];
-                }
-                if (WagoneData[i].Name == "Food")
-                {
-                    WagoneData[i].WagoneImage = SPR2[0];
-                }
-                if (WagoneData[i].Name == "Water")
-                {
-                    WagoneData[i].WagoneImage = SPR2[1];
-                }
-                if (WagoneData[i].Name == "Pass")
-                {
-                    WagoneData[i].WagoneImage = SPR2[2];
-                }
-                if (WagoneData[i].Name == "Boiler")
-                {
-                    WagoneData[i].WagoneImage = SPR2[3];
-                }
-            }
-            if (TextureTrain == 3)
-            {
-                if (WagoneData[i].Name == "")
-                {
-                    WagoneData[i].WagoneImage = SPR3[0];
-                }
-                if (WagoneData[i].Name == "Food")
-                {
-                    WagoneData[i].WagoneImage = SPR3[0];
-                }
-                if (WagoneData[i].Name == "Water")
-                {
-                    WagoneData[i].WagoneImage = SPR3[1];
-                }
-                if (WagoneData[i].Name == "Pass")
-                {
-                    WagoneData[i].WagoneImage = SPR3[2];
-                }
-                if (WagoneData[i].Name == "Boiler")
-                {
-                    WagoneData[i].WagoneImage = SPR3[3];
-                }
-            }
+            WagoneData[i].WagoneImage = wagoneSprites[WagoneData[i].Name][TextureTrain];
         }
     }
     public void ChoiceViewTrain(int index) // Выбор вида поезда!
     {
-        if(index == 0)
-        {
-            TextureTrain = 0;
-            ViewLoco();
-            UpdateViewTrain();
-        }
-        else if (index == 1)
-        {
-            TextureTrain = 1;
-            ViewLoco();
-            UpdateViewTrain();
-        }
-        else if (index == 2)
-        {
-            TextureTrain = 2;
-            ViewLoco();
-            UpdateViewTrain();
-        }
-        else if (index == 3)
-        {
-            TextureTrain = 3;
-            ViewLoco();
-            UpdateViewTrain();
-        }
+        TextureTrain = index;
+        ViewLoco();
+        UpdateViewTrain();
     }
 
     public void RandomBackground() //
@@ -1497,6 +1332,9 @@ public class Game : MonoBehaviour
         TrainPan[17].SetActive(false);
         TrainPan[37].SetActive(false);
         TrainPan[38].SetActive(false);
+        Food = FoodMax;
+        Water = WaterMax;
+        ResourceTextUpdate();
     }
     public void Trainer2() //
     {
@@ -1504,7 +1342,6 @@ public class Game : MonoBehaviour
         {
             TrainPan[17].SetActive(false);
             TrainPan[37].SetActive(true);
-            Time.timeScale = 0;
         }
     }
 

@@ -6,6 +6,7 @@ using YG;
 public class WagonScript : MonoBehaviour
 {
     public Game GM; // 
+    
     [Header("Основ.Панели")]
     public GameObject ChoiceWagonePan; // Первая панель выбора назначения вагона
     public GameObject FoodWaterWagonePan; // Панель еда или вода
@@ -16,6 +17,7 @@ public class WagonScript : MonoBehaviour
     public Text WagoneName; // Название вагона на нем.
     public GameObject DoneProductionPan; // Панель готовности продукции для сбора
     public GameObject SnowWagone; // Иконка замерзания вагона
+    
     [Header("ПанельЕдаВода")]
     public Text FoodWagoneNameText; // Навзание вагона еда или вода
     public Text FoodLevelText; // Уровень вагона
@@ -26,6 +28,7 @@ public class WagonScript : MonoBehaviour
     public Text FoodTimerText; // Таймер производства
     public Text FoodUpgradeText; // Улучшение вагона стоимость
     public Text FoodNeedWarmText; // 
+    
     [Header("ПанельПасс")]
     public Text PassLevelText; // Уровень вагона
     public Text PassMaxCapacityText; // Максимальная вместимость вагона
@@ -34,11 +37,13 @@ public class WagonScript : MonoBehaviour
     public Text PassNeedFoodText; //
     public Text PassNeedWaterText; //
     public Text PassNeedWarmText; //
+    
     [Header("ПанельХранилище")]
     public Text StorageLevelText; // Уровень вагона
     public Text StorageMaxCapacityText; // Максимальная вместимость вагона
     public Text StorageCapacityText; // Сколько на складе товаров
     public Text StorageUpgradeText; // Улучшение вагона стоимость
+    
     [Header("ПанельКотельная")]
     public Text BoilerLevelText; // Уровень вагона
     public Text BoilerWorkCountText; // Количество работников в вагоне
@@ -46,6 +51,7 @@ public class WagonScript : MonoBehaviour
     public Text BoilerTimerText; // Таймер производства
     public Text BoilerUpgradeText; // Улучшение вагона стоимость
     public Text BoilerNeedCoalText; //
+    
     [Header("Вид вагона")]
     public Image WagoneImage; // Вид вагона
     public Sprite BaseWagone; // Стартовый вид вагона

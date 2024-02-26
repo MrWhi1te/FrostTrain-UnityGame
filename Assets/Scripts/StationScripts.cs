@@ -479,122 +479,86 @@ public class StationScripts : MonoBehaviour
 
     public void BuyViewTrain(int index) // Покупка внешнего вида поезда
     {
-        if(index == 0)
+        // Обновление текста для всех вариантов
+        for (int i = 0; i < TrainViewText.Length; i++)
         {
-            TrainViewText[0].text = "Текущий";
-            GM.TextureTrain = 0;
-            GM.ChoiceViewTrain(0);
-            if(GM.Texture1 == true)
+            if (i == index)
             {
-                TrainViewText[1].text = "Доступен";
+                TrainViewText[i].text = "Текущий";
             }
-            else if (GM.Texture2 == true)
+            else if (IsTextureAvailable(i))
             {
-                TrainViewText[2].text = "Доступен";
-            }
-            else if (GM.Texture3 == true)
-            {
-                TrainViewText[3].text = "Доступен";
+                TrainViewText[i].text = "Доступен";
             }
         }
-        else if(index == 1)
+
+        // Покупка текстуры
+        if (IsTextureAvailable(index))
         {
-            if (GM.Texture1 == true)
+            GM.TextureTrain = index;
+            GM.ChoiceViewTrain(index);
+            TrainViewText[0].text = "Доступен";
+            ResourceTextUpdate();
+        }
+        else
+        {
+            if (TryBuyTexture(index))
             {
-                TrainViewText[1].text = "Текущий";
-                GM.TextureTrain = 1;
-                GM.ChoiceViewTrain(1);
-                TrainViewText[0].text = "Доступен";
-            }
-            else if (GM.Texture2 == true)
-            {
-                TrainViewText[2].text = "Доступен";
-            }
-            else if (GM.Texture3 == true)
-            {
-                TrainViewText[3].text = "Доступен";
-            }
-            if (GM.Texture1 == false & GM.Money >= 10000)
-            {
-                GM.Money -= 10000;
-                StartCoroutine(PlusMoney(0 - 10000));
-                GM.Texture1 = true;
-                TrainViewText[1].text = "Текущий";
-                GM.TextureTrain = 1;
-                GM.ChoiceViewTrain(1);
+                GM.TextureTrain = index;
+                GM.ChoiceViewTrain(index);
                 TrainViewText[0].text = "Доступен";
                 ResourceTextUpdate();
             }
-            if (GM.Texture1 == false & GM.Money < 10000)
+            else
             {
                 StartCoroutine(MoneyShow());
             }
         }
-        if (index == 2)
+    }
+
+    private bool IsTextureAvailable(int index)
+    {
+        switch (index)
         {
-            if (GM.Texture2 == true)
-            {
-                TrainViewText[2].text = "Текущий";
-                GM.TextureTrain = 2;
-                GM.ChoiceViewTrain(2);
-                TrainViewText[0].text = "Доступен";
-            }
-            if (GM.Texture1 == true)
-            {
-                TrainViewText[1].text = "Доступен";
-            }
-            if (GM.Texture3 == true)
-            {
-                TrainViewText[3].text = "Доступен";
-            }
-            if (GM.Texture2 == false & GM.Money >= 30000)
-            {
-                GM.Money -= 30000;
-                StartCoroutine(PlusMoney(0 - 30000));
-                GM.Texture2 = true;
-                TrainViewText[2].text = "Текущий";
-                GM.TextureTrain = 2;
-                GM.ChoiceViewTrain(2);
-                TrainViewText[0].text = "Доступен";
-                ResourceTextUpdate();
-            }
-            if (GM.Texture2 == false & GM.Money < 30000)
-            {
-                StartCoroutine(MoneyShow());
-            }
+            case 1: return GM.Texture1;
+            case 2: return GM.Texture2;
+            case 3: return GM.Texture3;
+            default: return false;
         }
-        if (index == 3)
+    }
+
+    private bool TryBuyTexture(int index)
+    {
+        switch (index)
         {
-            if (GM.Texture3 == true)
-            {
-                TrainViewText[3].text = "Текущий";
-                GM.TextureTrain = 3;
-                GM.ChoiceViewTrain(3);
-                TrainViewText[0].text = "Доступен";
-            }
-            if (GM.Texture1 == true)
-            {
-                TrainViewText[1].text = "Доступен";
-            }
-            if (GM.Texture2 == true)
-            {
-                TrainViewText[2].text = "Доступен";
-            }
-            if (GM.Texture3 == false & GM.Diamond >= 15) // 30 АЛМАЗОВ . ЗАМЕНА на 15! СКИДКА!                                                  АКЦИЯ!!!
-            {
-                GM.Diamond -= 15;
-                GM.Texture3 = true;
-                TrainViewText[3].text = "Текущий";
-                GM.TextureTrain = 3;
-                GM.ChoiceViewTrain(3);
-                TrainViewText[0].text = "Доступен";
-                ResourceTextUpdate();
-            }
-            if (GM.Texture3 == false & GM.Diamond >= 15) 
-            {
-                StartCoroutine(MoneyShow());
-            }
+            case 1:
+                if (GM.Money >= 10000)
+                {
+                    GM.Money -= 10000;
+                    StartCoroutine(PlusMoney(0 - 10000));
+                    GM.Texture1 = true;
+                    return true;
+                }
+                break;
+            case 2:
+                if (GM.Money >= 30000)
+                {
+                    GM.Money -= 30000;
+                    StartCoroutine(PlusMoney(0 - 30000));
+                    GM.Texture2 = true;
+                    return true;
+                }
+                break;
+            case 3:
+                if (GM.Diamond >= 30)
+                {
+                    GM.Diamond -= 15;
+                    GM.Texture3 = true;
+                    return true;
+                }
+                break;
         }
+        return false;
     }
 
     public void BuyUpdateLoco(int index) // Покупка улушение поезда
