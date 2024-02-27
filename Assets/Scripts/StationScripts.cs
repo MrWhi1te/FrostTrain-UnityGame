@@ -47,11 +47,7 @@ public class StationScripts : MonoBehaviour
     public Text WaterText; // Текст воды
     public Text WarmText; // Текст тепла
     public Text WorkerText; // Текст рабочих
-    public Text PlusFoodText; // 
-    public Text PlusWaterText; //
-    public Text PlusWarmText; //
-    public Text PlusCoalText; //
-    public Text PlusWorkerText; //
+    [SerializeField] private Text[] plusResourceText; // 0-Уголь / 1-Еда / 2-Вода / 3-Тепло
     public Text PlusMoneyText; // 
     [Header("MoneyView")]
     public Text MoneyShowText; // 
@@ -78,9 +74,18 @@ public class StationScripts : MonoBehaviour
 
     public Text[] ScoreTextView; //
 
+    private int[,] resourcesInfo; // Количество ресурса, максимально ресурса, цена продажи, цена покупки.
+
     private void OnEnable()
     {
         YandexGame.RewardVideoEvent += Rewarded;
+        resourcesInfo = new int[,]
+        {
+            { GM.Coal, GM.CoalMax, 1, 2 },
+            { GM.Food, GM.FoodMax, 9, 30 },
+            { GM.Water, GM.WaterMax, 8, 25 },
+            { GM.Warm, GM.WarmMax, 5, 20 }
+        };
         if (GM.Trainer[1] == false)
         {
             TrainerPan[0].SetActive(true);
@@ -114,12 +119,6 @@ public class StationScripts : MonoBehaviour
         Questioner();
     }
     private void OnDisable() => YandexGame.RewardVideoEvent -= Rewarded;
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void TimerNextStation() //
     {
@@ -235,156 +234,48 @@ public class StationScripts : MonoBehaviour
     }
     public void ActiveSlider(int index) // Активация слайдеров
     {
-        if(index == 0)
+        if (index < 4)
         {
-            SliderMarket[0].maxValue = GM.Coal; 
-            ColMoneyText[0].text = "+" + (SliderMarket[0].value * 1) + "$";
+            SliderMarket[index].maxValue = resourcesInfo[index % 4, 0];
+            ColMoneyText[index].text = "+" + (SliderMarket[index].value * resourcesInfo[index % 4, 2]) + "$";
         }
-        else if (index == 1)
+        else
         {
-            SliderMarket[1].maxValue = GM.Food;
-            ColMoneyText[1].text = "+" + (SliderMarket[1].value * 9) + "$";
-        }
-        else if (index == 2)
-        {
-            SliderMarket[2].maxValue = GM.Water;
-            ColMoneyText[2].text = "+" + (SliderMarket[2].value * 8) + "$";
-        }
-        else if (index == 3)
-        {
-            SliderMarket[3].maxValue = GM.Warm;
-            ColMoneyText[3].text = "+" + (SliderMarket[3].value * 5) + "$";
-        }
-        else if (index == 4)
-        {
-            SliderMarket[4].maxValue = GM.CoalMax - GM.Coal;
-            ColMoneyText[4].text = "-" + (SliderMarket[4].value * 2) + "$";
-        }
-        else if (index == 5)
-        {
-            SliderMarket[5].maxValue = GM.FoodMax - GM.Food;
-            ColMoneyText[5].text = "-" + (SliderMarket[5].value * 30) + "$";
-        }
-        else if (index == 6)
-        {
-            SliderMarket[6].maxValue = GM.WaterMax - GM.Water;
-            ColMoneyText[6].text = "-" + (SliderMarket[6].value * 25) + "$";
-        }
-        else if (index == 7)
-        {
-            SliderMarket[7].maxValue = GM.WarmMax - GM.Warm;
-            ColMoneyText[7].text = "-" + (SliderMarket[7].value * 20) + "$";
+            SliderMarket[index].maxValue = resourcesInfo[index % 4, 1] - resourcesInfo[index % 4, 0];
+            ColMoneyText[index].text = "-" + SliderMarket[index].value * resourcesInfo[index % 4, 3] + "$";
         }
         ColResourceText[index].text = SliderMarket[index].value.ToString();
     }
 
     public void BuySellResource(int index) // Покупка / Продажа Ресурсов на рынке
     {
-        if(index == 0)
+        if(index < 4)
         {
-            if(GM.Money >= SliderMarket[4].value * 2)
+            if(GM.Money >= SliderMarket[index+4].value * resourcesInfo[index % 4, 3])
             {
-                GM.Money -= (int)SliderMarket[4].value * 2;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[4].value * 2)));
-                GM.Coal += (int)SliderMarket[4].value;
-                StartCoroutine(PlusCoal((int)SliderMarket[4].value));
-                SliderMarket[4].value = 0;
-                ResourceTextUpdate();
-            }
-            else
-            {
-                StartCoroutine(MoneyShow());
+                GM.Money -= (int)SliderMarket[index + 4].value * resourcesInfo[index % 4, 3];
+                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[index + 4].value * resourcesInfo[index % 4, 3])));
+                resourcesInfo[index % 4, 0] += (int)SliderMarket[index + 4].value;
+                StartCoroutine(PlusResources(index % 4,(int)SliderMarket[index + 4].value));
+                SliderMarket[index + 4].value = 0;
             }
         }
-        else if (index == 1)
+        else 
         {
-            if (GM.Money >= SliderMarket[5].value * 30)
-            {
-                GM.Money -= (int)SliderMarket[5].value * 30;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[5].value * 30)));
-                GM.Food += (int)SliderMarket[5].value;
-                StartCoroutine(PlusFood((int)SliderMarket[5].value));
-                SliderMarket[5].value = 0;
-                ResourceTextUpdate();
-            }
-            else
-            {
-                StartCoroutine(MoneyShow());
-            }
+            GM.Money += (int)SliderMarket[index-4].value * resourcesInfo[index % 4 , 2];
+            GM.MoneyPlusStatistic += (int)SliderMarket[index-4].value * resourcesInfo[index % 4, 2];
+            StartCoroutine(PlusMoney((int)SliderMarket[index - 4].value * resourcesInfo[index % 4, 2]));
+            resourcesInfo[index % 4, 0] -= (int)SliderMarket[index - 4].value;
+            StartCoroutine(PlusResources(index % 4, 0 - (int)SliderMarket[index-4].value));
+            SliderMarket[index - 4].value = 0;
         }
-        else if (index == 2)
-        {
-            if (GM.Money >= SliderMarket[6].value * 25)
-            {
-                GM.Money -= (int)SliderMarket[6].value * 25;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[6].value * 25)));
-                GM.Water += (int)SliderMarket[6].value;
-                StartCoroutine(PlusWater((int)SliderMarket[6].value));
-                SliderMarket[6].value = 0;
-                ResourceTextUpdate();
-            }
-            else
-            {
-                StartCoroutine(MoneyShow());
-            }
-        }
-        else if (index == 3)
-        {
-            if (GM.Money >= SliderMarket[7].value * 20)
-            {
-                GM.Money -= (int)SliderMarket[7].value * 20;
-                StartCoroutine(PlusMoney(0 - ((int)SliderMarket[7].value * 20)));
-                GM.Warm += (int)SliderMarket[7].value;
-                StartCoroutine(PlusWarm((int)SliderMarket[7].value));
-                SliderMarket[7].value = 0;
-                ResourceTextUpdate();
-            }
-            else
-            {
-                StartCoroutine(MoneyShow());
-            }
-        }
-        else if (index == 4)
-        {
-            GM.Money += (int)SliderMarket[0].value * 1;
-            GM.MoneyPlusStatistic += (int)SliderMarket[0].value * 1;
-            StartCoroutine(PlusMoney((int)SliderMarket[0].value * 1));
-            GM.Coal -= (int)SliderMarket[0].value;
-            StartCoroutine(PlusCoal(0 - (int)SliderMarket[0].value));
-            SliderMarket[0].value = 0;
-            ResourceTextUpdate();
-        }
-        else if (index == 5)
-        {
-            GM.Money += (int)SliderMarket[1].value * 9;
-            GM.MoneyPlusStatistic += (int)SliderMarket[1].value * 9;
-            StartCoroutine(PlusMoney((int)SliderMarket[1].value * 9));
-            GM.Food -= (int)SliderMarket[1].value;
-            StartCoroutine(PlusFood(0 - (int)SliderMarket[1].value));
-            SliderMarket[1].value = 0;
-            ResourceTextUpdate();
-        }
-        else if (index == 6)
-        {
-            GM.Money += (int)SliderMarket[2].value * 8;
-            GM.MoneyPlusStatistic += (int)SliderMarket[2].value * 8;
-            StartCoroutine(PlusMoney((int)SliderMarket[2].value * 8));
-            GM.Water -= (int)SliderMarket[2].value;
-            StartCoroutine(PlusWater(0 - (int)SliderMarket[2].value));
-            SliderMarket[2].value = 0;
-            ResourceTextUpdate();
-        }
-        else if (index == 7)
-        {
-            GM.Money += (int)SliderMarket[3].value * 5;
-            GM.MoneyPlusStatistic += (int)SliderMarket[3].value * 5;
-            StartCoroutine(PlusMoney((int)SliderMarket[3].value * 5));
-            GM.Warm -= (int)SliderMarket[3].value;
-            StartCoroutine(PlusWarm(0 - (int)SliderMarket[3].value));
-            SliderMarket[3].value = 0;
-            ResourceTextUpdate();
-        }
+        GM.Coal = resourcesInfo[0, 0];
+        GM.Food = resourcesInfo[1, 0];
+        GM.Water = resourcesInfo[2, 0];
+        GM.Warm = resourcesInfo[3, 0];
+        ResourceTextUpdate();
     }
+
     IEnumerator MoneyShow() // Вывод надписи не хватает денег с рынка
     {
         MoneyShowText.text = "Не хватает денег!";
@@ -437,37 +328,7 @@ public class StationScripts : MonoBehaviour
             LocoBuyPan.SetActive(false);
             ViewTrainPan.SetActive(true);
             SpecialWagPan.SetActive(false);
-            if(GM.TextureTrain == 0)
-            {
-                TrainViewText[0].text = "Текущий";
-            }
-            if(GM.Texture1 == true)
-            {
-                TrainViewText[1].text = "Доступен";
-            }
-            else if (GM.Texture2 == true)
-            {
-                TrainViewText[2].text = "Доступен";
-            }
-            else if (GM.Texture3 == true)
-            {
-                TrainViewText[3].text = "Доступен";
-            }
-            if (GM.TextureTrain == 1)
-            {
-                TrainViewText[1].text = "Текущий";
-                TrainViewText[0].text = "Доступен";
-            }
-            else if (GM.TextureTrain == 2)
-            {
-                TrainViewText[2].text = "Текущий";
-                TrainViewText[0].text = "Доступен";
-            }
-            else if (GM.TextureTrain == 3)
-            {
-                TrainViewText[3].text = "Текущий";
-                TrainViewText[0].text = "Доступен";
-            }
+            UpdateTextTrainView();
         }
         else if (index == 2)
         {
@@ -476,28 +337,21 @@ public class StationScripts : MonoBehaviour
             SpecialWagPan.SetActive(true);
         }
     }
-
-    public void BuyViewTrain(int index) // Покупка внешнего вида поезда
+    private void UpdateTextTrainView()
     {
-        // Обновление текста для всех вариантов
         for (int i = 0; i < TrainViewText.Length; i++)
         {
-            if (i == index)
-            {
-                TrainViewText[i].text = "Текущий";
-            }
-            else if (IsTextureAvailable(i))
-            {
-                TrainViewText[i].text = "Доступен";
-            }
+            if (i == GM.TextureTrain) TrainViewText[i].text = "Текущий";
+            else if (GM.Texture[i]) TrainViewText[i].text = "Доступен";
         }
-
+    }
+    public void BuyViewTrain(int index) // Покупка внешнего вида поезда
+    {
         // Покупка текстуры
-        if (IsTextureAvailable(index))
+        if (GM.Texture[index])
         {
             GM.TextureTrain = index;
             GM.ChoiceViewTrain(index);
-            TrainViewText[0].text = "Доступен";
             ResourceTextUpdate();
         }
         else
@@ -506,7 +360,6 @@ public class StationScripts : MonoBehaviour
             {
                 GM.TextureTrain = index;
                 GM.ChoiceViewTrain(index);
-                TrainViewText[0].text = "Доступен";
                 ResourceTextUpdate();
             }
             else
@@ -514,17 +367,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(MoneyShow());
             }
         }
-    }
-
-    private bool IsTextureAvailable(int index)
-    {
-        switch (index)
-        {
-            case 1: return GM.Texture1;
-            case 2: return GM.Texture2;
-            case 3: return GM.Texture3;
-            default: return false;
-        }
+        UpdateTextTrainView();
     }
 
     private bool TryBuyTexture(int index)
@@ -536,7 +379,7 @@ public class StationScripts : MonoBehaviour
                 {
                     GM.Money -= 10000;
                     StartCoroutine(PlusMoney(0 - 10000));
-                    GM.Texture1 = true;
+                    GM.Texture[index] = true;
                     return true;
                 }
                 break;
@@ -545,15 +388,15 @@ public class StationScripts : MonoBehaviour
                 {
                     GM.Money -= 30000;
                     StartCoroutine(PlusMoney(0 - 30000));
-                    GM.Texture2 = true;
+                    GM.Texture[index] = true;
                     return true;
                 }
                 break;
             case 3:
                 if (GM.Diamond >= 30)
                 {
-                    GM.Diamond -= 15;
-                    GM.Texture3 = true;
+                    GM.Diamond -= 30;
+                    GM.Texture[index] = true;
                     return true;
                 }
                 break;
@@ -742,97 +585,35 @@ public class StationScripts : MonoBehaviour
         }
     }
 
+
+
     // Корутины на тексты прибавления и отнимания ресурсов!
-    IEnumerator PlusFood(int F)
+    IEnumerator PlusResources(int index, int value)
     {
-        if (F > 0)
+        if (value >= 0)
         {
-            PlusFoodText.text = "+" + F;
-            PlusFoodText.color = new Color(70, 255, 0, 255);
+            plusResourceText[index].text = "+" + value;
+            plusResourceText[index].color = new Color(70, 255, 0, 255);
         }
-        if (F < 0)
+        else
         {
-            PlusFoodText.text = F.ToString();
-            PlusFoodText.color = new Color(255, 0, 0, 255);
+            plusResourceText[index].text = value.ToString();
+            plusResourceText[index].color = new Color(70, 255, 0, 255);
         }
         yield return new WaitForSeconds(2);
-        PlusFoodText.text = "";
+        plusResourceText[index].text = "";
         yield break;
     }
-    IEnumerator PlusWater(int F)
+    IEnumerator PlusMoney(int value)
     {
-        if (F > 0)
+        if (value > 0)
         {
-            PlusWaterText.text = "+" + F;
-            PlusWaterText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusWaterText.text = F.ToString();
-            PlusWaterText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusWaterText.text = "";
-        yield break;
-    }
-    IEnumerator PlusWarm(int F)
-    {
-        if (F > 0)
-        {
-            PlusWarmText.text = "+" + F;
-            PlusWarmText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusWarmText.text = F.ToString();
-            PlusWarmText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusWarmText.text = "";
-        yield break;
-    }
-    IEnumerator PlusCoal(int F)
-    {
-        if (F > 0)
-        {
-            PlusCoalText.text = "+" + F;
-            PlusCoalText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusCoalText.text = F.ToString();
-            PlusCoalText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusCoalText.text = "";
-        yield break;
-    }
-    IEnumerator PlusWorker(int F)
-    {
-        if (F > 0)
-        {
-            PlusWorkerText.text = "+" + F;
-            PlusWorkerText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusWorkerText.text = F.ToString();
-            PlusWorkerText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusWorkerText.text = "";
-        yield break;
-    }
-    IEnumerator PlusMoney(int F)
-    {
-        if (F > 0)
-        {
-            PlusMoneyText.text = "+" + F;
+            PlusMoneyText.text = "+" + value;
             PlusMoneyText.color = new Color(70, 255, 0, 255);
         }
-        if (F < 0)
+        if (value < 0)
         {
-            PlusMoneyText.text = F.ToString();
+            PlusMoneyText.text = value.ToString();
             PlusMoneyText.color = new Color(255, 0, 0, 255);
         }
         yield return new WaitForSeconds(2);
@@ -863,13 +644,10 @@ public class StationScripts : MonoBehaviour
         }
     }
 
-    public void OpenShopPan() // Открытие панели магазина
+    public void OpenClosedShopPan() // Открытие панели магазина
     {
-        ShopPan.SetActive(true);
-    }
-    public void ClosedShopPan() // Закрытие панели магазина
-    {
-        ShopPan.SetActive(false);
+        if(!ShopPan.activeInHierarchy) ShopPan.SetActive(true);
+        else ShopPan.SetActive(false);
     }
     public void ExchangeDiamond() // Обмен Роскоши на деньги
     {
@@ -1046,16 +824,16 @@ public class StationScripts : MonoBehaviour
                 TaskPan[5].SetActive(false);
                 TaskPan[6].SetActive(true);
                 TaskCounter = 2;
-                if (GM.Food >= 30)
-                {
-                    GM.Food -= 30;
-                    StartCoroutine(PlusFood(0 - 30));
-                }
-                else if (GM.Food < 30)
-                {
-                    GM.Food = 0;
-                    StartCoroutine(PlusFood(0 - GM.Food));
-                }
+                //if (GM.Food >= 30)
+                //{
+                //    GM.Food -= 30;
+                //    StartCoroutine(PlusFood(0 - 30));
+                //}
+                //else if (GM.Food < 30)
+                //{
+                //    GM.Food = 0;
+                //    StartCoroutine(PlusFood(0 - GM.Food));
+                //}
             }
             else if (TaskCounter == 0)
             {

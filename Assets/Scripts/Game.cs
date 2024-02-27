@@ -17,9 +17,7 @@ public class Game : MonoBehaviour
     public Sprite[] SPR2; // Вид вагона Золотой
     public Sprite[] SPR3; // Вид вагона Фиолетовый
     public int TextureTrain; // Выбранный вид поезда
-    public bool Texture1; // Открыта ли цветной вид поезда
-    public bool Texture2; // Открыта ли золотой вид поезда
-    public bool Texture3; // Открыта ли фиолетовый вид поезда
+    public bool[] Texture; // 1-Цветной поезд / 2-Золотой поезд / 3-Фиолетовый
     
     [Header("Ресурсы")]
     public int Money; // Количество денег
@@ -74,7 +72,6 @@ public class Game : MonoBehaviour
     public Text MaxWagoneText; // Текст максимальное количество вагонов
     public GameObject LocoPan; // Панель Локомотива
     public GameObject UpgradeLocoPan; // Панель Улучшения локомотива
-    public GameObject ViewTrainPan; // Панель выбора вида поезда
     public GameObject[] TextureChoice; //
     public GameObject SmokeParticle; //
     public int LevelLoco = 1; // уровень локомотива. Уровень зависит от вида локомотива. ПОкупается на станции
@@ -226,9 +223,10 @@ public class Game : MonoBehaviour
         {
             WagonCol = YandexGame.savesData.WagonCol;
             TextureTrain = YandexGame.savesData.TextureTrain;
-            Texture1 = YandexGame.savesData.Texture1;
-            Texture2 = YandexGame.savesData.Texture2;
-            Texture3 = YandexGame.savesData.Texture3;
+            for(int i = 0; i < Texture.Length; i++)
+            {
+                Texture[i] = YandexGame.savesData.Texture[i];
+            }
             //
             Money = YandexGame.savesData.Money;
             Diamond = YandexGame.savesData.Diamond;
@@ -766,18 +764,6 @@ public class Game : MonoBehaviour
     public void ClosedLocoUpgradePan() // Закрытие панели улучшения локомотива
     {
         UpgradeLocoPan.SetActive(false);
-    }
-    public void OpenTrainViewPan() // Открытие панели внешнего вида поезда
-    {
-        ViewTrainPan.SetActive(true);
-        if(Texture1 == true)
-        {
-            TextureChoice[0].SetActive(true);
-        }
-    }
-    public void ClosedTrainViewPan() // Закрытие панели внешнего вида поезда
-    {
-        ViewTrainPan.SetActive(false);
     }
     public void ResourceTextUpdate() // Обновление текстов и слайдера ресурсов 
     {
@@ -1666,9 +1652,10 @@ public class Game : MonoBehaviour
         }
         YandexGame.savesData.WagonCol = WagonCol;
         YandexGame.savesData.TextureTrain = TextureTrain;
-        YandexGame.savesData.Texture1 = Texture1;
-        YandexGame.savesData.Texture2 = Texture2;
-        YandexGame.savesData.Texture3 = Texture3;
+        for (int i = 0; i < Texture.Length; i++)
+        {
+            YandexGame.savesData.Texture[i] = Texture[i];
+        }
         //
         YandexGame.savesData.Money = Money;
         YandexGame.savesData.Diamond = Diamond;

@@ -12,25 +12,25 @@ public class PassengersScript : MonoBehaviour
     public List<Pass> pass = new();
     public List<PassPan> passPan = new();
 
-    public List<Pass> passOnTrain;
-    public List<Pass> passOffTrain;
+    public List<Pass> passEventList;
 
-    void AddList()
+    private void Start()
+    {
+        StartAddList();
+    }
+    void StartAddList()
     {
         for(int i = 0; i < pass.Count; i++)
         {
-            if (pass[i].statusPass == 1 && pass[i].statusEvent == 1)
+            if (pass[i].statusPass != 0 && pass[i].passEvent[0].statusEvent)
             {
-                passOnTrain.Add(pass[i]);
-            }
-            else if (pass[i].statusPass == 2 && pass[i].statusEvent == 2)
-            {
-                passOffTrain.Add(pass[i]);
+                pass[i].numberPass = i;
+                passEventList.Add(pass[i]);
             }
         }
     }
 
-    public void CheckPassStation()
+    public void EnterStation()
     {
         int r = 0;
         for (int i = 0; i < pass.Count; i++)
@@ -99,6 +99,15 @@ public class Pass
     public string cityLocation;
     public int[] usageResources; // [0]-Еда, [1]-Вода, [2]-Тепло 
     public int statusPass; // 1 = Пассажира взяли на поезд / 2 = Пассажира не взяли на поезд
-    public GameObject eventPass; // Объект события для пассажира
-    public int statusEvent; // 1 = событие происходит если взял пассажира / 2 = событие происходит если не взял пассажира
+    public int numberPass;
+    public List<PassEvent> passEvent;
+}
+
+[Serializable]
+public class PassEvent
+{
+    public bool statusEvent;
+    public int stationBeforeEvent;
+    public string eventPassText; // Текст события для пассажира  | 0 - для взял пассажира / 1 - для не взял
+    public int eventResources; // [0]-Еда, [1]-Вода, [2]-Тепло
 }

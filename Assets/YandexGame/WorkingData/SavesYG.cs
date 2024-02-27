@@ -13,9 +13,7 @@ namespace YG
         //
         public int WagonCol; // Количество активных вагонов
         public int TextureTrain; // Выбранный вид поезда
-        public bool Texture1; // Открыта ли цветной вид поезда
-        public bool Texture2; // Открыта ли золотой вид поезда
-        public bool Texture3; // Открыта ли фиолетовый вид поезда
+        public bool[] Texture = new bool[4]; // 1-Цветной вид поезда / 2-Золотой вид поезда / 3-Фиолетовый вид поезда
 
         public int Money; // Количество денег
         public int Diamond; // Роскошь
