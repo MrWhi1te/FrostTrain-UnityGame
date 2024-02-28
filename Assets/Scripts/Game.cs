@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
+    public Audio AO;
+
     public List<WagoneData> WagoneData = new List<WagoneData>(); // Лист с данными вагонов
     public int WagonCol; // Количество активных вагонов
     [SerializeField] private GameObject Station; //
@@ -61,7 +63,6 @@ public class Game : MonoBehaviour
     public int NextStationTimeCount; //
     public Button TimerX2Bttn; //
     public GameObject TimerX2Pan; //
-    int x2Pan; //
     float Timer = 1; //
     int StationCount; // Количество станций
     
@@ -77,9 +78,9 @@ public class Game : MonoBehaviour
     public int LevelLoco = 1; // уровень локомотива. Уровень зависит от вида локомотива. ПОкупается на станции
     public int MaxWagone; // Максимальное кол-во вагонов
     public Image LocoSprite; // 
-    int NeedCoal;// Сколько потребляет угля
-    int TimerLoco;// Таймер за сколько потребляет уголь
-    int ActiveTimerLoco; // Активный таймер локомотива
+    private int NeedCoal;// Сколько потребляет угля
+    private int TimerLoco;// Таймер за сколько потребляет уголь
+    private int ActiveTimerLoco; // Активный таймер локомотива
     
     [Header("CoalFree")]
     public GameObject CoalADS; // Объект угля за рекламу
@@ -87,23 +88,27 @@ public class Game : MonoBehaviour
     public GameObject CoalHelpObj; //
     public GameObject TreesClickParticle; //
     public GameObject TreesFreeObj; //
-    int coalCountClick;
-    bool CoalHelp; // Подсказка при первом появлении угля
+    private int coalCountClick;
+    private bool CoalHelp; // Подсказка при первом появлении угля
     
     [Header("Message")]
-    public Text Message; // Текст сообщений
+    [SerializeField] private Text Message; // Текст сообщений
    
     [Header("Улучшение локомотива")]
-    public Text LevelEngineText; // Уровень Котла
-    public Text LevelCoalStorageText; // Уровень Тендера
-    public Text LevelChassisText; // Уровень Шасси
-    public int LevelEngine = 1; // Уровень двигателя локомотива
-    int LevelCostEngine; // Стоимость улучшения двигателя
-    public int LevelCoalStorage = 1; // Уровень тендера локомотива
-    int LevelCostCoalStorage; // Стоимость улучшения тендера локо 
-    public int LevelChassis = 1; // Уровень шасси локомотива
-    int LevelCostChassis; // Стоимость улучшения шасси локо 
-   
+    [SerializeField] private Text LevelEngineText; // Уровень Котла
+    [SerializeField] private Text LevelCoalStorageText; // Уровень Тендера
+    [SerializeField] private Text LevelChassisText; // Уровень Шасси
+    [HideInInspector] public int LevelEngine = 1; // Уровень двигателя локомотива
+    private int LevelCostEngine; // Стоимость улучшения двигателя
+    [HideInInspector] public int LevelCoalStorage = 1; // Уровень тендера локомотива
+    private int LevelCostCoalStorage; // Стоимость улучшения тендера локо 
+    [HideInInspector] public int LevelChassis = 1; // Уровень шасси локомотива
+    private int LevelCostChassis; // Стоимость улучшения шасси локо 
+
+    [Header("Passengers")]
+    public int passWagoneCount;
+    public int passCount;
+
     [Header("CargoTrasport")]
     public GameObject[] CargoTransportWagone; // Обьекты вагонов задания перевозки
     public int CargoTransportCount; // Количество вагонов
@@ -172,7 +177,7 @@ public class Game : MonoBehaviour
     public Button TaskDone; // Если задание выполнено, то собрать награду
     public Text TaskText; // Текст задания
     public int TaskCount; // Счетчик задания
-    [Header("SpecWagone")]
+    [Header("AirShip")]
     public GameObject AirShipObj; //
     public GameObject AirShipPan;
     public Text TimerAirShipText; //
@@ -195,8 +200,8 @@ public class Game : MonoBehaviour
     public Text TimeInGameStatisticText; //
 
     public GameObject EffectCollect;
+    public GameObject ParticleTrain;
     //
-    public string Lang;
 
     public GameObject PanWagon; // Открытая панель вагона
 
@@ -207,7 +212,6 @@ public class Game : MonoBehaviour
     {
         YandexGame.RewardVideoEvent += Rewarded;
         YandexGame.GetDataEvent += GetLoad;
-        Lang = YandexGame.savesData.language;
     }
 
     private void OnDisable()
@@ -300,6 +304,7 @@ public class Game : MonoBehaviour
         if (Trainer[0] == false)
         {
             TrainPan[0].SetActive(true);
+            AO.PlayAudioEnterPanel();
             TrainPan[38].SetActive(true);
             NextStationTimeCount = 60;
             NextStationSlide.maxValue = NextStationTimeCount;
@@ -403,6 +408,7 @@ public class Game : MonoBehaviour
     public void StartNextStation()
     {
         StartCoroutine(TimerNextStation());
+        AO.PlayAudioStation();
         SmokeParticle.SetActive(true);
     }
     public void TextLoco() // Обновление Текстов панели локомотива
@@ -423,6 +429,7 @@ public class Game : MonoBehaviour
             LevelLocoUpdater();
             TextLoco();
             ResourceTextUpdate();
+            AO.PlayAudioClickTrain();
         }
     }
     public void UpdateChassisLoco() // Улучшение Шасси
@@ -435,6 +442,7 @@ public class Game : MonoBehaviour
             LevelLocoUpdater();
             TextLoco();
             ResourceTextUpdate();
+            AO.PlayAudioClickTrain();
         }
     }
     public void UpdateStorageLoco() // Улучшение Хранилища
@@ -447,6 +455,7 @@ public class Game : MonoBehaviour
             LevelLocoUpdater();
             TextLoco();
             ResourceTextUpdate();
+            AO.PlayAudioClickTrain();
             if (TaskCount == 0)
             {
                 TaskCount = 1;
@@ -756,14 +765,13 @@ public class Game : MonoBehaviour
             LocoPan.SetActive(false);
             PanWagon = null;
         }
+        AO.PlayAudioClickTrain();
     }
-    public void OpenLocoUpgradePan() // Открытие панели улучшения локомотива
+    public void OpenClosedLocoUpgradePan() // Открытие панели улучшения локомотива
     {
-        UpgradeLocoPan.SetActive(true);
-    }
-    public void ClosedLocoUpgradePan() // Закрытие панели улучшения локомотива
-    {
-        UpgradeLocoPan.SetActive(false);
+        if(!UpgradeLocoPan.activeInHierarchy) UpgradeLocoPan.SetActive(true);
+        else UpgradeLocoPan.SetActive(false);
+        AO.PlayAudioClickTrain();
     }
     public void ResourceTextUpdate() // Обновление текстов и слайдера ресурсов 
     {
@@ -831,6 +839,8 @@ public class Game : MonoBehaviour
         int ADS = 0; // таймер денег за рекламу
         int R = UnityEngine.Random.Range(10, 500);
         NextStationSlide.maxValue = NextStationTimeCount;
+        ParticleTrain.SetActive(false); ParticleTrain.SetActive(true);
+        AO.PlayAudioTrain();
         while (true)
         {
             R--;
@@ -850,6 +860,8 @@ public class Game : MonoBehaviour
             {
                 StopCoroutine("PassFoodNeed");
                 StopCoroutine("PassFoodWater");
+                AO.StopAudio();
+                AO.PlayAudioStation();
                 Station.SetActive(true);
                 for (int i = 0; i < WagonCol; i++)
                 {
@@ -906,6 +918,7 @@ public class Game : MonoBehaviour
             }
             else
             {
+                AO.StopAudio();
                 SpeedFon = 0;
                 if (!CoalHelp)
                 {
@@ -949,6 +962,7 @@ public class Game : MonoBehaviour
         if(coalCountClick >= 5)
         {
             coalCountClick = 0;
+            AO.PlayAudioTakeResource();
             CollectResources[3].SetActive(false); CollectResources[03].SetActive(true);
         }
         if (!CoalHelp)
@@ -1306,6 +1320,10 @@ public class Game : MonoBehaviour
             TrainPan[2].SetActive(true);
             TrainCount++;
         }
+        if (TrainCount < 17)
+        {
+            AO.PlayAudioEnterPanel();
+        }
     }
     public void EscapeTrain()
     {
@@ -1328,23 +1346,29 @@ public class Game : MonoBehaviour
         {
             TrainPan[17].SetActive(false);
             TrainPan[37].SetActive(true);
+            AO.PlayAudioEnterPanel();
         }
     }
 
     // HELP!!!
-    public void OpenHelpPan()
+    public void OpenClosedHelpPan()
     {
-        HelpPan.SetActive(true);
-        int H = TimeInGameStatistic / 60;
-        int M = TimeInGameStatistic - (H * 60);
-        TimeInGameStatisticText.text = "Время в игре:" + H + "ч. " + M + "м.";
-        Time.timeScale = 0;
+        if (!HelpPan.activeInHierarchy)
+        {
+            HelpPan.SetActive(true);
+            int H = TimeInGameStatistic / 60;
+            int M = TimeInGameStatistic - (H * 60);
+            TimeInGameStatisticText.text = "Время в игре:" + H + "ч. " + M + "м.";
+            Time.timeScale = 0;
+        }
+        else
+        {
+            HelpPan.SetActive(false);
+            Time.timeScale = 1;
+        }
+        AO.PlayAudioClickBttn();
     }
-    public void ClosedHelpPan()
-    {
-        HelpPan.SetActive(false);
-        Time.timeScale = 1;
-    }
+
     public void ChoiceHelp(int index)
     {
         if(index == 0)
@@ -1365,6 +1389,7 @@ public class Game : MonoBehaviour
             WagoneHelp.SetActive(false);
             LocomotiveHelp.SetActive(true);
         }
+        AO.PlayAudioClickBttn();
     }
 
 
@@ -1401,16 +1426,21 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void OpenShopPan() // Открытие панели магазина
+    public void OpenClosedShopPan() // Открытие панели магазина
     {
-        ShopPan.SetActive(true);
-        Time.timeScale = 0;
+        if (!ShopPan.activeInHierarchy)
+        {
+            ShopPan.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            ShopPan.SetActive(false);
+            Time.timeScale = 1;
+        }
+        AO.PlayAudioClickBttn();
     }
-    public void ClosedShopPan() // Закрытие панели магазина
-    {
-        ShopPan.SetActive(false);
-        Time.timeScale = 1;
-    }
+
     public void ExchangeDiamond() // Обмен Роскоши на деньги
     {
         if (Diamond >= 1)
@@ -1420,18 +1450,12 @@ public class Game : MonoBehaviour
             StartPlusMoney(1500);
         }
     }
+
     public void OpenClosedTiemrX2Pan() // Открытие закрытие панели ускроения времени до станции
     {
-        if(x2Pan == 1)
-        {
-            TimerX2Pan.SetActive(false);
-            x2Pan = 0;
-        }
-        else
-        {
-            TimerX2Pan.SetActive(true);
-            x2Pan = 1;
-        }
+        if (TimerX2Pan.activeInHierarchy) TimerX2Pan.SetActive(false);
+        else TimerX2Pan.SetActive(true);
+        AO.PlayAudioClickBttn();
     }
     IEnumerator TimerX2() // Ускорение времени на минуту
     {
@@ -1458,6 +1482,8 @@ public class Game : MonoBehaviour
             StartPlusCoal(350);
             ResourceTextUpdate();
         }
+        AO.PlayAudioTakeResource();
+        CollectResources[3].SetActive(false); CollectResources[03].SetActive(true);
     }
 
     public void TakeADSMoney() // Взять деньги за рекламу
@@ -1466,6 +1492,7 @@ public class Game : MonoBehaviour
         StartPlusMoney(ADSMoneyCol);
         ADSMoneyActivePan.SetActive(false);
         ResourceTextUpdate();
+        AO.PlayAudioTakeResource();
     }
     IEnumerator ADSMoneyActive() // Активность таймера на плюс денег
     {
@@ -1616,6 +1643,7 @@ public class Game : MonoBehaviour
     {
         if(!AirShipPan.activeInHierarchy) AirShipPan.SetActive(true);
         else AirShipPan.SetActive(false);
+        AO.PlayAudioClickTrain();
     }
     public void StartTimerAirShip() //
     {
@@ -1752,20 +1780,20 @@ public class Game : MonoBehaviour
     {
         YandexGame.ResetSaveProgress();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        AO.PlayAudioClickBttn();
     }
-    public void OpenDeleteSave()
+    public void OpenClosedDeleteSave()
     {
-        DeletePan.SetActive(true);
-    }
-    public void ClosedDeleteSave()
-    {
-        DeletePan.SetActive(false);
+        if(!DeletePan.activeInHierarchy) DeletePan.SetActive(true);
+        else DeletePan.SetActive(false);
+        AO.PlayAudioClickBttn();
     }
 
     // MENU!!!
 
     public void ReturnTravel()
     {
+        AO.PlayAudioClickBttn();
         MenuPan.SetActive(false);
         StartGame();
     }
@@ -1872,6 +1900,7 @@ public class Game : MonoBehaviour
             TaskCount++;
             TaskPan.SetActive(false);
         }
+        AO.PlayAudioTakeResource();
     }
 
     //

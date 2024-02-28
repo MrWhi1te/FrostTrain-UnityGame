@@ -5,14 +5,19 @@ using YG;
 
 public class StationScripts : MonoBehaviour
 {
+    public Game GM; // Скрипт Гейм
+    public PassengersScript PS; //
+    public Audio AO;
+
     public GameObject StationPan; // Панель станции
     public GameObject GamePan; //
-    public Game GM; // Скрипт Гейм
+   
     [Header("Market")]
     public GameObject MarketPan; // Панель рынка
     public Slider[] SliderMarket; // Слайдеры рынка
     public Text[] ColResourceText; // Выбор Кол-во ресурсов текст
     public Text[] ColMoneyText; // Сумма покупки/продажи
+
     [Header("Train")]
     public GameObject TrainPan; // Панель поезда
     public GameObject LocoBuyPan; // Панель покупки локомотива
@@ -20,11 +25,13 @@ public class StationScripts : MonoBehaviour
     public GameObject SpecialWagPan; // Панель Специальных вагонов
     public Text[] TrainViewText; //
     public Text[] LocoUpdateText; //
+
     [Header("QuestPass")]
     public GameObject QuestPan; // Панель заданий
     public GameObject StartRewardQuestPan; //
     public Text StartRewardQuestText; //
     public Text ActiveTextQuest; //
+    
     [Header("QuestCargo")]
     public GameObject CargoQuestPan; //
     public Text CargoWagoneTransport; //
@@ -32,13 +39,16 @@ public class StationScripts : MonoBehaviour
     public Text CargoWagoneReward; //
     int CargoTransport; //
     int CargoReward; //
+    
     [Header("NextStation")]
     public Text NextStationText; // Текст следующей станции
     public GameObject[] BttnNextStation; //
     public bool StationVibor; //
+    
     [Header("AddWagone")]
     public Text CountWagon; // Подсчет кол-ва вагонов
     public Text BuyWagoneText; //
+    
     [Header("Resource")]
     public Text MoneyText; // Текст денег
     public Text DiamondText; // Текст Роскошь
@@ -49,16 +59,20 @@ public class StationScripts : MonoBehaviour
     public Text WorkerText; // Текст рабочих
     [SerializeField] private Text[] plusResourceText; // 0-Уголь / 1-Еда / 2-Вода / 3-Тепло
     public Text PlusMoneyText; // 
+    
     [Header("MoneyView")]
     public Text MoneyShowText; // 
+    
     [Header("Train")]
     public GameObject[] TrainerPan; //
     public int TrainerCount; //
+    
     [Header("ADS")]
     public GameObject ShopPan; //
     public GameObject ADSMoneyActive; //
     public Text ADSMoneyActiveText; // текст денег за рекламу
     int ADSMoneyCol; // награда денег за рекламу
+    
     [Header("TASK")]
     public GameObject[] TaskPan;
     int TaskCounter;
@@ -89,7 +103,9 @@ public class StationScripts : MonoBehaviour
         if (GM.Trainer[1] == false)
         {
             TrainerPan[0].SetActive(true);
+            AO.PlayAudioEnterPanel();
         }
+        PS.EnterStation();
         BttnNextStation[1].SetActive(false);
         StationVibor = false;
         TimerNextStation();
@@ -197,6 +213,7 @@ public class StationScripts : MonoBehaviour
         StationPan.SetActive(false);
         GM.Save();
         GM.TaskCounter();
+        PS.ExitStation();
         if (YandexGame.EnvironmentData.deviceType == "mobile")
         {
             YandexGame.StickyAdActivity(true);
@@ -225,6 +242,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(PlusMoney(0 - (300 * GM.WagonCol)));
                 GM.WagonCol++;
                 ResourceTextUpdate();
+                AO.PlayAudioPayment();
             }
             else
             {
@@ -274,6 +292,7 @@ public class StationScripts : MonoBehaviour
         GM.Water = resourcesInfo[2, 0];
         GM.Warm = resourcesInfo[3, 0];
         ResourceTextUpdate();
+        AO.PlayAudioPayment();
     }
 
     IEnumerator MoneyShow() // Вывод надписи не хватает денег с рынка
@@ -314,6 +333,7 @@ public class StationScripts : MonoBehaviour
             TrainPan.SetActive(false);
             QuestPan.SetActive(true);
         }
+        AO.PlayAudioClickBttn();
     }
     public void OpenTrainPan(int index) // Открытие панелей поезда
     {
@@ -336,6 +356,7 @@ public class StationScripts : MonoBehaviour
             ViewTrainPan.SetActive(false);
             SpecialWagPan.SetActive(true);
         }
+        AO.PlayAudioClickBttn();
     }
     private void UpdateTextTrainView()
     {
@@ -361,6 +382,7 @@ public class StationScripts : MonoBehaviour
                 GM.TextureTrain = index;
                 GM.ChoiceViewTrain(index);
                 ResourceTextUpdate();
+                AO.PlayAudioPayment();
             }
             else
             {
@@ -422,6 +444,7 @@ public class StationScripts : MonoBehaviour
                 GM.ViewLoco();
                 LocoUpdateText[0].text = "Приобретено";
                 LocoUpdateText[1].text = "Текущий";
+                AO.PlayAudioPayment();
             }
             else
             {
@@ -445,6 +468,7 @@ public class StationScripts : MonoBehaviour
                 LocoUpdateText[0].text = "Приобретено";
                 LocoUpdateText[1].text = "Приобретено";
                 LocoUpdateText[2].text = "Текущий";
+                AO.PlayAudioPayment();
             }
             else
             {
@@ -463,6 +487,7 @@ public class StationScripts : MonoBehaviour
                 StartCoroutine(PlusMoney(0 - 50000));
                 ResourceTextUpdate();
                 GM.AirShipActive = true;
+                AO.PlayAudioPayment();
             }
         }
     }
@@ -539,6 +564,7 @@ public class StationScripts : MonoBehaviour
         BttnNextStation[1].SetActive(true);
         BttnNextStation[0].SetActive(true);
         StationVibor = true;
+        AO.PlayAudioClickBttn();
     }
 
     public void ScoreCount() // Вывод очков
@@ -583,6 +609,7 @@ public class StationScripts : MonoBehaviour
             TrainerPan[2].SetActive(true);
             TrainerCount = 1;
         }
+        AO.PlayAudioEnterPanel();
     }
 
 
@@ -648,6 +675,7 @@ public class StationScripts : MonoBehaviour
     {
         if(!ShopPan.activeInHierarchy) ShopPan.SetActive(true);
         else ShopPan.SetActive(false);
+        AO.PlayAudioClickBttn();
     }
     public void ExchangeDiamond() // Обмен Роскоши на деньги
     {
@@ -657,6 +685,7 @@ public class StationScripts : MonoBehaviour
             GM.Diamond--;
             StartCoroutine(PlusMoney(1500));
             ResourceTextUpdate();
+            AO.PlayAudioPayment();
         }
     }
     void UpdateADSMoneyActive() //

@@ -5,6 +5,8 @@ public class Map : MonoBehaviour
 {
     public Game GM; // Скрипт Гейм
     public StationScripts ST; // Скрипт станции
+    public Audio AO;
+
     public Image[] PointCity; // Спрайты городов
     public Button NextStation; // Кнопка продолжения
     public GameObject MapPan; // 
@@ -366,6 +368,7 @@ public class Map : MonoBehaviour
                 GetNextStation(index);
             }
         }
+        AO.PlayAudioClickTrain();
     }
 
     void GetNextStation(int index)
@@ -382,6 +385,7 @@ public class Map : MonoBehaviour
     {
         ST.TimerNextStation();
         MapPan.SetActive(false);
+        AO.PlayAudioClickBttn();
     }
 
     public void ScoreCount() // Вывод очков

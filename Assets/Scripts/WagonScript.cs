@@ -6,6 +6,7 @@ using YG;
 public class WagonScript : MonoBehaviour
 {
     public Game GM; // 
+    public Audio AO;
     
     [Header("Основ.Панели")]
     public GameObject ChoiceWagonePan; // Первая панель выбора назначения вагона
@@ -175,6 +176,7 @@ public class WagonScript : MonoBehaviour
                 GM.PanWagon = null;
             }
         }
+        AO.PlayAudioClickTrain();
     }
 
     // Выбор назначения вагона!
@@ -237,6 +239,7 @@ public class WagonScript : MonoBehaviour
         WagoneWorkData();
         ChoiceWagonePan.SetActive(false);
         GM.PanWagon = null;
+        AO.PlayAudioClickTrain();
     }
 
     // Добавление и удаление рабочих в вагоне производств
@@ -249,6 +252,7 @@ public class WagonScript : MonoBehaviour
             WagoneDataCount();
             WagoneWorkData();
             GM.ResourceTextUpdate();
+            AO.PlayAudioClickTrain();
         }
     }
     public void RemoveWork() // Удаление рабочих в вагоне от 
@@ -260,6 +264,7 @@ public class WagonScript : MonoBehaviour
             WagoneDataCount();
             WagoneWorkData();
             GM.ResourceTextUpdate();
+            AO.PlayAudioClickTrain();
         }
     }
 
@@ -329,6 +334,7 @@ public class WagonScript : MonoBehaviour
         GM.ResourceTextUpdate();
         GM.WagoneData[IndexWag].TimerActiveProduction = TimerWag;
         DoneProductionPan.SetActive(false);
+        AO.PlayAudioTakeResource();
 
         if (GM.TaskCount == 2)
         {
@@ -644,6 +650,7 @@ public class WagonScript : MonoBehaviour
                     GM.TaskCount = 7;
                     GM.TaskCounter();
                 }
+                AO.PlayAudioClickTrain();
             }
             else
             {
@@ -674,6 +681,7 @@ public class WagonScript : MonoBehaviour
                     GM.TaskCount = 7;
                     GM.TaskCounter();
                 }
+                AO.PlayAudioClickTrain();
             }
             else
             {
