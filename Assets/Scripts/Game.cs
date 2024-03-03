@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class Game : MonoBehaviour
 {
     public Audio AO;
+    public Training TR;
 
     public List<WagoneData> WagoneData = new List<WagoneData>(); // Лист с данными вагонов
     public int WagonCol; // Количество активных вагонов
@@ -42,15 +43,10 @@ public class Game : MonoBehaviour
     public Text FoodText; // Текст еды
     public Text WaterText; // Текст воды
     public Text DiamondText; // Роскошь текст
-    public Text PlusFoodText; // 
-    public Text PlusWaterText; //
-    public Text PlusWarmText; //
-    public Text PlusCoalText; //
-    public Text PlusWorkerText; //
-    public Text PlusMoneyText; // 
+    public Text[] plusResourceText; // 0-money / 1-Coal / 2-Food / 3-Water / 4-Warm
     int StorageCount = 50; // Емкость хранилища
     public Slider[] SliderResource; // Слайдер ресурсов (В наличие и макс)
-    public GameObject[] CollectResources; //
+    public GameObject[] CollectResources; // 
     
     [Header("Температура")]
     public int TemperatureOnStreet; // Температура за бортом
@@ -88,8 +84,7 @@ public class Game : MonoBehaviour
     public GameObject CoalHelpObj; //
     public GameObject TreesClickParticle; //
     public GameObject TreesFreeObj; //
-    private int coalCountClick;
-    private bool CoalHelp; // Подсказка при первом появлении угля
+    public bool CoalHelp; // Подсказка при первом появлении угля
     
     [Header("Message")]
     [SerializeField] private Text Message; // Текст сообщений
@@ -108,6 +103,8 @@ public class Game : MonoBehaviour
     [Header("Passengers")]
     public int passWagoneCount;
     public int passCount;
+    public bool helpPass;
+    public GameObject[] passWagon; 
 
     [Header("CargoTrasport")]
     public GameObject[] CargoTransportWagone; // Обьекты вагонов задания перевозки
@@ -136,14 +133,18 @@ public class Game : MonoBehaviour
     public GameObject[] ParallaxObj; //
 
     [Header("Barrier")]
-    public GameObject BarrierObj; //
-    int clickCountBarrier; //
-   
+    public GameObject barrierObj; //
+    public GameObject helpBarrierObj; //
+    public bool helpBarrier;
+
+    [Header("LocoRepair")]
+    public GameObject repairTrainObj; //
+    public GameObject helpTrainRepairObj; //
+    public bool helpRepair;
+
     [Header("Trainer")]
     public bool[] Trainer; //
-    public bool[] WagoneTrainerChoice; //
-    public int TrainCount; //
-    public GameObject[] TrainPan; //
+    public int trainingCount; //
     
     [Header("Help")]
     public GameObject HelpPan; //
@@ -168,7 +169,6 @@ public class Game : MonoBehaviour
     public Text ScoreMenu; // 
     
     [Header("Task")]
-    public bool[] QuestionPoint; //
     public bool ActiveTask; //
     public int CityTask; //
     
@@ -287,10 +287,6 @@ public class Game : MonoBehaviour
                 WagoneData[i].WorkerInWagone = YandexGame.savesData.WorkerInWagone[i];
                 WagoneData[i].TemperatureWagone = YandexGame.savesData.TemperatureWagone[i];
             }
-            for (int i = 0; i < QuestionPoint.Length; i++)
-            {
-                QuestionPoint[i] = YandexGame.savesData.QuestionPoint[i];
-            }
             ScoreMenu.text = "Очки: " + Score;
             if(YandexGame.EnvironmentData.reviewCanShow == false)
             {
@@ -303,9 +299,9 @@ public class Game : MonoBehaviour
     {
         if (Trainer[0] == false)
         {
-            TrainPan[0].SetActive(true);
+            TR.trainingPanGame[0].SetActive(true);
             AO.PlayAudioEnterPanel();
-            TrainPan[38].SetActive(true);
+            TR.trainingPanGame[2].SetActive(true);
             NextStationTimeCount = 60;
             NextStationSlide.maxValue = NextStationTimeCount;
             NextStationTime = NextStationTimeCount;
@@ -314,7 +310,7 @@ public class Game : MonoBehaviour
         if(Trainer[0] == true)
         {
             StartNextStation();
-            StartCoroutine(AutoSave());
+            StartAutoSave();
             TaskCounter();
         }
         wagoneSprites.Add("", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
@@ -323,6 +319,8 @@ public class Game : MonoBehaviour
         wagoneSprites.Add("Pass", new Sprite[] { SPR0[2], SPR1[2], SPR2[2], SPR3[2] });
         wagoneSprites.Add("Boiler", new Sprite[] { SPR0[3], SPR1[3], SPR2[3], SPR3[3] });
         wagoneSprites.Add("Storage", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
+        wagoneSprites.Add("PassWagon", new Sprite[] { SPR0[4], SPR1[4], SPR2[4], SPR3[4] });
+        wagoneSprites.Add("Cargo", new Sprite[] { SPR0[8], SPR1[8], SPR2[8], SPR3[8] });
         LocoSprites.Add(1, new Sprite[] { SPR0[5], SPR1[5], SPR2[5], SPR3[5] });
         LocoSprites.Add(2, new Sprite[] { SPR0[6], SPR1[6], SPR2[6], SPR3[6] });
         LocoSprites.Add(3, new Sprite[] { SPR0[7], SPR1[7], SPR2[7], SPR3[7] });
@@ -335,60 +333,9 @@ public class Game : MonoBehaviour
         StartCoroutine(TimerInGame());
         StartCoroutine("PassFoodNeed");
         StartCoroutine("PassFoodWater");
-        if (CargoTransportCount >= 1) // Если активно грузовое задание
-        {
-            for (int i = 0; i < CargoTransportCount; i++)
-            {
-                CargoTransportWagone[i].SetActive(true);
-                if (TextureTrain == 0)
-                {
-                    CargoTransportWagone[i].GetComponent<Image>().sprite = SPR0[8];
-                }
-                else if (TextureTrain == 1)
-                {
-                    CargoTransportWagone[i].GetComponent<Image>().sprite = SPR1[8];
-                }
-                else if (TextureTrain == 2)
-                {
-                    CargoTransportWagone[i].GetComponent<Image>().sprite = SPR1[8];
-                }
-                else if (TextureTrain == 3)
-                {
-                    CargoTransportWagone[i].GetComponent<Image>().sprite = SPR1[8];
-                }
-            }
-            StartTransportCargoWagoneQuest();
-        }
-        if (CargoSpecTransportCount >= 1) // Если активно грузовое Spec задание
-        {
-            for (int i = 0; i < CargoSpecTransportCount; i++)
-            {
-                CargoSpecTransportWagone[i].SetActive(true);
-            }
-        }
-        if (CargoSpec1TransportCount >= 1) // Если активно грузовое Spec задание
-        {
-            for (int i = 0; i < CargoSpec1TransportCount; i++)
-            {
-                CargoSpec1TransportWagone[i].SetActive(true);
-            }
-        }
-        if(AirShipActive == true)
-        {
-            AirShipObj.SetActive(true);
-            if(TextureTrain == 0)
-            {
-                AirShipObj.GetComponent<Image>().sprite = SPR0[9];
-            }
-            else if (TextureTrain >= 1)
-            {
-                AirShipObj.GetComponent<Image>().sprite = SPR1[11];
-            }
-            StartTimerAirShip();
-        }
     }
 
-    void ActiveWagone()
+    public void ActiveWagone()
     {
         for (int a = 0; a < WagonCol; a++)
         {
@@ -404,7 +351,51 @@ public class Game : MonoBehaviour
                 WagoneData[a].WagoneObj.SetActive(true);
             }
         }
+        if (passWagoneCount > 0)
+        {
+            for (int i = 0; i < passWagoneCount; i++)
+            {
+                passWagon[i].SetActive(true);
+                passWagon[i].GetComponent<Image>().sprite = wagoneSprites["PassWagon"][TextureTrain];
+            }
+        }
+        if (CargoTransportCount >= 1) // Если активно грузовое задание
+        {
+            for (int i = 0; i < CargoTransportCount; i++)
+            {
+                CargoTransportWagone[i].SetActive(true);
+                CargoTransportWagone[i].GetComponent<Image>().sprite = wagoneSprites["Cargo"][TextureTrain];
+            }
+        }
+        if (CargoSpecTransportCount >= 1) // Если активно грузовое Spec задание
+        {
+            for (int i = 0; i < CargoSpecTransportCount; i++)
+            {
+                CargoSpecTransportWagone[i].SetActive(true);
+            }
+        }
+        if (CargoSpec1TransportCount >= 1) // Если активно грузовое Spec задание
+        {
+            for (int i = 0; i < CargoSpec1TransportCount; i++)
+            {
+                CargoSpec1TransportWagone[i].SetActive(true);
+            }
+        }
+        if (AirShipActive == true)
+        {
+            AirShipObj.SetActive(true);
+            if (TextureTrain == 0)
+            {
+                AirShipObj.GetComponent<Image>().sprite = SPR0[9];
+            }
+            else if (TextureTrain >= 1)
+            {
+                AirShipObj.GetComponent<Image>().sprite = SPR1[11];
+            }
+            StartTimerAirShip();
+        }
     }
+
     public void StartNextStation()
     {
         StartCoroutine(TimerNextStation());
@@ -424,7 +415,7 @@ public class Game : MonoBehaviour
         if(Money >= LevelCostEngine)
         {
             Money -= LevelCostEngine;
-            StartPlusMoney(0 - LevelCostEngine);
+            PlusResources(0, 0 - LevelCostEngine);
             LevelEngine++;
             LevelLocoUpdater();
             TextLoco();
@@ -437,7 +428,7 @@ public class Game : MonoBehaviour
         if(Money >= LevelCostChassis)
         {
             Money -= LevelCostChassis;
-            StartPlusMoney(0 - LevelCostChassis);
+            PlusResources(0, 0 - LevelCostChassis);
             LevelChassis++;
             LevelLocoUpdater();
             TextLoco();
@@ -450,7 +441,7 @@ public class Game : MonoBehaviour
         if (Money >= LevelCostCoalStorage)
         {
             Money -= LevelCostCoalStorage;
-            StartPlusMoney(0 - LevelCostCoalStorage);
+            PlusResources(0, 0 - LevelCostCoalStorage);
             LevelCoalStorage++;
             LevelLocoUpdater();
             TextLoco();
@@ -472,28 +463,28 @@ public class Game : MonoBehaviour
                 NeedCoal = 100;
                 TimerLoco = 30;
                 LevelCostEngine = 500;
-                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if(LevelEngine == 2)
             {
                 NeedCoal = 90;
                 TimerLoco = 30;
                 LevelCostEngine = 1000;
-                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 3)
             {
                 NeedCoal = 80;
                 TimerLoco = 35;
                 LevelCostEngine = 1500;
-                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 4)
             {
                 NeedCoal = 78;
                 TimerLoco = 35;
                 LevelCostEngine = 2500;
-                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine >= 5)
             {
@@ -505,25 +496,25 @@ public class Game : MonoBehaviour
             {
                 MaxWagone = 5;
                 LevelCostChassis = 500;
-                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 2)
             {
                 MaxWagone = 7;
                 LevelCostChassis = 1000;
-                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 3)
             {
                 MaxWagone = 8;
                 LevelCostChassis = 1500;
-                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 4)
             {
                 MaxWagone = 10;
                 LevelCostChassis = 2500;
-                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis >= 5)
             {
@@ -534,25 +525,25 @@ public class Game : MonoBehaviour
             {
                 CoalMax = 500;
                 LevelCostCoalStorage = 500;
-                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 2)
             {
                 CoalMax = 650;
                 LevelCostCoalStorage = 1000;
-                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 3)
             {
                 CoalMax = 850;
                 LevelCostCoalStorage = 1500;
-                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 4)
             {
                 CoalMax = 1000;
                 LevelCostCoalStorage = 2500;
-                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage >= 5)
             {
@@ -567,28 +558,28 @@ public class Game : MonoBehaviour
                 NeedCoal = 140;
                 TimerLoco = 30;
                 LevelCostEngine = 1000;
-                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 2)
             {
                 NeedCoal = 100;
                 TimerLoco = 30;
                 LevelCostEngine = 1500;
-                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 3)
             {
                 NeedCoal = 80;
                 TimerLoco = 35;
                 LevelCostEngine = 2500;
-                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 4)
             {
                 NeedCoal = 75;
                 TimerLoco = 35;
                 LevelCostEngine = 3500;
-                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine >= 5)
             {
@@ -600,25 +591,25 @@ public class Game : MonoBehaviour
             {
                 MaxWagone = 15;
                 LevelCostChassis = 1000;
-                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 2)
             {
                 MaxWagone = 18;
                 LevelCostChassis = 2000;
-                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 3)
             {
                 MaxWagone = 21;
                 LevelCostChassis = 3000;
-                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 4)
             {
                 MaxWagone = 27;
                 LevelCostChassis = 4500;
-                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis >= 5)
             {
@@ -629,25 +620,25 @@ public class Game : MonoBehaviour
             {
                 CoalMax = 1500;
                 LevelCostCoalStorage = 1000;
-                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 2)
             {
                 CoalMax = 1800;
                 LevelCostCoalStorage = 2000;
-                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 3)
             {
                 CoalMax = 2100;
                 LevelCostCoalStorage = 3000;
-                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 4)
             {
                 CoalMax = 2500;
                 LevelCostCoalStorage = 4500;
-                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage >= 5)
             {
@@ -662,28 +653,28 @@ public class Game : MonoBehaviour
                 NeedCoal = 120;
                 TimerLoco = 30;
                 LevelCostEngine = 1000;
-                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 2)
             {
                 NeedCoal = 100;
                 TimerLoco = 30;
                 LevelCostEngine = 1500;
-                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 3)
             {
                 NeedCoal = 80;
                 TimerLoco = 35;
                 LevelCostEngine = 2500;
-                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine == 4)
             {
                 NeedCoal = 65;
                 TimerLoco = 35;
                 LevelCostEngine = 3500;
-                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "$ -потребление угля";
+                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "р -потребление угля";
             }
             if (LevelEngine >= 5)
             {
@@ -695,25 +686,25 @@ public class Game : MonoBehaviour
             {
                 MaxWagone = 30;
                 LevelCostChassis = 1000;
-                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 2)
             {
                 MaxWagone = 34;
                 LevelCostChassis = 2000;
-                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 3)
             {
                 MaxWagone = 38;
                 LevelCostChassis = 3000;
-                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis == 4)
             {
                 MaxWagone = 44;
                 LevelCostChassis = 4500;
-                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "$ +Мах количество вагонов";
+                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
             }
             if (LevelChassis >= 5)
             {
@@ -724,25 +715,25 @@ public class Game : MonoBehaviour
             {
                 CoalMax = 3000;
                 LevelCostCoalStorage = 1000;
-                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 2)
             {
                 CoalMax = 3400;
                 LevelCostCoalStorage = 2000;
-                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 3)
             {
                 CoalMax = 3800;
                 LevelCostCoalStorage = 3000;
-                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage == 4)
             {
                 CoalMax = 4200;
                 LevelCostCoalStorage = 4500;
-                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "$ +хранилище угля";
+                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
             }
             if (LevelCoalStorage >= 5)
             {
@@ -775,7 +766,7 @@ public class Game : MonoBehaviour
     }
     public void ResourceTextUpdate() // Обновление текстов и слайдера ресурсов 
     {
-        MoneyText.text = Money + "$";
+        MoneyText.text = Money + "р";
         DiamondText.text = Diamond.ToString();
         CoalText.text = Coal + "/" + CoalMax;
         WorkerText.text = FreeWorker + "/" + AllWorker;
@@ -835,25 +826,45 @@ public class Game : MonoBehaviour
     // Таймер до следующей станции
     IEnumerator TimerNextStation() //
     {
-        int S = 0; // таймер скорости фона
-        int ADS = 0; // таймер денег за рекламу
-        int R = UnityEngine.Random.Range(10, 500);
+        int timeBackground = 0; // таймер скорости фона
+        int timeADS = 0; // таймер денег за рекламу
+        int timeBarrier = UnityEngine.Random.Range(20, 600); // Таймер барьер
+        int timeRepair = UnityEngine.Random.Range(20, 600); //  Таймер ремонта поезда
         NextStationSlide.maxValue = NextStationTimeCount;
         ParticleTrain.SetActive(false); ParticleTrain.SetActive(true);
         AO.PlayAudioTrain();
         while (true)
         {
-            R--;
+            timeBarrier--;
+            timeRepair--;
             NextStationTime--;
             DistancePlusStatistic++;
             int Min = NextStationTime / 60;
             int Sec = NextStationTime - (Min * 60);
             NextStationTimeText.text = Min + "мин. " + Sec + "сек.";
             NextStationSlide.value = NextStationTimeCount - NextStationTime;
-            if (R <= 0)
+            if (timeBarrier <= 0)
             {
+                AO.StopAudio();
                 StartMessage("Препятствие на пути!");
-                BarrierObj.SetActive(true);
+                barrierObj.SetActive(true);
+                if (!helpBarrier)
+                {
+                    AO.PlayAudioEnterPanel();
+                    helpBarrierObj.SetActive(true);
+                }
+                break;
+            }
+            if (timeRepair <= 0)
+            {
+                AO.StopAudio();
+                StartMessage("Поезд сломался!");
+                repairTrainObj.SetActive(true);
+                if (!helpRepair)
+                {
+                    AO.PlayAudioEnterPanel();
+                    helpTrainRepairObj.SetActive(true);
+                }
                 break;
             }
             if (NextStationTime <= 0)
@@ -870,49 +881,36 @@ public class Game : MonoBehaviour
                 }
                 SmokeParticle.SetActive(false);
                 GamePan.SetActive(false);
-                if (YandexGame.EnvironmentData.deviceType == "mobile" & City == 0 || City == 1)
-                {
-                    YandexGame.StickyAdActivity(false);
-                }
+                if (YandexGame.EnvironmentData.deviceType == "mobile" & City == 0 || City == 1) YandexGame.StickyAdActivity(false);
                 YandexGame.FullscreenShow();
                 break;
             }
             else if(NextStationTime > 0 & Coal >= NeedCoal) //
             {
                 ActiveTimerLoco--;
-                S++;
-                ADS++;
+                timeBackground++;
+                timeADS++;
                 if(ActiveTimerLoco <= 0) //
                 {
                     Coal -= NeedCoal;
-                    StartPlusCoal(0- NeedCoal);
+                    PlusResources(1, 0- NeedCoal);
                     ResourceTextUpdate();
                     TextLoco();
                     ActiveTimerLoco = TimerLoco;
                 }
-                if (S >= 45 & SpeedFon <= 3)
+                if (timeBackground >= 45 & SpeedFon <= 3)
                 {
                     SpeedFon++;
-                    S = 0;
+                    timeBackground = 0;
                 }
-                if(ADS >= 40)
+                if(timeADS >= 40)
                 {
-                    if(Money >= 500)
-                    {
-                        ADSMoneyCol = UnityEngine.Random.Range(500, Money);
-                        ADSMoneyActivePan.SetActive(true);
-                        ADSMoneyActiveText.text = "+" + ADSMoneyCol + "$!!!" + "\n" + "За просмотр"; 
-                        StartCoroutine(ADSMoneyActive());
-                        ADS = 0;
-                    }
-                    else
-                    {
-                        ADSMoneyCol = 500;
-                        ADSMoneyActivePan.SetActive(true);
-                        ADSMoneyActiveText.text = "+" + ADSMoneyCol + "$!!!" + "\n" + "За просмотр";
-                        StartCoroutine(ADSMoneyActive());
-                        ADS = 0;
-                    }
+                    if(Money >= 500) ADSMoneyCol = UnityEngine.Random.Range(500, Money);
+                    else ADSMoneyCol = 500;
+                    ADSMoneyActivePan.SetActive(true);
+                    ADSMoneyActiveText.text = "+" + ADSMoneyCol + "р!!!" + "\n" + "За просмотр";
+                    StartCoroutine(ADSMoneyActive());
+                    timeADS = 0;
                 }
                 yield return new WaitForSeconds(Timer);
             }
@@ -922,6 +920,7 @@ public class Game : MonoBehaviour
                 SpeedFon = 0;
                 if (!CoalHelp)
                 {
+                    AO.PlayAudioEnterPanel();
                     CoalHelpObj.SetActive(true);
                 }
                 TreesFreeObj.SetActive(true);
@@ -933,44 +932,6 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void ClickBarrier()
-    {
-        TreesClickParticle.SetActive(false);
-        TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        TreesClickParticle.SetActive(true);
-        clickCountBarrier++;
-        if (clickCountBarrier >= 10)
-        {
-            clickCountBarrier = 0;
-            BarrierObj.SetActive(false);
-            StartEngineLoco();
-        }
-    }
-    public void ClickTreesCoalFree() // Клик по деревьям для угля
-    {
-        if(Coal < CoalMax)
-        {
-            coalCountClick++;
-            Coal++;
-            CoalPlusStatistic++;
-            ResourceTextUpdate();
-            TextLoco();
-        }
-        TreesClickParticle.SetActive(false);
-        TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        TreesClickParticle.SetActive(true);
-        if(coalCountClick >= 5)
-        {
-            coalCountClick = 0;
-            AO.PlayAudioTakeResource();
-            CollectResources[3].SetActive(false); CollectResources[03].SetActive(true);
-        }
-        if (!CoalHelp)
-        {
-            CoalHelpObj.SetActive(false);
-            CoalHelp = true;
-        }
-    }
     public void StartEngineLoco() // Запуск поезда, если достаточно угля
     {
         if(Coal >= NeedCoal)
@@ -995,37 +956,6 @@ public class Game : MonoBehaviour
         Message.text = "";
         yield break;
     }
-    public void StartTransportCargoWagoneQuest() //Запуск задания по транспортивке
-    {
-        StartCoroutine(WorkTransportCargoWagone());
-    }
-    IEnumerator WorkTransportCargoWagone() // Корутина расхода ресурсов транспортировки Грузовой
-    {
-        while (true)
-        {
-            if (NextStationTime <= 0 || CargoTransportCount <= 0)
-            {
-                break;
-            }
-            if (NextStationTime > 0 & CargoTransportCount >= 1)
-            {
-                if (Coal < CargoTransportCount * 20)
-                {
-                    RewardCargoTransport -= 30;
-                    Coal -= CargoTransportCount * 20;
-                    StartPlusCoal(0 - (CargoTransportCount * 20));
-                    if (Coal < 0) { Coal = 0; }
-                    yield return new WaitForSeconds(30);
-                }
-                else
-                {
-                    Coal -= CargoTransportCount * 20;
-                    StartPlusCoal(0 - (CargoTransportCount * 20));
-                    yield return new WaitForSeconds(30);
-                }
-            }
-        }
-    }
 
     IEnumerator PassFoodNeed() // Корутина пищи людей
     {
@@ -1037,7 +967,7 @@ public class Game : MonoBehaviour
             {
                 Food -= AllWorker;
                 ResourceTextUpdate();
-                StartPlusFood(0 - AllWorker);
+                PlusResources(2, 0 - AllWorker);
                 NeedFoodPeople = 0;
                 CicleNeedFood = 0;
                 yield return new WaitForSeconds(10);
@@ -1047,7 +977,7 @@ public class Game : MonoBehaviour
                 StartMessage("Людям не хватает пищи!");
                 NeedFoodPeople = AllWorker - Food;
                 CicleNeedFood++;
-                StartPlusFood(0 - Food);
+                PlusResources(2, 0 - Food);
                 Food = 0;
                 ResourceTextUpdate();
                 if (CicleNeedFood >= 7) // Если 7 циклов и больше люди без еды
@@ -1084,7 +1014,7 @@ public class Game : MonoBehaviour
             {
                 Water -= AllWorker;
                 ResourceTextUpdate();
-                StartPlusFood(0 - AllWorker);
+                PlusResources(3, 0 - AllWorker);
                 NeedFoodPeople = 0;
                 CicleNeedFood = 0;
                 yield return new WaitForSeconds(10);
@@ -1094,7 +1024,7 @@ public class Game : MonoBehaviour
                 StartMessage("Людям не хватает воды!");
                 NeedFoodPeople = AllWorker - Water;
                 CicleNeedFood++;
-                StartPlusFood(0 - Water);
+                PlusResources(3, 0 - Water);
                 Water = 0;
                 ResourceTextUpdate();
                 if (CicleNeedFood >= 7) // Если 7 циклов и больше люди без еды
@@ -1176,178 +1106,6 @@ public class Game : MonoBehaviour
         int r = UnityEngine.Random.Range(0, ParallaxObj.Length);
         for(int i = 0; i < ParallaxObj.Length; i++) { ParallaxObj[i].SetActive(false); }
         ParallaxObj[r].SetActive(true);    
-    }
-
-    // TRAINER!!!
-    public void NextTrainPan()
-    {
-        if (TrainCount == 17)
-        {
-            Time.timeScale = 1;
-            StartNextStation();
-            StartCoroutine(AutoSave());
-            TaskCounter();
-            Trainer[0] = true;
-            TrainPan[37].SetActive(false);
-            TrainPan[38].SetActive(false);
-        }
-        else if (TrainCount == 16)
-        {
-            TrainPan[33].SetActive(false);
-            TrainPan[34].SetActive(false);
-            TrainPan[35].SetActive(true);
-            TrainPan[36].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 15)
-        {
-            TrainPan[20].SetActive(false);
-            TrainPan[27].SetActive(false);
-            TrainPan[30].SetActive(false);
-            TrainPan[33].SetActive(true);
-            TrainPan[34].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 14)
-        {
-            TrainPan[27].SetActive(false);
-            TrainPan[30].SetActive(true);
-            TrainPan[31].SetActive(true);
-            TrainPan[32].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 13)
-        {
-            TrainPan[24].SetActive(false);
-            TrainPan[27].SetActive(true);
-            TrainPan[28].SetActive(true);
-            TrainPan[29].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 12)
-        {
-            TrainPan[21].SetActive(false);
-            TrainPan[24].SetActive(true);
-            TrainPan[25].SetActive(true);
-            TrainPan[26].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 11)
-        {
-            TrainPan[19].SetActive(false);
-            TrainPan[21].SetActive(true);
-            TrainPan[22].SetActive(true);
-            TrainPan[23].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 10)
-        {
-            TrainPan[18].SetActive(false);
-            TrainPan[19].SetActive(true);
-            TrainPan[20].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 9)
-        {
-            Time.timeScale = 1;
-            TrainPan[0].SetActive(false);
-            TrainPan[17].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 8)
-        {
-            TrainPan[14].SetActive(false);
-            TrainPan[15].SetActive(false);
-            TrainPan[16].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 7)
-        {
-            TrainPan[12].SetActive(false);
-            TrainPan[13].SetActive(false);
-            TrainPan[14].SetActive(true);
-            TrainPan[15].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 6)
-        {
-            TrainPan[9].SetActive(false);
-            TrainPan[10].SetActive(false);
-            TrainPan[11].SetActive(false);
-            TrainPan[12].SetActive(true);
-            TrainPan[13].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 5)
-        {
-            TrainPan[7].SetActive(false);
-            TrainPan[8].SetActive(false);
-            TrainPan[9].SetActive(true);
-            TrainPan[10].SetActive(true);
-            TrainPan[11].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 4)
-        {
-            TrainPan[5].SetActive(false);
-            TrainPan[6].SetActive(false);
-            TrainPan[7].SetActive(true);
-            TrainPan[8].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 3)
-        {
-            TrainPan[4].SetActive(false);
-            TrainPan[5].SetActive(true);
-            TrainPan[6].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 2)
-        {
-            TrainPan[3].SetActive(false);
-            TrainPan[4].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 1)
-        {
-            TrainPan[2].SetActive(false);
-            TrainPan[3].SetActive(true);
-            TrainCount++;
-        }
-        else if (TrainCount == 0)
-        {
-            TrainPan[1].SetActive(false);
-            TrainPan[2].SetActive(true);
-            TrainCount++;
-        }
-        if (TrainCount < 17)
-        {
-            AO.PlayAudioEnterPanel();
-        }
-    }
-    public void EscapeTrain()
-    {
-        Time.timeScale = 1;
-        StartNextStation();
-        StartCoroutine(AutoSave());
-        TaskCounter();
-        Trainer[0] = true;
-        TrainPan[0].SetActive(false);
-        TrainPan[17].SetActive(false);
-        TrainPan[37].SetActive(false);
-        TrainPan[38].SetActive(false);
-        Food = FoodMax;
-        Water = WaterMax;
-        ResourceTextUpdate();
-    }
-    public void Trainer2() //
-    {
-        if(WagoneTrainerChoice[0] == true & WagoneTrainerChoice[1] == true & WagoneTrainerChoice[2] == true & WagoneTrainerChoice[3] == true)
-        {
-            TrainPan[17].SetActive(false);
-            TrainPan[37].SetActive(true);
-            AO.PlayAudioEnterPanel();
-        }
     }
 
     // HELP!!!
@@ -1447,7 +1205,7 @@ public class Game : MonoBehaviour
         {
             Money += 1500;
             Diamond--;
-            StartPlusMoney(1500);
+            PlusResources(0, 1500);
         }
     }
 
@@ -1473,13 +1231,13 @@ public class Game : MonoBehaviour
         if (350 < Razn)
         {
             Coal += 350;
-            StartPlusCoal(350);
+            PlusResources(1, 350);
             ResourceTextUpdate();
         }
         else if (350 >= Razn)
         {
             Coal += Razn;
-            StartPlusCoal(350);
+            PlusResources(1, 350);
             ResourceTextUpdate();
         }
         AO.PlayAudioTakeResource();
@@ -1489,7 +1247,7 @@ public class Game : MonoBehaviour
     public void TakeADSMoney() // Взять деньги за рекламу
     {
         Money += ADSMoneyCol;
-        StartPlusMoney(ADSMoneyCol);
+        PlusResources(0, ADSMoneyCol);
         ADSMoneyActivePan.SetActive(false);
         ResourceTextUpdate();
         AO.PlayAudioTakeResource();
@@ -1516,127 +1274,27 @@ public class Game : MonoBehaviour
 
     
     // Корутины на тексты прибавления и отнимания ресурсов!
-    public void StartPlusFood(int F)
+    public void StartPlusResource(int index, int value)
     {
-        StartCoroutine(PlusFood(F));
-    }
-    public void StartPlusWater(int F)
-    {
-        StartCoroutine(PlusWater(F));
-    }
-    public void StartPlusCoal(int F)
-    {
-        StartCoroutine(PlusCoal(F));
-    }
-    public void StartPlusWarm(int F)
-    {
-        StartCoroutine(PlusWarm(F));
-    }
-    public void StartPlusWorker(int F)
-    {
-        StartCoroutine(PlusWorker(F));
-    }
-    public void StartPlusMoney(int F)
-    {
-        StartCoroutine(PlusMoney(F));
-    }
-    IEnumerator PlusFood(int F)
-    {
-        if (F > 0)
-        {
-            PlusFoodText.text = "+" + F;
-            PlusFoodText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusFoodText.text = F.ToString();
-            PlusFoodText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusFoodText.text = "";
-        yield break;
-    }
-    IEnumerator PlusWater(int F)
-    {
-        if (F > 0)
-        {
-            PlusWaterText.text = "+" + F;
-            PlusWaterText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusWaterText.text = F.ToString();
-            PlusWaterText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusWaterText.text = "";
-        yield break;
-    }
-    IEnumerator PlusWarm(int F)
-    {
-        if (F > 0)
-        {
-            PlusWarmText.text = "+" + F;
-            PlusWarmText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusWarmText.text = F.ToString();
-            PlusWarmText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusWarmText.text = "";
-        yield break;
-    }
-    IEnumerator PlusCoal(int F)
-    {
-        if (F > 0)
-        {
-            PlusCoalText.text = "+" + F;
-            PlusCoalText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusCoalText.text = F.ToString();
-            PlusCoalText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusCoalText.text = "";
-        yield break;
-    }
-    IEnumerator PlusWorker(int F)
-    {
-        if (F > 0)
-        {
-            PlusWorkerText.text = "+" + F;
-            PlusWorkerText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusWorkerText.text = F.ToString();
-            PlusWorkerText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusWorkerText.text = "";
-        yield break;
-    }
-    IEnumerator PlusMoney(int F)
-    {
-        if (F > 0)
-        {
-            PlusMoneyText.text = "+" + F;
-            PlusMoneyText.color = new Color(70, 255, 0, 255);
-        }
-        if (F < 0)
-        {
-            PlusMoneyText.text = F.ToString();
-            PlusMoneyText.color = new Color(255, 0, 0, 255);
-        }
-        yield return new WaitForSeconds(2);
-        PlusMoneyText.text = "";
-        yield break;
+        StartCoroutine(PlusResources(index, value));
     }
 
+    IEnumerator PlusResources(int index, int value)
+    {
+        if (value >= 0)
+        {
+            plusResourceText[index].text = "+" + value;
+            plusResourceText[index].color = new Color(70, 255, 0, 255);
+        }
+        else
+        {
+            plusResourceText[index].text = value.ToString();
+            plusResourceText[index].color = new Color(70, 255, 0, 255);
+        }
+        yield return new WaitForSeconds(2);
+        plusResourceText[index].text = "";
+        yield break;
+    }
 
     // AIRSHIPS
     public void ClickAirShipPan() // Открытие и закрытие панели локомотива
@@ -1740,10 +1398,6 @@ public class Game : MonoBehaviour
             YandexGame.savesData.WorkerInWagone[i] = WagoneData[i].WorkerInWagone;
             YandexGame.savesData.TemperatureWagone[i] = WagoneData[i].TemperatureWagone;
         }
-        for(int i = 0; i < QuestionPoint.Length; i++)
-        {
-            YandexGame.savesData.QuestionPoint[i] = QuestionPoint[i];
-        }
         YandexGame.SaveProgress();
         YandexGame.NewLeaderboardScores("LeaderBoard", Score);
         StartCoroutine(SaveColor());
@@ -1755,6 +1409,11 @@ public class Game : MonoBehaviour
         yield return new WaitForSeconds(2);
         SaveText.color = new Color(0, 0, 0, 255);
         yield break;
+    }
+
+    public void StartAutoSave()
+    {
+        StartCoroutine(AutoSave());
     }
     IEnumerator AutoSave()
     {
@@ -1869,28 +1528,28 @@ public class Game : MonoBehaviour
         if (TaskCount == 1)
         {
             Money += 1000;
-            PlusMoney(1000);
+            PlusResources(0, 1000);
             TaskCount++;
             TaskCounter();
         }
         else if (TaskCount == 3)
         {
             Money += 500;
-            PlusMoney(500);
+            PlusResources(0, 500);
             TaskCount++;
             TaskCounter();
         }
         else if (TaskCount == 5)
         {
             Money += 1000;
-            PlusMoney(1000);
+            PlusResources(0,1000);
             TaskCount++;
             TaskCounter();
         }
         else if (TaskCount == 7)
         {
             Money += 800;
-            PlusMoney(800);
+            PlusResources(0, 800);
             TaskCount++;
             TaskCounter();
         }

@@ -8,6 +8,9 @@ public class StationScripts : MonoBehaviour
     public Game GM; // Скрипт Гейм
     public PassengersScript PS; //
     public Audio AO;
+    public Training TR;
+    public Questions QS;
+    public DeliveryTask DT;
 
     public GameObject StationPan; // Панель станции
     public GameObject GamePan; //
@@ -26,20 +29,6 @@ public class StationScripts : MonoBehaviour
     public Text[] TrainViewText; //
     public Text[] LocoUpdateText; //
 
-    [Header("QuestPass")]
-    public GameObject QuestPan; // Панель заданий
-    public GameObject StartRewardQuestPan; //
-    public Text StartRewardQuestText; //
-    public Text ActiveTextQuest; //
-    
-    [Header("QuestCargo")]
-    public GameObject CargoQuestPan; //
-    public Text CargoWagoneTransport; //
-    public Text CargoWagoneCoal; //
-    public Text CargoWagoneReward; //
-    int CargoTransport; //
-    int CargoReward; //
-    
     [Header("NextStation")]
     public Text NextStationText; // Текст следующей станции
     public GameObject[] BttnNextStation; //
@@ -48,7 +37,14 @@ public class StationScripts : MonoBehaviour
     [Header("AddWagone")]
     public Text CountWagon; // Подсчет кол-ва вагонов
     public Text BuyWagoneText; //
-    
+
+    [Header("AddPassWagon")]
+    public Text countPassWagon;
+    public Text buyPassWagonText;
+
+    [Header("Delivery")]
+    public GameObject QuestPan; // Панель заданий
+
     [Header("Resource")]
     public Text MoneyText; // Текст денег
     public Text DiamondText; // Текст Роскошь
@@ -63,19 +59,12 @@ public class StationScripts : MonoBehaviour
     [Header("MoneyView")]
     public Text MoneyShowText; // 
     
-    [Header("Train")]
-    public GameObject[] TrainerPan; //
-    public int TrainerCount; //
-    
     [Header("ADS")]
     public GameObject ShopPan; //
     public GameObject ADSMoneyActive; //
     public Text ADSMoneyActiveText; // текст денег за рекламу
     int ADSMoneyCol; // награда денег за рекламу
     
-    [Header("TASK")]
-    public GameObject[] TaskPan;
-    int TaskCounter;
     //
     public Text TimeInGameStatisticText; //
     public Text FoodStatisticText; //
@@ -102,7 +91,7 @@ public class StationScripts : MonoBehaviour
         };
         if (GM.Trainer[1] == false)
         {
-            TrainerPan[0].SetActive(true);
+            TR.trainingPanStation.SetActive(true);
             AO.PlayAudioEnterPanel();
         }
         PS.EnterStation();
@@ -112,27 +101,13 @@ public class StationScripts : MonoBehaviour
         ResourceTextUpdate();
         GM.Score+=10;
         ScoreCount();
+        QS.CheckQuest();
         for (int i = 0; i < 9; i++)
         {
             ActiveSlider(i);
         }
-        if (GM.CargoTransportCount >= 1)
-        {
-            CargoTransport = GM.CargoTransportCount;
-            for (int i = 0; i < GM.CargoTransportCount; i++)
-            {
-                GM.CargoTransportWagone[i].SetActive(false);
-            }
-            GM.CargoTransportCount = 0;
-            StartRewardQuestPan.SetActive(true);
-            StartRewardQuestText.text = "Вы доставили: " + CargoTransport + " вагонов. Награда составила: " + GM.RewardCargoTransport + "$";
-            if(GM.TaskCount == 4)
-            {
-                GM.TaskCount = 5;
-            }
-        }
+        DT.CheckDelivery();
         UpdateADSMoneyActive();
-        Questioner();
     }
     private void OnDisable() => YandexGame.RewardVideoEvent -= Rewarded;
 
@@ -145,66 +120,16 @@ public class StationScripts : MonoBehaviour
         int Sec = GM.NextStationTime - (Min * 60);
         NextStationText.text = "До " + GM.NameCity[GM.ChoiceCity] + ": " + Min + "мин. " + Sec + "сек." + "Температура: " + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
     }
+
+    public void ExitStation()
+    {
+        PS.ExitStation();
+    }
+
     public void StartNextStation() // Старт следующей станции
     {
         GamePan.SetActive(true);
-        for (int a = 0; a < GM.WagonCol; a++)
-        {
-            if (GM.WagoneData[a].Name != "")
-            {
-                GM.WagoneData[a].WagoneObj.SetActive(true);
-            }
-        }
-        for (int a = 0; a < GM.WagonCol; a++)
-        {
-            if (GM.WagoneData[a].Name == "")
-            {
-                GM.WagoneData[a].WagoneObj.SetActive(true);
-            }
-        }
-        if (GM.CargoTransportCount >= 1) // Если активно грузовое задание
-        {
-            for (int i = 0; i < GM.CargoTransportCount; i++)
-            {
-                GM.CargoTransportWagone[i].SetActive(true);
-                if (GM.TextureTrain == 0)
-                {
-                    GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR0[8];
-                }
-                else if (GM.TextureTrain == 1)
-                {
-                    GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[8];
-                }
-                else if (GM.TextureTrain == 2)
-                {
-                    GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[8];
-                }
-                else if (GM.TextureTrain == 3)
-                {
-                    GM.CargoTransportWagone[i].GetComponent<Image>().sprite = GM.SPR1[8];
-                }
-            }
-            GM.StartTransportCargoWagoneQuest();
-        }
-        if (GM.CargoSpecTransportCount >= 1) // Если активно грузовое SPEC задание
-        {
-            for (int i = 0; i < GM.CargoSpecTransportCount; i++)
-            {
-                GM.CargoSpecTransportWagone[i].SetActive(true);
-            }
-        }
-        if (GM.CargoSpec1TransportCount >= 1) // Если активно грузовое SPEC1 задание
-        {
-            for (int i = 0; i < GM.CargoSpec1TransportCount; i++)
-            {
-                GM.CargoSpec1TransportWagone[i].SetActive(true);
-            }
-        }
-        if (GM.AirShipActive == true)
-        {
-            GM.AirShipObj.SetActive(true);
-            GM.StartTimerAirShip();
-        }
+        GM.ActiveWagone();
         GM.StartNextStation();
         GM.City = GM.ChoiceCity;
         GM.ChoiceCity = 0;
@@ -213,16 +138,16 @@ public class StationScripts : MonoBehaviour
         StationPan.SetActive(false);
         GM.Save();
         GM.TaskCounter();
-        PS.ExitStation();
         if (YandexGame.EnvironmentData.deviceType == "mobile")
         {
             YandexGame.StickyAdActivity(true);
         }
         YandexGame.FullscreenShow();
     }
-    void ResourceTextUpdate() // Обновление текстов
+
+    public void ResourceTextUpdate() // Обновление текстов
     {
-        MoneyText.text = GM.Money + "$";
+        MoneyText.text = GM.Money + "р";
         DiamondText.text = GM.Diamond.ToString();
         CoalText.text = GM.Coal + "/" + GM.CoalMax;
         FoodText.text = GM.Food + "/" + GM.FoodMax;
@@ -230,8 +155,11 @@ public class StationScripts : MonoBehaviour
         WarmText.text = GM.Warm + "/" + GM.WarmMax;
         WorkerText.text = GM.FreeWorker + "/" + GM.AllWorker; //
         CountWagon.text = "Вагонов: " + GM.WagonCol + " из " + GM.MaxWagone; //
-        BuyWagoneText.text = (300 * GM.WagonCol) + "$";
+        BuyWagoneText.text = (300 * GM.WagonCol) + "р";
+        countPassWagon.text = "Мест пассажирам: " + ((GM.passWagoneCount * 3) - GM.passCount) + " из " + (GM.passWagoneCount * 3);
+        buyPassWagonText.text = (1000 * GM.passWagoneCount) + "р";
     }
+
     public void BuyWagone() // Покупка вагонов / Добавление
     {
         if(GM.WagonCol < GM.MaxWagone)
@@ -250,17 +178,34 @@ public class StationScripts : MonoBehaviour
             }
         }
     }
+
+    public void BuyPassWagone() // Покупка вагонов / Добавление
+    {
+        if (GM.Money >= (1000 * GM.passWagoneCount))
+        {
+            GM.Money -= 1000 * GM.passWagoneCount;
+            StartCoroutine(PlusMoney(0 - (1000 * GM.passWagoneCount)));
+            GM.passWagoneCount++;
+            ResourceTextUpdate();
+            AO.PlayAudioPayment();
+        }
+        else
+        {
+            StartCoroutine(MoneyShow());
+        }
+    }
+
     public void ActiveSlider(int index) // Активация слайдеров
     {
         if (index < 4)
         {
             SliderMarket[index].maxValue = resourcesInfo[index % 4, 0];
-            ColMoneyText[index].text = "+" + (SliderMarket[index].value * resourcesInfo[index % 4, 2]) + "$";
+            ColMoneyText[index].text = "+" + (SliderMarket[index].value * resourcesInfo[index % 4, 2]) + "р";
         }
         else
         {
             SliderMarket[index].maxValue = resourcesInfo[index % 4, 1] - resourcesInfo[index % 4, 0];
-            ColMoneyText[index].text = "-" + SliderMarket[index].value * resourcesInfo[index % 4, 3] + "$";
+            ColMoneyText[index].text = "-" + SliderMarket[index].value * resourcesInfo[index % 4, 3] + "р";
         }
         ColResourceText[index].text = SliderMarket[index].value.ToString();
     }
@@ -302,6 +247,7 @@ public class StationScripts : MonoBehaviour
         MoneyShowText.text = "";
         yield break; 
     }
+
     public void OpenMTQPan(int index) // Открытие основных панелей
     {
         if(index == 0)
@@ -332,9 +278,11 @@ public class StationScripts : MonoBehaviour
             MarketPan.SetActive(false);
             TrainPan.SetActive(false);
             QuestPan.SetActive(true);
+            DT.UpdateDelivery();
         }
         AO.PlayAudioClickBttn();
     }
+
     public void OpenTrainPan(int index) // Открытие панелей поезда
     {
         if (index == 0)
@@ -358,6 +306,7 @@ public class StationScripts : MonoBehaviour
         }
         AO.PlayAudioClickBttn();
     }
+
     private void UpdateTextTrainView()
     {
         for (int i = 0; i < TrainViewText.Length; i++)
@@ -366,6 +315,7 @@ public class StationScripts : MonoBehaviour
             else if (GM.Texture[i]) TrainViewText[i].text = "Доступен";
         }
     }
+
     public void BuyViewTrain(int index) // Покупка внешнего вида поезда
     {
         // Покупка текстуры
@@ -491,73 +441,6 @@ public class StationScripts : MonoBehaviour
             }
         }
     }
-    
-
-
-
-    public void EnterQuestPass() // Принять задание
-    {
-        if (CargoTransport >= 1)
-        {
-            ActiveTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + CargoTransport;
-        }
-        else { ActiveTextQuest.text = ""; }
-    }
-    public void EnterRewardQuest() // Принять награду за доставку
-    {
-        GM.Money += GM.RewardCargoTransport;
-        GM.MoneyPlusStatistic += GM.RewardCargoTransport;
-        StartCoroutine(PlusMoney(GM.RewardCargoTransport));
-        CargoTransport = 0;
-        StartRewardQuestPan.SetActive(false);
-        ActiveTextQuest.text = "";
-        ResourceTextUpdate();
-        GM.Score += GM.RewardCargoTransport/50;
-        ScoreCount();
-    }
-
-    // TRANSPORT CARGO!!!
-    void CargoTransportationUpdate() // Обнвление панели доставки
-    {
-        CargoWagoneTransport.text = CargoTransport.ToString();
-        CargoWagoneCoal.text = "-" + CargoTransport * 20;
-        CargoWagoneReward.text = CargoReward + "$";
-    }
-    public void AddCargoTransport() // Добавить вагон доставки
-    {
-        if (StationVibor == true)
-        {
-            if (CargoTransport < 10)
-            {
-                CargoTransport++;
-                CargoReward = CargoTransport * (GM.NextStationTime * 2);
-                CargoTransportationUpdate();
-            }
-        }
-        else
-        {
-            CargoWagoneReward.text = "Для начала выберите станцию назначения!";
-        }
-    }
-    public void RemoveCargoTransport() // Минус вагон доставки
-    {
-        if (CargoTransport > 0)
-        {
-            CargoTransport--;
-            CargoReward = CargoTransport * (GM.NextStationTime * 2);
-            CargoTransportationUpdate();
-        }
-    }
-    public void EnterQuestCargo() // Принять задание
-    {
-        GM.CargoTransportCount = CargoTransport;
-        GM.RewardCargoTransport = CargoReward;
-        if (CargoTransport >= 1)
-        {
-            ActiveTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + CargoTransport;
-        }
-        else { ActiveTextQuest.text = ""; }
-    }
 
     public void OpenMapPan()
     {
@@ -587,31 +470,6 @@ public class StationScripts : MonoBehaviour
             r++;
         }
     }
-
-    // TRAINER!!!
-
-    public void TrainerNext()
-    {
-        if (TrainerCount == 2)
-        {
-            GM.Trainer[1] = true;
-            TrainerPan[0].SetActive(false);
-        }
-        if (TrainerCount == 1)
-        {
-            TrainerPan[2].SetActive(false);
-            TrainerPan[3].SetActive(true);
-            TrainerCount = 2;
-        }
-        if (TrainerCount == 0)
-        {
-            TrainerPan[1].SetActive(false);
-            TrainerPan[2].SetActive(true);
-            TrainerCount = 1;
-        }
-        AO.PlayAudioEnterPanel();
-    }
-
 
 
     // Корутины на тексты прибавления и отнимания ресурсов!
@@ -694,288 +552,37 @@ public class StationScripts : MonoBehaviour
         {
             ADSMoneyActive.SetActive(true);
             ADSMoneyCol = Random.Range(500, GM.Money);
-            ADSMoneyActiveText.text = "+" + ADSMoneyCol + "$!!!" + "\n" + "За просмотр";
+            ADSMoneyActiveText.text = "+" + ADSMoneyCol + "р!!!" + "\n" + "За просмотр";
         }
         else
         {
             ADSMoneyActive.SetActive(true);
             ADSMoneyCol = 500;
-            ADSMoneyActiveText.text = "+" + ADSMoneyCol + "$!!!" + "\n" + "За просмотр";
+            ADSMoneyActiveText.text = "+" + ADSMoneyCol + "р!!!" + "\n" + "За просмотр";
         }
     }
-
-
-    //
-    void Questioner()
-    {
-        if(GM.City == 2 & GM.QuestionPoint[0] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[1].SetActive(true);
-            GM.QuestionPoint[0] = true;
-            TaskCounter = 0;
-        }
-        else if(GM.City == 9 & GM.ActiveTask == true & GM.CityTask == 9)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[3].SetActive(true);
-            GM.ActiveTask = false;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 15 & GM.QuestionPoint[1] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[4].SetActive(true);
-            GM.QuestionPoint[1] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 13 & GM.QuestionPoint[2] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[7].SetActive(true);
-            GM.QuestionPoint[2] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 20 & GM.QuestionPoint[3] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[8].SetActive(true);
-            GM.QuestionPoint[3] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 19 & GM.QuestionPoint[4] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[10].SetActive(true);
-            GM.QuestionPoint[4] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 24 & GM.QuestionPoint[5] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[11].SetActive(true);
-            GM.QuestionPoint[5] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 6 & GM.ActiveTask == true & GM.CityTask == 6)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[13].SetActive(true);
-            GM.ActiveTask = false;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 28 & GM.QuestionPoint[6] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[14].SetActive(true);
-            GM.QuestionPoint[6] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 32 & GM.QuestionPoint[7] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[15].SetActive(true);
-            GM.QuestionPoint[7] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 41 & GM.QuestionPoint[8] == false)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[16].SetActive(true);
-            GM.QuestionPoint[8] = true;
-            TaskCounter = 0;
-        }
-        else if (GM.City == 44)
-        {
-            TaskPan[0].SetActive(true);
-            TaskPan[18].SetActive(true);
-            TaskCounter = 0;
-        }
-    }
-    public void DismissQuestion()
-    {
-        if (GM.City == 2) // Отказ в Москве
-        {
-            TaskPan[0].SetActive(false);
-            TaskPan[1].SetActive(false);
-        }
-        else if(GM.City == 15) // Отказ в Новороссийск
-        {
-            TaskPan[0].SetActive(false);
-            TaskPan[6].SetActive(false);
-        }
-        else if (GM.City == 24)
-        {
-            TaskPan[0].SetActive(false);
-            TaskPan[11].SetActive(false);
-        }
-    }
-    public void EnterQuestion()
-    {
-        if(GM.City == 2) // Задание на доставку в Москве
-        {
-            if (TaskCounter == 1)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[2].SetActive(false);
-                GM.ActiveTask = true;
-                GM.CityTask = 9;
-                GM.CargoSpecTransportCount = 5;
-            }
-            else if (TaskCounter == 0)
-            {
-                TaskPan[1].SetActive(false);
-                TaskPan[2].SetActive(true);
-                TaskCounter = 1;
-            }
-        }
-        else if (GM.City == 9) // Награда за доставку в Краснодар из Москвы
-        {
-            if (TaskCounter == 0)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[3].SetActive(false);
-                GM.CargoSpecTransportCount = 0;
-                GM.Money += 3000;
-                StartCoroutine(PlusMoney(3000));
-                ResourceTextUpdate();
-            }
-        }
-        else if (GM.City == 15) // Диалог Новороссийск
-        {
-            if (TaskCounter == 2)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[6].SetActive(false);
-            }
-            else if (TaskCounter == 1)
-            {
-                TaskPan[5].SetActive(false);
-                TaskPan[6].SetActive(true);
-                TaskCounter = 2;
-                //if (GM.Food >= 30)
-                //{
-                //    GM.Food -= 30;
-                //    StartCoroutine(PlusFood(0 - 30));
-                //}
-                //else if (GM.Food < 30)
-                //{
-                //    GM.Food = 0;
-                //    StartCoroutine(PlusFood(0 - GM.Food));
-                //}
-            }
-            else if (TaskCounter == 0)
-            {
-                TaskPan[4].SetActive(false);
-                TaskPan[5].SetActive(true);
-                TaskCounter = 1;
-            }
-        }
-        else if(GM.City == 13)
-        {
-            TaskPan[0].SetActive(false);
-            TaskPan[7].SetActive(true);
-        }
-        else if (GM.City == 20)
-        {
-            if (TaskCounter == 1)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[9].SetActive(false);
-            }
-            else if (TaskCounter == 0)
-            {
-                TaskPan[8].SetActive(false);
-                TaskPan[9].SetActive(true);
-                TaskCounter = 1;
-            }
-        }
-        else if (GM.City == 19)
-        {
-            TaskPan[0].SetActive(false);
-            TaskPan[10].SetActive(false);
-            GM.Score += 20;
-            ScoreCount();
-        }
-        else if (GM.City == 24)
-        {
-            if (TaskCounter == 1)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[12].SetActive(false);
-                GM.ActiveTask = true;
-                GM.CityTask = 6;
-                GM.CargoSpec1TransportCount = 9;
-            }
-            else if (TaskCounter == 0)
-            {
-                TaskPan[11].SetActive(false);
-                TaskPan[12].SetActive(true);
-                TaskCounter = 1;
-            }
-        }
-        else if (GM.City == 6) // Награда за доставку в Саратов из Уренгой
-        {
-            if (TaskCounter == 0)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[13].SetActive(false);
-                GM.CargoSpec1TransportCount = 0;
-                GM.AirShipActive = true;
-            }
-        }
-        else if (GM.City == 28)
-        {
-            TaskPan[0].SetActive(false);
-            TaskPan[14].SetActive(false);
-            GM.Money += 2000;
-            StartCoroutine(PlusMoney(2000));
-            ResourceTextUpdate();
-        }
-        else if (GM.City == 32)
-        {
-            TaskPan[0].SetActive(false);
-            TaskPan[15].SetActive(false);
-            GM.Score += 20;
-            ScoreCount();
-        }
-        else if (GM.City == 41)
-        {
-            if (TaskCounter == 1)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[17].SetActive(false);
-            }
-            else if (TaskCounter == 0)
-            {
-                TaskPan[16].SetActive(false);
-                TaskPan[17].SetActive(true);
-                TaskCounter = 1;
-            }
-        }
-        else if(GM.City == 44)
-        {
-            if (TaskCounter == 1)
-            {
-                TaskPan[0].SetActive(false);
-                TaskPan[19].SetActive(false);
-            }
-            else if (TaskCounter == 0)
-            {
-                TaskPan[18].SetActive(false);
-                TaskPan[19].SetActive(true);
-                TaskCounter = 1;
-                int H = GM.TimeInGameStatistic / 60;
-                int M = GM.TimeInGameStatistic - (H * 60);
-                TimeInGameStatisticText.text = "Время в игре: " + H + "ч. " + M + "м."; //
-                FoodStatisticText.text = "Собрано еды: " + GM.FoodPlusStatistic.ToString(); //
-                CoalPlusStatisticText.text = "Собрано угля: " + GM.CoalPlusStatistic.ToString(); //
-                WaterPlusStatisticText.text = "Собрано воды: " + GM.WaterPlusStatistic.ToString(); //
-                WarmPlusStatisticText.text = "Собрано тепла: " + GM.WarmPlusStatistic.ToString(); //
-                MoneyPlusStatisticText.text = "Заработано денег: " + GM.MoneyPlusStatistic.ToString(); //
-                DistancePlusStatisticText.text = "Пройдено расстояние: " + GM.DistancePlusStatistic * 10; //
-                ScorePlusStatisticText.text = "Очков: " + GM.Score.ToString(); //
-            }
-        }
-    }
+        //else if(GM.City == 44)
+        //{
+        //    if (TaskCounter == 1)
+        //    {
+        //        TaskPan[0].SetActive(false);
+        //        TaskPan[19].SetActive(false);
+        //    }
+        //    else if (TaskCounter == 0)
+        //    {
+        //        TaskPan[18].SetActive(false);
+        //        TaskPan[19].SetActive(true);
+        //        TaskCounter = 1;
+        //        int H = GM.TimeInGameStatistic / 60;
+        //        int M = GM.TimeInGameStatistic - (H * 60);
+        //        TimeInGameStatisticText.text = "Время в игре: " + H + "ч. " + M + "м."; //
+        //        FoodStatisticText.text = "Собрано еды: " + GM.FoodPlusStatistic.ToString(); //
+        //        CoalPlusStatisticText.text = "Собрано угля: " + GM.CoalPlusStatistic.ToString(); //
+        //        WaterPlusStatisticText.text = "Собрано воды: " + GM.WaterPlusStatistic.ToString(); //
+        //        WarmPlusStatisticText.text = "Собрано тепла: " + GM.WarmPlusStatistic.ToString(); //
+        //        MoneyPlusStatisticText.text = "Заработано денег: " + GM.MoneyPlusStatistic.ToString(); //
+        //        DistancePlusStatisticText.text = "Пройдено расстояние: " + GM.DistancePlusStatistic * 10; //
+        //        ScorePlusStatisticText.text = "Очков: " + GM.Score.ToString(); //
+        //    }
+        //}
 }

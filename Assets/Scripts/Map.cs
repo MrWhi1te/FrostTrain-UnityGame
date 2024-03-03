@@ -10,6 +10,7 @@ public class Map : MonoBehaviour
     public Image[] PointCity; // Спрайты городов
     public Button NextStation; // Кнопка продолжения
     public GameObject MapPan; // 
+    public GameObject[] mapParts; //
     public Text ChoiceCityNameText; // Текст следующей станции
     public Text ChoiceCityTemperatureText; //
     public Text ChoiceCityTimeText; //
@@ -29,13 +30,6 @@ public class Map : MonoBehaviour
         PointCity[GM.City].color = new Color(0, 150, 255, 255);
         NextStation.enabled = false;
         ScoreCount();
-        for(int i = 0; i < QuestionPoint.Length; i++)
-        {
-            if(GM.QuestionPoint[i] == true)
-            {
-                QuestionPoint[i].SetActive(false);
-            }
-        }
         if(GM.ActiveTask == true)
         {
             TaskPoint.SetActive(true);
@@ -387,6 +381,20 @@ public class Map : MonoBehaviour
         MapPan.SetActive(false);
         AO.PlayAudioClickBttn();
     }
+
+    public void NextMap()
+    {
+        if (mapParts[0].activeInHierarchy)
+        {
+            mapParts[0].SetActive(false);
+            mapParts[1].SetActive(true);
+        }
+        else
+        {
+            mapParts[0].SetActive(true);
+            mapParts[1].SetActive(false);
+        }
+    } 
 
     public void ScoreCount() // Вывод очков
     {

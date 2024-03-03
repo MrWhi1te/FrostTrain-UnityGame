@@ -7,6 +7,7 @@ public class WagonScript : MonoBehaviour
 {
     public Game GM; // 
     public Audio AO;
+    [SerializeField] private Training TR;
     
     [Header("Основ.Панели")]
     public GameObject ChoiceWagonePan; // Первая панель выбора назначения вагона
@@ -190,8 +191,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагон
             if (GM.Trainer[0] == false)
             {
-                GM.WagoneTrainerChoice[1] = true;
-                GM.Trainer2();
+                TR.wagoneTrainerChoice[1] = true;
+                TR.TrainingGameWagonActive();
             }
         }
         else if (index == 1)
@@ -201,8 +202,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагон
             if (GM.Trainer[0] == false)
             {
-                GM.WagoneTrainerChoice[2] = true;
-                GM.Trainer2();
+                TR.wagoneTrainerChoice[2] = true;
+                TR.TrainingGameWagonActive();
             }
         }
         else if (index == 2)
@@ -213,8 +214,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагона
             if (GM.Trainer[0] == false)
             {
-                GM.WagoneTrainerChoice[0] = true;
-                GM.Trainer2();
+                TR.wagoneTrainerChoice[0] = true;
+                TR.TrainingGameWagonActive();
             }
         }
         else if (index == 3)
@@ -228,8 +229,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(BoilerWorkWagone());
             if (GM.Trainer[0] == false)
             {
-                GM.WagoneTrainerChoice[3] = true;
-                GM.Trainer2();
+                TR.wagoneTrainerChoice[3] = true;
+                TR.TrainingGameWagonActive();
             }
         }
         GM.WagoneData[IndexWag].WagoneActive = true;
@@ -283,13 +284,13 @@ public class WagonScript : MonoBehaviour
             {
                 GM.Food += ProductCount;
                 GM.FoodPlusStatistic += ProductCount;
-                GM.StartPlusFood(ProductCount);
+                GM.StartPlusResource(2, ProductCount);
             }
             else if ( ProductCount >= Razn)
             {
                 GM.Food += Razn;
                 GM.FoodPlusStatistic += Razn;
-                GM.StartPlusFood(Razn);
+                GM.StartPlusResource(2, Razn);
             }
             GM.CollectResources[0].SetActive(false); GM.CollectResources[0].SetActive(true);
             StartCoroutine(FoodWorkWagone());
@@ -301,13 +302,13 @@ public class WagonScript : MonoBehaviour
             {
                 GM.Water += ProductCount;
                 GM.WaterPlusStatistic += ProductCount;
-                GM.StartPlusWater(ProductCount);
+                GM.StartPlusResource(3, ProductCount);
             }
             else if (ProductCount >= Razn)
             {
                 GM.Water += Razn;
                 GM.WaterPlusStatistic += Razn;
-                GM.StartPlusWater(Razn);
+                GM.StartPlusResource(3, Razn);
             }
             GM.CollectResources[1].SetActive(false); GM.CollectResources[1].SetActive(true);
             StartCoroutine(FoodWorkWagone());
@@ -319,13 +320,13 @@ public class WagonScript : MonoBehaviour
             {
                 GM.Warm += ProductCount;
                 GM.WarmPlusStatistic += ProductCount;
-                GM.StartPlusWarm(ProductCount);
+                GM.StartPlusResource(4, ProductCount);
             }
             else if (ProductCount >= Razn)
             {
                 GM.Warm += Razn;
                 GM.WarmPlusStatistic += Razn;
-                GM.StartPlusWarm(Razn);
+                GM.StartPlusResource(4, Razn);
             }
             GM.CollectResources[2].SetActive(false); GM.CollectResources[2].SetActive(true);
             StartCoroutine(BoilerWorkWagone());
@@ -411,13 +412,13 @@ public class WagonScript : MonoBehaviour
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 10; //
                 TimerWag = 30;
-                FoodUpgradeText.text = "2000$";
+                FoodUpgradeText.text = "2000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 2)
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 10; //
                 TimerWag = 50;
-                FoodUpgradeText.text = "4000$";
+                FoodUpgradeText.text = "4000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 3)
             {
@@ -434,13 +435,13 @@ public class WagonScript : MonoBehaviour
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 20; //
                 TimerWag = 20;
-                BoilerUpgradeText.text = "2000$";
+                BoilerUpgradeText.text = "2000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 2)
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 20; //
                 TimerWag = 40;
-                BoilerUpgradeText.text = "4000$";
+                BoilerUpgradeText.text = "4000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 3)
             {
@@ -456,12 +457,12 @@ public class WagonScript : MonoBehaviour
             if (GM.WagoneData[IndexWag].LevelWagone == 1)
             {
                 ProductCount = 5; // Максимальная вместимость в вагон от уровня
-                PassUpgradeText.text = "2000$";
+                PassUpgradeText.text = "2000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 2)
             {
                 ProductCount = 10; // Максимальная вместимость в вагон от уровня
-                PassUpgradeText.text = "4000$";
+                PassUpgradeText.text = "4000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 3)
             {
@@ -475,12 +476,12 @@ public class WagonScript : MonoBehaviour
             if (GM.WagoneData[IndexWag].LevelWagone == 1)
             {
                 ProductCount = 50; // Максимальная вместимость в вагон от уровня
-                StorageUpgradeText.text = "2000$";
+                StorageUpgradeText.text = "2000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 2)
             {
                 ProductCount = 75; // Максимальная вместимость в вагон от уровня
-                StorageUpgradeText.text = "4000$";
+                StorageUpgradeText.text = "4000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 3)
             {
@@ -556,7 +557,7 @@ public class WagonScript : MonoBehaviour
                 {
                     GM.Warm -= 10;
                     GM.ResourceTextUpdate();
-                    GM.StartPlusWarm(0 - 10);
+                    GM.StartPlusResource(4, 0 - 10);
                     GM.WagoneData[IndexWag].TemperatureWagone = 10;
                     FoodTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
                     PassTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
@@ -577,7 +578,7 @@ public class WagonScript : MonoBehaviour
                 {
                     GM.Warm -= r;
                     GM.ResourceTextUpdate();
-                    GM.StartPlusWarm(0 - r);
+                    GM.StartPlusResource(4, 0 - r);
                     GM.WagoneData[IndexWag].TemperatureWagone = 10;
                     SnowWagone.SetActive(false);
                     FoodTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
@@ -631,7 +632,7 @@ public class WagonScript : MonoBehaviour
             if (GM.Money >= 2000)
             {
                 GM.Money -= 2000;
-                GM.StartPlusMoney(0 - 2000);
+                GM.StartPlusResource(0, 0 - 2000);
                 GM.WagoneData[IndexWag].LevelWagone = 2;
                 WagoneDataCount();
                 WagoneWorkData();
@@ -662,7 +663,7 @@ public class WagonScript : MonoBehaviour
             if (GM.Money >= 4000)
             {
                 GM.Money -= 4000;
-                GM.StartPlusMoney(0 - 4000);
+                GM.StartPlusResource(0, 0 - 4000);
                 GM.WagoneData[IndexWag].LevelWagone = 3;
                 WagoneDataCount();
                 WagoneWorkData();

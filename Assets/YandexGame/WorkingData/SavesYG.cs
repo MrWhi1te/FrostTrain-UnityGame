@@ -62,7 +62,6 @@ namespace YG
 
         public bool[] Trainer = new bool[2]; //
         public int TaskCount; // Счетчик задания
-        public bool[] QuestionPoint = new bool[9]; //
         public bool ActiveTask; //
         public int CityTask; //
 

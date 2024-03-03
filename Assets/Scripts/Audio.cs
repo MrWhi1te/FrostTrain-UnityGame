@@ -5,13 +5,16 @@ using UnityEngine;
 public class Audio : MonoBehaviour
 {
     private AudioSource thisAudio;
-    [SerializeField]private AudioClip enterPanel;
+    [SerializeField] private AudioClip enterPanel;
     [SerializeField] private AudioClip clickBttn;
     [SerializeField] private AudioClip clickTrain;
     [SerializeField] private AudioClip enterExitStation;
     [SerializeField] private AudioClip takeResource;
     [SerializeField] private AudioClip train;
     [SerializeField] private AudioClip payment;
+    [SerializeField] private AudioClip clickTrees;
+    [SerializeField] private AudioClip takePass;
+    [SerializeField] private AudioClip notTakePass;
 
     // Start is called before the first frame update
     void Start()
@@ -52,5 +55,20 @@ public class Audio : MonoBehaviour
     public void PlayAudioPayment()
     {
         thisAudio.PlayOneShot(payment);
+    }
+
+    public void PlayAudioTrees()
+    {
+        thisAudio.PlayOneShot(clickTrees);
+    }
+
+    public void PlayAudioTakePass()
+    {
+        thisAudio.PlayOneShot(takePass);
+    }
+
+    public void PlayAudioNotTakePass()
+    {
+        thisAudio.PlayOneShot(notTakePass);
     }
 }
