@@ -53,17 +53,13 @@ namespace YG
         public int RewardCargoTransport; // Награда за доставку
 
         public int CargoSpecTransportCount; // Количество вагонов
-        public int RewardCargoSpecTransport; // Награда за доставку
 
         public int CargoSpec1TransportCount; // Количество вагонов
-        public int RewardCargoSpec1Transport; // Награда за доставку
 
         public int City; // Текущий город
 
         public bool[] Trainer = new bool[2]; //
         public int TaskCount; // Счетчик задания
-        public bool ActiveTask; //
-        public int CityTask; //
 
         public bool[] WagoneActive = new bool[50]; // Активация скрипта вагона
         public string[] Name = new string[50]; // Название вагона (Назначение)

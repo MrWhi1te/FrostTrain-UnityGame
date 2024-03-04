@@ -9,9 +9,6 @@ public class PassengersScript : MonoBehaviour
     [SerializeField] private StationScripts ST;
     [SerializeField] private Audio AO;
 
-    [Header("Passengers")]
-    public List<Pass> pass = new();
-
     private List<Pass> passStationList;
 
     [Header("Station")]
@@ -24,6 +21,9 @@ public class PassengersScript : MonoBehaviour
     [SerializeField] private Text[] passResource;
     [SerializeField] private Text placeFreeText;
     [SerializeField] private GameObject helpPan;
+
+    [Header("Passengers")]
+    public List<Pass> pass = new();
 
     public void EnterStation()
     {

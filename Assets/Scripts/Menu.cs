@@ -30,10 +30,6 @@ public class Menu : MonoBehaviour
             {
                 LoadText.text = "Загружаем людей по вагонам";
             }
-            if (async.progress == 0.8f)
-            {
-                LoadText.text = "Наблюдаем за погодой в окно";
-            }
             if (async.progress == 0.9f)
             {
                 async.allowSceneActivation = true;

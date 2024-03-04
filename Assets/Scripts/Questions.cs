@@ -9,15 +9,13 @@ public class Questions : MonoBehaviour
     [SerializeField] private StationScripts ST;
     [SerializeField] private Audio AO;
 
-    public List<Quest> quest = new();
-
-    [HideInInspector] public string targetCity;
-
     [SerializeField] private GameObject questPan;
     [SerializeField] private Text namePersonQuest;
     [SerializeField] private Text textQuest;
     private bool activeTask;
     private int numberQuest;
+
+    public List<Quest> quest = new();
 
 
     public void CheckQuest()
@@ -31,6 +29,7 @@ public class Questions : MonoBehaviour
                     textQuest.text = "Вам нужно посетить станцию " + quest[i-1].cityPerson + ". Там вас ожидает человек";
                     questPan.SetActive(true);
                     namePersonQuest.text = quest[i].namePerson;
+                    activeTask = false;
                 }
                 else
                 {
@@ -50,17 +49,18 @@ public class Questions : MonoBehaviour
         if (activeTask)
         {
             quest[numberQuest].doneTask = true;
-            targetCity = quest[numberQuest].targetCity;
-            if(quest[numberQuest].wagonTask[0] > 0 || quest[numberQuest].wagonTask[1] > 0)
-            {
-                GM.CargoSpecTransportCount = quest[numberQuest].wagonTask[0];
-                GM.CargoSpec1TransportCount = quest[numberQuest].wagonTask[1];
-            }
             if(numberQuest > 0)
             {
                 GM.Money += quest[numberQuest].rewardTask;
                 ST.ResourceTextUpdate();
+                GM.CargoSpecTransportCount = 0;
+                GM.CargoSpec1TransportCount = 0;
                 AO.PlayAudioTakeResource();
+            }
+            if (quest[numberQuest].wagonTask[0] > 0 || quest[numberQuest].wagonTask[1] > 0)
+            {
+                GM.CargoSpecTransportCount = quest[numberQuest].wagonTask[0];
+                GM.CargoSpec1TransportCount = quest[numberQuest].wagonTask[1];
             }
         }
         questPan.SetActive(false);
@@ -74,7 +74,7 @@ public class Quest
     [TextArea] public string textQuest;
     public string cityPerson;
     public bool doneTask;
-    public string targetCity;
+    public int targetCity;
     public int rewardTask;
     public int[] wagonTask;
 }

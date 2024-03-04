@@ -10337,6 +10337,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GM: {fileID: 0}
+  AO: {fileID: 0}
+  TR: {fileID: 0}
   ChoiceWagonePan: {fileID: 7279312656377454650}
   FoodWaterWagonePan: {fileID: 7279312656695809903}
   PassWagonePan: {fileID: 7279312656552572627}

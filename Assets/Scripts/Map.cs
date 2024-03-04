@@ -6,6 +6,7 @@ public class Map : MonoBehaviour
     public Game GM; // Скрипт Гейм
     public StationScripts ST; // Скрипт станции
     public Audio AO;
+    public Questions QT;
 
     public Image[] PointCity; // Спрайты городов
     public Button NextStation; // Кнопка продолжения
@@ -30,10 +31,14 @@ public class Map : MonoBehaviour
         PointCity[GM.City].color = new Color(0, 150, 255, 255);
         NextStation.enabled = false;
         ScoreCount();
-        if(GM.ActiveTask == true)
+        for(int i = 0; i < QT.quest.Count; i++)
         {
-            TaskPoint.SetActive(true);
-            TaskPoint.transform.position = PointCity[GM.CityTask].transform.position;
+            if (!QT.quest[i].doneTask)
+            {
+                TaskPoint.SetActive(true);
+                TaskPoint.transform.position = PointCity[QT.quest[i].targetCity].transform.position;
+                break;
+            }
         }
         ChoiceCityNameText.text = "Выберите следующую станцию на карте!";
         ChoiceCityBttnText.text = "Выберите станцию на карте!";
@@ -372,7 +377,7 @@ public class Map : MonoBehaviour
         NextStation.enabled = true;
         ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];
         ChoiceCityTemperatureText.text = "Температура:" + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
-        ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 10 + "км.";
+        ChoiceCityTimeText.text = "Расстояние:" + GM.TimeForCity[GM.ChoiceCity] * 100 + "дист.";
     }
 
     public void NextStationGO()

@@ -13,21 +13,20 @@ public class DeliveryTask : MonoBehaviour
     private int multiplierReward;
 
     [Header("Delivery")]
-    public GameObject rewardQuestPan; //
-    public Text rewardQuestText; //
-    public Text activeTextQuest; //
-    public int targetDeliveryCity;
+    [SerializeField] private GameObject rewardQuestPan; //
+    [SerializeField] private Text rewardQuestText; //
+    [SerializeField] private Text activeTextQuest; //
 
     [Header("DeliveryCargo")]
-    public GameObject deliveryObj;
-    public Text deliveryCity;
-    public Text cargoWagoneTransport; //
-    public Text cargoWagoneCoal; //
-    public Text cargoWagoneReward; //
+    [SerializeField] private GameObject deliveryObj;
+    [SerializeField] private Text deliveryCity;
+    [SerializeField] private Text cargoWagoneTransport; //
+    [SerializeField] private Text cargoWagoneCoal; //
+    [SerializeField] private Text cargoWagoneReward; //
 
     public void CheckDelivery()
     {
-        if (GM.CargoTransportCount >= 1 && GM.City == targetDeliveryCity)
+        if (GM.CargoTransportCount >= 1 && GM.City == ST.targetDeliveryCity)
         {
             for (int i = 0; i < GM.CargoTransportCount; i++)
             {
@@ -82,6 +81,7 @@ public class DeliveryTask : MonoBehaviour
         ST.ResourceTextUpdate();
         GM.Score += GM.RewardCargoTransport / 50;
         ST.ScoreCount();
+        AO.PlayAudioTakeResource();
     }
 
     void CargoTransportationUpdate() // Обнвление панели доставки
@@ -98,6 +98,7 @@ public class DeliveryTask : MonoBehaviour
             cargoWagon++;
             cargoReward = cargoWagon * (100 * multiplierReward);
             CargoTransportationUpdate();
+            AO.PlayAudioClickTrain();
         }
     }
     public void RemoveCargoTransport() // Минус вагон доставки
@@ -107,17 +108,20 @@ public class DeliveryTask : MonoBehaviour
             cargoWagon--;
             cargoReward = cargoWagon * (100 * multiplierReward);
             CargoTransportationUpdate();
+            AO.PlayAudioClickTrain();
         }
     }
     public void EnterQuestCargo() // Принять задание
     {
         GM.CargoTransportCount = cargoWagon;
         GM.RewardCargoTransport = cargoReward;
+        ST.targetDeliveryCity = cityDelivery;
         if (cargoWagon >= 1)
         {
             activeTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + cargoWagon + GM.NameCity[cityDelivery];
             deliveryObj.SetActive(false);
             deliveryCity.text = "Текущая Доставка до: " + GM.NameCity[cityDelivery];
+            AO.PlayAudioClickBttn();
         }
         else { activeTextQuest.text = ""; }
     }

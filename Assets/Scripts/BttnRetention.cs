@@ -47,10 +47,10 @@ public class BttnRetention : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         if(nameType == "Repair")
         {
             GM.repairTrainObj.SetActive(false);
-            if (!GM.helpBarrier)
+            if (!GM.helpRepair)
             {
-                GM.helpBarrier = true;
-                GM.helpBarrierObj.SetActive(false);
+                GM.helpRepair = true;
+                GM.helpTrainRepairObj.SetActive(false);
             }
         }
         else if (nameType == "Barrier")

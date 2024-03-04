@@ -44,6 +44,7 @@ public class StationScripts : MonoBehaviour
 
     [Header("Delivery")]
     public GameObject QuestPan; // Панель заданий
+    public int targetDeliveryCity; //
 
     [Header("Resource")]
     public Text MoneyText; // Текст денег
@@ -116,9 +117,7 @@ public class StationScripts : MonoBehaviour
         GM.NextStationTimeCount = GM.TimeForCity[GM.ChoiceCity];
         GM.NextStationTime = GM.TimeForCity[GM.ChoiceCity];
         GM.NextStationSlide.maxValue = GM.NextStationTime;
-        int Min = GM.NextStationTime / 60;
-        int Sec = GM.NextStationTime - (Min * 60);
-        NextStationText.text = "До " + GM.NameCity[GM.ChoiceCity] + ": " + Min + "мин. " + Sec + "сек." + "Температура: " + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
+        NextStationText.text = "До " + GM.NameCity[GM.ChoiceCity] + ": " + GM.NextStationTime + " дист." + "Температура: " + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
     }
 
     public void ExitStation()

@@ -8,17 +8,17 @@ using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
-    public Audio AO;
-    public Training TR;
+    [SerializeField] private Audio AO;
+    [SerializeField] private Training TR;
 
     public List<WagoneData> WagoneData = new List<WagoneData>(); // Лист с данными вагонов
     public int WagonCol; // Количество активных вагонов
     [SerializeField] private GameObject Station; //
     [SerializeField] private GameObject GamePan; //
-    public Sprite[] SPR0; // Вид вагона стандарт
-    public Sprite[] SPR1; // Вид вагона цветной
-    public Sprite[] SPR2; // Вид вагона Золотой
-    public Sprite[] SPR3; // Вид вагона Фиолетовый
+    [SerializeField] private Sprite[] SPR0; // Вид вагона стандарт
+    [SerializeField] private Sprite[] SPR1; // Вид вагона цветной
+    [SerializeField] private Sprite[] SPR2; // Вид вагона Золотой
+    [SerializeField] private Sprite[] SPR3; // Вид вагона Фиолетовый
     public int TextureTrain; // Выбранный вид поезда
     public bool[] Texture; // 1-Цветной поезд / 2-Золотой поезд / 3-Фиолетовый
     
@@ -36,54 +36,54 @@ public class Game : MonoBehaviour
     public int FoodMax; // Максимум еды для хранения
     public int Water; // Количество воды
     public int WaterMax; // Максимум воды для хранения
-    public Text MoneyText; // Текст денег
-    public Text CoalText; // Текст угля
-    public Text WorkerText; // Текст свободных рабочих
-    public Text WarmText; // Текст тепла
-    public Text FoodText; // Текст еды
-    public Text WaterText; // Текст воды
-    public Text DiamondText; // Роскошь текст
-    public Text[] plusResourceText; // 0-money / 1-Coal / 2-Food / 3-Water / 4-Warm
-    int StorageCount = 50; // Емкость хранилища
-    public Slider[] SliderResource; // Слайдер ресурсов (В наличие и макс)
+    public int[] PassResourceUse; // Дополнительное потребление ресурсе пассажирами
     public GameObject[] CollectResources; // 
+    [SerializeField] private Text MoneyText; // Текст денег
+    [SerializeField] private Text CoalText; // Текст угля
+    [SerializeField] private Text WorkerText; // Текст свободных рабочих
+    [SerializeField] private Text WarmText; // Текст тепла
+    [SerializeField] private Text FoodText; // Текст еды
+    [SerializeField] private Text WaterText; // Текст воды
+    [SerializeField] private Text DiamondText; // Роскошь текст
+    [SerializeField] private Text[] plusResourceText; // 0-money / 1-Coal / 2-Food / 3-Water / 4-Warm
+    [SerializeField] private Slider[] SliderResource; // Слайдер ресурсов (В наличие и макс)
+    private int StorageCount = 50; // Емкость хранилища
     
     [Header("Температура")]
     public int TemperatureOnStreet; // Температура за бортом
-    public Text TermometrText; // Текст термометра температуры за бортом
+    [SerializeField] private Text TermometrText; // Текст термометра температуры за бортом
    
     [Header("ТаймерСтанции")]
     public Slider NextStationSlide; // Слайдер (прогресс) следующей станции
     public Text NextStationTimeText; // Текст времени до следующей станции
     public int NextStationTime; // Таймер до следующей станции
     public int NextStationTimeCount; //
-    public Button TimerX2Bttn; //
-    public GameObject TimerX2Pan; //
-    float Timer = 1; //
-    int StationCount; // Количество станций
+    [SerializeField] private Button TimerX2Bttn; //
+    [SerializeField] private GameObject TimerX2Pan; //
+    private float Timer = 1; //
     
     [Header("Локомотив")]
-    public Text LevelLocoText; // Текст уроень локомотива
-    public Text StorageCoalText; // Текст Хранилище угля
-    public Text NeedCoalText; // Текст потребления угля локомотивом
-    public Text MaxWagoneText; // Текст максимальное количество вагонов
-    public GameObject LocoPan; // Панель Локомотива
-    public GameObject UpgradeLocoPan; // Панель Улучшения локомотива
-    public GameObject[] TextureChoice; //
-    public GameObject SmokeParticle; //
+    [SerializeField] private Text LevelLocoText; // Текст уроень локомотива
+    [SerializeField] private Text StorageCoalText; // Текст Хранилище угля
+    [SerializeField] private Text NeedCoalText; // Текст потребления угля локомотивом
+    [SerializeField] private Text MaxWagoneText; // Текст максимальное количество вагонов
+    [SerializeField] private GameObject LocoPan; // Панель Локомотива
+    [SerializeField] private GameObject UpgradeLocoPan; // Панель Улучшения локомотива
+    [SerializeField] private GameObject[] TextureChoice; //
+    [SerializeField] private GameObject SmokeParticle; //
     public int LevelLoco = 1; // уровень локомотива. Уровень зависит от вида локомотива. ПОкупается на станции
     public int MaxWagone; // Максимальное кол-во вагонов
-    public Image LocoSprite; // 
+    [SerializeField] private Image LocoSprite; // 
     private int NeedCoal;// Сколько потребляет угля
     private int TimerLoco;// Таймер за сколько потребляет уголь
     private int ActiveTimerLoco; // Активный таймер локомотива
     
     [Header("CoalFree")]
-    public GameObject CoalADS; // Объект угля за рекламу
-    public GameObject StartLocoEnginePan; // Запуск двигателя
+    [SerializeField] private GameObject CoalADS; // Объект угля за рекламу
+    [SerializeField] private GameObject StartLocoEnginePan; // Запуск двигателя
     public GameObject CoalHelpObj; //
     public GameObject TreesClickParticle; //
-    public GameObject TreesFreeObj; //
+    [SerializeField] private GameObject TreesFreeObj; //
     public bool CoalHelp; // Подсказка при первом появлении угля
     
     [Header("Message")]
@@ -104,26 +104,24 @@ public class Game : MonoBehaviour
     public int passWagoneCount;
     public int passCount;
     public bool helpPass;
-    public GameObject[] passWagon; 
+    [SerializeField] private GameObject[] passWagon; 
 
     [Header("CargoTrasport")]
     public GameObject[] CargoTransportWagone; // Обьекты вагонов задания перевозки
-    public int CargoTransportCount; // Количество вагонов
-    public int RewardCargoTransport; // Награда за доставку
+    [HideInInspector] public int CargoTransportCount; // Количество вагонов
+    [HideInInspector] public int RewardCargoTransport; // Награда за доставку
    
     [Header("CargoSpecTrasport")]
     public GameObject[] CargoSpecTransportWagone; // Обьекты вагонов задания перевозки
-    public int CargoSpecTransportCount; // Количество вагонов
-    public int RewardCargoSpecTransport; // Награда за доставку
+    [HideInInspector] public int CargoSpecTransportCount; // Количество вагонов
    
     [Header("CargoSpec1Trasport")]
     public GameObject[] CargoSpec1TransportWagone; // Обьекты вагонов задания перевозки
-    public int CargoSpec1TransportCount; // Количество вагонов
-    public int RewardCargoSpec1Transport; // Награда за доставку
+    [HideInInspector] public int CargoSpec1TransportCount; // Количество вагонов
    
     [Header("Город")]
-    public int City; // Текущий город
-    public int ChoiceCity; // Выбор города
+    [HideInInspector] public int City; // Текущий город
+    [HideInInspector] public int ChoiceCity; // Выбор города
     public string[] NameCity; // Название выбранного города
     public int[] TimeForCity; // Время до следующего города
     public int[] TemperatureForCity; // Температура до следующего города
@@ -147,63 +145,63 @@ public class Game : MonoBehaviour
     public int trainingCount; //
     
     [Header("Help")]
-    public GameObject HelpPan; //
-    public GameObject TargetHelp; //
-    public GameObject WagoneHelp; //
-    public GameObject LocomotiveHelp; //
+    [SerializeField] private GameObject HelpPan; //
+    [SerializeField] private GameObject TargetHelp; //
+    [SerializeField] private GameObject WagoneHelp; //
+    [SerializeField] private GameObject LocomotiveHelp; //
    
     [Header("ADS")]
-    public GameObject ShopPan; //
-    public GameObject ADSMoneyActivePan; // Панель предложения денег за рекламу
-    public Slider ADSMoneyActiveSlide; // слайдер таймера денег за рекламу
-    public Text ADSMoneyActiveText; // текст денег за рекламу
-    int ADSMoneyCol; // награда денег за рекламу
+    [SerializeField] private GameObject ShopPan; //
+    [SerializeField] private GameObject ADSMoneyActivePan; // Панель предложения денег за рекламу
+    [SerializeField] private Slider ADSMoneyActiveSlide; // слайдер таймера денег за рекламу
+    [SerializeField] private Text ADSMoneyActiveText; // текст денег за рекламу
+    private int ADSMoneyCol; // награда денег за рекламу
     
     [Header("SAVE")]
-    public Text SaveText; //
-    public bool Saver;
-    public GameObject DeletePan;
+    [SerializeField] private Text SaveText; //
+    [SerializeField] private GameObject DeletePan;
+    [HideInInspector] public bool Saver;
+    [HideInInspector] public bool SaverNew;
     
     [Header("Menu")]
-    public GameObject MenuPan; //
-    public Text ScoreMenu; // 
-    
-    [Header("Task")]
-    public bool ActiveTask; //
-    public int CityTask; //
+    [SerializeField] private GameObject MenuPan; //
+    [SerializeField] private Text ScoreMenu; // 
     
     //
     public GameObject TaskPan; // Активация панели задания
     public Button TaskDone; // Если задание выполнено, то собрать награду
     public Text TaskText; // Текст задания
     public int TaskCount; // Счетчик задания
+    
     [Header("AirShip")]
-    public GameObject AirShipObj; //
-    public GameObject AirShipPan;
-    public Text TimerAirShipText; //
-    public Text TimerAirShipText1; //
+    [SerializeField] private GameObject AirShipObj; //
+    [SerializeField] private GameObject AirShipPan;
+    [SerializeField] private Text TimerAirShipText; //
+    [SerializeField] private Text TimerAirShipText1; //
     public bool AirShipActive; //
-    public int TimerAirShip = 900; //
+    [SerializeField] private int TimerAirShip = 900; //
+    
     [Header("Thanks")]
-    public GameObject ThanksPan;//
-    public bool Thanks; //
-    public GameObject Feedback; //
+    [SerializeField] private GameObject ThanksPan;//
+    [SerializeField] private GameObject Feedback; //
+    [HideInInspector] public bool Thanks; //
     //
     [Header("STATISTIC")]
-    public int TimeInGameStatistic; //
-    public int CoalPlusStatistic; //
-    public int FoodPlusStatistic; //
-    public int WaterPlusStatistic; //
-    public int WarmPlusStatistic; //
-    public int MoneyPlusStatistic; //
-    public int DistancePlusStatistic; //
-    public Text TimeInGameStatisticText; //
+    [HideInInspector] public int TimeInGameStatistic; //
+    [HideInInspector] public int CoalPlusStatistic; //
+    [HideInInspector] public int FoodPlusStatistic; //
+    [HideInInspector] public int WaterPlusStatistic; //
+    [HideInInspector] public int WarmPlusStatistic; //
+    [HideInInspector] public int MoneyPlusStatistic; //
+    [HideInInspector] public int DistancePlusStatistic; //
+    [SerializeField] private Text TimeInGameStatisticText; //
 
     public GameObject EffectCollect;
-    public GameObject ParticleTrain;
+    [SerializeField] private GameObject ParticleTrain;
     //
 
     public GameObject PanWagon; // Открытая панель вагона
+    public GameObject trailer; //
 
     public Dictionary<string, Sprite[]> wagoneSprites = new();
     private Dictionary<int, Sprite[]> LocoSprites = new();
@@ -257,10 +255,8 @@ public class Game : MonoBehaviour
             RewardCargoTransport = YandexGame.savesData.RewardCargoTransport;
             //
             CargoSpecTransportCount = YandexGame.savesData.CargoSpecTransportCount;
-            RewardCargoSpecTransport = YandexGame.savesData.RewardCargoSpecTransport;
             //
             CargoSpec1TransportCount = YandexGame.savesData.CargoSpec1TransportCount;
-            RewardCargoSpec1Transport = YandexGame.savesData.RewardCargoSpec1Transport;
             //
             City = YandexGame.savesData.City;
             AirShipActive = YandexGame.savesData.AirShipActive; //
@@ -268,8 +264,6 @@ public class Game : MonoBehaviour
             Trainer[0] = YandexGame.savesData.Trainer[0];
             Trainer[1] = YandexGame.savesData.Trainer[1];
             TaskCount = YandexGame.savesData.TaskCount;
-            ActiveTask = YandexGame.savesData.ActiveTask; //
-            CityTask = YandexGame.savesData.CityTask; //
             TimeInGameStatistic = YandexGame.savesData.TimeInGameStatistic; //
             CoalPlusStatistic = YandexGame.savesData.CoalPlusStatistic; //
             FoodPlusStatistic = YandexGame.savesData.FoodPlusStatistic; //
@@ -299,6 +293,7 @@ public class Game : MonoBehaviour
     {
         if (Trainer[0] == false)
         {
+            trailer.SetActive(true);
             TR.trainingPanGame[0].SetActive(true);
             AO.PlayAudioEnterPanel();
             TR.trainingPanGame[2].SetActive(true);
@@ -320,7 +315,7 @@ public class Game : MonoBehaviour
         wagoneSprites.Add("Boiler", new Sprite[] { SPR0[3], SPR1[3], SPR2[3], SPR3[3] });
         wagoneSprites.Add("Storage", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
         wagoneSprites.Add("PassWagon", new Sprite[] { SPR0[4], SPR1[4], SPR2[4], SPR3[4] });
-        wagoneSprites.Add("Cargo", new Sprite[] { SPR0[8], SPR1[8], SPR2[8], SPR3[8] });
+        wagoneSprites.Add("Cargo", new Sprite[] { SPR0[8], SPR1[8] });
         LocoSprites.Add(1, new Sprite[] { SPR0[5], SPR1[5], SPR2[5], SPR3[5] });
         LocoSprites.Add(2, new Sprite[] { SPR0[6], SPR1[6], SPR2[6], SPR3[6] });
         LocoSprites.Add(3, new Sprite[] { SPR0[7], SPR1[7], SPR2[7], SPR3[7] });
@@ -839,9 +834,7 @@ public class Game : MonoBehaviour
             timeRepair--;
             NextStationTime--;
             DistancePlusStatistic++;
-            int Min = NextStationTime / 60;
-            int Sec = NextStationTime - (Min * 60);
-            NextStationTimeText.text = Min + "мин. " + Sec + "сек.";
+            NextStationTimeText.text = (NextStationTime * 100) + " дист.";
             NextStationSlide.value = NextStationTimeCount - NextStationTime;
             if (timeBarrier <= 0)
             {
@@ -963,24 +956,24 @@ public class Game : MonoBehaviour
         int CicleNeedFood = 0;
         while (true)
         {
-            if (AllWorker <= Food)
+            if ((AllWorker + PassResourceUse[0]) <= Food)
             {
-                Food -= AllWorker;
+                Food -= AllWorker + PassResourceUse[0];
                 ResourceTextUpdate();
-                PlusResources(2, 0 - AllWorker);
+                PlusResources(2, 0 - (AllWorker + PassResourceUse[0]));
                 NeedFoodPeople = 0;
                 CicleNeedFood = 0;
                 yield return new WaitForSeconds(10);
             }
-            else if (AllWorker > Food)
+            else if ((AllWorker + PassResourceUse[0]) > Food)
             {
                 StartMessage("Людям не хватает пищи!");
-                NeedFoodPeople = AllWorker - Food;
+                NeedFoodPeople = (AllWorker + PassResourceUse[0]) - Food;
                 CicleNeedFood++;
                 PlusResources(2, 0 - Food);
                 Food = 0;
                 ResourceTextUpdate();
-                if (CicleNeedFood >= 7) // Если 7 циклов и больше люди без еды
+                if (CicleNeedFood >= 4) // Если 4 циклов и больше люди без еды
                 {
                     for(int i = 0; i < WagoneData.Count; i++)
                     {
@@ -1010,19 +1003,19 @@ public class Game : MonoBehaviour
         int CicleNeedFood = 0;
         while (true)
         {
-            if (AllWorker <= Water)
+            if ((AllWorker + PassResourceUse[0]) <= Water)
             {
-                Water -= AllWorker;
+                Water -= AllWorker + PassResourceUse[1];
                 ResourceTextUpdate();
-                PlusResources(3, 0 - AllWorker);
+                PlusResources(3, 0 - (AllWorker + PassResourceUse[1]));
                 NeedFoodPeople = 0;
                 CicleNeedFood = 0;
                 yield return new WaitForSeconds(10);
             }
-            else if (AllWorker > Water)
+            else if ((AllWorker + PassResourceUse[1]) > Water)
             {
                 StartMessage("Людям не хватает воды!");
-                NeedFoodPeople = AllWorker - Water;
+                NeedFoodPeople = AllWorker + PassResourceUse[1] - Water;
                 CicleNeedFood++;
                 PlusResources(3, 0 - Water);
                 Water = 0;
@@ -1368,17 +1361,13 @@ public class Game : MonoBehaviour
         YandexGame.savesData.RewardCargoTransport = RewardCargoTransport;
         //
         YandexGame.savesData.CargoSpecTransportCount = CargoSpecTransportCount;
-        YandexGame.savesData.RewardCargoSpecTransport = RewardCargoSpecTransport;
         //
         YandexGame.savesData.CargoSpec1TransportCount = CargoSpec1TransportCount;
-        YandexGame.savesData.RewardCargoSpec1Transport = RewardCargoSpec1Transport;
         //
         YandexGame.savesData.City = City;
         YandexGame.savesData.Trainer[0] = Trainer[0];
         YandexGame.savesData.Trainer[1] = Trainer[1];
         YandexGame.savesData.TaskCount = TaskCount;
-        YandexGame.savesData.ActiveTask = ActiveTask; //
-        YandexGame.savesData.CityTask = CityTask; //
         YandexGame.savesData.AirShipActive = AirShipActive; //
         YandexGame.savesData.TimerAirShip = TimerAirShip; //
         YandexGame.savesData.TimeInGameStatistic = TimeInGameStatistic; //

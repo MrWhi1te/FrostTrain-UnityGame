@@ -383,7 +383,7 @@ public class WagonScript : MonoBehaviour
             BoilerLevelText.text = GM.WagoneData[IndexWag].LevelWagone.ToString();
             BoilerWorkCountText.text = GM.WagoneData[IndexWag].WorkerInWagone.ToString();
             BoilerTimerText.text = GM.WagoneData[IndexWag].TimerActiveProduction.ToString();
-            BoilerNeedCoalText.text = "-" + GM.WagoneData[IndexWag].WorkerInWagone * 20;
+            BoilerNeedCoalText.text = "-" + GM.WagoneData[IndexWag].WorkerInWagone * 10;
         }
         else if (GM.WagoneData[IndexWag].Name == "Storage") //
         {
@@ -411,19 +411,19 @@ public class WagonScript : MonoBehaviour
             if(GM.WagoneData[IndexWag].LevelWagone == 1)
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 10; //
-                TimerWag = 30;
+                TimerWag = 20;
                 FoodUpgradeText.text = "2000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 2)
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 10; //
-                TimerWag = 50;
+                TimerWag = 30;
                 FoodUpgradeText.text = "4000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 3)
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 20; //
-                TimerWag = 80;
+                TimerWag = 50;
                 FoodUpgradeText.text = "Максимум";
             }
             FoodProdCountText.text = ProductCount + "ед. за: " + TimerWag + "сек."; //
@@ -434,19 +434,19 @@ public class WagonScript : MonoBehaviour
             if (GM.WagoneData[IndexWag].LevelWagone == 1)
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 20; //
-                TimerWag = 20;
+                TimerWag = 15;
                 BoilerUpgradeText.text = "2000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 2)
             {
                 ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 20; //
-                TimerWag = 40;
+                TimerWag = 15;
                 BoilerUpgradeText.text = "4000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 3)
             {
-                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 20; //
-                TimerWag = 60;
+                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 25; //
+                TimerWag = 20;
                 BoilerUpgradeText.text = "Максимум";
             }
             BoilerProdCountText.text = ProductCount + "ед. за: " + TimerWag + "сек."; //
@@ -528,7 +528,7 @@ public class WagonScript : MonoBehaviour
                 BoilerTimerText.text = GM.WagoneData[IndexWag].TimerActiveProduction.ToString();
                 if (GM.WagoneData[IndexWag].TimerActiveProduction <= 0) // Если активный таймер 0,
                 {
-                    GM.Coal -= ProductCount;
+                    GM.Coal -= ProductCount / 2;
                     GM.ResourceTextUpdate();
                     DoneProductionPan.SetActive(true); // Активация панели сбора награды
                     break;
@@ -551,52 +551,29 @@ public class WagonScript : MonoBehaviour
     {
         while (true)
         {
-            if (GM.TemperatureOnStreet == 0)
+            int r = GM.TemperatureOnStreet;
+            Mathf.Abs(r);
+            if (GM.Warm >= r)
             {
-                if (GM.Warm >= 10)
-                {
-                    GM.Warm -= 10;
-                    GM.ResourceTextUpdate();
-                    GM.StartPlusResource(4, 0 - 10);
-                    GM.WagoneData[IndexWag].TemperatureWagone = 10;
-                    FoodTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
-                    PassTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
-                }
-                else if (GM.Warm < 10)
-                {
-                    FoodTermometrText.text = GM.TemperatureOnStreet + "°C";
-                    PassTermometrText.text = GM.TemperatureOnStreet + "°C";
-                }
+                GM.Warm -= r;
+                GM.ResourceTextUpdate();
+                GM.StartPlusResource(4, 0 - r);
+                GM.WagoneData[IndexWag].TemperatureWagone = 10;
                 SnowWagone.SetActive(false);
-                yield return new WaitForSeconds(10);
+                FoodTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
+                PassTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
             }
-            else if (GM.TemperatureOnStreet < 0)
+            else if (GM.Warm < r)
             {
-                int r = GM.TemperatureOnStreet;
-                Mathf.Abs(r);
-                if (GM.Warm >= r)
-                {
-                    GM.Warm -= r;
-                    GM.ResourceTextUpdate();
-                    GM.StartPlusResource(4, 0 - r);
-                    GM.WagoneData[IndexWag].TemperatureWagone = 10;
-                    SnowWagone.SetActive(false);
-                    FoodTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
-                    PassTermometrText.text = GM.WagoneData[IndexWag].TemperatureWagone + "°C";
-                }
-                else if (GM.Warm < r)
-                {
-                    GM.Warm = 0;
-                    GM.ResourceTextUpdate();
-                    GM.WagoneData[IndexWag].TemperatureWagone = -10;
-                    FoodTermometrText.text = GM.TemperatureOnStreet + "°C";
-                    PassTermometrText.text = GM.TemperatureOnStreet + "°C";
-                    GM.WagoneData[IndexWag].TemperatureWagone = -10;
-                    GM.StartMessage("Вагон замерзает!");
-                    SnowWagone.SetActive(true);
-                }
-                yield return new WaitForSeconds(10);
+                GM.Warm = 0;
+                GM.ResourceTextUpdate();
+                FoodTermometrText.text = GM.TemperatureOnStreet + "°C";
+                PassTermometrText.text = GM.TemperatureOnStreet + "°C";
+                GM.WagoneData[IndexWag].TemperatureWagone = -10;
+                GM.StartMessage("Вагон замерзает!");
+                SnowWagone.SetActive(true);
             }
+            yield return new WaitForSeconds(10);
         }
     }
 
