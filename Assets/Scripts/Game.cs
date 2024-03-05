@@ -839,6 +839,7 @@ public class Game : MonoBehaviour
             if (timeBarrier <= 0)
             {
                 AO.StopAudio();
+                SpeedFon = 0;
                 StartMessage("Препятствие на пути!");
                 barrierObj.SetActive(true);
                 if (!helpBarrier)
@@ -851,6 +852,7 @@ public class Game : MonoBehaviour
             if (timeRepair <= 0)
             {
                 AO.StopAudio();
+                SpeedFon = 0;
                 StartMessage("Поезд сломался!");
                 repairTrainObj.SetActive(true);
                 if (!helpRepair)
@@ -865,7 +867,7 @@ public class Game : MonoBehaviour
                 StopCoroutine("PassFoodNeed");
                 StopCoroutine("PassFoodWater");
                 AO.StopAudio();
-                AO.PlayAudioStation();
+                AO.PlayAudioEnterStation();
                 Station.SetActive(true);
                 for (int i = 0; i < WagonCol; i++)
                 {
@@ -1445,6 +1447,13 @@ public class Game : MonoBehaviour
         MenuPan.SetActive(false);
         StartGame();
     }
+    public void OpenClosedSettingPan()
+    {
+
+    }
+    //public void OnOffMusic
+
+
 
 
     // TASK!!!
@@ -1581,6 +1590,7 @@ public class Game : MonoBehaviour
     {
         Feedback.SetActive(false);
     }
+
 }
 
 [Serializable]

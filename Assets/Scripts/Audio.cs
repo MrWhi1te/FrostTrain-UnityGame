@@ -1,14 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Audio : MonoBehaviour
 {
     private AudioSource thisAudio;
+
     [SerializeField] private AudioClip enterPanel;
     [SerializeField] private AudioClip clickBttn;
     [SerializeField] private AudioClip clickTrain;
     [SerializeField] private AudioClip enterExitStation;
+    [SerializeField] private AudioClip enterStation;
     [SerializeField] private AudioClip takeResource;
     [SerializeField] private AudioClip train;
     [SerializeField] private AudioClip payment;
@@ -16,59 +16,89 @@ public class Audio : MonoBehaviour
     [SerializeField] private AudioClip takePass;
     [SerializeField] private AudioClip notTakePass;
 
+    [SerializeField] private UnityEngine.UI.Image soundImg;
+    [SerializeField] private Sprite[] soundSprite;
+    public bool activeSound;
+
     // Start is called before the first frame update
     void Start()
     {
         thisAudio = GetComponent<AudioSource>();
+        if (activeSound) soundImg.sprite = soundSprite[0];
+        else soundImg.sprite = soundSprite[1];
     }
     public void PlayAudioEnterPanel()
     {
-        thisAudio.clip = enterPanel;
-        thisAudio.Play();
+        if (activeSound)
+        {
+            thisAudio.clip = enterPanel;
+            thisAudio.Play();
+        }
     }
     public void PlayAudioClickBttn()
     {
-        //thisAudio.clip = clickBttn;
-        thisAudio.PlayOneShot(clickBttn);
+        if (activeSound) thisAudio.PlayOneShot(clickBttn);
     }
     public void PlayAudioStation()
     {
-        thisAudio.PlayOneShot(enterExitStation);
+        if (activeSound) thisAudio.PlayOneShot(enterExitStation);
     }
+    public void PlayAudioEnterStation()
+    {
+        if (activeSound) thisAudio.PlayOneShot(enterStation);
+    }
+
     public void PlayAudioTakeResource()
     {
-        thisAudio.PlayOneShot(takeResource);
+        if (activeSound) thisAudio.PlayOneShot(takeResource);
     }
     public void PlayAudioTrain()
     {
-        thisAudio.clip = train;
-        thisAudio.Play();
+        if (activeSound)
+        {
+            thisAudio.clip = train;
+            thisAudio.Play();
+        }
     }
     public void StopAudio()
     {
-        thisAudio.Stop();
+        if (activeSound) thisAudio.Stop();
     }
     public void PlayAudioClickTrain()
     {
-        thisAudio.PlayOneShot(clickTrain);
+        if (activeSound) thisAudio.PlayOneShot(clickTrain);
     }
     public void PlayAudioPayment()
     {
-        thisAudio.PlayOneShot(payment);
+        if (activeSound) thisAudio.PlayOneShot(payment);
     }
 
     public void PlayAudioTrees()
     {
-        thisAudio.PlayOneShot(clickTrees);
+        if (activeSound) thisAudio.PlayOneShot(clickTrees);
     }
 
     public void PlayAudioTakePass()
     {
-        thisAudio.PlayOneShot(takePass);
+        if (activeSound) thisAudio.PlayOneShot(takePass);
     }
 
     public void PlayAudioNotTakePass()
     {
-        thisAudio.PlayOneShot(notTakePass);
+        if (activeSound) thisAudio.PlayOneShot(notTakePass);
+    }
+
+    public void OnOffSound()
+    {
+        if (activeSound) 
+        {
+            activeSound = false;
+            soundImg.sprite = soundSprite[1];
+        } 
+        else
+        {
+            activeSound = true;
+            soundImg.sprite = soundSprite[0];
+        }
     }
 }

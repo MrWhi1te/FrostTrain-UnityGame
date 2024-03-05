@@ -9,7 +9,7 @@ public class PassengersScript : MonoBehaviour
     [SerializeField] private StationScripts ST;
     [SerializeField] private Audio AO;
 
-    private List<Pass> passStationList;
+    private List<Pass> passStationList = new();
 
     [Header("Station")]
     [SerializeField] private GameObject passPan;
