@@ -9,6 +9,10 @@ public class Questions : MonoBehaviour
     [SerializeField] private StationScripts ST;
     [SerializeField] private Audio AO;
 
+    [SerializeField] private GameObject endPan;
+    [SerializeField] private Text endText;
+    [SerializeField] private Text statisticText;
+    [SerializeField] [TextArea] private string[] end;
     [SerializeField] private GameObject questPan;
     [SerializeField] private Text namePersonQuest;
     [SerializeField] private Text textQuest;
@@ -20,6 +24,7 @@ public class Questions : MonoBehaviour
 
     public void CheckQuest()
     {
+        int done = 0;
         for (int i=0; i < quest.Count; i++)
         {
             if(quest[i].cityPerson == GM.NameCity[GM.City] && !quest[i].doneTask)
@@ -41,6 +46,21 @@ public class Questions : MonoBehaviour
                 }
                 break;
             }
+            if (quest[i].doneTask) done++;
+        }
+        if (done == quest.Count)
+        {
+            if(GM.NameCity[GM.City] == "Владивосток")
+            {
+                endText.text = end[0];
+            }
+            else if(GM.NameCity[GM.City] == "Магнитогорск")
+            {
+                endText.text = end[1];
+            }
+            endPan.SetActive(true);
+            statisticText.text = "Статистика вашей игры:" + "\n" + "Собрано угля: " + GM.CoalPlusStatistic + "\n" + "Собрано еды: " + GM.FoodPlusStatistic + "\n" + "Собрано воды:" + GM.WaterPlusStatistic 
+                + "\n" + "Собрано тепла: " + GM.WarmPlusStatistic + "\n" + "Заработано денег: " + GM.MoneyPlusStatistic + "\n" + "Пройдено: " + GM.DistancePlusStatistic + "\n" + "Очков: " + GM.Score;
         }
     }
 

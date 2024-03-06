@@ -36,7 +36,7 @@ public class Game : MonoBehaviour
     public int FoodMax; // Максимум еды для хранения
     public int Water; // Количество воды
     public int WaterMax; // Максимум воды для хранения
-    public int[] PassResourceUse; // Дополнительное потребление ресурсе пассажирами
+    [HideInInspector] public int[] PassResourceUse; // Дополнительное потребление ресурсе пассажирами
     public GameObject[] CollectResources; // 
     [SerializeField] private Text MoneyText; // Текст денег
     [SerializeField] private Text CoalText; // Текст угля
@@ -50,7 +50,7 @@ public class Game : MonoBehaviour
     private int StorageCount = 50; // Емкость хранилища
     
     [Header("Температура")]
-    public int TemperatureOnStreet; // Температура за бортом
+    [HideInInspector] public int TemperatureOnStreet; // Температура за бортом
     [SerializeField] private Text TermometrText; // Текст термометра температуры за бортом
    
     [Header("ТаймерСтанции")]
@@ -81,11 +81,12 @@ public class Game : MonoBehaviour
     [Header("CoalFree")]
     [SerializeField] private GameObject CoalADS; // Объект угля за рекламу
     [SerializeField] private GameObject StartLocoEnginePan; // Запуск двигателя
-    public GameObject CoalHelpObj; //
-    public GameObject TreesClickParticle; //
+    [SerializeField] public GameObject TreesClickParticle; //
     [SerializeField] private GameObject TreesFreeObj; //
+    public GameObject CoalHelpObj; //
     public bool CoalHelp; // Подсказка при первом появлении угля
-    
+
+
     [Header("Message")]
     [SerializeField] private Text Message; // Текст сообщений
    
@@ -127,22 +128,22 @@ public class Game : MonoBehaviour
     public int[] TemperatureForCity; // Температура до следующего города
    
     [Header("Background")]
-    public int SpeedFon; // Скорость движения фона
+    [HideInInspector] public int SpeedFon; // Скорость движения фона
     public GameObject[] ParallaxObj; //
 
     [Header("Barrier")]
     public GameObject barrierObj; //
     public GameObject helpBarrierObj; //
-    public bool helpBarrier;
+    [HideInInspector] public bool helpBarrier;
 
     [Header("LocoRepair")]
     public GameObject repairTrainObj; //
     public GameObject helpTrainRepairObj; //
-    public bool helpRepair;
+    [HideInInspector] public bool helpRepair;
 
     [Header("Trainer")]
-    public bool[] Trainer; //
-    public int trainingCount; //
+    [HideInInspector] public bool[] Trainer; //
+    [HideInInspector] public int trainingCount; //
     
     [Header("Help")]
     [SerializeField] private GameObject HelpPan; //
@@ -168,9 +169,9 @@ public class Game : MonoBehaviour
     [SerializeField] private Text ScoreMenu; // 
     
     //
-    public GameObject TaskPan; // Активация панели задания
-    public Button TaskDone; // Если задание выполнено, то собрать награду
-    public Text TaskText; // Текст задания
+    [SerializeField] private GameObject TaskPan; // Активация панели задания
+    [SerializeField] private Button TaskDone; // Если задание выполнено, то собрать награду
+    [SerializeField] private Text TaskText; // Текст задания
     public int TaskCount; // Счетчик задания
     
     [Header("AirShip")]
@@ -178,7 +179,7 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject AirShipPan;
     [SerializeField] private Text TimerAirShipText; //
     [SerializeField] private Text TimerAirShipText1; //
-    public bool AirShipActive; //
+    [HideInInspector] public bool AirShipActive; //
     [SerializeField] private int TimerAirShip = 900; //
     
     [Header("Thanks")]
@@ -200,7 +201,7 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject ParticleTrain;
     //
 
-    public GameObject PanWagon; // Открытая панель вагона
+    [HideInInspector] public GameObject PanWagon; // Открытая панель вагона
     public GameObject trailer; //
 
     public Dictionary<string, Sprite[]> wagoneSprites = new();
@@ -238,7 +239,7 @@ public class Game : MonoBehaviour
             Water = YandexGame.savesData.Water;
             Warm = YandexGame.savesData.Warm;
             FreeWorker = YandexGame.savesData.Worker;
-            AllWorker = YandexGame.savesData.AllPeople;
+            AllWorker = YandexGame.savesData.AllWorker;
             //
             TemperatureOnStreet = YandexGame.savesData.TemperatureOnStreet;
             NextStationTime = YandexGame.savesData.NextStationTime;
@@ -250,6 +251,12 @@ public class Game : MonoBehaviour
             LevelChassis = YandexGame.savesData.LevelChassis;
             //
             CoalHelp = YandexGame.savesData.CoalHelp;
+            helpPass = YandexGame.savesData.helpPass;
+            helpRepair = YandexGame.savesData.helpRepair;
+            helpBarrier = YandexGame.savesData.helpBarrier;
+            //
+            passCount = YandexGame.savesData.passCount;
+            passWagoneCount = YandexGame.savesData.passWagoneCount;
             //
             CargoTransportCount = YandexGame.savesData.CargoTransportCount;
             RewardCargoTransport = YandexGame.savesData.RewardCargoTransport;
@@ -1346,7 +1353,7 @@ public class Game : MonoBehaviour
         YandexGame.savesData.Water = Water;
         YandexGame.savesData.Warm = Warm;
         YandexGame.savesData.Worker = FreeWorker;
-        YandexGame.savesData.AllPeople = AllWorker;
+        YandexGame.savesData.AllWorker = AllWorker;
         //
         YandexGame.savesData.TemperatureOnStreet = TemperatureOnStreet;
         YandexGame.savesData.NextStationTime = NextStationTime;
@@ -1358,6 +1365,12 @@ public class Game : MonoBehaviour
         YandexGame.savesData.LevelChassis = LevelChassis;
         //
         YandexGame.savesData.CoalHelp = CoalHelp;
+        YandexGame.savesData.helpPass = helpPass;
+        YandexGame.savesData.helpRepair = helpRepair;
+        YandexGame.savesData.helpBarrier = helpBarrier;
+        //
+        YandexGame.savesData.passCount = passCount;
+        YandexGame.savesData.passWagoneCount = passWagoneCount;
         //
         YandexGame.savesData.CargoTransportCount = CargoTransportCount;
         YandexGame.savesData.RewardCargoTransport = RewardCargoTransport;

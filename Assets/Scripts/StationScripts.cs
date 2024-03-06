@@ -560,28 +560,4 @@ public class StationScripts : MonoBehaviour
             ADSMoneyActiveText.text = "+" + ADSMoneyCol + "р!!!" + "\n" + "За просмотр";
         }
     }
-        //else if(GM.City == 44)
-        //{
-        //    if (TaskCounter == 1)
-        //    {
-        //        TaskPan[0].SetActive(false);
-        //        TaskPan[19].SetActive(false);
-        //    }
-        //    else if (TaskCounter == 0)
-        //    {
-        //        TaskPan[18].SetActive(false);
-        //        TaskPan[19].SetActive(true);
-        //        TaskCounter = 1;
-        //        int H = GM.TimeInGameStatistic / 60;
-        //        int M = GM.TimeInGameStatistic - (H * 60);
-        //        TimeInGameStatisticText.text = "Время в игре: " + H + "ч. " + M + "м."; //
-        //        FoodStatisticText.text = "Собрано еды: " + GM.FoodPlusStatistic.ToString(); //
-        //        CoalPlusStatisticText.text = "Собрано угля: " + GM.CoalPlusStatistic.ToString(); //
-        //        WaterPlusStatisticText.text = "Собрано воды: " + GM.WaterPlusStatistic.ToString(); //
-        //        WarmPlusStatisticText.text = "Собрано тепла: " + GM.WarmPlusStatistic.ToString(); //
-        //        MoneyPlusStatisticText.text = "Заработано денег: " + GM.MoneyPlusStatistic.ToString(); //
-        //        DistancePlusStatisticText.text = "Пройдено расстояние: " + GM.DistancePlusStatistic * 10; //
-        //        ScorePlusStatisticText.text = "Очков: " + GM.Score.ToString(); //
-        //    }
-        //}
 }

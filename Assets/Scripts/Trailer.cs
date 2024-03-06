@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Trailer : MonoBehaviour
 {
-    //public Animation anim;
     public Animator anim;
 
     private void Start()

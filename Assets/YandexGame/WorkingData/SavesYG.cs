@@ -21,10 +21,7 @@ namespace YG
         public int Coal; // Количество угля
         public int CoalMax; // Максимум угля для хранения
         public int Worker; // Количество свободных рабочих
-        public int People; // Количество занятых на работе людей в поезде
-        public int AllPeople; // Количество всего рабочих в поезде
-        public int DontPeopleWagone; // Людей без вагона
-        public int WorkerMax; // Максимум Рабочих в поезде.
+        public int AllWorker; // Количество всего рабочих в поезде
         public int Warm; // Количество тепла
         public int WarmMax; // Максимум тепла для хранения
         public int Food; // Количество еды
@@ -36,18 +33,14 @@ namespace YG
         public int NextStationTime; // Таймер до следующей станции
         public int NextStationTimeCount; //
         public int LevelLoco; // уровень локомотива. Уровень зависит от вида локомотива. ПОкупается на станции
-        public int MaxWagone; // Максимальное кол-во вагонов
-        public int NeedCoal;// Сколько потребляет угля
-        public int TimerLoco;// Таймер за сколько потребляет уголь
         public int ActiveTimerLoco; // Активный таймер локомотива
 
-        public bool CoalHelp; // Подсказка при первом появлении угля
         public int LevelEngine = 1; // Уровень двигателя локомотива
         public int LevelCoalStorage = 1; // Уровень тендера локомотива
         public int LevelChassis = 1; // Уровень шасси локомотива
 
-        public int PTransportCount; // Количество вагонов
-        public int RewardPTransport; // Награда за доставку
+        public int passWagoneCount;
+        public int passCount;
 
         public int CargoTransportCount; // Количество вагонов
         public int RewardCargoTransport; // Награда за доставку
@@ -59,6 +52,11 @@ namespace YG
         public int City; // Текущий город
 
         public bool[] Trainer = new bool[2]; //
+        public bool CoalHelp; // Подсказка при первом появлении угля
+        public bool helpPass; //
+        public bool helpBarrier;
+        public bool helpRepair;
+        
         public int TaskCount; // Счетчик задания
 
         public bool[] WagoneActive = new bool[50]; // Активация скрипта вагона
