@@ -10,6 +10,7 @@ public class Training : MonoBehaviour
     public GameObject[] trainingPanGame;
     [SerializeField] private GameObject[] trainingDialogGame;
     [SerializeField] private GameObject[] trainingWagonePan;
+    public GameObject trainingTaskPan;
     private int trainingWagonCount;
     public bool[] wagoneTrainerChoice; //
 
@@ -28,12 +29,16 @@ public class Training : MonoBehaviour
         {
             trainingPanGame[1].SetActive(false);
             GM.StartNextStation();
-            GM.StartAutoSave();
+            GM.SV.StartAutoSave();
             GM.TaskCounter();
             GM.Trainer[0] = true;
         }
         
-        if (GM.trainingCount == 10) trainingPanGame[0].SetActive(false);
+        if (GM.trainingCount == 10)
+        {
+            trainingPanGame[0].SetActive(false);
+            trainingTaskPan.SetActive(true);
+        }
         
         else if(GM.trainingCount != 10 && GM.trainingCount != 18)
         {
@@ -55,6 +60,7 @@ public class Training : MonoBehaviour
     {
         if (wagoneTrainerChoice[0] == true & wagoneTrainerChoice[1] == true & wagoneTrainerChoice[2] == true & wagoneTrainerChoice[3] == true)
         {
+            trainingTaskPan.SetActive(false);
             trainingPanGame[1].SetActive(true);
             AO.PlayAudioEnterPanel();
         }
@@ -63,7 +69,7 @@ public class Training : MonoBehaviour
     public void EscapeTrainingGame()
     {
         GM.StartNextStation();
-        GM.StartAutoSave();
+        GM.SV.StartAutoSave();
         GM.TaskCounter();
         GM.Trainer[0] = true;
         trainingPanGame[0].SetActive(false); 

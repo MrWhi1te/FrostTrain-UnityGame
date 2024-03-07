@@ -4,12 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using YG;
-using UnityEngine.SceneManagement;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private Audio AO;
-    [SerializeField] private Training TR;
+    public Training TR;
+    public Audio AO;
+    public SaveLoad SV;
 
     public List<WagoneData> WagoneData = new List<WagoneData>(); // Лист с данными вагонов
     public int WagonCol; // Количество активных вагонов
@@ -76,7 +76,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Image LocoSprite; // 
     private int NeedCoal;// Сколько потребляет угля
     private int TimerLoco;// Таймер за сколько потребляет уголь
-    private int ActiveTimerLoco; // Активный таймер локомотива
+    [HideInInspector] public int ActiveTimerLoco; // Активный таймер локомотива
     
     [Header("CoalFree")]
     [SerializeField] private GameObject CoalADS; // Объект угля за рекламу
@@ -85,7 +85,6 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject TreesFreeObj; //
     public GameObject CoalHelpObj; //
     public bool CoalHelp; // Подсказка при первом появлении угля
-
 
     [Header("Message")]
     [SerializeField] private Text Message; // Текст сообщений
@@ -158,15 +157,9 @@ public class Game : MonoBehaviour
     [SerializeField] private Text ADSMoneyActiveText; // текст денег за рекламу
     private int ADSMoneyCol; // награда денег за рекламу
     
-    [Header("SAVE")]
-    [SerializeField] private Text SaveText; //
-    [SerializeField] private GameObject DeletePan;
-    [HideInInspector] public bool Saver;
-    [HideInInspector] public bool SaverNew;
-    
     [Header("Menu")]
     [SerializeField] private GameObject MenuPan; //
-    [SerializeField] private Text ScoreMenu; // 
+    public Text ScoreMenu; // 
     
     //
     [SerializeField] private GameObject TaskPan; // Активация панели задания
@@ -180,7 +173,7 @@ public class Game : MonoBehaviour
     [SerializeField] private Text TimerAirShipText; //
     [SerializeField] private Text TimerAirShipText1; //
     [HideInInspector] public bool AirShipActive; //
-    [SerializeField] private int TimerAirShip = 900; //
+    [HideInInspector] public int TimerAirShip = 900; //
     
     [Header("Thanks")]
     [SerializeField] private GameObject ThanksPan;//
@@ -207,94 +200,9 @@ public class Game : MonoBehaviour
     public Dictionary<string, Sprite[]> wagoneSprites = new();
     private Dictionary<int, Sprite[]> LocoSprites = new();
 
-    private void OnEnable()
-    {
-        YandexGame.RewardVideoEvent += Rewarded;
-        YandexGame.GetDataEvent += GetLoad;
-    }
+    private void OnEnable() => YandexGame.RewardVideoEvent += Rewarded;
 
-    private void OnDisable()
-    {
-        YandexGame.RewardVideoEvent -= Rewarded;
-        YandexGame.GetDataEvent -= GetLoad;
-    }
-
-    public void GetLoad()
-    {
-        Saver = YandexGame.savesData.Saver;
-        if(Saver == true)
-        {
-            WagonCol = YandexGame.savesData.WagonCol;
-            TextureTrain = YandexGame.savesData.TextureTrain;
-            for(int i = 0; i < Texture.Length; i++)
-            {
-                Texture[i] = YandexGame.savesData.Texture[i];
-            }
-            //
-            Money = YandexGame.savesData.Money;
-            Diamond = YandexGame.savesData.Diamond;
-            Score = YandexGame.savesData.Score;
-            Coal = YandexGame.savesData.Coal;
-            Food = YandexGame.savesData.Food;
-            Water = YandexGame.savesData.Water;
-            Warm = YandexGame.savesData.Warm;
-            FreeWorker = YandexGame.savesData.Worker;
-            AllWorker = YandexGame.savesData.AllWorker;
-            //
-            TemperatureOnStreet = YandexGame.savesData.TemperatureOnStreet;
-            NextStationTime = YandexGame.savesData.NextStationTime;
-            NextStationTimeCount = YandexGame.savesData.NextStationTimeCount;
-            LevelLoco = YandexGame.savesData.LevelLoco;
-            ActiveTimerLoco = YandexGame.savesData.ActiveTimerLoco;
-            LevelEngine = YandexGame.savesData.LevelEngine;
-            LevelCoalStorage = YandexGame.savesData.LevelCoalStorage;
-            LevelChassis = YandexGame.savesData.LevelChassis;
-            //
-            CoalHelp = YandexGame.savesData.CoalHelp;
-            helpPass = YandexGame.savesData.helpPass;
-            helpRepair = YandexGame.savesData.helpRepair;
-            helpBarrier = YandexGame.savesData.helpBarrier;
-            //
-            passCount = YandexGame.savesData.passCount;
-            passWagoneCount = YandexGame.savesData.passWagoneCount;
-            //
-            CargoTransportCount = YandexGame.savesData.CargoTransportCount;
-            RewardCargoTransport = YandexGame.savesData.RewardCargoTransport;
-            //
-            CargoSpecTransportCount = YandexGame.savesData.CargoSpecTransportCount;
-            //
-            CargoSpec1TransportCount = YandexGame.savesData.CargoSpec1TransportCount;
-            //
-            City = YandexGame.savesData.City;
-            AirShipActive = YandexGame.savesData.AirShipActive; //
-            TimerAirShip = YandexGame.savesData.TimerAirShip; //
-            Trainer[0] = YandexGame.savesData.Trainer[0];
-            Trainer[1] = YandexGame.savesData.Trainer[1];
-            TaskCount = YandexGame.savesData.TaskCount;
-            TimeInGameStatistic = YandexGame.savesData.TimeInGameStatistic; //
-            CoalPlusStatistic = YandexGame.savesData.CoalPlusStatistic; //
-            FoodPlusStatistic = YandexGame.savesData.FoodPlusStatistic; //
-            WaterPlusStatistic = YandexGame.savesData.WaterPlusStatistic; //
-            WarmPlusStatistic = YandexGame.savesData.WarmPlusStatistic; //
-            MoneyPlusStatistic = YandexGame.savesData.MoneyPlusStatistic; //
-            DistancePlusStatistic = YandexGame.savesData.DistancePlusStatistic;
-            Thanks = YandexGame.savesData.Thanks;
-            for (int i = 0; i < WagonCol; i++)
-            {
-                WagoneData[i].WagoneActive = false;// YandexGame.savesData.WagoneActive[i];
-                WagoneData[i].Name = YandexGame.savesData.Name[i];
-                WagoneData[i].LevelWagone = YandexGame.savesData.LevelWagone[i];
-                WagoneData[i].TimerActiveProduction = YandexGame.savesData.TimerActiveProduction[i];
-                WagoneData[i].WorkerInWagone = YandexGame.savesData.WorkerInWagone[i];
-                WagoneData[i].TemperatureWagone = YandexGame.savesData.TemperatureWagone[i];
-            }
-            ScoreMenu.text = "Очки: " + Score;
-            if(YandexGame.EnvironmentData.reviewCanShow == false)
-            {
-                OffFeedback();
-            }
-        }
-    }
+    private void OnDisable() => YandexGame.RewardVideoEvent -= Rewarded;
 
     void StartGame()
     {
@@ -312,7 +220,7 @@ public class Game : MonoBehaviour
         if(Trainer[0] == true)
         {
             StartNextStation();
-            StartAutoSave();
+            SV.StartAutoSave();
             TaskCounter();
         }
         wagoneSprites.Add("", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
@@ -412,337 +320,83 @@ public class Game : MonoBehaviour
         NeedCoalText.text = NeedCoal + "ед. за: " + TimerLoco + "сек.";
         TermometrText.text = TemperatureOnStreet + "°C";
     }
-    public void UpdateEngineLoco() // Улучшения Котла
+
+    public void UpdateLoco(int index)
     {
-        if(Money >= LevelCostEngine)
+        if(index == 0 && Money >= LevelCostEngine)
         {
             Money -= LevelCostEngine;
-            PlusResources(0, 0 - LevelCostEngine);
             LevelEngine++;
-            LevelLocoUpdater();
-            TextLoco();
-            ResourceTextUpdate();
-            AO.PlayAudioClickTrain();
+            PlusResources(0, 0 - LevelCostEngine);
         }
-    }
-    public void UpdateChassisLoco() // Улучшение Шасси
-    {
-        if(Money >= LevelCostChassis)
+        
+        else if(index == 1 && Money >= LevelCostChassis)
         {
             Money -= LevelCostChassis;
-            PlusResources(0, 0 - LevelCostChassis);
             LevelChassis++;
-            LevelLocoUpdater();
-            TextLoco();
-            ResourceTextUpdate();
-            AO.PlayAudioClickTrain();
+            PlusResources(0, 0 - LevelCostChassis);
         }
-    }
-    public void UpdateStorageLoco() // Улучшение Хранилища
-    {
-        if (Money >= LevelCostCoalStorage)
+        
+        else if(index == 2 && Money >= LevelCostCoalStorage)
         {
             Money -= LevelCostCoalStorage;
-            PlusResources(0, 0 - LevelCostCoalStorage);
             LevelCoalStorage++;
-            LevelLocoUpdater();
-            TextLoco();
-            ResourceTextUpdate();
-            AO.PlayAudioClickTrain();
+            PlusResources(0, 0 - LevelCostCoalStorage);
             if (TaskCount == 0)
             {
                 TaskCount = 1;
                 TaskCounter();
             }
         }
+
+        LevelLocoUpdater();
+        TextLoco();
+        ResourceTextUpdate();
+        AO.PlayAudioClickTrain();
     }
+
+
+    private int[,] coalNeedEngine = new int[,]
+    {
+        { 100, 90, 80, 78, 75 },
+        { 140, 100, 80, 75, 70 },
+        { 120, 100, 80, 72, 60 },
+    };
+    
+    private int[,] maxWagonLoco = new int[,]
+    {
+        { 5, 7, 8, 10, 12 },
+        { 15, 18, 21, 27, 30 },
+        { 30, 34, 38, 44, 50 },
+    };
+
+    private int[,] storageCoalLoco = new int[,]
+    {
+        { 500, 650, 850, 1000, 1200 },
+        { 1500, 1800, 2100, 2500, 2800 },
+        { 3000, 3400, 3800, 4400, 5000 },
+    };
     public void LevelLocoUpdater() // Уровень Локомотива, данные
     {
-        if (LevelLoco == 1) // Если 1 локомотив
-        {
-            if(LevelEngine == 1) // Уровни Котла
-            {
-                NeedCoal = 100;
-                TimerLoco = 30;
-                LevelCostEngine = 500;
-                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if(LevelEngine == 2)
-            {
-                NeedCoal = 90;
-                TimerLoco = 30;
-                LevelCostEngine = 1000;
-                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 3)
-            {
-                NeedCoal = 80;
-                TimerLoco = 35;
-                LevelCostEngine = 1500;
-                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 4)
-            {
-                NeedCoal = 78;
-                TimerLoco = 35;
-                LevelCostEngine = 2500;
-                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine >= 5)
-            {
-                NeedCoal = 75;
-                TimerLoco = 35;
-                LevelEngineText.text = "Максимальный уровень Котла";
-            }
-            if (LevelChassis == 1) // Уровни Шасси
-            {
-                MaxWagone = 5;
-                LevelCostChassis = 500;
-                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 2)
-            {
-                MaxWagone = 7;
-                LevelCostChassis = 1000;
-                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 3)
-            {
-                MaxWagone = 8;
-                LevelCostChassis = 1500;
-                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 4)
-            {
-                MaxWagone = 10;
-                LevelCostChassis = 2500;
-                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis >= 5)
-            {
-                MaxWagone = 12;
-                LevelChassisText.text = "Максимальный уровень Шасси";
-            }
-            if (LevelCoalStorage == 1) // Уровни Тендера
-            {
-                CoalMax = 500;
-                LevelCostCoalStorage = 500;
-                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 2)
-            {
-                CoalMax = 650;
-                LevelCostCoalStorage = 1000;
-                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 3)
-            {
-                CoalMax = 850;
-                LevelCostCoalStorage = 1500;
-                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 4)
-            {
-                CoalMax = 1000;
-                LevelCostCoalStorage = 2500;
-                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage >= 5)
-            {
-                CoalMax = 1200;
-                LevelCoalStorageText.text = "Максимальный уровень Тендера";
-            }
-        }
-        if (LevelLoco == 2) // Если 1 локомотив
-        {
-            if (LevelEngine == 1) // Уровни Котла
-            {
-                NeedCoal = 140;
-                TimerLoco = 30;
-                LevelCostEngine = 1000;
-                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 2)
-            {
-                NeedCoal = 100;
-                TimerLoco = 30;
-                LevelCostEngine = 1500;
-                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 3)
-            {
-                NeedCoal = 80;
-                TimerLoco = 35;
-                LevelCostEngine = 2500;
-                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 4)
-            {
-                NeedCoal = 75;
-                TimerLoco = 35;
-                LevelCostEngine = 3500;
-                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine >= 5)
-            {
-                NeedCoal = 65;
-                TimerLoco = 35;
-                LevelEngineText.text = "Максимальный уровень Котла";
-            }
-            if (LevelChassis == 1) // Уровни Шасси
-            {
-                MaxWagone = 15;
-                LevelCostChassis = 1000;
-                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 2)
-            {
-                MaxWagone = 18;
-                LevelCostChassis = 2000;
-                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 3)
-            {
-                MaxWagone = 21;
-                LevelCostChassis = 3000;
-                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 4)
-            {
-                MaxWagone = 27;
-                LevelCostChassis = 4500;
-                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis >= 5)
-            {
-                MaxWagone = 30;
-                LevelChassisText.text = "Максимальный уровень Шасси";
-            }
-            if (LevelCoalStorage == 1) // Уровни Тендера
-            {
-                CoalMax = 1500;
-                LevelCostCoalStorage = 1000;
-                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 2)
-            {
-                CoalMax = 1800;
-                LevelCostCoalStorage = 2000;
-                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 3)
-            {
-                CoalMax = 2100;
-                LevelCostCoalStorage = 3000;
-                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 4)
-            {
-                CoalMax = 2500;
-                LevelCostCoalStorage = 4500;
-                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage >= 5)
-            {
-                CoalMax = 2800;
-                LevelCoalStorageText.text = "Максимальный уровень Тендера";
-            }
-        }
-        if (LevelLoco == 3) // Если 1 локомотив
-        {
-            if (LevelEngine == 1) // Уровни Котла
-            {
-                NeedCoal = 120;
-                TimerLoco = 30;
-                LevelCostEngine = 1000;
-                LevelEngineText.text = "Улучшение 1. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 2)
-            {
-                NeedCoal = 100;
-                TimerLoco = 30;
-                LevelCostEngine = 1500;
-                LevelEngineText.text = "Улучшение 2. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 3)
-            {
-                NeedCoal = 80;
-                TimerLoco = 35;
-                LevelCostEngine = 2500;
-                LevelEngineText.text = "Улучшение 3. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine == 4)
-            {
-                NeedCoal = 65;
-                TimerLoco = 35;
-                LevelCostEngine = 3500;
-                LevelEngineText.text = "Улучшение 4. Стоимость: " + LevelCostEngine + "р -потребление угля";
-            }
-            if (LevelEngine >= 5)
-            {
-                NeedCoal = 60;
-                TimerLoco = 35;
-                LevelEngineText.text = "Максимальный уровень Котла";
-            }
-            if (LevelChassis == 1) // Уровни Шасси
-            {
-                MaxWagone = 30;
-                LevelCostChassis = 1000;
-                LevelChassisText.text = "Улучшение 1. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 2)
-            {
-                MaxWagone = 34;
-                LevelCostChassis = 2000;
-                LevelChassisText.text = "Улучшение 2. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 3)
-            {
-                MaxWagone = 38;
-                LevelCostChassis = 3000;
-                LevelChassisText.text = "Улучшение 3. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis == 4)
-            {
-                MaxWagone = 44;
-                LevelCostChassis = 4500;
-                LevelChassisText.text = "Улучшение 4. Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
-            }
-            if (LevelChassis >= 5)
-            {
-                MaxWagone = 50;
-                LevelChassisText.text = "Максимальный уровень Шасси";
-            }
-            if (LevelCoalStorage == 1) // Уровни Тендера
-            {
-                CoalMax = 3000;
-                LevelCostCoalStorage = 1000;
-                LevelCoalStorageText.text = "Улучшение 1. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 2)
-            {
-                CoalMax = 3400;
-                LevelCostCoalStorage = 2000;
-                LevelCoalStorageText.text = "Улучшение 2. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 3)
-            {
-                CoalMax = 3800;
-                LevelCostCoalStorage = 3000;
-                LevelCoalStorageText.text = "Улучшение 3. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage == 4)
-            {
-                CoalMax = 4200;
-                LevelCostCoalStorage = 4500;
-                LevelCoalStorageText.text = "Улучшение 4. Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
-            }
-            if (LevelCoalStorage >= 5)
-            {
-                CoalMax = 5000;
-                LevelCoalStorageText.text = "Максимальный уровень Тендера";
-            }
-        }
+        NeedCoal = coalNeedEngine[LevelLoco, LevelEngine];
+        LevelCostEngine = 500 * LevelLoco * LevelEngine;
+        
+        if (LevelEngine < 5) LevelEngineText.text = "Улучшение " + LevelEngine + ". Стоимость: " + LevelCostEngine + "р -потребление угля";
+        else LevelEngineText.text = "Максимальный уровень Котла";
+
+
+        MaxWagone = maxWagonLoco[LevelLoco, LevelChassis];
+        LevelCostChassis = 500 * LevelLoco * LevelChassis;
+
+        if (LevelChassis < 5) LevelChassisText.text = "Улучшение " + LevelChassis + ". Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
+        else LevelChassisText.text = "Максимальный уровень Шасси";
+
+
+        CoalMax = storageCoalLoco[LevelLoco, LevelCoalStorage];
+        LevelCostCoalStorage = 500 * LevelLoco * LevelCoalStorage;
+
+        if(LevelCoalStorage < 5) LevelCoalStorageText.text = "Улучшение " + LevelCoalStorage + ". Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
+        else LevelCoalStorageText.text = "Максимальный уровень Тендера";
     }
 
     public void ClickLocoPan() // Открытие и закрытие панели локомотива
@@ -835,6 +489,7 @@ public class Game : MonoBehaviour
         NextStationSlide.maxValue = NextStationTimeCount;
         ParticleTrain.SetActive(false); ParticleTrain.SetActive(true);
         AO.PlayAudioTrain();
+        
         while (true)
         {
             timeBarrier--;
@@ -843,6 +498,7 @@ public class Game : MonoBehaviour
             DistancePlusStatistic++;
             NextStationTimeText.text = (NextStationTime * 100) + " дист.";
             NextStationSlide.value = NextStationTimeCount - NextStationTime;
+            
             if (timeBarrier <= 0)
             {
                 AO.StopAudio();
@@ -856,6 +512,7 @@ public class Game : MonoBehaviour
                 }
                 break;
             }
+            
             if (timeRepair <= 0)
             {
                 AO.StopAudio();
@@ -869,6 +526,7 @@ public class Game : MonoBehaviour
                 }
                 break;
             }
+            
             if (NextStationTime <= 0)
             {
                 StopCoroutine("PassFoodNeed");
@@ -887,6 +545,7 @@ public class Game : MonoBehaviour
                 YandexGame.FullscreenShow();
                 break;
             }
+            
             else if(NextStationTime > 0 & Coal >= NeedCoal) //
             {
                 ActiveTimerLoco--;
@@ -916,6 +575,7 @@ public class Game : MonoBehaviour
                 }
                 yield return new WaitForSeconds(Timer);
             }
+            
             else
             {
                 AO.StopAudio();
@@ -1165,11 +825,11 @@ public class Game : MonoBehaviour
         {
             TakeADSMoney();
         }
-        if (id == 1)
+        else if (id == 1)
         {
             ADSCoal();
         }
-        if (id == 2)
+        else if (id == 2)
         {
             StartCoroutine(TimerX2());
             TimerX2Pan.SetActive(false);
@@ -1179,7 +839,7 @@ public class Game : MonoBehaviour
                 TaskCounter();
             }
         }
-        if (id == 3)
+        else if (id == 3)
         {
             Diamond++;
             ResourceTextUpdate();
@@ -1331,127 +991,6 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void Save()
-    {
-        if(Saver == false)
-        {
-            Saver = true;
-            YandexGame.savesData.Saver = Saver;
-        }
-        YandexGame.savesData.WagonCol = WagonCol;
-        YandexGame.savesData.TextureTrain = TextureTrain;
-        for (int i = 0; i < Texture.Length; i++)
-        {
-            YandexGame.savesData.Texture[i] = Texture[i];
-        }
-        //
-        YandexGame.savesData.Money = Money;
-        YandexGame.savesData.Diamond = Diamond;
-        YandexGame.savesData.Score = Score;
-        YandexGame.savesData.Coal = Coal;
-        YandexGame.savesData.Food = Food;
-        YandexGame.savesData.Water = Water;
-        YandexGame.savesData.Warm = Warm;
-        YandexGame.savesData.Worker = FreeWorker;
-        YandexGame.savesData.AllWorker = AllWorker;
-        //
-        YandexGame.savesData.TemperatureOnStreet = TemperatureOnStreet;
-        YandexGame.savesData.NextStationTime = NextStationTime;
-        YandexGame.savesData.NextStationTimeCount = NextStationTimeCount;
-        YandexGame.savesData.LevelLoco = LevelLoco;
-        YandexGame.savesData.ActiveTimerLoco = ActiveTimerLoco;
-        YandexGame.savesData.LevelEngine = LevelEngine;
-        YandexGame.savesData.LevelCoalStorage = LevelCoalStorage;
-        YandexGame.savesData.LevelChassis = LevelChassis;
-        //
-        YandexGame.savesData.CoalHelp = CoalHelp;
-        YandexGame.savesData.helpPass = helpPass;
-        YandexGame.savesData.helpRepair = helpRepair;
-        YandexGame.savesData.helpBarrier = helpBarrier;
-        //
-        YandexGame.savesData.passCount = passCount;
-        YandexGame.savesData.passWagoneCount = passWagoneCount;
-        //
-        YandexGame.savesData.CargoTransportCount = CargoTransportCount;
-        YandexGame.savesData.RewardCargoTransport = RewardCargoTransport;
-        //
-        YandexGame.savesData.CargoSpecTransportCount = CargoSpecTransportCount;
-        //
-        YandexGame.savesData.CargoSpec1TransportCount = CargoSpec1TransportCount;
-        //
-        YandexGame.savesData.City = City;
-        YandexGame.savesData.Trainer[0] = Trainer[0];
-        YandexGame.savesData.Trainer[1] = Trainer[1];
-        YandexGame.savesData.TaskCount = TaskCount;
-        YandexGame.savesData.AirShipActive = AirShipActive; //
-        YandexGame.savesData.TimerAirShip = TimerAirShip; //
-        YandexGame.savesData.TimeInGameStatistic = TimeInGameStatistic; //
-        YandexGame.savesData.CoalPlusStatistic = CoalPlusStatistic; //
-        YandexGame.savesData.FoodPlusStatistic = FoodPlusStatistic; //
-        YandexGame.savesData.WaterPlusStatistic = WaterPlusStatistic; //
-        YandexGame.savesData.WarmPlusStatistic = WarmPlusStatistic; //
-        YandexGame.savesData.MoneyPlusStatistic = MoneyPlusStatistic; //
-        YandexGame.savesData.DistancePlusStatistic = DistancePlusStatistic; //
-        YandexGame.savesData.Thanks = Thanks;
-        for(int i = 0; i < WagonCol; i++)
-        {
-            YandexGame.savesData.WagoneActive[i] = WagoneData[i].WagoneActive;
-            YandexGame.savesData.Name[i] = WagoneData[i].Name;
-            YandexGame.savesData.LevelWagone[i] = WagoneData[i].LevelWagone;
-            YandexGame.savesData.TimerActiveProduction[i] = WagoneData[i].TimerActiveProduction;
-            YandexGame.savesData.WorkerInWagone[i] = WagoneData[i].WorkerInWagone;
-            YandexGame.savesData.TemperatureWagone[i] = WagoneData[i].TemperatureWagone;
-        }
-        YandexGame.SaveProgress();
-        YandexGame.NewLeaderboardScores("LeaderBoard", Score);
-        StartCoroutine(SaveColor());
-    }
-
-    IEnumerator SaveColor()
-    {
-        SaveText.color = new Color(0, 255, 0, 255);
-        yield return new WaitForSeconds(2);
-        SaveText.color = new Color(0, 0, 0, 255);
-        yield break;
-    }
-
-    public void StartAutoSave()
-    {
-        StartCoroutine(AutoSave());
-    }
-    IEnumerator AutoSave()
-    {
-        int SaveCount = 0;
-        while (true)
-        {
-            SaveCount++;
-            if (SaveCount >= 35)
-            {
-                SaveCount = 0;
-                Save();
-                yield return new WaitForSeconds(1);
-            }
-            else
-            {
-                yield return new WaitForSeconds(1);
-            }
-        }
-    }
-
-
-    public void DeleteSave()
-    {
-        YandexGame.ResetSaveProgress();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        AO.PlayAudioClickBttn();
-    }
-    public void OpenClosedDeleteSave()
-    {
-        if(!DeletePan.activeInHierarchy) DeletePan.SetActive(true);
-        else DeletePan.SetActive(false);
-        AO.PlayAudioClickBttn();
-    }
-
     // MENU!!!
 
     public void ReturnTravel()
@@ -1460,10 +999,10 @@ public class Game : MonoBehaviour
         MenuPan.SetActive(false);
         StartGame();
     }
-    public void OpenClosedSettingPan()
-    {
+    //public void OpenClosedSettingPan()
+    //{
 
-    }
+    //}
     //public void OnOffMusic
 
 
@@ -1471,105 +1010,47 @@ public class Game : MonoBehaviour
 
     // TASK!!!
 
+    [Serializable]
+    public class Tasks
+    {
+        public int index;
+        public string text;
+        public int reward;
+    }
+
+    public Tasks[] tasks = new Tasks[]
+    {
+        new Tasks { index = 0, text = "Улучшите тендер Локомотива", reward = 1000},
+        new Tasks { index = 2, text = "Соберите любой ресурс", reward = 150},
+        new Tasks { index = 4, text = "Выполните задание по доставке", reward = 600},
+        new Tasks { index = 6, text = "Улучшите вагон", reward = 1000},
+        new Tasks { index = 8, text = "Ускорьте время до станции", reward = 300},
+    };
+
     public void TaskCounter() //
     {
-        if(TaskCount == 0)
+        if (TaskCount < 10)
         {
+            if (TaskCount % 2 == 0)
+            {
+                TaskDone.interactable = false;
+                TaskText.text = tasks[TaskCount].text;
+            }
+            else
+            {
+                TaskDone.interactable = false;
+                TaskText.text = "Собрать награду";
+            }
             TaskPan.SetActive(true);
-            TaskDone.interactable = false;
-            TaskText.text = "Улучшите тендер Локомотива";
         }
-        else if (TaskCount == 1)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = true;
-            TaskText.text = "Собрать награду";
-        }
-        else if (TaskCount == 2)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = false;
-            TaskText.text = "Соберите любой ресурс";
-        }
-        else if (TaskCount == 3)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = true;
-            TaskText.text = "Собрать награду";
-        }
-        else if (TaskCount == 4)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = false;
-            TaskText.text = "Выполните задание по доставке";
-        }
-        else if (TaskCount == 5)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = true;
-            TaskText.text = "Собрать награду";
-        }
-        else if (TaskCount == 6)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = false;
-            TaskText.text = "Улучшите вагон";
-        }
-        else if (TaskCount == 7)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = true;
-            TaskText.text = "Собрать награду";
-        }
-        else if (TaskCount == 8)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = false;
-            TaskText.text = "Ускорьте время до станции";
-        }
-        else if (TaskCount == 9)
-        {
-            TaskPan.SetActive(true);
-            TaskDone.interactable = true;
-            TaskText.text = "Собрать награду";
-        }
+        else TaskPan.SetActive(false);
     }
+
     public void TaskDoner() //
     {
-        if (TaskCount == 1)
-        {
-            Money += 1000;
-            PlusResources(0, 1000);
-            TaskCount++;
-            TaskCounter();
-        }
-        else if (TaskCount == 3)
-        {
-            Money += 500;
-            PlusResources(0, 500);
-            TaskCount++;
-            TaskCounter();
-        }
-        else if (TaskCount == 5)
-        {
-            Money += 1000;
-            PlusResources(0,1000);
-            TaskCount++;
-            TaskCounter();
-        }
-        else if (TaskCount == 7)
-        {
-            Money += 800;
-            PlusResources(0, 800);
-            TaskCount++;
-            TaskCounter();
-        }
-        else if (TaskCount == 9)
-        {
-            Diamond++;
-            TaskCount++;
-            TaskPan.SetActive(false);
-        }
+        Money += tasks[TaskCount - 1].reward;
+        TaskCount++;
+        TaskCounter();
         AO.PlayAudioTakeResource();
     }
 

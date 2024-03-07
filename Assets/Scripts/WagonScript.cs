@@ -5,9 +5,8 @@ using YG;
 
 public class WagonScript : MonoBehaviour
 {
-    public Game GM; // 
-    public Audio AO;
-    [SerializeField] private Training TR;
+    [SerializeField] private Game GM; // 
+    [SerializeField] private Audio AO;
     
     [Header("Основ.Панели")]
     public GameObject ChoiceWagonePan; // Первая панель выбора назначения вагона
@@ -17,51 +16,50 @@ public class WagonScript : MonoBehaviour
     public GameObject ProductionWagonePan; // Панель производственного вагона
     public GameObject BoilerWagonePan; // Панель Котельной
     public Text WagoneName; // Название вагона на нем.
-    public GameObject DoneProductionPan; // Панель готовности продукции для сбора
+    [SerializeField] private GameObject DoneProductionPan; // Панель готовности продукции для сбора
     public GameObject SnowWagone; // Иконка замерзания вагона
     
     [Header("ПанельЕдаВода")]
-    public Text FoodWagoneNameText; // Навзание вагона еда или вода
-    public Text FoodLevelText; // Уровень вагона
-    public Text FoodProdText; // Что производит вагон (еда или вода)
-    public Text FoodWorkCountText; // Количество работников в вагоне
-    public Text FoodProdCountText; // Сколько продукции и за какое время производит
-    public Text FoodTermometrText; // Температура в вагоне
-    public Text FoodTimerText; // Таймер производства
-    public Text FoodUpgradeText; // Улучшение вагона стоимость
-    public Text FoodNeedWarmText; // 
+    [SerializeField] private Text FoodWagoneNameText; // Навзание вагона еда или вода
+    [SerializeField] private Text FoodLevelText; // Уровень вагона
+    [SerializeField] private Text FoodProdText; // Что производит вагон (еда или вода)
+    [SerializeField] private Text FoodWorkCountText; // Количество работников в вагоне
+    [SerializeField] private Text FoodProdCountText; // Сколько продукции и за какое время производит
+    [SerializeField] private Text FoodTermometrText; // Температура в вагоне
+    [SerializeField] private Text FoodTimerText; // Таймер производства
+    [SerializeField] private Text FoodUpgradeText; // Улучшение вагона стоимость
+    [SerializeField] private Text FoodNeedWarmText; // 
     
     [Header("ПанельПасс")]
-    public Text PassLevelText; // Уровень вагона
-    public Text PassMaxCapacityText; // Максимальная вместимость вагона
-    public Text PassTermometrText; // Температура в вагоне
-    public Text PassUpgradeText; // Улучшение вагона стоимость
-    public Text PassNeedFoodText; //
-    public Text PassNeedWaterText; //
-    public Text PassNeedWarmText; //
+    [SerializeField] private Text PassLevelText; // Уровень вагона
+    [SerializeField] private Text PassMaxCapacityText; // Максимальная вместимость вагона
+    [SerializeField] private Text PassTermometrText; // Температура в вагоне
+    [SerializeField] private Text PassUpgradeText; // Улучшение вагона стоимость
+    [SerializeField] private Text PassNeedFoodText; //
+    [SerializeField] private Text PassNeedWaterText; //
+    [SerializeField] private Text PassNeedWarmText; //
     
     [Header("ПанельХранилище")]
-    public Text StorageLevelText; // Уровень вагона
-    public Text StorageMaxCapacityText; // Максимальная вместимость вагона
-    public Text StorageCapacityText; // Сколько на складе товаров
-    public Text StorageUpgradeText; // Улучшение вагона стоимость
+    [SerializeField] private Text StorageLevelText; // Уровень вагона
+    [SerializeField] private Text StorageMaxCapacityText; // Максимальная вместимость вагона
+    [SerializeField] private Text StorageCapacityText; // Сколько на складе товаров
+    [SerializeField] private Text StorageUpgradeText; // Улучшение вагона стоимость
     
     [Header("ПанельКотельная")]
-    public Text BoilerLevelText; // Уровень вагона
-    public Text BoilerWorkCountText; // Количество работников в вагоне
-    public Text BoilerProdCountText; // Сколько продукции и за какое время производит
-    public Text BoilerTimerText; // Таймер производства
-    public Text BoilerUpgradeText; // Улучшение вагона стоимость
-    public Text BoilerNeedCoalText; //
+    [SerializeField] private Text BoilerLevelText; // Уровень вагона
+    [SerializeField] private Text BoilerWorkCountText; // Количество работников в вагоне
+    [SerializeField] private Text BoilerProdCountText; // Сколько продукции и за какое время производит
+    [SerializeField] private Text BoilerTimerText; // Таймер производства
+    [SerializeField] private Text BoilerUpgradeText; // Улучшение вагона стоимость
+    [SerializeField] private Text BoilerNeedCoalText; //
     
     [Header("Вид вагона")]
-    public Image WagoneImage; // Вид вагона
-    public Sprite BaseWagone; // Стартовый вид вагона
+    [SerializeField] private Image WagoneImage; // Вид вагона
 
     [Header("ТаймерСледующейСтанции")]
-    int IndexWag; // Индекс вагона
-    int TimerWag; // Таймер для производства (Сколько времени необходимо)
-    int ProductCount; // Количество единиц производства
+    private int IndexWag; // Индекс вагона
+    private int TimerWag; // Таймер для производства (Сколько времени необходимо)
+    private int ProductCount; // Количество единиц производства
 
 
     private void OnEnable()
@@ -191,8 +189,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагон
             if (GM.Trainer[0] == false)
             {
-                TR.wagoneTrainerChoice[1] = true;
-                TR.TrainingGameWagonActive();
+                GM.TR.wagoneTrainerChoice[1] = true;
+                GM.TR.TrainingGameWagonActive();
             }
         }
         else if (index == 1)
@@ -202,8 +200,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагон
             if (GM.Trainer[0] == false)
             {
-                TR.wagoneTrainerChoice[2] = true;
-                TR.TrainingGameWagonActive();
+                GM.TR.wagoneTrainerChoice[2] = true;
+                GM.TR.TrainingGameWagonActive();
             }
         }
         else if (index == 2)
@@ -214,8 +212,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(WarmInWagone()); // Запуск корутины просчета температуры вагона
             if (GM.Trainer[0] == false)
             {
-                TR.wagoneTrainerChoice[0] = true;
-                TR.TrainingGameWagonActive();
+                GM.TR.wagoneTrainerChoice[0] = true;
+                GM.TR.TrainingGameWagonActive();
             }
         }
         else if (index == 3)
@@ -229,8 +227,8 @@ public class WagonScript : MonoBehaviour
             StartCoroutine(BoilerWorkWagone());
             if (GM.Trainer[0] == false)
             {
-                TR.wagoneTrainerChoice[3] = true;
-                TR.TrainingGameWagonActive();
+                GM.TR.wagoneTrainerChoice[3] = true;
+                GM.TR.TrainingGameWagonActive();
             }
         }
         GM.WagoneData[IndexWag].WagoneActive = true;

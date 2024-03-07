@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BackgroundMove : MonoBehaviour
 {
-    public Game GM; //
+    [SerializeField] private Game GM; //
 
     private Transform thisTransf;
     [SerializeField] private float backgroundSpeed; // Скорость движения заднего фона

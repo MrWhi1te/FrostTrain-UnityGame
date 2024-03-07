@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Trailer : MonoBehaviour
 {
-    public Animator anim;
+    [SerializeField] private Animator anim;
 
     private void Start()
     {

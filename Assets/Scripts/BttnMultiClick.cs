@@ -26,7 +26,7 @@ public class BttnMultiClick : MonoBehaviour
                 GM.Coal += 3;
                 AO.PlayAudioTakeResource();
                 GM.CollectResources[3].SetActive(false); GM.CollectResources[03].SetActive(true);
-                clickText.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                clickText.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
                 clickText.text = "+3";
                 GM.ResourceTextUpdate();
                 GM.TextLoco();

@@ -18,6 +18,7 @@ public class Audio : MonoBehaviour
 
     [SerializeField] private UnityEngine.UI.Image soundImg;
     [SerializeField] private Sprite[] soundSprite;
+    
     public bool activeSound;
 
     // Start is called before the first frame update

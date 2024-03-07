@@ -79,5 +79,9 @@ namespace YG
         public int WarmPlusStatistic; //
         public int MoneyPlusStatistic; //
         public int DistancePlusStatistic; //
+
+        //
+        public bool[] doneTask = new bool[14];
+        public bool[] statusPass = new bool[42];
     }
 }

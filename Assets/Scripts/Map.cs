@@ -3,23 +3,23 @@ using UnityEngine.UI;
 
 public class Map : MonoBehaviour
 {
-    public Game GM; // Скрипт Гейм
-    public StationScripts ST; // Скрипт станции
-    public Audio AO;
-    public Questions QT;
+    [SerializeField] private Game GM; // Скрипт Гейм
+    [SerializeField] private StationScripts ST; // Скрипт станции
+    [SerializeField] private Audio AO;
+    [SerializeField] private Questions QT;
 
-    public Image[] PointCity; // Спрайты городов
-    public Button NextStation; // Кнопка продолжения
-    public GameObject MapPan; // 
-    public GameObject[] mapParts; //
-    public Text ChoiceCityNameText; // Текст следующей станции
-    public Text ChoiceCityTemperatureText; //
-    public Text ChoiceCityTimeText; //
-    public Text ChoiceCityBttnText; //
-    public GameObject[] QuestionPoint; // Точки вопросов
-    public GameObject TaskPoint; // Точка задания
+    [SerializeField] private Image[] PointCity; // Спрайты городов
+    [SerializeField] private Button NextStation; // Кнопка продолжения
+    [SerializeField] private GameObject MapPan; // 
+    [SerializeField] private GameObject[] mapParts; //
+    [SerializeField] private Text ChoiceCityNameText; // Текст следующей станции
+    [SerializeField] private Text ChoiceCityTemperatureText; //
+    [SerializeField] private Text ChoiceCityTimeText; //
+    [SerializeField] private Text ChoiceCityBttnText; //
+    [SerializeField] private GameObject[] QuestionPoint; // Точки вопросов
+    [SerializeField] private GameObject TaskPoint; // Точка задания
 
-    public Text[] ScoreTextView; //
+    [SerializeField] private Text[] ScoreTextView; //
 
     private void OnEnable()
     {

@@ -5,78 +5,69 @@ using YG;
 
 public class StationScripts : MonoBehaviour
 {
-    public Game GM; // Скрипт Гейм
-    public PassengersScript PS; //
-    public Audio AO;
-    public Training TR;
-    public Questions QS;
-    public DeliveryTask DT;
+    [SerializeField] private Game GM; // Скрипт Гейм
+    [SerializeField] private PassengersScript PS; //
+    [SerializeField] private Audio AO;
+    [SerializeField] private Training TR;
+    [SerializeField] private Questions QS;
+    [SerializeField] private DeliveryTask DT;
 
-    public GameObject StationPan; // Панель станции
-    public GameObject GamePan; //
+    [SerializeField] private GameObject StationPan; // Панель станции
+    [SerializeField] private GameObject GamePan; //
    
     [Header("Market")]
-    public GameObject MarketPan; // Панель рынка
-    public Slider[] SliderMarket; // Слайдеры рынка
-    public Text[] ColResourceText; // Выбор Кол-во ресурсов текст
-    public Text[] ColMoneyText; // Сумма покупки/продажи
+    [SerializeField] private GameObject MarketPan; // Панель рынка
+    [SerializeField] private Slider[] SliderMarket; // Слайдеры рынка
+    [SerializeField] private Text[] ColResourceText; // Выбор Кол-во ресурсов текст
+    [SerializeField] private Text[] ColMoneyText; // Сумма покупки/продажи
 
     [Header("Train")]
-    public GameObject TrainPan; // Панель поезда
-    public GameObject LocoBuyPan; // Панель покупки локомотива
-    public GameObject ViewTrainPan; // Панель Смены вида поезда
-    public GameObject SpecialWagPan; // Панель Специальных вагонов
-    public Text[] TrainViewText; //
-    public Text[] LocoUpdateText; //
+    [SerializeField] private GameObject TrainPan; // Панель поезда
+    [SerializeField] private GameObject LocoBuyPan; // Панель покупки локомотива
+    [SerializeField] private GameObject ViewTrainPan; // Панель Смены вида поезда
+    [SerializeField] private GameObject SpecialWagPan; // Панель Специальных вагонов
+    [SerializeField] private Text[] TrainViewText; //
+    [SerializeField] private Text[] LocoUpdateText; //
 
     [Header("NextStation")]
-    public Text NextStationText; // Текст следующей станции
-    public GameObject[] BttnNextStation; //
-    public bool StationVibor; //
+    [SerializeField] private Text NextStationText; // Текст следующей станции
+    [SerializeField] private GameObject[] BttnNextStation; //
+    [HideInInspector] public bool StationVibor; //
     
     [Header("AddWagone")]
-    public Text CountWagon; // Подсчет кол-ва вагонов
-    public Text BuyWagoneText; //
+    [SerializeField] private Text CountWagon; // Подсчет кол-ва вагонов
+    [SerializeField] private Text BuyWagoneText; //
 
     [Header("AddPassWagon")]
-    public Text countPassWagon;
-    public Text buyPassWagonText;
+    [SerializeField] private Text countPassWagon;
+    [SerializeField] private Text buyPassWagonText;
 
     [Header("Delivery")]
-    public GameObject QuestPan; // Панель заданий
-    public int targetDeliveryCity; //
+    [SerializeField] private GameObject QuestPan; // Панель заданий
+    [HideInInspector] public int targetDeliveryCity; //
 
     [Header("Resource")]
-    public Text MoneyText; // Текст денег
-    public Text DiamondText; // Текст Роскошь
-    public Text CoalText; // Текст угля
-    public Text FoodText; // Текст еды
-    public Text WaterText; // Текст воды
-    public Text WarmText; // Текст тепла
-    public Text WorkerText; // Текст рабочих
+    [SerializeField] private Text MoneyText; // Текст денег
+    [SerializeField] private Text DiamondText; // Текст Роскошь
+    [SerializeField] private Text CoalText; // Текст угля
+    [SerializeField] private Text FoodText; // Текст еды
+    [SerializeField] private Text WaterText; // Текст воды
+    [SerializeField] private Text WarmText; // Текст тепла
+    [SerializeField] private Text WorkerText; // Текст рабочих
     [SerializeField] private Text[] plusResourceText; // 0-Уголь / 1-Еда / 2-Вода / 3-Тепло
-    public Text PlusMoneyText; // 
+    [SerializeField] private Text PlusMoneyText; // 
     
     [Header("MoneyView")]
-    public Text MoneyShowText; // 
+    [SerializeField] private Text MoneyShowText; // 
     
     [Header("ADS")]
-    public GameObject ShopPan; //
-    public GameObject ADSMoneyActive; //
-    public Text ADSMoneyActiveText; // текст денег за рекламу
-    int ADSMoneyCol; // награда денег за рекламу
-    
-    //
-    public Text TimeInGameStatisticText; //
-    public Text FoodStatisticText; //
-    public Text CoalPlusStatisticText; //
-    public Text WaterPlusStatisticText; //
-    public Text WarmPlusStatisticText; //
-    public Text MoneyPlusStatisticText; //
-    public Text DistancePlusStatisticText; //
-    public Text ScorePlusStatisticText; //
+    [SerializeField] private GameObject ShopPan; //
+    [SerializeField] private GameObject ADSMoneyActive; //
+    [SerializeField] private Text ADSMoneyActiveText; // текст денег за рекламу
+    private int ADSMoneyCol; // награда денег за рекламу
 
-    public Text[] ScoreTextView; //
+    //
+    [SerializeField] private Text[] ScoreTextView; //
 
     private int[,] resourcesInfo; // Количество ресурса, максимально ресурса, цена продажи, цена покупки.
 
@@ -135,7 +126,7 @@ public class StationScripts : MonoBehaviour
         GM.SpeedFon = 1;
         GM.RandomBackground();
         StationPan.SetActive(false);
-        GM.Save();
+        GM.SV.Save();
         GM.TaskCounter();
         if (YandexGame.EnvironmentData.deviceType == "mobile")
         {
