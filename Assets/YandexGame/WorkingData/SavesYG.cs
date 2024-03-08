@@ -44,6 +44,7 @@ namespace YG
 
         public int CargoTransportCount; // Количество вагонов
         public int RewardCargoTransport; // Награда за доставку
+        public int targetDeliveryCity; //
 
         public int CargoSpecTransportCount; // Количество вагонов
 
@@ -81,6 +82,7 @@ namespace YG
         public int DistancePlusStatistic; //
 
         //
+        public bool activeAudio;
         public bool[] doneTask = new bool[14];
         public bool[] statusPass = new bool[42];
     }

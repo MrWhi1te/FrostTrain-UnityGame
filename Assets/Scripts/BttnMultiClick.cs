@@ -26,7 +26,6 @@ public class BttnMultiClick : MonoBehaviour
                 GM.Coal += 3;
                 AO.PlayAudioTakeResource();
                 GM.CollectResources[3].SetActive(false); GM.CollectResources[03].SetActive(true);
-                clickText.transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0));
                 clickText.text = "+3";
                 GM.ResourceTextUpdate();
                 GM.TextLoco();
@@ -52,14 +51,12 @@ public class BttnMultiClick : MonoBehaviour
             clickCount++;
             GM.Coal++;
             GM.CoalPlusStatistic++;
-            clickText.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             clickText.text = "+1";
             AO.PlayAudioTrees();
             GM.ResourceTextUpdate();
             GM.TextLoco();
         }
         GM.TreesClickParticle.SetActive(false);
-        GM.TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         GM.TreesClickParticle.SetActive(true);
         if (clickCount >= 5)
         {

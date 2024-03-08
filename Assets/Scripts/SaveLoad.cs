@@ -58,6 +58,7 @@ public class SaveLoad : MonoBehaviour
             //
             GM.CargoTransportCount = YandexGame.savesData.CargoTransportCount;
             GM.RewardCargoTransport = YandexGame.savesData.RewardCargoTransport;
+            GM.targetDeliveryCity = YandexGame.savesData.targetDeliveryCity;
             //
             GM.CargoSpecTransportCount = YandexGame.savesData.CargoSpecTransportCount;
             //
@@ -94,6 +95,7 @@ public class SaveLoad : MonoBehaviour
             {
                 PS.pass[i].statusPass = YandexGame.savesData.statusPass[i]; 
             }
+            GM.AO.activeSound = YandexGame.savesData.activeAudio;
             GM.ScoreMenu.text = "Очки: " + GM.Score;
             if (YandexGame.EnvironmentData.reviewCanShow == false)
             {
@@ -145,6 +147,7 @@ public class SaveLoad : MonoBehaviour
         //
         YandexGame.savesData.CargoTransportCount = GM.CargoTransportCount;
         YandexGame.savesData.RewardCargoTransport = GM.RewardCargoTransport;
+        YandexGame.savesData.targetDeliveryCity = GM.targetDeliveryCity;
         //
         YandexGame.savesData.CargoSpecTransportCount = GM.CargoSpecTransportCount;
         //
@@ -164,6 +167,7 @@ public class SaveLoad : MonoBehaviour
         YandexGame.savesData.MoneyPlusStatistic = GM.MoneyPlusStatistic; //
         YandexGame.savesData.DistancePlusStatistic = GM.DistancePlusStatistic; //
         YandexGame.savesData.Thanks = GM.Thanks;
+        YandexGame.savesData.activeAudio = GM.AO.activeSound;
         for (int i = 0; i < GM.WagonCol; i++)
         {
             YandexGame.savesData.WagoneActive[i] = GM.WagoneData[i].WagoneActive;

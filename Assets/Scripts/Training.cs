@@ -28,9 +28,14 @@ public class Training : MonoBehaviour
         if(GM.trainingCount == 18)
         {
             trainingPanGame[1].SetActive(false);
+            trainingPanGame[2].SetActive(false);
             GM.StartNextStation();
             GM.SV.StartAutoSave();
             GM.TaskCounter();
+            GM.Food = GM.FoodMax;
+            GM.Water = GM.WaterMax;
+            GM.Coal = GM.CoalMax;
+            GM.ResourceTextUpdate();
             GM.Trainer[0] = true;
         }
         
@@ -77,6 +82,7 @@ public class Training : MonoBehaviour
         trainingPanGame[2].SetActive(false);
         GM.Food = GM.FoodMax;
         GM.Water = GM.WaterMax;
+        GM.Coal = GM.CoalMax;
         GM.ResourceTextUpdate();
     }
     #endregion

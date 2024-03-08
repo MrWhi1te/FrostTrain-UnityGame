@@ -71,11 +71,11 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject UpgradeLocoPan; // Панель Улучшения локомотива
     [SerializeField] private GameObject[] TextureChoice; //
     [SerializeField] private GameObject SmokeParticle; //
-    public int LevelLoco = 1; // уровень локомотива. Уровень зависит от вида локомотива. ПОкупается на станции
+    public int LevelLoco = 0; // уровень локомотива. Уровень зависит от вида локомотива. ПОкупается на станции
     public int MaxWagone; // Максимальное кол-во вагонов
     [SerializeField] private Image LocoSprite; // 
     private int NeedCoal;// Сколько потребляет угля
-    private int TimerLoco;// Таймер за сколько потребляет уголь
+    //private int TimerLoco;// Таймер за сколько потребляет уголь
     [HideInInspector] public int ActiveTimerLoco; // Активный таймер локомотива
     
     [Header("CoalFree")]
@@ -93,11 +93,11 @@ public class Game : MonoBehaviour
     [SerializeField] private Text LevelEngineText; // Уровень Котла
     [SerializeField] private Text LevelCoalStorageText; // Уровень Тендера
     [SerializeField] private Text LevelChassisText; // Уровень Шасси
-    [HideInInspector] public int LevelEngine = 1; // Уровень двигателя локомотива
+    [HideInInspector] public int LevelEngine = 0; // Уровень двигателя локомотива
     private int LevelCostEngine; // Стоимость улучшения двигателя
-    [HideInInspector] public int LevelCoalStorage = 1; // Уровень тендера локомотива
+    [HideInInspector] public int LevelCoalStorage = 0; // Уровень тендера локомотива
     private int LevelCostCoalStorage; // Стоимость улучшения тендера локо 
-    [HideInInspector] public int LevelChassis = 1; // Уровень шасси локомотива
+    [HideInInspector] public int LevelChassis = 0; // Уровень шасси локомотива
     private int LevelCostChassis; // Стоимость улучшения шасси локо 
 
     [Header("Passengers")]
@@ -110,7 +110,8 @@ public class Game : MonoBehaviour
     public GameObject[] CargoTransportWagone; // Обьекты вагонов задания перевозки
     [HideInInspector] public int CargoTransportCount; // Количество вагонов
     [HideInInspector] public int RewardCargoTransport; // Награда за доставку
-   
+    [HideInInspector] public int targetDeliveryCity; //
+
     [Header("CargoSpecTrasport")]
     public GameObject[] CargoSpecTransportWagone; // Обьекты вагонов задания перевозки
     [HideInInspector] public int CargoSpecTransportCount; // Количество вагонов
@@ -127,7 +128,7 @@ public class Game : MonoBehaviour
     public int[] TemperatureForCity; // Температура до следующего города
    
     [Header("Background")]
-    [HideInInspector] public int SpeedFon; // Скорость движения фона
+    [HideInInspector] public float SpeedFon; // Скорость движения фона
     public GameObject[] ParallaxObj; //
 
     [Header("Barrier")]
@@ -215,7 +216,7 @@ public class Game : MonoBehaviour
             NextStationTimeCount = 60;
             NextStationSlide.maxValue = NextStationTimeCount;
             NextStationTime = NextStationTimeCount;
-            ActiveTimerLoco = TimerLoco;
+            ActiveTimerLoco = 30;
         }
         if(Trainer[0] == true)
         {
@@ -231,9 +232,9 @@ public class Game : MonoBehaviour
         wagoneSprites.Add("Storage", new Sprite[] { SPR0[0], SPR1[0], SPR2[0], SPR3[0] });
         wagoneSprites.Add("PassWagon", new Sprite[] { SPR0[4], SPR1[4], SPR2[4], SPR3[4] });
         wagoneSprites.Add("Cargo", new Sprite[] { SPR0[8], SPR1[8] });
-        LocoSprites.Add(1, new Sprite[] { SPR0[5], SPR1[5], SPR2[5], SPR3[5] });
-        LocoSprites.Add(2, new Sprite[] { SPR0[6], SPR1[6], SPR2[6], SPR3[6] });
-        LocoSprites.Add(3, new Sprite[] { SPR0[7], SPR1[7], SPR2[7], SPR3[7] });
+        LocoSprites.Add(0, new Sprite[] { SPR0[5], SPR1[5], SPR2[5], SPR3[5] });
+        LocoSprites.Add(1, new Sprite[] { SPR0[6], SPR1[6], SPR2[6], SPR3[6] });
+        LocoSprites.Add(2, new Sprite[] { SPR0[7], SPR1[7], SPR2[7], SPR3[7] });
         ActiveWagone();
         ViewLoco();
         MaxStorageWagone();
@@ -314,10 +315,10 @@ public class Game : MonoBehaviour
     }
     public void TextLoco() // Обновление Текстов панели локомотива
     {
-        LevelLocoText.text = LevelLoco.ToString();
+        LevelLocoText.text = (LevelLoco+1).ToString();
         StorageCoalText.text = Coal + "ед./ " + CoalMax + "ед.";
         MaxWagoneText.text = WagonCol + " из " + MaxWagone;
-        NeedCoalText.text = NeedCoal + "ед. за: " + TimerLoco + "сек.";
+        NeedCoalText.text = NeedCoal + "ед. за: 30сек.";
         TermometrText.text = TemperatureOnStreet + "°C";
     }
 
@@ -379,23 +380,23 @@ public class Game : MonoBehaviour
     public void LevelLocoUpdater() // Уровень Локомотива, данные
     {
         NeedCoal = coalNeedEngine[LevelLoco, LevelEngine];
-        LevelCostEngine = 500 * LevelLoco * LevelEngine;
+        LevelCostEngine = 500 * (LevelLoco+1) * (LevelEngine+1);
         
-        if (LevelEngine < 5) LevelEngineText.text = "Улучшение " + LevelEngine + ". Стоимость: " + LevelCostEngine + "р -потребление угля";
+        if (LevelEngine < 5) LevelEngineText.text = "Улучшение " + (LevelEngine+1) + ". Стоимость: " + LevelCostEngine + "р -потребление угля";
         else LevelEngineText.text = "Максимальный уровень Котла";
 
 
         MaxWagone = maxWagonLoco[LevelLoco, LevelChassis];
-        LevelCostChassis = 500 * LevelLoco * LevelChassis;
+        LevelCostChassis = 500 * (LevelLoco+1) * (LevelChassis+1);
 
-        if (LevelChassis < 5) LevelChassisText.text = "Улучшение " + LevelChassis + ". Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
+        if (LevelChassis < 5) LevelChassisText.text = "Улучшение " + (LevelChassis+1) + ". Стоимость: " + LevelCostChassis + "р +Мах количество вагонов";
         else LevelChassisText.text = "Максимальный уровень Шасси";
 
 
         CoalMax = storageCoalLoco[LevelLoco, LevelCoalStorage];
-        LevelCostCoalStorage = 500 * LevelLoco * LevelCoalStorage;
+        LevelCostCoalStorage = 500 * (LevelLoco+1) * (LevelCoalStorage+1);
 
-        if(LevelCoalStorage < 5) LevelCoalStorageText.text = "Улучшение " + LevelCoalStorage + ". Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
+        if(LevelCoalStorage < 5) LevelCoalStorageText.text = "Улучшение " + (LevelCoalStorage+1) + ". Стоимость: " + LevelCostCoalStorage + "р +хранилище угля";
         else LevelCoalStorageText.text = "Максимальный уровень Тендера";
     }
 
@@ -489,7 +490,7 @@ public class Game : MonoBehaviour
         NextStationSlide.maxValue = NextStationTimeCount;
         ParticleTrain.SetActive(false); ParticleTrain.SetActive(true);
         AO.PlayAudioTrain();
-        
+
         while (true)
         {
             timeBarrier--;
@@ -529,6 +530,7 @@ public class Game : MonoBehaviour
             
             if (NextStationTime <= 0)
             {
+                SpeedFon = 0;
                 StopCoroutine("PassFoodNeed");
                 StopCoroutine("PassFoodWater");
                 AO.StopAudio();
@@ -557,11 +559,11 @@ public class Game : MonoBehaviour
                     PlusResources(1, 0- NeedCoal);
                     ResourceTextUpdate();
                     TextLoco();
-                    ActiveTimerLoco = TimerLoco;
+                    ActiveTimerLoco = 30;
                 }
-                if (timeBackground >= 45 & SpeedFon <= 3)
+                if (timeBackground >= 30 & SpeedFon <= 3)
                 {
-                    SpeedFon++;
+                    SpeedFon+= 0.1f;
                     timeBackground = 0;
                 }
                 if(timeADS >= 40)

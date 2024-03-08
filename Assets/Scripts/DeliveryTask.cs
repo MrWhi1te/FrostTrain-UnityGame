@@ -26,7 +26,7 @@ public class DeliveryTask : MonoBehaviour
 
     public void CheckDelivery()
     {
-        if (GM.CargoTransportCount >= 1 && GM.City == ST.targetDeliveryCity)
+        if (GM.CargoTransportCount >= 1 && GM.City == GM.targetDeliveryCity)
         {
             for (int i = 0; i < GM.CargoTransportCount; i++)
             {
@@ -115,7 +115,7 @@ public class DeliveryTask : MonoBehaviour
     {
         GM.CargoTransportCount = cargoWagon;
         GM.RewardCargoTransport = cargoReward;
-        ST.targetDeliveryCity = cityDelivery;
+        GM.targetDeliveryCity = cityDelivery;
         if (cargoWagon >= 1)
         {
             activeTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + cargoWagon + GM.NameCity[cityDelivery];

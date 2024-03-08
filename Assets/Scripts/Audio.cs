@@ -30,11 +30,7 @@ public class Audio : MonoBehaviour
     }
     public void PlayAudioEnterPanel()
     {
-        if (activeSound)
-        {
-            thisAudio.clip = enterPanel;
-            thisAudio.Play();
-        }
+        if (activeSound) thisAudio.PlayOneShot(enterPanel);
     }
     public void PlayAudioClickBttn()
     {
@@ -95,6 +91,7 @@ public class Audio : MonoBehaviour
         {
             activeSound = false;
             soundImg.sprite = soundSprite[1];
+            StopAudio();
         } 
         else
         {

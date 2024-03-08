@@ -44,7 +44,6 @@ public class StationScripts : MonoBehaviour
 
     [Header("Delivery")]
     [SerializeField] private GameObject QuestPan; // Панель заданий
-    [HideInInspector] public int targetDeliveryCity; //
 
     [Header("Resource")]
     [SerializeField] private Text MoneyText; // Текст денег
@@ -108,7 +107,7 @@ public class StationScripts : MonoBehaviour
         GM.NextStationTimeCount = GM.TimeForCity[GM.ChoiceCity];
         GM.NextStationTime = GM.TimeForCity[GM.ChoiceCity];
         GM.NextStationSlide.maxValue = GM.NextStationTime;
-        NextStationText.text = "До " + GM.NameCity[GM.ChoiceCity] + ": " + GM.NextStationTime + " дист." + "Температура: " + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
+        NextStationText.text = "До " + GM.NameCity[GM.ChoiceCity] + ": " + (GM.NextStationTime*100) + " дист." + "Температура: " + GM.TemperatureForCity[GM.ChoiceCity] + "°C";
     }
 
     public void ExitStation()
@@ -123,7 +122,7 @@ public class StationScripts : MonoBehaviour
         GM.StartNextStation();
         GM.City = GM.ChoiceCity;
         GM.ChoiceCity = 0;
-        GM.SpeedFon = 1;
+        GM.SpeedFon = 0.1f;
         GM.RandomBackground();
         StationPan.SetActive(false);
         GM.SV.Save();
@@ -145,19 +144,19 @@ public class StationScripts : MonoBehaviour
         WarmText.text = GM.Warm + "/" + GM.WarmMax;
         WorkerText.text = GM.FreeWorker + "/" + GM.AllWorker; //
         CountWagon.text = "Вагонов: " + GM.WagonCol + " из " + GM.MaxWagone; //
-        BuyWagoneText.text = (300 * GM.WagonCol) + "р";
+        BuyWagoneText.text = (200 * GM.WagonCol) + "р";
         countPassWagon.text = "Мест пассажирам: " + ((GM.passWagoneCount * 3) - GM.passCount) + " из " + (GM.passWagoneCount * 3);
-        buyPassWagonText.text = (1000 * GM.passWagoneCount) + "р";
+        buyPassWagonText.text = (800 * GM.passWagoneCount) + "р";
     }
 
     public void BuyWagone() // Покупка вагонов / Добавление
     {
         if(GM.WagonCol < GM.MaxWagone)
         {
-            if(GM.Money >= (300 * GM.WagonCol))
+            if(GM.Money >= (200 * GM.WagonCol))
             {
-                GM.Money -= (300 * GM.WagonCol);
-                StartCoroutine(PlusMoney(0 - (300 * GM.WagonCol)));
+                GM.Money -= (200 * GM.WagonCol);
+                StartCoroutine(PlusMoney(0 - (200 * GM.WagonCol)));
                 GM.WagonCol++;
                 ResourceTextUpdate();
                 AO.PlayAudioPayment();
@@ -171,10 +170,10 @@ public class StationScripts : MonoBehaviour
 
     public void BuyPassWagone() // Покупка вагонов / Добавление
     {
-        if (GM.Money >= (1000 * GM.passWagoneCount))
+        if (GM.Money >= (800 * GM.passWagoneCount))
         {
-            GM.Money -= 1000 * GM.passWagoneCount;
-            StartCoroutine(PlusMoney(0 - (1000 * GM.passWagoneCount)));
+            GM.Money -= 800 * GM.passWagoneCount;
+            StartCoroutine(PlusMoney(0 - (800 * GM.passWagoneCount)));
             GM.passWagoneCount++;
             ResourceTextUpdate();
             AO.PlayAudioPayment();
@@ -374,10 +373,10 @@ public class StationScripts : MonoBehaviour
             {
                 GM.Money -= 10000;
                 StartCoroutine(PlusMoney(0 - 10000));
-                GM.LevelLoco = 2;
-                GM.LevelEngine = 1;
-                GM.LevelChassis = 1;
-                GM.LevelCoalStorage = 1;
+                GM.LevelLoco = 1;
+                GM.LevelEngine = 0;
+                GM.LevelChassis = 0;
+                GM.LevelCoalStorage = 0;
                 GM.LevelLocoUpdater();
                 GM.TextLoco();
                 ResourceTextUpdate();
@@ -397,10 +396,10 @@ public class StationScripts : MonoBehaviour
             {
                 GM.Money -= 25000;
                 StartCoroutine(PlusMoney(0 - 25000));
-                GM.LevelLoco = 3;
-                GM.LevelEngine = 1;
-                GM.LevelChassis = 1;
-                GM.LevelCoalStorage = 1;
+                GM.LevelLoco = 2;
+                GM.LevelEngine = 0;
+                GM.LevelChassis = 0;
+                GM.LevelCoalStorage = 0;
                 GM.LevelLocoUpdater();
                 GM.TextLoco();
                 ResourceTextUpdate();

@@ -16,7 +16,6 @@ public class PassengersScript : MonoBehaviour
     [SerializeField] private GameObject swipeCard;
     [SerializeField] private Image passPhoto;
     [SerializeField] private Text passName;
-    [SerializeField] private Text passDescription;
     [SerializeField] private Text passRequest;
     [SerializeField] private Text[] passResource;
     [SerializeField] private Text placeFreeText;
@@ -42,7 +41,6 @@ public class PassengersScript : MonoBehaviour
         if (passStationList.Count > 0)
         {
             passName.text = passStationList[0].namePass;
-            passDescription.text = passStationList[0].descriptionPass;
             passRequest.text = passStationList[0].requestPass;
             for (int i = 0; i < passResource.Length; i++) passResource[i].text = passStationList[0].usageResources[i].ToString();
             swipeCard.SetActive(true);
@@ -102,7 +100,6 @@ public class Pass
 {
     public string namePass;
     public Sprite photoPass;
-    public string descriptionPass;
     [TextArea]public string requestPass;
     public string cityLocation;
     public int[] usageResources; // [0]-Еда, [1]-Вода, [2]-Тепло 
