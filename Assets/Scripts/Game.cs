@@ -417,8 +417,17 @@ public class Game : MonoBehaviour
     }
     public void OpenClosedLocoUpgradePan() // Открытие панели улучшения локомотива
     {
-        if(!UpgradeLocoPan.activeInHierarchy) UpgradeLocoPan.SetActive(true);
-        else UpgradeLocoPan.SetActive(false);
+        if(!UpgradeLocoPan.activeInHierarchy)
+        {
+            if (PanWagon != null) { PanWagon.SetActive(false); }
+            UpgradeLocoPan.SetActive(true);
+            PanWagon = UpgradeLocoPan;
+        }
+        else
+        {
+            UpgradeLocoPan.SetActive(false);
+            PanWagon = null;
+        }
         AO.PlayAudioClickTrain();
     }
     public void ResourceTextUpdate() // Обновление текстов и слайдера ресурсов 
@@ -1040,7 +1049,7 @@ public class Game : MonoBehaviour
             }
             else
             {
-                TaskDone.interactable = false;
+                TaskDone.interactable = true;
                 TaskText.text = "Собрать награду";
             }
             TaskPan.SetActive(true);

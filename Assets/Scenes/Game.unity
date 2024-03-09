@@ -5262,7 +5262,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36050162, y: 0.070521235}
   m_AnchorMax: {x: 0.9612748, y: 0.97778195}
-  m_AnchoredPosition: {x: -214.43001, y: -2.921997}
+  m_AnchoredPosition: {x: -214.43, y: -2.921997}
   m_SizeDelta: {x: 418.3, y: -0.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114576518
@@ -7815,7 +7815,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.98724365, y: 30.22}
+  m_AnchoredPosition: {x: 0.98724365, y: 30.220001}
   m_SizeDelta: {x: 97.79, y: 60.44}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &167888518
@@ -7866,7 +7866,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "+3500$!!!\n\u0417\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440"
+  m_Text: 
 --- !u!222 &167888520
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -15789,7 +15789,7 @@ MonoBehaviour:
   - {fileID: 411527419}
   - {fileID: 1413691900}
   - {fileID: 595466498}
-  TaskPoint: {fileID: 928293341}
+  TaskPoint: {fileID: 1052303807}
   ScoreTextView:
   - {fileID: 1893556087}
   - {fileID: 777493560}
@@ -17362,7 +17362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -204.56998, y: -425.5584}
+  m_AnchoredPosition: {x: -204.56995, y: -425.5584}
   m_SizeDelta: {x: 386.16, y: 133.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &278461680
@@ -30306,7 +30306,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1072837398}
         m_TargetAssemblyTypeName: Game, Assembly-CSharp
-        m_MethodName: ClosedLocoUpgradePan
+        m_MethodName: OpenClosedLocoUpgradePan
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -42992,7 +42992,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0.33}
-  m_AnchoredPosition: {x: 21.25, y: 0.22299194}
+  m_AnchoredPosition: {x: 21.250008, y: 0.22299194}
   m_SizeDelta: {x: 40.92, y: 0.5400009}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &684437769
@@ -44111,7 +44111,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u041C\u0430\u0433 \u0410\u043B\u0438\u0441\u0430"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u042D\u0442\u043E \u043F\u0440\u043E\u0441\u0442\u043E \u043F\u0440\u0435\u0434\u0437\u043D\u0430\u043C\u0435\u043D\u043E\u0432\u0430\u043D\u0438\u0435
       \u0442\u043E\u0433\u043E, \u0447\u0442\u043E \u043C\u0438\u0440 \u043D\u0430
       \u0441\u0430\u043C\u043E\u043C \u0434\u0435\u043B\u0435 \u0441\u0431\u0438\u043B\u0441\u044F
@@ -44132,15 +44132,17 @@ MonoBehaviour:
     numberPass: 0
   - namePass: "\u0413\u0438\u0442\u0430\u0440\u0438\u0441\u0442 \u0421\u0435\u0440\u0430\u0444\u0438\u043C"
     photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
-    requestPass: "\u0410 \u043D\u0435 \u0441\u043F\u0435\u0442\u044C \u043B\u0438
-      \u0432\u0430\u043C \u043F\u0440\u043E 300?"
+    requestPass: "\"\u0411\u0435\u043B\u044B\u0439 \u0441\u043D\u0435\u0433, \u0441\u0435\u0440\u044B\u0439
+      \u043B\u0451\u0434\r\n\u041D\u0430 \u0440\u0430\u0441\u0442\u0440\u0435\u0441\u043A\u0430\u0432\u0448\u0435\u0439\u0441\u044F
+      \u0437\u0435\u043C\u043B\u0435.\""
     cityLocation: "\u041D\u0438\u0436\u043D\u0438\u0439 \u041D\u043E\u0432\u0433\u043E\u0440\u043E\u0434"
     usageResources: 010000000100000001000000
     statusPass: 0
     numberPass: 0
-  - namePass: "\u0422\u0430\u043D\u043A\u0438\u0441\u0442 \u0410\u043D\u0434\u0440\u0435\u0439"
+  - namePass: "\u0410\u0440\u0442\u0438\u0441\u0442 \u0410\u043D\u0434\u0440\u0435\u0439"
     photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
-    requestPass: "\u0428\u0443\u0442\u043A\u0438 \u043F\u0440\u043E \u0442\u0430\u043D\u043A\u0438\u0441\u0442\u0430"
+    requestPass: "\u0418\u0433\u0440\u0430\u0435\u0442 \u0447\u0435\u043B\u043E\u0432\u0435\u043A\u0430,
+      \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0445\u043E\u0447\u0435\u0442 \u0432\u044B\u0436\u0438\u0442\u044C"
     cityLocation: "\u0422\u044E\u043C\u0435\u043D\u044C"
     usageResources: 010000000100000001000000
     statusPass: 0
@@ -44171,7 +44173,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0410\u0440\u0445\u0435\u043E\u043B\u043E\u0433 \u041A\u044D\u0442"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u042D\u0442\u043E \u043B\u0438\u0448\u044C \u043D\u0430\u0447\u0430\u043B\u043E
       \u043D\u043E\u0432\u044B\u0445 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u0439!
       \u041A\u0442\u043E \u0437\u043D\u0430\u0435\u0442, \u0447\u0442\u043E \u043C\u044B
@@ -44217,7 +44219,7 @@ MonoBehaviour:
     numberPass: 0
   - namePass: "\u0423\u0447\u0438\u0442\u0435\u043B\u044C\u043D\u0438\u0446\u0430
       \u041E\u043B\u044C\u0433\u0430"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u0414\u0430\u0432\u0430\u0439\u0442\u0435 \u043D\u0430 \u044D\u0442\u043E\u0442
       \u043F\u043E\u0435\u0437\u0434, \u0434\u0435\u0442\u0438!\""
     cityLocation: "\u0410\u0440\u0445\u0430\u043D\u0433\u0435\u043B\u044C\u0441\u043A"
@@ -44225,7 +44227,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0412\u0435\u0442\u0435\u0440\u0438\u043D\u0430\u0440 \u041C\u0430\u0440\u0438\u044F"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u0414\u0430\u0436\u0435 \u0432 \u0445\u043E\u043B\u043E\u0434\u0435
       \u044F \u043D\u0430\u0439\u0434\u0443 \u0441\u043F\u043E\u0441\u043E\u0431
       \u0441\u043E\u0433\u0440\u0435\u0442\u044C \u043D\u0430\u0448\u0438\u0445 \u043F\u0443\u0448\u0438\u0441\u0442\u044B\u0445
@@ -44248,7 +44250,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u041A\u043E\u0441\u043C\u0435\u0442\u043E\u043B\u043E\u0433 \u0410\u043D\u0430\u0441\u0442\u0430\u0441\u0438\u044F"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u0425\u043E\u043B\u043E\u0434\u043D\u043E! \u041D\u043E \u0437\u0430\u0442\u043E
       \u0442\u0430\u043A \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u0442\u0441\u044F
       \u043C\u043E\u043B\u043E\u0434\u043E\u0441\u0442\u044C \u0438 \u043A\u0440\u0430\u0441\u043E\u0442\u0430\""
@@ -44257,7 +44259,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0424\u043E\u0442\u043E\u0433\u0440\u0430\u0444 \u0415\u043A\u0430\u0442\u0435\u0440\u0438\u043D\u0430"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u0417\u0430\u043C\u043E\u0440\u043E\u0436\u0435\u043D\u043D\u044B\u0439
       \u043C\u0438\u0440 \u043F\u0440\u0435\u0434\u043B\u0430\u0433\u0430\u0435\u0442
       \u0442\u0430\u043A \u043C\u043D\u043E\u0433\u043E \u0438\u043D\u0442\u0435\u0440\u0435\u0441\u043D\u044B\u0445
@@ -44270,7 +44272,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u041C\u0435\u0434\u0441\u0435\u0441\u0442\u0440\u0430 \u0422\u0430\u0442\u044C\u044F\u043D\u0430"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u042F \u0431\u0443\u0434\u0443 \u0441\u043B\u0435\u0434\u0438\u0442\u044C
       \u0437\u0430 \u0432\u0430\u0448\u0438\u043C\u0438 \u043F\u043E\u043A\u0430\u0437\u0430\u043D\u0438\u044F\u043C\u0438
       \u0438 \u0437\u0430\u0431\u043E\u0442\u0438\u0442\u044C\u0441\u044F \u043E
@@ -44303,7 +44305,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0423\u0431\u043E\u0440\u0449\u0438\u0446\u0430 \u042E\u043B\u0438\u044F"
-    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u0414\u0430\u0436\u0435 \u0432 \u043C\u0438\u0440\u0435 \u043C\u0435\u0440\u0437\u043B\u043E\u0442\u044B
       \u043F\u043E\u0440\u044F\u0434\u043E\u043A - \u044D\u0442\u043E \u043E\u0441\u043D\u043E\u0432\u0430
       \u043A\u043E\u043C\u0444\u043E\u0440\u0442\u043D\u043E\u0433\u043E \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044F\""
@@ -44312,7 +44314,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0421\u0442\u0430\u0440\u0438\u043A \u0418\u0432\u0430\u043D"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\u0412 \u043F\u0440\u043E\u0448\u043B\u043E\u043C \u0443\u0447\u0435\u043D\u044B\u0439-\u0431\u0438\u043E\u043B\u043E\u0433.
       \u0418\u0437\u0432\u0435\u0441\u0442\u043D\u043E, \u0447\u0442\u043E \u043E\u0431\u043B\u0430\u0434\u0430\u0435\u0442
       \u0446\u0435\u043D\u043D\u044B\u043C\u0438 \u0437\u043D\u0430\u043D\u0438\u044F\u043C\u0438
@@ -44322,7 +44324,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0424\u0435\u0440\u043C\u0435\u0440 \u0410\u043B\u0435\u043A\u0441\u0435\u0439"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\"\u041C\u0435\u0440\u0437\u043B\u043E\u0442\u0430 \u0438\u043B\u0438
       \u043D\u0435\u0442, \u043F\u0438\u0442\u0430\u043D\u0438\u0435 - \u0437\u0430\u043B\u043E\u0433
       \u0432\u044B\u0436\u0438\u0432\u0430\u043D\u0438\u044F. \u042F \u043E\u0431\u0435\u0441\u043F\u0435\u0447\u0443
@@ -44335,7 +44337,7 @@ MonoBehaviour:
     numberPass: 0
   - namePass: "\u0411\u044B\u0432\u0448\u0438\u0439 \u0448\u0430\u0445\u0442\u0435\u0440
       \u0418\u0433\u043E\u0440\u044C"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\"\u0417\u043D\u0430\u0435\u0442\u0435 \u043B\u0438, \u0443 \u043D\u0430\u0441
       \u0432 \u0448\u0430\u0445\u0442\u0435 \u0442\u043E\u0436\u0435 \u0431\u044B\u043B\u043E
       \u0445\u043E\u043B\u043E\u0434\u043D\u043E, \u043D\u043E \u0442\u0430\u043C
@@ -44346,7 +44348,7 @@ MonoBehaviour:
     numberPass: 0
   - namePass: "\u0411\u043B\u043E\u0433\u0435\u0440-\u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0435\u043D\u043D\u0438\u043A
       \u0421\u0442\u0430\u043D\u0438\u0441\u043B\u0430\u0432"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\"\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0439 \u043F\u043E\u0435\u0437\u0434
       \u0432 \u043C\u0438\u0440\u0435? \u042D\u0442\u043E \u043D\u0435\u0447\u0442\u043E!
       \u042F \u0441\u0447\u0430\u0441\u0442\u043B\u0438\u0432 \u0431\u044B\u0442\u044C
@@ -44358,7 +44360,7 @@ MonoBehaviour:
     numberPass: 0
   - namePass: "\u041B\u044E\u0431\u0438\u0442\u0435\u043B\u044C \u044D\u043A\u0441\u0442\u0440\u0438\u043C\u0430
       \u0410\u0440\u0442\u0443\u0440"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\"\u041D\u0435\u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E
       \u043D\u0430\u0439\u0442\u0438 \u0431\u043E\u043B\u0435\u0435 \u0437\u0430\u0445\u0432\u0430\u0442\u044B\u0432\u0430\u044E\u0449\u0435\u0435
       \u043F\u0440\u0438\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435, \u0447\u0435\u043C
@@ -44371,7 +44373,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0410\u0441\u0442\u0440\u043E\u043B\u043E\u0433 \u0412\u0438\u043A\u0442\u043E\u0440\u0438\u044F"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u0417\u0432\u0435\u0437\u0434\u044B \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u044B\u0432\u0430\u044E\u0442
       \u043C\u043D\u0435, \u0447\u0442\u043E \u044D\u0442\u043E \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u0435
       \u0431\u0443\u0434\u0435\u0442 \u0443\u0434\u0430\u0447\u043D\u044B\u043C!\""
@@ -44381,7 +44383,7 @@ MonoBehaviour:
     numberPass: 0
   - namePass: "\u0412\u0440\u0430\u0447-\u043F\u0441\u0438\u0445\u0438\u0430\u0442\u0440
       \u0410\u043D\u0434\u0440\u0435\u0439"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\"\u0412 \u0441\u043B\u043E\u0436\u043D\u044B\u0445 \u0432\u0440\u0435\u043C\u0435\u043D\u0430\u0445,
       \u043A\u0430\u043A \u044D\u0442\u0438, \u0432\u0430\u0436\u043D\u043E \u043F\u043E\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0442\u044C
       \u043D\u0430\u0448\u0435 \u043F\u0441\u0438\u0445\u0438\u0447\u0435\u0441\u043A\u043E\u0435
@@ -44391,7 +44393,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0410\u0434\u0432\u043E\u043A\u0430\u0442 \u041E\u043B\u0435\u0441\u044F"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 00bac581ed059204c9722a0ca04a2195, type: 3}
     requestPass: "\"\u041C\u0435\u0440\u0437\u043B\u043E\u0442\u0430 - \u044D\u0442\u043E
       \u0447\u0430\u0441\u0442\u044C \u043D\u0430\u0448\u0435\u0433\u043E \u043E\u0431\u0449\u0435\u0433\u043E
       \u0434\u043E\u043C\u0430, \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u043D\u0443\u0436\u043D\u043E
@@ -44403,7 +44405,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0411\u0438\u043E\u0438\u043D\u0436\u0435\u043D\u0435\u0440 \u0410\u043D\u0442\u043E\u043D\u0438\u043D\u0430"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\"\u0412\u043F\u0435\u0440\u0435\u0434, \u043D\u0430\u0448\u0438
       \u0440\u0430\u0441\u0442\u0435\u043D\u0438\u044F \u043F\u0440\u0435\u043E\u0434\u043E\u043B\u0435\u044E\u0442
       \u044D\u0442\u043E\u0442 \u043B\u0435\u0434\u044F\u043D\u043E\u0439 \u043C\u0438\u0440!\""
@@ -44412,7 +44414,7 @@ MonoBehaviour:
     statusPass: 0
     numberPass: 0
   - namePass: "\u0413\u0435\u043E\u043B\u043E\u0433 \u0413\u0440\u0438\u0433\u043E\u0440\u0438\u0439"
-    photoPass: {fileID: 0}
+    photoPass: {fileID: 21300000, guid: 051b1ea1c4a87104eae5a15110eb1c9e, type: 3}
     requestPass: "\"\u041C\u0435\u0440\u0437\u043B\u043E\u0442\u0430 \u0441\u043A\u0440\u044B\u0432\u0430\u0435\u0442
       \u0432 \u0441\u0435\u0431\u0435 \u043C\u043D\u043E\u0436\u0435\u0441\u0442\u0432\u043E
       \u0433\u0435\u043E\u043B\u043E\u0433\u0438\u0447\u0435\u0441\u043A\u0438\u0445
@@ -50898,8 +50900,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -59712,82 +59714,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926388072}
   m_CullTransparentMesh: 1
---- !u!1 &928293341
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 928293342}
-  - component: {fileID: 928293344}
-  - component: {fileID: 928293343}
-  m_Layer: 5
-  m_Name: TaskPOint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &928293342
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928293341}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2001909712}
-  m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.595, y: 0.5997784}
-  m_AnchorMax: {x: 0.6431658, y: 0.68959224}
-  m_AnchoredPosition: {x: 0, y: -0.55999756}
-  m_SizeDelta: {x: 8, y: 3}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &928293343
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928293341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 0
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b91f59292024977498ddd353f0fcba11, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &928293344
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 928293341}
-  m_CullTransparentMesh: 1
 --- !u!1 &930032353
 GameObject:
   m_ObjectHideFlags: 0
@@ -65670,7 +65596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1039476214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -66994,6 +66920,82 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1052271486}
+  m_CullTransparentMesh: 1
+--- !u!1 &1052303807
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1052303808}
+  - component: {fileID: 1052303810}
+  - component: {fileID: 1052303809}
+  m_Layer: 5
+  m_Name: TaskPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1052303808
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052303807}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2001909712}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.20345369, y: 0.59000003}
+  m_AnchorMax: {x: 0.23270927, y: 0.64332914}
+  m_AnchoredPosition: {x: 138, y: -79}
+  m_SizeDelta: {x: 13.15, y: -0.63}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1052303809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052303807}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: b91f59292024977498ddd353f0fcba11, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1052303810
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052303807}
   m_CullTransparentMesh: 1
 --- !u!1 &1053778487
 GameObject:
@@ -80372,7 +80374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1244745506
 RectTransform:
   m_ObjectHideFlags: 0
@@ -93753,9 +93755,9 @@ RectTransform:
   m_Father: {fileID: 859632538}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 28341.709, y: -425.5584}
   m_SizeDelta: {x: 386.16, y: 133.22}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1490754868
@@ -105964,7 +105966,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -281.19202, y: 223.78853}
+  m_AnchoredPosition: {x: -281.19202, y: 223.78851}
   m_SizeDelta: {x: 272.7972, y: 118.34811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669964578
@@ -115826,7 +115828,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6857704, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 107.367676, y: 332.85178}
+  m_AnchoredPosition: {x: 107.367676, y: 332.8518}
   m_SizeDelta: {x: 234.85913, y: 280.83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1786366955
@@ -117493,7 +117495,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1821576576
 RectTransform:
   m_ObjectHideFlags: 0
@@ -119635,8 +119637,8 @@ MonoBehaviour:
   m_Text: "\u0415\u0441\u043B\u0438 \u0432 \u043F\u0443\u0442\u0438 \u0443 \u0432\u0430\u0441
     \u0437\u0430\u043A\u0430\u043D\u0447\u0438\u0432\u0430\u0435\u0442\u0441\u044F
     \u0443\u0433\u043E\u043B\u044C, \u0432\u044B \u0432\u0441\u0435\u0433\u0434\u0430
-    \u043C\u043E\u0436\u0435\u0442 \u043D\u0430\u0441\u043E\u0431\u0438\u0440\u0430\u0442\u044C
-    \u0435\u0433\u043E \u0431\u0435\u0441\u043F\u0430\u0442\u043D\u043E. \u041F\u0440\u043E\u0441\u0442\u043E
+    \u043C\u043E\u0436\u0435\u0442\u0435 \u043D\u0430\u0441\u043E\u0431\u0438\u0440\u0430\u0442\u044C
+    \u0435\u0433\u043E \u0431\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u043E. \u041F\u0440\u043E\u0441\u0442\u043E
     \u043A\u043B\u0438\u043A\u0430\u0439\u0442\u0435 \u043D\u0430 \u0434\u0435\u0440\u0435\u0432\u044C\u044F
     \u0432 \u043B\u0435\u0441\u0443(\u041F\u043E\u043A\u0430 \u043E\u043D\u0438 \u0435\u0441\u0442\u044C)!
     \n\n\u041A\u0430\u043A \u0433\u043E\u0432\u043E\u0440\u0438\u0442\u0441\u044F:
@@ -122705,7 +122707,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.8542308, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.0809937, y: 387.15768}
+  m_AnchoredPosition: {x: 5.0809937, y: 387.1577}
   m_SizeDelta: {x: 59.398354, y: 88.8042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1932670662
@@ -126525,7 +126527,7 @@ RectTransform:
   - {fileID: 1151551337}
   - {fileID: 74400125}
   - {fileID: 1436182850}
-  - {fileID: 928293342}
+  - {fileID: 1052303808}
   - {fileID: 564965988}
   m_Father: {fileID: 235176441}
   m_RootOrder: 0
@@ -129311,7 +129313,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "+3500$!!!\n\u0417\u0430 \u043F\u0440\u043E\u0441\u043C\u043E\u0442\u0440"
+  m_Text: 
 --- !u!222 &2044675224
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -129550,11 +129552,11 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\u041F\u043E\u0435\u0437\u0434 \u0433\u043E\u0442\u043E\u0432\u0438\u043B\u0438
-    \u043A \u043F\u043E\u0435\u0437\u0434\u043A\u0435 \u0441\u043B\u0438\u0448\u043A\u043E\u043C
+    \u043A \u043F\u0443\u0442\u0435\u0448\u0435\u0441\u0442\u0432\u0438\u044E \u0441\u043B\u0438\u0448\u043A\u043E\u043C
     \u0431\u044B\u0441\u0442\u0440\u043E \u0438 \u043D\u0435 \u0432\u0441\u0435 \u043C\u043E\u0436\u0435\u0442
     \u0431\u044B\u0442\u044C \u0438\u0441\u043F\u0440\u0430\u0432\u043D\u043E. \u0425\u043E\u0440\u043E\u0448\u043E,
     \u0447\u0442\u043E \u0441\u043D\u0430\u0431\u0434\u0438\u043B\u0438 \u0438\u043D\u0441\u0442\u0440\u0443\u043C\u0435\u043D\u0442\u043E\u043C
-    \u0438 \u0440\u0435\u043C\u043E\u043D\u0442 \u043D\u0435 \u0441\u043B\u043E\u0436\u043D\u044B\u0439."
+    \u0438 \u0441\u0430\u043C \u0440\u0435\u043C\u043E\u043D\u0442 \u043D\u0435 \u0441\u043B\u043E\u0436\u043D\u044B\u0439."
 --- !u!222 &2047924351
 CanvasRenderer:
   m_ObjectHideFlags: 0

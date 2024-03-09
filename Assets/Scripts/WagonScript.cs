@@ -274,6 +274,7 @@ public class WagonScript : MonoBehaviour
         GM.EffectCollect.SetActive(false);
         GM.EffectCollect.transform.position = DoneProductionPan.transform.position;
         GM.EffectCollect.SetActive(true);
+        GM.WagoneData[IndexWag].TimerActiveProduction = TimerWag;
 
         if (GM.WagoneData[IndexWag].Name == "Food")
         {
@@ -331,7 +332,6 @@ public class WagonScript : MonoBehaviour
         }
 
         GM.ResourceTextUpdate();
-        GM.WagoneData[IndexWag].TimerActiveProduction = TimerWag;
         DoneProductionPan.SetActive(false);
         AO.PlayAudioTakeResource();
 

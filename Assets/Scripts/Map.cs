@@ -35,6 +35,8 @@ public class Map : MonoBehaviour
         {
             if (!QT.quest[i].doneTask)
             {
+                if (QT.quest[i].targetCity < 31) TaskPoint.transform.SetParent(mapParts[0].transform);
+                else TaskPoint.transform.SetParent(mapParts[1].transform);
                 TaskPoint.SetActive(true);
                 TaskPoint.transform.position = PointCity[QT.quest[i].targetCity].transform.position;
                 break;

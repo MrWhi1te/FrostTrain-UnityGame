@@ -93,7 +93,7 @@ public class StationScripts : MonoBehaviour
         GM.Score+=10;
         ScoreCount();
         QS.CheckQuest();
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < 8; i++)
         {
             ActiveSlider(i);
         }
