@@ -17,28 +17,26 @@ public class Map : MonoBehaviour
     [SerializeField] private Text ChoiceCityTimeText; //
     [SerializeField] private Text ChoiceCityBttnText; //
     [SerializeField] private GameObject[] QuestionPoint; // Точки вопросов
-    [SerializeField] private GameObject TaskPoint; // Точка задания
+    [SerializeField] private Sprite[] TaskPoint; // Точка задания
 
     [SerializeField] private Text[] ScoreTextView; //
+    private int questNumber;
 
     private void OnEnable()
     {
-        TaskPoint.SetActive(false);
         for (int i = 0; i < 45; i++)
         {
-            PointCity[i].color = new Color(36, 255, 0, 0);
+            PointCity[i].color = new Color(255, 255, 255, 255);
         }
-        PointCity[GM.City].color = new Color(0, 150, 255, 255);
+        PointCity[GM.City].color = new Color(36, 255, 0, 255);
         NextStation.enabled = false;
         ScoreCount();
         for(int i = 0; i < QT.quest.Count; i++)
         {
             if (!QT.quest[i].doneTask)
             {
-                if (QT.quest[i].targetCity < 31) TaskPoint.transform.SetParent(mapParts[0].transform);
-                else TaskPoint.transform.SetParent(mapParts[1].transform);
-                TaskPoint.SetActive(true);
-                TaskPoint.transform.position = PointCity[QT.quest[i].targetCity].transform.position;
+                PointCity[QT.quest[i].targetCity].sprite = TaskPoint[1];
+                questNumber = i;
                 break;
             }
         }
@@ -50,9 +48,9 @@ public class Map : MonoBehaviour
     {
         for (int i = 0; i < 45; i++)
         {
-            PointCity[i].color = new Color(36, 255, 0, 0);
+            PointCity[i].color = new Color(255, 255, 255, 255);
         }
-        PointCity[GM.City].color = new Color(0, 150, 255, 255);
+        PointCity[GM.City].color = new Color(36, 255, 0, 255);
         ChoiceCityBttnText.text = "Продолжить путешествие";
         if (GM.City == 0)
         {
@@ -384,6 +382,7 @@ public class Map : MonoBehaviour
 
     public void NextStationGO()
     {
+        PointCity[QT.quest[questNumber].targetCity].sprite = TaskPoint[0];
         ST.TimerNextStation();
         MapPan.SetActive(false);
         AO.PlayAudioClickBttn();

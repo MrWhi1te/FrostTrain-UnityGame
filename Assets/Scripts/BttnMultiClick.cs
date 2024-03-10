@@ -56,6 +56,7 @@ public class BttnMultiClick : MonoBehaviour
             GM.ResourceTextUpdate();
             GM.TextLoco();
         }
+        GM.TreesClickParticle.transform.position = Camera.main.WorldToScreenPoint(Input.mousePosition);
         GM.TreesClickParticle.SetActive(false);
         GM.TreesClickParticle.SetActive(true);
         if (clickCount >= 5)

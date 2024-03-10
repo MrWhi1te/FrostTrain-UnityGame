@@ -577,8 +577,8 @@ public class Game : MonoBehaviour
                 }
                 if(timeADS >= 40)
                 {
-                    if(Money >= 500) ADSMoneyCol = UnityEngine.Random.Range(500, Money);
-                    else ADSMoneyCol = 500;
+                    if(Money >= 500) ADSMoneyCol = UnityEngine.Random.Range(200, (int)(Money / 1.5));
+                    else ADSMoneyCol = 300;
                     ADSMoneyActivePan.SetActive(true);
                     ADSMoneyActiveText.text = "+" + ADSMoneyCol + "р!!!" + "\n" + "За просмотр";
                     StartCoroutine(ADSMoneyActive());
@@ -1007,16 +1007,10 @@ public class Game : MonoBehaviour
     public void ReturnTravel()
     {
         AO.PlayAudioClickBttn();
+        AO.CheckActiveSound();
         MenuPan.SetActive(false);
         StartGame();
     }
-    //public void OpenClosedSettingPan()
-    //{
-
-    //}
-    //public void OnOffMusic
-
-
 
 
     // TASK!!!
@@ -1045,7 +1039,8 @@ public class Game : MonoBehaviour
             if (TaskCount % 2 == 0)
             {
                 TaskDone.interactable = false;
-                TaskText.text = tasks[TaskCount].text;
+                int i = Array.FindIndex(tasks, task => task.index == TaskCount);
+                TaskText.text = tasks[i].text;
             }
             else
             {
@@ -1062,7 +1057,7 @@ public class Game : MonoBehaviour
         Money += tasks[TaskCount - 1].reward;
         TaskCount++;
         TaskCounter();
-        AO.PlayAudioTakeResource();
+        AO.PlayAudioTakePass();
     }
 
     //

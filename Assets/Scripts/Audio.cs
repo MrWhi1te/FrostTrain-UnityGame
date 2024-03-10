@@ -25,8 +25,6 @@ public class Audio : MonoBehaviour
     void Start()
     {
         thisAudio = GetComponent<AudioSource>();
-        if (activeSound) soundImg.sprite = soundSprite[0];
-        else soundImg.sprite = soundSprite[1];
     }
     public void PlayAudioEnterPanel()
     {
@@ -90,13 +88,19 @@ public class Audio : MonoBehaviour
         if (activeSound) 
         {
             activeSound = false;
-            soundImg.sprite = soundSprite[1];
-            StopAudio();
+            CheckActiveSound();
+            thisAudio.Stop();
         } 
         else
         {
             activeSound = true;
-            soundImg.sprite = soundSprite[0];
+            CheckActiveSound();
         }
+    }
+
+    public void CheckActiveSound()
+    {
+        if (activeSound) soundImg.sprite = soundSprite[0];
+        else soundImg.sprite = soundSprite[1];
     }
 }

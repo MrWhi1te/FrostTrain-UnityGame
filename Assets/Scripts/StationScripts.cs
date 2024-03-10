@@ -537,16 +537,16 @@ public class StationScripts : MonoBehaviour
     }
     void UpdateADSMoneyActive() //
     {
-        if (GM.Money >= 500)
+        if (GM.Money >= 600)
         {
             ADSMoneyActive.SetActive(true);
-            ADSMoneyCol = Random.Range(500, GM.Money);
+            ADSMoneyCol = Random.Range(300, (int)(GM.Money/1.5));
             ADSMoneyActiveText.text = "+" + ADSMoneyCol + "р!!!" + "\n" + "За просмотр";
         }
         else
         {
             ADSMoneyActive.SetActive(true);
-            ADSMoneyCol = 500;
+            ADSMoneyCol = 300;
             ADSMoneyActiveText.text = "+" + ADSMoneyCol + "р!!!" + "\n" + "За просмотр";
         }
     }
