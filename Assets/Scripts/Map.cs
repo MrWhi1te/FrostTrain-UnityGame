@@ -16,6 +16,7 @@ public class Map : MonoBehaviour
     [SerializeField] private Text ChoiceCityTemperatureText; //
     [SerializeField] private Text ChoiceCityTimeText; //
     [SerializeField] private Text ChoiceCityBttnText; //
+    [SerializeField] private Text TaskCityText; //
     [SerializeField] private GameObject[] QuestionPoint; // Точки вопросов
     [SerializeField] private Sprite[] TaskPoint; // Точка задания
 
@@ -30,12 +31,14 @@ public class Map : MonoBehaviour
         }
         PointCity[GM.City].color = new Color(36, 255, 0, 255);
         NextStation.enabled = false;
+        TaskCityText.text = "";
         ScoreCount();
         for(int i = 0; i < QT.quest.Count; i++)
         {
             if (!QT.quest[i].doneTask)
             {
                 PointCity[QT.quest[i].targetCity].sprite = TaskPoint[1];
+                TaskCityText.text = "Задание в городе: " + QT.quest[i].cityPerson;
                 questNumber = i;
                 break;
             }

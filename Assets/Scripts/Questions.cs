@@ -16,6 +16,8 @@ public class Questions : MonoBehaviour
     [SerializeField] private GameObject questPan;
     [SerializeField] private Text namePersonQuest;
     [SerializeField] private Text textQuest;
+    [SerializeField] private GameObject[] miniGamePan;
+    [SerializeField] private GameObject taskBttn;
     private bool activeTask;
     private int numberQuest;
 
@@ -29,21 +31,14 @@ public class Questions : MonoBehaviour
         {
             if(quest[i].cityPerson == GM.NameCity[GM.City] && !quest[i].doneTask)
             {
-                if(i > 0 && !quest[i - 1].doneTask)
-                {
-                    textQuest.text = "Вам нужно посетить станцию " + quest[i-1].cityPerson + ". Там вас ожидает человек";
-                    questPan.SetActive(true);
-                    namePersonQuest.text = quest[i].namePerson;
-                    activeTask = false;
-                }
-                else
-                {
-                    questPan.SetActive(true);
-                    namePersonQuest.text = quest[i].namePerson;
-                    textQuest.text = quest[i].textQuest;
-                    numberQuest = i;
-                    activeTask = true;
-                }
+                questPan.SetActive(true);
+                taskBttn.SetActive(true);
+                namePersonQuest.text = quest[i].namePerson;
+                textQuest.text = quest[i].textQuest;
+                numberQuest = i;
+                activeTask = true;
+                if (quest[i].miniGame[0]) miniGamePan[0].SetActive(true);
+                else if (quest[i].miniGame[1]) miniGamePan[1].SetActive(true);
                 break;
             }
             if (quest[i].doneTask) done++;
@@ -83,7 +78,13 @@ public class Questions : MonoBehaviour
                 GM.CargoSpec1TransportCount = quest[numberQuest].wagonTask[1];
             }
         }
+        taskBttn.SetActive(false);
         questPan.SetActive(false);
+    }
+    public void ClosedPan()
+    {
+        questPan.SetActive(false);
+        miniGamePan[0].SetActive(false); miniGamePan[1].SetActive(false);
     }
 }
 
@@ -97,4 +98,5 @@ public class Quest
     public int targetCity;
     public int rewardTask;
     public int[] wagonTask;
+    public bool[] miniGame; // 0 - Радио / 1 - код
 }
