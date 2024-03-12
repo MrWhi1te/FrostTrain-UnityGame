@@ -12,6 +12,7 @@ public class Map : MonoBehaviour
     [SerializeField] private Button NextStation; // Кнопка продолжения
     [SerializeField] private GameObject MapPan; // 
     [SerializeField] private GameObject[] mapParts; //
+    [SerializeField] private GameObject openMap;
     [SerializeField] private Text ChoiceCityNameText; // Текст следующей станции
     [SerializeField] private Text ChoiceCityTemperatureText; //
     [SerializeField] private Text ChoiceCityTimeText; //
@@ -43,6 +44,7 @@ public class Map : MonoBehaviour
                 break;
             }
         }
+        if (QT.quest[12].doneTask) openMap.SetActive(false); 
         ChoiceCityNameText.text = "Выберите следующую станцию на карте!";
         ChoiceCityBttnText.text = "Выберите станцию на карте!";
     }

@@ -35,9 +35,9 @@ namespace YG
         public int LevelLoco; // уровень локомотива. Уровень зависит от вида локомотива. ПОкупается на станции
         public int ActiveTimerLoco; // Активный таймер локомотива
 
-        public int LevelEngine = 1; // Уровень двигателя локомотива
-        public int LevelCoalStorage = 1; // Уровень тендера локомотива
-        public int LevelChassis = 1; // Уровень шасси локомотива
+        public int LevelEngine; // Уровень двигателя локомотива
+        public int LevelCoalStorage; // Уровень тендера локомотива
+        public int LevelChassis; // Уровень шасси локомотива
 
         public int passWagoneCount;
         public int passCount;
@@ -68,10 +68,11 @@ namespace YG
         public int[] TemperatureWagone = new int[50]; // Температура в вагоне
 
         public bool Saver;
+        public bool SaverNew;
         public bool Thanks;
         //
         public bool AirShipActive; //
-        public int TimerAirShip = 900; //
+        public int TimerAirShip; //
         //
         public int TimeInGameStatistic; //
         public int CoalPlusStatistic; //
@@ -83,7 +84,7 @@ namespace YG
 
         //
         public bool activeAudio;
-        public bool[] doneTask = new bool[14];
+        public bool[] doneTask = new bool[19];
         public bool[] statusPass = new bool[42];
     }
 }

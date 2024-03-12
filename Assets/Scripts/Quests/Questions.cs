@@ -80,11 +80,13 @@ public class Questions : MonoBehaviour
         }
         taskBttn.SetActive(false);
         questPan.SetActive(false);
+        AO.PlayAudioClickBttn();
     }
     public void ClosedPan()
     {
         questPan.SetActive(false);
         miniGamePan[0].SetActive(false); miniGamePan[1].SetActive(false);
+        AO.PlayAudioClickBttn();
     }
 }
 

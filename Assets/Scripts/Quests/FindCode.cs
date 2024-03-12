@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class FindCode : MonoBehaviour
 {
+    [SerializeField] private Audio AO;
+
+    [SerializeField] private GameObject pan;
     [SerializeField] private Dropdown[] dropdown;
     [SerializeField] private Text[] dropdownText;
     [SerializeField] private Text attemptText;
@@ -13,11 +16,11 @@ public class FindCode : MonoBehaviour
     private List<int> correctlyNumber = new();
     private int attempt;
 
+
     private void OnEnable()
     {
         NewNumber();
     }
-
     private void NewNumber()
     {
         attempt = 5;
@@ -28,15 +31,12 @@ public class FindCode : MonoBehaviour
             dropdownText[i].color = new Color32(0, 0, 0, 255);
             inventNumber[i] = Random.Range(0, 10);
         }
-        foreach (int number in inventNumber)
-        {
-            Debug.Log(number);
-        }
         attemptText.text = "Попыток: " + attempt;
     }
 
     public void CheckNumber()
     {
+        AO.PlayAudioEnterCode();
         correctlyNumber.Clear();
         string[] entText = new string[4];
         for (int i = 0; i < 4; i++)
@@ -65,7 +65,8 @@ public class FindCode : MonoBehaviour
         
         if(correctlyNumber.Count >= 4)
         {
-            Debug.Log("WIN!");
+            AO.PlayAudioSuccess();
+            pan.SetActive(false);
         }
         
         attempt--;
@@ -73,6 +74,7 @@ public class FindCode : MonoBehaviour
         enteredText.text += entText[0] + entText[1] + entText[2] + entText[3] + "\n";
         if (attempt <= 0)
         {
+            AO.PlayAudioNotTakePass();
             NewNumber();
         }
     }

@@ -75,7 +75,6 @@ public class Game : MonoBehaviour
     public int MaxWagone; // Максимальное кол-во вагонов
     [SerializeField] private Image LocoSprite; // 
     private int NeedCoal;// Сколько потребляет угля
-    //private int TimerLoco;// Таймер за сколько потребляет уголь
     [HideInInspector] public int ActiveTimerLoco; // Активный таймер локомотива
     
     [Header("CoalFree")]
@@ -194,9 +193,10 @@ public class Game : MonoBehaviour
     public GameObject EffectCollect;
     [SerializeField] private GameObject ParticleTrain;
     //
-
+    public GameObject updatePan; 
     [HideInInspector] public GameObject PanWagon; // Открытая панель вагона
     public GameObject trailer; //
+
 
     public Dictionary<string, Sprite[]> wagoneSprites = new();
     private Dictionary<int, Sprite[]> LocoSprites = new();
@@ -241,9 +241,6 @@ public class Game : MonoBehaviour
         LevelLocoUpdater();
         TextLoco();
         ResourceTextUpdate();
-        StartCoroutine(TimerInGame());
-        StartCoroutine("PassFoodNeed");
-        StartCoroutine("PassFoodWater");
     }
 
     public void ActiveWagone()
@@ -305,6 +302,10 @@ public class Game : MonoBehaviour
             }
             StartTimerAirShip();
         }
+        TemperatureOnStreet = TemperatureForCity[City];
+        StartCoroutine(TimerInGame());
+        StartCoroutine("PassFoodNeed");
+        StartCoroutine("PassFoodWater");
     }
 
     public void StartNextStation()
@@ -597,6 +598,7 @@ public class Game : MonoBehaviour
                     CoalHelpObj.SetActive(true);
                 }
                 TreesFreeObj.SetActive(true);
+                CoalADS.SetActive(true);
                 SmokeParticle.SetActive(false);
                 StartLocoEnginePan.SetActive(true);
                 StartCoroutine(MessageView("Закончилось топливо!"));
@@ -1011,7 +1013,6 @@ public class Game : MonoBehaviour
         MenuPan.SetActive(false);
         StartGame();
     }
-
 
     // TASK!!!
 

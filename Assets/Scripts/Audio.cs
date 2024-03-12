@@ -15,6 +15,8 @@ public class Audio : MonoBehaviour
     [SerializeField] private AudioClip clickTrees;
     [SerializeField] private AudioClip takePass;
     [SerializeField] private AudioClip notTakePass;
+    [SerializeField] private AudioClip success;
+    [SerializeField] private AudioClip enterCode;
 
     [SerializeField] private UnityEngine.UI.Image soundImg;
     [SerializeField] private Sprite[] soundSprite;
@@ -81,6 +83,16 @@ public class Audio : MonoBehaviour
     public void PlayAudioNotTakePass()
     {
         if (activeSound) thisAudio.PlayOneShot(notTakePass);
+    }
+
+    public void PlayAudioSuccess()
+    {
+        if (activeSound) thisAudio.PlayOneShot(success);
+    }
+
+    public void PlayAudioEnterCode()
+    {
+        if (activeSound) thisAudio.PlayOneShot(enterCode);
     }
 
     public void OnOffSound()

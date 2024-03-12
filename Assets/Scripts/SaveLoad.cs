@@ -20,7 +20,9 @@ public class SaveLoad : MonoBehaviour
     public void GetLoad()
     {
         Saver = YandexGame.savesData.Saver;
-        if (Saver == true)
+        SaverNew = YandexGame.savesData.SaverNew;
+        if (Saver) GM.updatePan.SetActive(true);
+        if (SaverNew == true)
         {
             GM.WagonCol = YandexGame.savesData.WagonCol;
             GM.TextureTrain = YandexGame.savesData.TextureTrain;
@@ -106,10 +108,10 @@ public class SaveLoad : MonoBehaviour
 
     public void Save()
     {
-        if (Saver == false)
+        if (SaverNew == false)
         {
-            Saver = true;
-            YandexGame.savesData.Saver = Saver;
+            SaverNew = true;
+            YandexGame.savesData.SaverNew = SaverNew;
         }
         YandexGame.savesData.WagonCol = GM.WagonCol;
         YandexGame.savesData.TextureTrain = GM.TextureTrain;

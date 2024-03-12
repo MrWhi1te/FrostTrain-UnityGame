@@ -5511,7 +5511,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.36050162, y: 0.070521235}
   m_AnchorMax: {x: 0.9612748, y: 0.97778195}
-  m_AnchoredPosition: {x: -214.43001, y: -2.921997}
+  m_AnchoredPosition: {x: -214.43, y: -2.921997}
   m_SizeDelta: {x: 418.3, y: -0.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &114576518
@@ -5587,7 +5587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.053000003, y: 0.609}
   m_AnchorMax: {x: 0.42900002, y: 0.8997347}
-  m_AnchoredPosition: {x: -0.88087463, y: -0.13999939}
+  m_AnchoredPosition: {x: -0.8807869, y: -0.13999939}
   m_SizeDelta: {x: -1.5148697, y: 0.2800007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &115236185
@@ -6818,7 +6818,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 232485318}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7466,6 +7466,7 @@ GameObject:
   - component: {fileID: 155617228}
   - component: {fileID: 155617230}
   - component: {fileID: 155617229}
+  - component: {fileID: 155617231}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -7535,6 +7536,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155617227}
   m_CullTransparentMesh: 1
+--- !u!114 &155617231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155617227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &156608698
 GameObject:
   m_ObjectHideFlags: 0
@@ -9372,7 +9388,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15449,7 +15465,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -15997,6 +16013,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 390425082}
+  - {fileID: 1524333653}
   - {fileID: 134513611}
   m_Father: {fileID: 1459082709}
   m_RootOrder: 0
@@ -16293,6 +16310,7 @@ MonoBehaviour:
   mapParts:
   - {fileID: 267734972}
   - {fileID: 1945979575}
+  openMap: {fileID: 768061478}
   ChoiceCityNameText: {fileID: 1986232765}
   ChoiceCityTemperatureText: {fileID: 1505241820}
   ChoiceCityTimeText: {fileID: 191581080}
@@ -18620,6 +18638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6778fc650dcbf534fb92bb277fc59ddf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AO: {fileID: 1335133379}
+  pan: {fileID: 290892190}
   dropdown:
   - {fileID: 444460839}
   - {fileID: 219468312}
@@ -19031,6 +19051,105 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 292056304}
+  m_CullTransparentMesh: 1
+--- !u!1 &296575390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 296575391}
+  - component: {fileID: 296575394}
+  - component: {fileID: 296575393}
+  - component: {fileID: 296575392}
+  m_Layer: 5
+  m_Name: Text (Legacy) (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &296575391
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296575390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1524333653}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.06829219, y: 0.693}
+  m_AnchorMax: {x: 0.92, y: 0.79800004}
+  m_AnchoredPosition: {x: 2.2600098, y: 3.4299927}
+  m_SizeDelta: {x: 1.4199829, y: 2.7700043}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &296575392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296575390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &296575393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296575390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 923144ea49ba5eb4f9ac14869f4714f3, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 104
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u0420\u0430\u043D\u0435\u0435 \u0432\u044B \u0443\u0436\u0435 \u0438\u0433\u0440\u0430\u043B\u0438.
+    \u041D\u043E \u0434\u043B\u044F \u043A\u043E\u0440\u0440\u0435\u043A\u0442\u043D\u043E\u0439
+    \u0440\u0430\u0431\u043E\u0442\u044B \u0431\u0443\u0434\u0435\u0442 \u043D\u0430\u0447\u0430\u0442\u0430
+    \u043D\u043E\u0432\u0430\u044F \u0438\u0433\u0440\u0430."
+--- !u!222 &296575394
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 296575390}
   m_CullTransparentMesh: 1
 --- !u!1 &298293274
 GameObject:
@@ -20430,7 +20549,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.041402332, y: 0.3021925}
   m_AnchorMax: {x: 0.42182758, y: 0.47300002}
-  m_AnchoredPosition: {x: -2.4051971, y: 1.2130127}
+  m_AnchoredPosition: {x: -2.4052124, y: 1.2130127}
   m_SizeDelta: {x: 4.8099976, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &318484330
@@ -30241,7 +30360,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -37570,7 +37689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0756009, y: 0.28959832}
   m_AnchorMax: {x: 0.9325987, y: 0.8587322}
-  m_AnchoredPosition: {x: -4.1900024, y: -0.20999146}
+  m_AnchoredPosition: {x: -4.1900043, y: -0.20999146}
   m_SizeDelta: {x: -2.2199993, y: -7.6899996}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &536475897
@@ -46745,6 +46864,102 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &701465977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 701465978}
+  - component: {fileID: 701465981}
+  - component: {fileID: 701465980}
+  - component: {fileID: 701465979}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &701465978
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701465977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1524333653}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.27972668, y: 0.79800004}
+  m_AnchorMax: {x: 0.71900004, y: 0.90400004}
+  m_AnchoredPosition: {x: 1, y: 4}
+  m_SizeDelta: {x: 0.9000244, y: -1.4500122}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &701465979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701465977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &701465980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701465977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.99941266, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 923144ea49ba5eb4f9ac14869f4714f3, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 104
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u0435 1.2.6!"
+--- !u!222 &701465981
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 701465977}
+  m_CullTransparentMesh: 1
 --- !u!1 &702907061
 GameObject:
   m_ObjectHideFlags: 0
@@ -48416,6 +48631,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 744521187}
   m_CullTransparentMesh: 1
+--- !u!1 &746316687
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 746316688}
+  - component: {fileID: 746316691}
+  - component: {fileID: 746316690}
+  - component: {fileID: 746316689}
+  m_Layer: 5
+  m_Name: Button (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &746316688
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746316687}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1446894847}
+  m_Father: {fileID: 1524333653}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.37054667, y: 0.049000002}
+  m_AnchorMax: {x: 0.61881727, y: 0.17600001}
+  m_AnchoredPosition: {x: -0.104400635, y: 1.0797119}
+  m_SizeDelta: {x: -3.100006, y: 1.7000122}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &746316689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746316687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 746316690}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1529338916}
+        m_TargetAssemblyTypeName: SaveLoad, Assembly-CSharp
+        m_MethodName: DeleteSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &746316690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746316687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -1060951450, guid: 917d29bfd0c73464f94367ee9fc50461, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &746316691
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746316687}
+  m_CullTransparentMesh: 1
 --- !u!1 &749323548
 GameObject:
   m_ObjectHideFlags: 0
@@ -48427,6 +48776,7 @@ GameObject:
   - component: {fileID: 749323549}
   - component: {fileID: 749323551}
   - component: {fileID: 749323550}
+  - component: {fileID: 749323552}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -48496,6 +48846,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 749323548}
   m_CullTransparentMesh: 1
+--- !u!114 &749323552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 749323548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
 --- !u!1 &749547991
 GameObject:
   m_ObjectHideFlags: 0
@@ -49813,10 +50178,10 @@ RectTransform:
   m_Father: {fileID: 2001909712}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.791}
-  m_AnchorMin: {x: 0.4914793, y: 0.1593352}
+  m_AnchorMin: {x: 0.5, y: 0.15100001}
   m_AnchorMax: {x: 1, y: 0.664483}
-  m_AnchoredPosition: {x: 50.67, y: -7.8200073}
-  m_SizeDelta: {x: 67.57, y: -64.96}
+  m_AnchoredPosition: {x: 48.264, y: -3.3200073}
+  m_SizeDelta: {x: 72.716995, y: -73.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &768061480
 MonoBehaviour:
@@ -54370,7 +54735,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -60475,6 +60840,7 @@ GameObject:
   - component: {fileID: 872131516}
   - component: {fileID: 872131518}
   - component: {fileID: 872131517}
+  - component: {fileID: 872131519}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -60544,6 +60910,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 872131515}
   m_CullTransparentMesh: 1
+--- !u!114 &872131519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 872131515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
 --- !u!1 &873769093
 GameObject:
   m_ObjectHideFlags: 0
@@ -61824,7 +62205,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -62800,7 +63181,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -62841,6 +63222,114 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 924570424}
+  m_CullTransparentMesh: 1
+--- !u!1 &925842776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 925842777}
+  - component: {fileID: 925842780}
+  - component: {fileID: 925842779}
+  - component: {fileID: 925842778}
+  m_Layer: 5
+  m_Name: Text (Legacy) (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &925842777
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925842776}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1524333653}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.06829219, y: 0.22500001}
+  m_AnchorMax: {x: 0.92, y: 0.693}
+  m_AnchoredPosition: {x: 1.130127, y: 1.2799988}
+  m_SizeDelta: {x: 3.6800003, y: 1.699997}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &925842778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925842776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
+--- !u!114 &925842779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925842776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 0, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 923144ea49ba5eb4f9ac14869f4714f3, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 104
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u041E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u043E:\n* \u041D\u043E\u0432\u044B\u0435
+    \u0441\u044E\u0436\u0435\u0442\u043D\u044B\u0435 \u0437\u0430\u0434\u0430\u043D\u0438\u044F.\n*
+    \u041D\u043E\u0432\u0430\u044F \u0441\u0438\u0441\u0442\u0435\u043C\u0430 \u0441\u043F\u0430\u0441\u0435\u043D\u0438\u044F
+    \u0431\u0435\u0436\u0435\u043D\u0446\u0435\u0432.\n* \u041F\u0435\u0440\u0435\u0440\u0430\u0431\u043E\u0442\u0430\u043D\u0430
+    \u0441\u0438\u0441\u0442\u0435\u043C\u0430 \u0440\u0435\u0441\u0443\u0440\u0441\u043E\u0432
+    \u0438 \u0440\u0430\u0431\u043E\u0447\u0438\u0445.\n* \u0414\u043E\u0431\u0430\u0432\u043B\u0435\u043D\u044B
+    \u0437\u0432\u0443\u043A\u0438 \u0432 \u0438\u0433\u0440\u0443.\n* \u0418\u0437\u043C\u0435\u043D\u0435\u043D\u0430
+    \u043C\u0435\u0445\u0430\u043D\u0438\u043A\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438
+    \u0433\u0440\u0443\u0437\u043E\u0432.\n* \u0413\u0440\u0430\u0444\u0438\u0447\u0435\u0441\u043A\u0438\u0435
+    \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F.\n* \u0418\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u044B
+    \u043E\u0448\u0438\u0431\u043A\u0438 \u0438 \u043F\u0440\u043E\u0441\u044C\u0431\u044B
+    \u0438\u0433\u0440\u043E\u043A\u043E\u0432.\n* \u0414\u0440\u0443\u0433\u0438\u0435
+    \u0438\u0441\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044F."
+--- !u!222 &925842780
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 925842776}
   m_CullTransparentMesh: 1
 --- !u!1 &926388072
 GameObject:
@@ -63966,7 +64455,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -67533,7 +68022,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -68185,6 +68674,7 @@ GameObject:
   - component: {fileID: 1033745345}
   - component: {fileID: 1033745347}
   - component: {fileID: 1033745346}
+  - component: {fileID: 1033745348}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -68254,6 +68744,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1033745344}
   m_CullTransparentMesh: 1
+--- !u!114 &1033745348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033745344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
 --- !u!1 &1034067723
 GameObject:
   m_ObjectHideFlags: 0
@@ -69154,7 +69659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1045153388
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76728,6 +77233,7 @@ MonoBehaviour:
   NextStationTimeCount: 0
   TimerX2Bttn: {fileID: 684437771}
   TimerX2Pan: {fileID: 1360366491}
+  class213: 0
   LevelLocoText: {fileID: 959353522}
   StorageCoalText: {fileID: 1303820030}
   NeedCoalText: {fileID: 482588987}
@@ -76858,8 +77364,8 @@ MonoBehaviour:
   - "\u041A\u043E\u043C\u0441\u043E\u043C\u043E\u043B\u044C\u0441\u043A-\u043D\u0430-\u0410\u043C\u0443\u0440\u0435"
   - "\u0412\u0430\u043D\u0438\u043D\u043E"
   - "\u0412\u043B\u0430\u0434\u0438\u0432\u043E\u0441\u0442\u043E\u043A"
-  TimeForCity: 5a0000005a0000005a0000005a000000b4000000b40000008c00000050000000640000003c0000003c0000005a0000005a000000fa000000820000003c0000006e0000005000000050000000640000005f000000a000000096000000dc00000036010000be000000a0000000a0000000dc000000c80000004001000054010000a40100007c010000e00100005e010000f802000040010000dc000000080200008a020000e6000000680100004001000020030000
-  TemperatureForCity: 000000000000000000000000000000000000000000000000f6fffffff6fffffff6ffffff0000000000000000f6fffffff6ffffffecfffffff6ffffff00000000f6ffffffecffffffecffffffecffffffecffffffe2ffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffe2ffffffe2ffffffe2ffffffe2ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffff
+  TimeForCity: 5a0000005a0000005a0000005a000000b4000000b40000008c0000005a000000640000005a0000005a0000005a0000005a000000fa000000820000005a0000006e0000005a0000005a000000640000005f000000a000000096000000dc00000036010000be000000a0000000a0000000dc000000c80000004001000054010000a40100007c010000e00100005e010000f802000040010000dc000000080200008a020000e6000000680100004001000020030000
+  TemperatureForCity: 0000000000000000000000000000000000000000f6fffffff6fffffff6fffffff6fffffff6fffffff6fffffff6fffffff6ffffffecfffffff6fffffff6fffffff6ffffffecffffffecffffffecffffffecffffffe2ffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffecffffffe2ffffffe2ffffffe2ffffffe2ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffffd8ffffff
   SpeedFon: 1
   ParallaxObj:
   - {fileID: 542264063}
@@ -76906,6 +77412,7 @@ MonoBehaviour:
   TimeInGameStatisticText: {fileID: 1712361529}
   EffectCollect: {fileID: 863974641}
   ParticleTrain: {fileID: 328794048}
+  updatePan: {fileID: 1524333652}
   PanWagon: {fileID: 0}
   trailer: {fileID: 977088816}
   tasks:
@@ -77849,7 +78356,9 @@ MonoBehaviour:
   taskBttn: {fileID: 1743032766}
   quest:
   - namePerson: "\u0413\u043B. \u0418\u043D\u0436\u0435\u043D\u0435\u0440"
-    textQuest: "\"\u041C\u043D\u0435 \u0441\u043E\u043E\u0431\u0449\u0438\u043B\u0438,
+    textQuest: "\"\u041F\u0443\u0442\u044C \u043D\u0430 \u0432\u043E\u0441\u0442\u043E\u043A
+      \u043F\u043E\u043A\u0430 \u0437\u0430\u043A\u0440\u044B\u0442 \u0448\u0442\u043E\u0440\u043C\u043E\u043C,
+      \u043D\u043E \u043C\u043D\u0435 \u0441\u043E\u043E\u0431\u0449\u0438\u043B\u0438,
       \u0447\u0442\u043E \u0432 \u0433\u043E\u0440\u043E\u0434\u0435 \u041C\u043E\u0441\u043A\u0432\u0430
       \u0432\u0430\u0441 \u043E\u0436\u0438\u0434\u0430\u0435\u0442 \u043F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440,
       \u043A\u043E\u0442\u043E\u0440\u044B\u0439 \u0437\u0430\u043D\u0438\u043C\u0430\u0435\u0442\u0441\u044F
@@ -77861,7 +78370,7 @@ MonoBehaviour:
     targetCity: 1
     rewardTask: 0
     wagonTask: 0000000000000000
-    miniGame: 
+    miniGame: 0000
   - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u0421\u043E\u043A\u043E\u043B\u043E\u0432"
     textQuest: "\"\u041D\u0435 \u0431\u0443\u0434\u0435\u043C \u0442\u0435\u0440\u044F\u0442\u044C
       \u0432\u0440\u0435\u043C\u044F. \u042F \u043F\u0440\u043E\u0432\u0435\u043B
@@ -77870,27 +78379,29 @@ MonoBehaviour:
       \u043C\u0438\u0440\u0430 \u043F\u0440\u043E\u0438\u0437\u043E\u0448\u043B\u043E
       \u0438\u0437-\u0437\u0430 \u0433\u043B\u043E\u0431\u0430\u043B\u044C\u043D\u043E\u0433\u043E
       \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u043A\u043B\u0438\u043C\u0430\u0442\u0430,
-      \u0432\u044B\u0437\u0432\u0430\u043D\u043D\u044B\u043C \u0447\u0435\u043B\u043E\u0432\u0435\u0447\u0435\u0441\u043A\u043E\u0439
-      \u0434\u0435\u044F\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C\u044E.
+      \u0432\u044B\u0437\u0432\u0430\u043D\u043D\u043E\u0433\u043E \u0447\u0435\u043B\u043E\u0432\u0435\u0447\u0435\u0441\u043A\u043E\u0439
+      \u0434\u0435\u044F\u0442\u0435\u043B\u044C\u043D\u043E\u0441\u0442\u044C\u044E. 
       \u041C\u044B \u0434\u043E\u043B\u0436\u043D\u044B \u0441\u0440\u043E\u0447\u043D\u043E
       \u0434\u0435\u0439\u0441\u0442\u0432\u043E\u0432\u0430\u0442\u044C, \u0447\u0442\u043E\u0431\u044B
       \u043F\u0440\u0435\u0434\u043E\u0442\u0432\u0440\u0430\u0442\u0438\u0442\u044C
       \u0435\u0449\u0435 \u0431\u043E\u043B\u0435\u0435 \u0441\u0442\u0440\u0430\u0448\u043D\u044B\u0435
-      \u043F\u043E\u0441\u043B\u0435\u0434\u0441\u0442\u0432\u0438\u044F.\n\u0422\u0435\u0431\u0435
+      \u043F\u043E\u0441\u043B\u0435\u0434\u0441\u0442\u0432\u0438\u044F.\r\n\u0412\u0430\u043C
       \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u043E\u0442\u0432\u0435\u0437\u0442\u0438
       \u0441\u043F\u0435\u0446\u0438\u0430\u043B\u044C\u043D\u043E\u0435 \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u0435
       \u043D\u0430 \u043D\u0430\u0443\u0447\u043D\u0443\u044E \u0441\u0442\u0430\u043D\u0446\u0438\u044E
-      \u0432 \u0433\u043E\u0440\u043E\u0434\u0435 \u0410\u0440\u0445\u0430\u043D\u0433\u0435\u043B\u044C\u0441\u043A.
+      \u0432 \u0433\u043E\u0440\u043E\u0434\u0435 \u041A\u0438\u0440\u043E\u0432.
       \u0422\u0430\u043C \u0435\u0441\u0442\u044C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u044B\u0435
       \u0443\u0441\u043B\u043E\u0432\u0438\u044F \u0434\u043B\u044F \u0442\u043E\u0433\u043E,
       \u0447\u0442\u043E\u0431\u044B \u0443\u0437\u043D\u0430\u0442\u044C \u043F\u0435\u0440\u0432\u044B\u0435
-      \u043F\u0440\u0438\u0437\u043D\u0430\u043A\u0438 \u043A\u0430\u0442\u0430\u0441\u0442\u0440\u043E\u0444\u044B.\""
+      \u043F\u0440\u0438\u0437\u043D\u0430\u043A\u0438 \u043A\u0430\u0442\u0430\u0441\u0442\u0440\u043E\u0444\u044B
+      \u0438 \u0432\u044B\u044F\u0441\u043D\u0438\u0442\u044C \u043F\u0440\u0438\u0447\u0438\u043D\u0443
+      \u0448\u0442\u043E\u0440\u043C\u0430 \u043D\u0430 \u0432\u043E\u0441\u0442\u043E\u043A\u0435.\""
     cityPerson: "\u041C\u043E\u0441\u043A\u0432\u0430"
     doneTask: 0
     targetCity: 2
-    rewardTask: 2000
+    rewardTask: 1000
     wagonTask: 0000000004000000
-    miniGame: 
+    miniGame: 0000
   - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u041D\u0438\u043A\u043E\u043B\u0430\u0435\u0432\u0430"
     textQuest: "\"\u041E\u0442\u043B\u0438\u0447\u043D\u043E! \u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440
       \u0421\u043E\u043A\u043E\u043B\u043E\u0432 \u043E\u043A\u0430\u0437\u0430\u043B\u0441\u044F
@@ -77920,12 +78431,49 @@ MonoBehaviour:
       \u0441\u0435\u0439\u0447\u0430\u0441 \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C
       \u0434\u043B\u044F \u0432\u0441\u0435\u0445 \u0438 \u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
       \u0434\u043E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0438\u043C \u0442\u043E\u043F\u043B\u0438\u0432\u043E.\""
+    cityPerson: "\u041A\u0438\u0440\u043E\u0432"
+    doneTask: 0
+    targetCity: 8
+    rewardTask: 0
+    wagonTask: 0000000000000000
+    miniGame: 0000
+  - namePerson: 
+    textQuest: "\u0412\u044B \u0441\u0443\u043C\u0435\u043B\u0438 \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
+      \u0432\u044B\u0448\u043A\u0443. \u0422\u0435\u043F\u0435\u0440\u044C \u0441\u0442\u0430\u043D\u0446\u0438\u044F
+      \u0441\u043C\u043E\u0436\u0435\u0442 \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C
+      \u0434\u0430\u043D\u043D\u044B\u0435."
     cityPerson: "\u0410\u0440\u0445\u0430\u043D\u0433\u0435\u043B\u044C\u0441\u043A"
     doneTask: 0
     targetCity: 13
-    rewardTask: 1500
+    rewardTask: 250
+    wagonTask: 0000000000000000
+    miniGame: 0100
+  - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u041D\u0438\u043A\u043E\u043B\u0430\u0435\u0432\u0430"
+    textQuest: "\"\u041E\u0442\u043B\u0438\u0447\u043D\u043E! \u0412\u044B\u0448\u043A\u0430
+      \u0437\u0430\u0440\u0430\u0431\u043E\u0442\u0430\u043B\u0430. \u0412 \u0441\u043A\u043E\u0440\u043E\u043C
+      \u0432\u0440\u0435\u043C\u0435\u043D\u0438 \u043C\u044B \u043D\u0430\u0447\u043D\u0435\u043C
+      \u043F\u043E\u043B\u0443\u0447\u0430\u0442\u044C \u0434\u0430\u043D\u043D\u044B\u0435
+      \u0438 \u0441\u043C\u043E\u0436\u0435\u043C \u0432\u044B\u044F\u0441\u043D\u0438\u0442\u044C
+      \u043F\u0440\u0438\u0447\u0438\u043D\u044B. \r\n\u0421 \u043D\u0430\u043C\u0438
+      \u0441\u0432\u044F\u0437\u0430\u043B\u0438\u0441\u044C \u0438\u0437 \u0420\u043E\u0441\u0442\u043E\u0432-\u043D\u0430-\u0414\u043E\u043D\u0443.
+      \u0422\u0430\u043C \u0441\u043E\u0437\u0434\u0430\u043D \u043E\u043F\u0435\u0440\u0430\u0442\u0438\u0432\u043D\u044B\u0439
+      \u0448\u0442\u0430\u0431, \u0438 \u0441\u0435\u0439\u0447\u0430\u0441 \u043E\u043D\u0438
+      \u0433\u043E\u0442\u043E\u0432\u044F\u0442 \u0441\u043E\u0441\u0442\u0430\u0432
+      \u0434\u043B\u044F \u044D\u0432\u0430\u043A\u0443\u0430\u0446\u0438\u0438 \u0431\u0435\u0436\u0435\u043D\u0446\u0435\u0432.
+      \u041D\u043E \u0438\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C
+      \u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u0437\u0430\u043F\u0430\u0441 \u0442\u043E\u043F\u043B\u0438\u0432\u0430.
+      \u0412\u0430\u0448 \u043F\u043E\u0435\u0437\u0434 - \u044D\u0442\u043E \u0441\u0435\u0439\u0447\u0430\u0441
+      \u0435\u0434\u0438\u043D\u0441\u0442\u0432\u0435\u043D\u043D\u0430\u044F \u0432\u043E\u0437\u043C\u043E\u0436\u043D\u043E\u0441\u0442\u044C
+      \u0434\u043B\u044F \u0432\u0441\u0435\u0445, \u0438 \u0412\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
+      \u0434\u043E\u0441\u0442\u0430\u0432\u0438\u0442\u044C \u0438\u043C \u0442\u043E\u043F\u043B\u0438\u0432\u043E.
+      \u041C\u044B \u0443\u0436\u0435 \u0437\u0430\u043A\u0430\u043D\u0447\u0438\u0432\u0430\u0435\u043C
+      \u043F\u043E\u0433\u0440\u0443\u0437\u043A\u0443.\""
+    cityPerson: "\u041A\u0438\u0440\u043E\u0432"
+    doneTask: 0
+    targetCity: 8
+    rewardTask: 600
     wagonTask: 0600000000000000
-    miniGame: 
+    miniGame: 0000
   - namePerson: "\u041F\u043E\u043B\u043A\u043E\u0432\u043D\u0438\u043A \u041A\u043E\u0432\u0430\u043B\u0435\u043D\u043A\u043E"
     textQuest: "\u0412\u044B \u0434\u0430\u0432\u043D\u043E \u0443\u0436\u0435 \u043D\u0435
       \u0432\u0438\u0434\u0435\u043B\u0438 \u0441\u0442\u043E\u043B\u044C\u043A\u043E
@@ -77947,29 +78495,99 @@ MonoBehaviour:
       \u044D\u0442\u0438\u043C \u043F\u0440\u0435\u0434\u043F\u0440\u0438\u044F\u0442\u0438\u0435\u043C.
       \u042F \u0436\u0435 \u0432\u043E\u0432\u0441\u0435 \u0434\u0430\u0436\u0435
       \u043D\u0435 \u043F\u043E\u043B\u043A\u043E\u0432\u043D\u0438\u043A... \u041D\u043E
-      \u043B\u0430\u0434\u043D\u043E, \u044D\u0442\u043E \u0443\u0436\u0435 \u043B\u0438\u0448\u043D\u0435\u0435..\r\n\u041C\u043D\u0435
-      \u0441\u043E\u043E\u0431\u0449\u0438\u043B\u0438, \u0447\u0442\u043E \u0442\u0435\u0431\u044F
-      \u0436\u0434\u0435\u0442 \u0447\u0435\u043B\u043E\u0432\u0435\u043A \u0437\u0434\u0435\u0441\u044C
-      \u043D\u0435\u0434\u0430\u043B\u0435\u043A\u043E, \u0432 \u041A\u0440\u0430\u0441\u043D\u043E\u0434\u0430\u0440\u0435.
-      \u041A\u0430\u043A \u043C\u043D\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E,
-      \u043E\u043D \u0434\u0435\u0440\u0436\u0438\u0442 \u0441\u0432\u044F\u0437\u044C
-      \u0441 \u043F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440\u043E\u043C \u0421\u043E\u043A\u043E\u043B\u043E\u0432\u044B\u043C
-      \u0438 \u0435\u0441\u0442\u044C \u0432\u0430\u0436\u043D\u044B\u0435 \u043D\u043E\u0432\u043E\u0441\u0442\u0438
-      \u0434\u043B\u044F \u0442\u0435\u0431\u044F.\""
+      \u043B\u0430\u0434\u043D\u043E, \u044D\u0442\u043E \u0443\u0436\u0435 \u043B\u0438\u0448\u043D\u0435\u0435..\r\n\u0422\u0430\u043A,
+      \u0442\u043E\u043F\u043B\u0438\u0432\u043E \u0443 \u043D\u0430\u0441 \u0435\u0441\u0442\u044C,
+      \u043D\u043E \u0447\u0442\u043E\u0431\u044B \u043F\u0440\u043E\u0432\u0435\u0441\u0442\u0438
+      \u044D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u0443\u044E \u044D\u0432\u0430\u043A\u0443\u0430\u0446\u0438\u044E.
+      \u041D\u043E \u043D\u0430\u043C \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E
+      \u0435\u0449\u0435 \u043F\u0440\u0438\u043F\u0430\u0441\u044B, \u0430 \u0442\u0430\u043A\u0436\u0435
+      \u043C\u0435\u0434\u0438\u043A\u0430\u043C\u0435\u043D\u0442\u044B. \u0427\u0442\u043E
+      \u043A\u0430\u0441\u0430\u0435\u0442\u0441\u044F \u043F\u0440\u0438\u043F\u0430\u0441\u043E\u0432,
+      \u0442\u043E \u0438\u0445 \u043C\u043E\u0436\u043D\u043E \u0431\u0443\u0434\u0435\u0442
+      \u0437\u0430\u0431\u0440\u0430\u0442\u044C \u0432 \u0412\u043E\u043B\u0433\u043E\u0433\u0440\u0430\u0434\u0435.
+      \u041E\u043D\u0438 \u0443\u0436\u0435 \u0433\u043E\u0442\u043E\u0432\u044B
+      \u043A \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0435. \u0410 \u0432\u043E\u0442
+      \u0441 \u043C\u0435\u0434\u0438\u043A\u0430\u043C\u0435\u043D\u0442\u0430\u043C\u0438
+      \u0441\u043B\u043E\u0436\u043D\u0435\u0435. \u0421\u043A\u043B\u0430\u0434
+      \u0432 \u041D\u043E\u0432\u043E\u0440\u043E\u0441\u0441\u0438\u0439\u0441\u043A\u0435,
+      \u043D\u043E \u043E\u043D \u043D\u0435 \u0432\u044B\u0445\u043E\u0434\u0438\u0442
+      \u043D\u0430 \u0441\u0432\u044F\u0437\u044C \u0438 \u043F\u0440\u0438\u0434\u0435\u0442\u0441\u044F
+      \u0441\u0430\u043C\u0438\u043C \u043A\u0430\u043A-\u0442\u043E \u0434\u043E\u0441\u0442\u0430\u0442\u044C
+      \u043E\u0442 \u0442\u0443\u0434\u0430 \u043F\u0440\u0438\u043F\u0430\u0441\u044B.\""
     cityPerson: "\u0420\u043E\u0441\u0442\u043E\u0432-\u043D\u0430-\u0414\u043E\u043D\u0443"
     doneTask: 0
     targetCity: 4
-    rewardTask: 300
+    rewardTask: 0
     wagonTask: 0000000000000000
-    miniGame: 
+    miniGame: 0000
+  - namePerson: 
+    textQuest: "\"\u0412\u044B \u0441\u0443\u043C\u0435\u043B\u0438 \u0432\u0437\u043B\u043E\u043C\u0430\u0442\u044C
+      \u043A\u043E\u0434. \u0425\u0440\u0430\u043D\u0438\u043B\u0438\u0449\u0435
+      \u043F\u0440\u0438\u043F\u0430\u0441\u043E\u0432 \u043E\u0442\u043A\u0440\u044B\u0442\u043E.
+      \u0412\u0430\u0448\u0438 \u043B\u044E\u0434\u0438 \u0433\u0440\u0443\u0437\u044F\u0442
+      \u0443\u0436\u0435 \u0432\u0441\u0435 \u043D\u0430 \u043F\u043E\u0435\u0437\u0434!\""
+    cityPerson: "\u041D\u043E\u0432\u043E\u0440\u043E\u0441\u0441\u0438\u0439\u0441\u043A"
+    doneTask: 0
+    targetCity: 15
+    rewardTask: 280
+    wagonTask: 0000000004000000
+    miniGame: 0001
+  - namePerson: "\u041F\u043E\u043B\u043A\u043E\u0432\u043D\u0438\u043A \u041A\u043E\u0432\u0430\u043B\u0435\u043D\u043A\u043E"
+    textQuest: "\u0417\u0430-\u043C\u0435-\u0447\u0430-\u0442\u0435-\u043B\u044C\u043D\u043E!
+      \u0417\u043D\u0430\u043B, \u0447\u0442\u043E \u043C\u043E\u0436\u043D\u043E
+      \u0440\u0430\u0441\u0441\u0447\u0438\u0442\u044B\u0432\u0430\u0442\u044C. \u0415\u0441\u043B\u0438
+      \u0443\u0434\u0430\u043B\u043E\u0441\u044C \u0434\u043E\u0441\u0442\u0430\u0442\u044C
+      \u043C\u0435\u0434\u0438\u043A\u0430\u043C\u0435\u043D\u0442\u044B, \u0442\u043E
+      \u0441 \u043F\u0440\u0438\u043F\u0430\u0441\u0430\u043C\u0438 \u043D\u0435
+      \u0431\u0443\u0434\u0435\u0442 \u043D\u0438\u043A\u0430\u043A\u0438\u0445 \u043F\u0440\u043E\u0431\u043B\u0435\u043C.
+      \u041E\u043D\u0438 \u043D\u0430\u0445\u043E\u0434\u044F\u0442\u0441\u044F \u0432
+      \u0412\u043E\u043B\u0433\u043E\u0433\u0440\u0430\u0434\u0435 \u0438 \u0443\u0436\u0435
+      \u0433\u043E\u0442\u043E\u0432\u044B \u043A \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0435."
+    cityPerson: "\u0420\u043E\u0441\u0442\u043E\u0432-\u043D\u0430-\u0414\u043E\u043D\u0443"
+    doneTask: 0
+    targetCity: 4
+    rewardTask: 0
+    wagonTask: 0000000000000000
+    miniGame: 0000
+  - namePerson: 
+    textQuest: "\u041F\u0440\u0438\u043F\u0430\u0441\u044B \u0434\u043B\u044F \u043F\u043E\u043B\u043A\u043E\u0432\u043D\u0438\u043A\u0430
+      \u041A\u043E\u0432\u0430\u043B\u0435\u043D\u043A\u043E \u043F\u043E\u0433\u0440\u0443\u0436\u0435\u043D\u044B
+      \u0443\u0436\u0435 \u043D\u0430 \u0432\u0430\u0448 \u043F\u043E\u0435\u0437\u0434!"
+    cityPerson: "\u0412\u043E\u043B\u0433\u043E\u0433\u0440\u0430\u0434"
+    doneTask: 0
+    targetCity: 5
+    rewardTask: 2300
+    wagonTask: 0000000005000000
+    miniGame: 0000
+  - namePerson: "\u041F\u043E\u043B\u043A\u043E\u0432\u043D\u0438\u043A \u041A\u043E\u0432\u0430\u043B\u0435\u043D\u043A\u043E"
+    textQuest: "\"\u0422\u0435\u043F\u0435\u0440\u044C \u043D\u0430\u0448 \u0441\u043E\u0441\u0442\u0430\u0432
+      \u0433\u043E\u0442\u043E\u0432 \u043A \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0435.
+      \u0412\u0441\u0435 \u044D\u0442\u0438 \u043B\u044E\u0434\u0438 \u0441\u043C\u043E\u0433\u0443\u0442
+      \u0432\u044B\u0436\u0438\u0442\u044C \u0431\u043B\u0430\u0433\u043E\u0434\u0430\u0440\u044F
+      \u0442\u0432\u043E\u0435\u0439 \u043F\u043E\u043C\u043E\u0449\u0438. \u041E\u0434\u043D\u0430\u043A\u043E.
+      \u041F\u0443\u0442\u044C \u043D\u0430 \u0432\u043E\u0441\u0442\u043E\u043A
+      \u043F\u043E-\u043F\u0440\u0435\u0436\u043D\u0435\u043C\u0443 \u0437\u0430\u043A\u0440\u044B\u0442
+      \u0438\u0437-\u0437\u0430 \u0441\u043C\u0435\u0440\u0447\u0435\u0439. \u0412\u043E\u0437\u043C\u043E\u0436\u043D\u043E,
+      \u043F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u0421\u043E\u043A\u043E\u043B\u043E\u0432
+      \u0437\u043D\u0430\u0435\u0442 \u043A\u0430\u043A \u0440\u0435\u0448\u0438\u0442\u044C
+      \u044D\u0442\u0443 \u043F\u0440\u043E\u0431\u043B\u0435\u043C\u0443.\r\n\u041C\u043D\u0435
+      \u0441\u043E\u043E\u0431\u0449\u0438\u043B\u0438, \u0447\u0442\u043E \u0432
+      \u041A\u0440\u0430\u0441\u043D\u043E\u0434\u0430\u0440\u0435 \u0442\u0435\u0431\u044F
+      \u0436\u0434\u0435\u0442 \u0447\u0435\u043B\u043E\u0432\u0435\u043A \u043E\u0442
+      \u043D\u0435\u0433\u043E \u0441 \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0435\u0439.\""
+    cityPerson: "\u0420\u043E\u0441\u0442\u043E\u0432-\u043D\u0430-\u0414\u043E\u043D\u0443"
+    doneTask: 0
+    targetCity: 4
+    rewardTask: 0
+    wagonTask: 0000000000000000
+    miniGame: 0000
   - namePerson: "\u041B\u0430\u0431\u043E\u0440\u0430\u043D\u0442 \u0421\u0438\u0434\u043E\u0440\u043E\u0432"
-    textQuest: "\u041C\u043E\u043B\u043E\u0434\u043E\u0439 \u0447\u0435\u043B\u043E\u0432\u0435\u043A
-      \u0441 \u043E\u0433\u0440\u043E\u043C\u043D\u044B\u043C \u043F\u0440\u0438\u0435\u043C\u043D\u0438\u043A\u043E\u043C
-      \u043F\u0440\u043E\u0442\u044F\u0433\u0438\u0432\u0430\u0435\u0442 \u0432\u0430\u043C
-      \u043D\u0430\u0443\u0448\u043D\u0438\u043A.\r\n\"\u041F\u0440\u043E\u0444\u0435\u0441\u043E\u0440
-      \u0421\u043E\u043B\u043E\u043A\u043E\u0432: \u042F \u043E\u0447\u0435\u043D\u044C
-      \u0440\u0430\u0434, \u0447\u0442\u043E \u0432\u044B \u0435\u0449\u0435 \u0436\u0438\u0432\u044B.
-      \u041C\u043D\u0435 \u0442\u0430\u043A\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E,
+    textQuest: "\u0412\u0430\u043C \u0443\u0434\u0430\u0435\u0442\u0441\u044F \u043D\u0430\u0441\u0442\u0440\u043E\u0438\u0442\u044C
+      \u043F\u0440\u0438\u0435\u043C\u043D\u0438\u043A, \u0438 \u0432\u044B \u0441\u043B\u044B\u0448\u0438\u0442\u0435
+      \u0433\u043E\u043B\u043E\u0441 \u043F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440\u0430:
+      \"\u042F \u043E\u0447\u0435\u043D\u044C \u0440\u0430\u0434, \u0447\u0442\u043E
+      \u0432\u044B \u0435\u0449\u0435 \u0436\u0438\u0432\u044B. \u041C\u043D\u0435
+      \u0442\u0430\u043A\u0436\u0435 \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E,
       \u0447\u0442\u043E \u0432\u044B \u0441\u0442\u0430\u0440\u0430\u0435\u0442\u0435\u0441\u044C
       \u043F\u043E\u043C\u043E\u0447\u044C \u0432\u044B\u0436\u0438\u0432\u0448\u0438\u043C.
       \u042D\u0442\u043E \u0432\u0441\u0435 \u0431\u043E\u043B\u044C\u0448\u0435
@@ -77977,7 +78595,7 @@ MonoBehaviour:
       \u0432\u043E \u0432\u0441\u0435\u0445 \u043D\u0430\u0441! \u041D\u0438\u043A\u043E\u043B\u0430\u0435\u0432\u0430
       \u0432\u044B\u044F\u0441\u043D\u0438\u043B\u0430, \u0447\u0442\u043E \u043F\u043E\u0441\u043B\u0435
       \u0437\u0435\u043C\u043B\u0435\u0442\u0440\u044F\u0441\u0435\u043D\u0438\u044F
-      \u0432 \u0410\u0440\u043A\u0442\u0438\u043A\u0435, \u043E\u0433\u0440\u043E\u043C\u043D\u043E\u0435
+      \u0432 \u0410\u0440\u043A\u0442\u0438\u043A\u0435 \u043E\u0433\u0440\u043E\u043C\u043D\u043E\u0435
       \u043A\u043E\u043B\u0438\u0447\u0435\u0441\u0442\u0432\u043E \u0441\u043A\u043E\u043F\u0438\u0432\u0448\u0435\u0433\u043E\u0441\u044F
       \u0442\u0430\u043C \u0433\u0430\u0437\u0430 \u0431\u044B\u043B\u0438 \u0432\u044B\u0431\u0440\u043E\u0448\u0435\u043D\u044B
       \u0432 \u0430\u0442\u043C\u043E\u0441\u0444\u0435\u0440\u0443, \u0447\u0442\u043E
@@ -77985,7 +78603,8 @@ MonoBehaviour:
       \u0440\u0435\u0437\u043A\u043E\u0433\u043E \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F
       \u043A\u043B\u0438\u043C\u0430\u0442\u0430. \u041D\u043E.. \u0432\u0435\u0440\u043E\u044F\u0442\u043D\u043E,
       \u0438 \u043D\u0430\u0448\u0430 \u0432\u0438\u043D\u0430 \u0435\u0441\u0442\u044C
-      \u0432 \u044D\u0442\u043E\u043C... \u0412 \u041C\u0430\u0433\u043D\u0438\u0442\u043E\u0433\u043E\u0440\u0441\u043A\u0435
+      \u0432 \u044D\u0442\u043E\u043C... \u0418\u0437\u0432\u0435\u0441\u0442\u043D\u043E
+      \u043B\u0438 \u0432\u0430\u043C, \u043D\u043E \u0432 \u041C\u0430\u0433\u043D\u0438\u0442\u043E\u0433\u043E\u0440\u0441\u043A\u0435
       \u043F\u0440\u043E\u0432\u043E\u0434\u0438\u043B\u0438\u0441\u044C \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F
       \u043F\u043E \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044E \u043F\u0440\u0438\u0440\u043E\u0434\u043D\u044B\u043C\u0438
       \u044F\u0432\u043B\u0435\u043D\u0438\u044F\u043C\u0438, \u0442\u0430\u043A\u0438\u043C\u0438
@@ -77997,17 +78616,21 @@ MonoBehaviour:
       \u0442\u043E\u0447\u043D\u043E \u0438\u0437\u0432\u0435\u0441\u0442\u043D\u043E,
       \u0447\u0442\u043E \u043D\u0430\u0448\u0430 \u0441\u0442\u0430\u043D\u0446\u0438\u044F
       \u043F\u0440\u043E\u0434\u043E\u043B\u0436\u0430\u0435\u0442 \u0440\u0430\u0431\u043E\u0442\u0443.
-      \u0412 \u0421\u0430\u0440\u0430\u0442\u043E\u0432\u0435 \u0442\u0435\u0431\u044F
+      \u0412\u0440\u0435\u043C\u0435\u043D\u0438 \u043E\u0447\u0435\u043D\u044C \u043C\u0430\u043B\u043E.
+      \u0412 \u0421\u0430\u0440\u0430\u0442\u043E\u0432\u0435 \u0412\u0430\u0441
       \u0436\u0434\u0435\u0442 \u0447\u0435\u043B\u043E\u0432\u0435\u043A, \u043A\u043E\u0442\u043E\u0440\u044B\u0439
       \u0441\u0443\u043C\u0435\u0435\u0442 \u043E\u0441\u0442\u0430\u043D\u043E\u0432\u0438\u0442\u044C
       \u0435\u0451. \u041D\u0430\u0434\u0435\u044E\u0441\u044C, \u044D\u0442\u043E
-      \u0445\u043E\u0442\u044C \u0437\u0430\u043C\u0435\u0434\u043B\u0438\u0442 \u043F\u0440\u043E\u0446\u0435\u0441\u0441...\""
+      \u043F\u043E\u043C\u043E\u0436\u0435\u0442 \u043E\u0442\u043A\u0440\u044B\u0442\u044C
+      \u043F\u0443\u0442\u044C \u043D\u0430 \u0432\u043E\u0441\u0442\u043E\u043A
+      \u0438\u043B\u0438 \u0445\u043E\u0442\u044C \u0437\u0430\u043C\u0435\u0434\u043B\u0438\u0442
+      \u043F\u0440\u043E\u0446\u0435\u0441\u0441...\""
     cityPerson: "\u041A\u0440\u0430\u0441\u043D\u043E\u0434\u0430\u0440"
     doneTask: 0
     targetCity: 9
-    rewardTask: 450
+    rewardTask: 100
     wagonTask: 0000000000000000
-    miniGame: 
+    miniGame: 0100
   - namePerson: "\u041A\u0430\u043F\u0438\u0442\u0430\u043D \u041C\u0443\u0440\u0430\u0442\u043E\u0432"
     textQuest: "\"\u041A\u043E\u0433\u0434\u0430 \u0432\u0441\u0435 \u043D\u0430\u0447\u0430\u043B\u043E\u0441\u044C,
       \u044F \u0443\u0436\u0435 \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u044F\u043B\u0441\u044F
@@ -78018,7 +78641,7 @@ MonoBehaviour:
       \u043D\u0435 \u0443\u0432\u0435\u0440\u0435\u043D, \u0447\u0442\u043E \u0434\u0435\u043B\u043E
       \u0432 \u0441\u0442\u0430\u043D\u0446\u0438\u0438. \u0423 \u043D\u0430\u0441
       \u0431\u044B\u043B\u0438 \u0443\u0441\u043F\u0435\u0445\u0438 \u043F\u043E
-      \u0443\u043F\u0440\u0430\u043E\u0432\u043B\u0435\u043D\u0438\u044E \u043F\u0440\u0438\u0440\u043E\u0434\u043D\u044B\u043C\u0438
+      \u0443\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u044E \u043F\u0440\u0438\u0440\u043E\u0434\u043D\u044B\u043C\u0438
       \u044F\u0432\u043B\u0435\u043D\u0438\u044F\u043C\u0438. \u042D\u0442\u043E
       \u043C\u043E\u0433\u043B\u043E \u0441\u0442\u0430\u0442\u044C \u0441\u0430\u043C\u044B\u043C
       \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u043C \u0438 \u044D\u0444\u0444\u0435\u043A\u0442\u0438\u0432\u043D\u044B\u043C
@@ -78032,24 +78655,22 @@ MonoBehaviour:
     cityPerson: "\u0421\u0430\u0440\u0430\u0442\u043E\u0432"
     doneTask: 0
     targetCity: 6
-    rewardTask: 650
+    rewardTask: 1200
     wagonTask: 0000000000000000
-    miniGame: 
+    miniGame: 0000
   - namePerson: "\u041A\u0430\u043F\u0438\u0442\u0430\u043D \u041C\u0443\u0440\u0430\u0442\u043E\u0432"
-    textQuest: "\"\u0421\u0442\u0430\u043D\u0446\u0438\u044E \u044F \u043E\u0431\u0435\u0441\u0442\u043E\u0447\u0438\u043B
+    textQuest: "\"\u041D\u0435 \u0437\u043D\u0430\u044E \u043A\u0430\u043A \u0442\u0430\u043A
+      \u043F\u043E\u043B\u0443\u0447\u0438\u043B\u043E\u0441\u044C, \u0447\u0442\u043E
+      \u044F \u0437\u0430\u0431\u044B\u043B \u043A\u043E\u0434. \u0425\u043E\u0440\u043E\u0448\u043E,
+      \u0447\u0442\u043E \u0443 \u0432\u0430\u0441 \u0435\u0441\u0442\u044C \u043D\u0430\u0432\u044B\u043A\u0438.
+      \u0421\u0442\u0430\u043D\u0446\u0438\u044E \u044F \u043E\u0431\u0435\u0441\u0442\u043E\u0447\u0438\u043B
       \u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u0438\u043B \u0432\u0441\u0435
       \u043D\u0430\u0448\u0438 \u0438\u0441\u0441\u043B\u0435\u0434\u043E\u0432\u0430\u043D\u0438\u044F..
       \u0414\u043E \u043B\u0443\u0447\u0448\u0438\u0445 \u0432\u0440\u0435\u043C\u0435\u043D...\r\n\u0414\u0430,
-      \u043A\u0441\u0442\u0430\u0442\u0438. \u0422\u0443\u0442 \u0441\u043A\u043E\u043F\u0438\u043B\u043E\u0441\u044C
-      \u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u043D\u0430\u0443\u0447\u043D\u043E\u0433\u043E
-      \u043E\u0431\u043E\u0440\u0443\u0434\u043E\u0432\u0430\u043D\u0438\u044F, \u043F\u0440\u043E\u0434\u0443\u043A\u0442\u043E\u0432
-      \u0438 \u043C\u0435\u0434\u0438\u043A\u0430\u043C\u0435\u043D\u0442\u043E\u0432.
-      \u0415\u0441\u0442\u044C \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u044F,
-      \u0447\u0442\u043E \u043F\u043E\u043B\u043A\u043E\u0432\u043D\u0438\u043A \u041A\u043E\u0432\u0430\u043B\u0435\u043D\u043A\u043E
-      \u0441\u043E \u0441\u0432\u043E\u0438\u043C\u0438 \u043B\u044E\u0434\u044C\u043C\u0438
-      \u0441\u0435\u0439\u0447\u0430\u0441 \u0432 \u041A\u0430\u0437\u0430\u043D\u0438.
-      \u0418\u043C \u0431\u044B \u0432\u0441\u0435 \u044D\u0442\u043E \u0434\u043E\u0431\u0440\u043E
-      \u043E\u0447\u0435\u043D\u044C \u043F\u0440\u0438\u0433\u043E\u0434\u0438\u043B\u043E\u0441\u044C...
+      \u043A\u0441\u0442\u0430\u0442\u0438. \u0428\u0442\u043E\u0440\u043C \u043D\u0430
+      \u0432\u043E\u0441\u0442\u043E\u043A\u0435 \u043D\u0430\u0447\u0430\u043B \u0443\u0442\u0438\u0445\u0430\u0442\u044C.
+      \u0412\u043E\u0437\u043C\u043E\u0436\u043D\u043E \u0443\u0434\u0430\u0441\u0442\u0441\u044F
+      \u043F\u0440\u043E\u0439\u0442\u0438 \u044D\u0442\u043E\u0442 \u043F\u0443\u0442\u044C.
       \u041D\u043E \u044F \u0441 \u0442\u043E\u0431\u043E\u0439 \u043D\u0435 \u043F\u043E\u0435\u0434\u0443...
       \u0435\u0441\u0442\u044C \u0442\u0443\u0442 \u043D\u0435\u0434\u0430\u043B\u0435\u043A\u043E
       \u0443 \u043C\u0435\u043D\u044F \u0435\u0449\u0435 \u043E\u0434\u043D\u0430
@@ -78061,39 +78682,14 @@ MonoBehaviour:
     cityPerson: "\u041C\u0430\u0433\u043D\u0438\u0442\u043E\u0433\u043E\u0440\u0441\u043A"
     doneTask: 0
     targetCity: 20
-    rewardTask: 1800
-    wagonTask: 0300000006000000
-    miniGame: 
-  - namePerson: "\u041F\u043E\u043B\u043A\u043E\u0432\u043D\u0438\u043A \u041A\u043E\u0432\u0430\u043B\u0435\u043D\u043A\u043E"
-    textQuest: "\"\u041C\u0438\u0440 \u0437\u0430\u043C\u0435\u0440\u0437\u0430\u0435\u0442,
-      \u043D\u043E \u043C\u044B \u0432\u0441\u0435 \u0435\u0449\u0435 \u043D\u0435
-      \u0441\u0434\u0430\u0435\u043C\u0441\u044F. \u0412\u0441\u0435 \u0435\u0449\u0435
-      \u0436\u0438\u0432\u044B.. \u041F\u043E\u0431\u043E\u0440\u0435\u043C\u0441\u044F
-      \u0435\u0449\u0451.\r\n\u041F\u0440\u0438\u043F\u0430\u0441\u044B \u043D\u0430\u043C
-      \u0441\u0435\u0439\u0447\u0430\u0441 \u043E\u0447\u0435\u043D\u044C \u043A\u0441\u0442\u0430\u0442\u0438.
-      \u0412\u043F\u0435\u0440\u0435\u0434\u0438 \u0436\u0434\u0443\u0442 \u0435\u0449\u0451
-      \u0431\u043E\u043B\u0435\u0435 \u0441\u0438\u043B\u044C\u043D\u044B\u0435 \u043C\u043E\u0440\u043E\u0437\u044B,
-      \u0430 \u043F\u0443\u0442\u044C \u0435\u0449\u0435 \u043D\u0435 \u0431\u043B\u0438\u0437\u043A\u0438\u0439.
-      \u041D\u043E \u043F\u0443\u0442\u044C \u0443 \u043D\u0430\u0441 \u0441 \u0442\u043E\u0431\u043E\u0439
-      \u043E\u0434\u0438\u043D. \u041D\u0430\u0434\u0435\u044E\u0441\u044C, \u0447\u0442\u043E
-      \u043C\u044B \u0432\u0441\u0435 \u0434\u043E\u0431\u0435\u0440\u0435\u043C\u0441\u044F
-      \u0438 \u043F\u043E\u0441\u043C\u0435\u0435\u043C\u0441\u044F \u0435\u0449\u0451
-      \u043D\u0430\u0434 \u044D\u0442\u0438\u043C.. \u0414\u0435\u0440\u0436\u0438
-      \u0435\u0449\u0435 \u043F\u0440\u0438\u0435\u043C\u043D\u0438\u043A. \u041E\u043D
-      \u0445\u043E\u0442\u044C \u0438 \u0441\u0442\u0430\u0440\u044B\u0439, \u043D\u043E
-      \u043D\u0430\u0448\u0438 \u0441\u043F\u0435\u0446\u044B \u0435\u0433\u043E
-      \u043D\u0435\u043C\u043D\u043E\u0433\u043E \u043F\u043E\u0434\u043B\u0430\u0442\u0430\u043B\u0438.
-      \u0412\u0440\u043E\u0434\u0435 \u043B\u043E\u0432\u0438\u0442 \u0438\u043D\u043E\u0433\u0434\u0430.
-      \u0418 \u0441\u0447\u0430\u0441\u0442\u043B\u0438\u0432\u043E\u0433\u043E \u043F\u0443\u0442\u0438!\""
-    cityPerson: "\u041A\u0430\u0437\u0430\u043D\u044C"
-    doneTask: 0
-    targetCity: 12
-    rewardTask: 150
+    rewardTask: 0
     wagonTask: 0000000000000000
-    miniGame: 
+    miniGame: 0001
   - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u0421\u043E\u043A\u043E\u043B\u043E\u0432"
-    textQuest: "\u0421\u0442\u0430\u0440\u044B\u0439 \u043F\u0440\u0438\u0435\u043C\u043D\u0438\u043A
-      \u043D\u0435\u043E\u0436\u0438\u0434\u0430\u043D\u043D\u043E \u043E\u0436\u0438\u0432\u0430\u0435\u0442..\r\n\"\u041D\u0430\u043A\u043E\u043D\u0435\u0446
+    textQuest: "\u041F\u0440\u0438\u0435\u043C\u043D\u0438\u043A \u0448\u0438\u043F\u0438\u0442,
+      \u043D\u043E \u043F\u043E\u0441\u043B\u0435 \u043D\u0430\u0441\u0442\u0440\u043E\u0439\u043A\u0438
+      \u0441\u0442\u0430\u0440\u044B\u0439 \u043F\u0440\u0438\u0435\u043C\u043D\u0438\u043A
+      \u043E\u0436\u0438\u0432\u0430\u0435\u0442..\r\n\"\u041D\u0430\u043A\u043E\u043D\u0435\u0446
       \u0432\u044B \u043F\u043E\u0439\u043C\u0430\u043B\u0438 \u043C\u043E\u0439
       \u0441\u0438\u0433\u043D\u0430\u043B. \u041E\u0442\u043A\u043B\u044E\u0447\u0435\u043D\u0438\u0435
       \u0441\u0442\u0430\u043D\u0446\u0438\u0438 \u043D\u0438 \u043A \u0447\u0435\u043C\u0443
@@ -78103,7 +78699,7 @@ MonoBehaviour:
       \u0447\u0442\u043E \u043F\u043E\u0447\u0442\u0438 \u0432\u0435\u0441\u044C
       \u043C\u0438\u0440 \u043F\u043E\u043A\u0440\u044B\u043B\u0441\u044F \u043B\u044C\u0434\u043E\u043C.
       \u0412\u0441\u0435 \u043F\u0435\u0440\u0435\u0432\u0435\u0440\u043D\u0443\u043B\u043E\u0441\u044C,
-      \u0438 \u0441\u0442\u0440\u0430\u043D\u044B \u0433\u0434\u0435 \u043D\u0438\u043A\u043E\u0433\u0434\u0430
+      \u0438 \u0441\u0442\u0440\u0430\u043D\u044B, \u0433\u0434\u0435 \u043D\u0438\u043A\u043E\u0433\u0434\u0430
       \u043D\u0435 \u0431\u044B\u043B\u043E \u043C\u043E\u0440\u043E\u0437\u043E\u0432
       \u043D\u0435 \u043F\u0440\u043E\u0434\u0435\u0440\u0436\u0430\u043B\u0438\u0441\u044C
       \u0438 \u043F\u0430\u0440\u044B \u043D\u0435\u0434\u0435\u043B\u044C.. \u0412
@@ -78112,14 +78708,14 @@ MonoBehaviour:
       \u0432\u0430\u043C \u043F\u0430\u0440\u0443 \u044F\u0449\u0438\u043A\u043E\u0432
       \u0441 \u0432\u0430\u0436\u043D\u044B\u043C\u0438 \u0434\u043B\u044F \u043C\u0435\u043D\u044F
       \u0434\u0430\u043D\u043D\u044B\u043C\u0438. \u0414\u043E\u0441\u0442\u0430\u0432\u044C\u0442\u0435
-      \u0438\u0445 \u0432 \u0446\u0435\u043B\u043E\u0441\u0442\u0438 \u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u043E\u0441\u0442\u0438
+      \u0438\u0445 \u0432 \u0446\u0435\u043B\u043E\u0441\u0442\u0438 \u0438 \u0441\u043E\u0445\u0440\u0430\u043D\u043D\u043E\u0441\u0442\u0438
       \u0434\u043E \u0412\u043B\u0430\u0434\u0438\u0432\u043E\u0441\u0442\u043E\u043A\u0430\""
     cityPerson: "\u041E\u043C\u0441\u043A"
     doneTask: 0
     targetCity: 22
     rewardTask: 10000
     wagonTask: 0000000000000000
-    miniGame: 
+    miniGame: 0100
   - namePerson: "\u0414\u043C\u0438\u0442\u0440\u0438\u0439"
     textQuest: "\u0421\u0442\u0430\u043D\u0446\u0438\u044F \u0437\u0430\u0431\u0438\u0442\u0430
       \u043B\u044E\u0434\u044C\u043C\u0438, \u043D\u043E \u043F\u0440\u0430\u043A\u0442\u0438\u0447\u0435\u0441\u043A\u0438
@@ -78130,7 +78726,7 @@ MonoBehaviour:
       \u043C\u044B \u043F\u043E\u0433\u0440\u0443\u0437\u0438\u043B\u0438, \u0442\u0430\u043A
       \u0447\u0442\u043E \u0432\u0441\u0435 \u0433\u043E\u0442\u043E\u0432\u043E.
       \u0412\u044B \u043C\u043E\u0436\u0435\u0442\u0435 \u043E\u0442\u043F\u0440\u0430\u0432\u043B\u044F\u0442\u044C\u0441\u044F
-      \u0432 \u043F\u0443\u0442\u044C. \u041D\u0430\u0434\u0435\u044E\u0441\u044C
+      \u0432 \u043F\u0443\u0442\u044C. \u041D\u0430\u0434\u0435\u044E\u0441\u044C,
       \u0432\u0430\u043C \u043D\u0435 \u043D\u0443\u0436\u043D\u043E \u043E\u0431\u044A\u044F\u0441\u043D\u044F\u0442\u044C,
       \u0447\u0442\u043E \u0441\u043E\u0434\u0435\u0440\u0436\u0438\u043C\u043E\u0435
       \u0438\u0445 \u043D\u0435 \u0434\u043E\u043B\u0436\u043D\u043E \u0432\u0430\u0441
@@ -78161,9 +78757,9 @@ MonoBehaviour:
     cityPerson: "\u041D\u043E\u0432\u043E\u0441\u0438\u0431\u0438\u0440\u0441\u043A"
     doneTask: 0
     targetCity: 26
-    rewardTask: 150
+    rewardTask: 0
     wagonTask: 0000000002000000
-    miniGame: 
+    miniGame: 0000
   - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u0421\u043E\u043A\u043E\u043B\u043E\u0432"
     textQuest: "\u041F\u0440\u0438\u0435\u043C\u043D\u0438\u043A \u0441 \u043A\u0430\u0436\u0434\u044B\u043C
       \u0434\u043D\u0435\u043C \u0440\u0430\u0431\u043E\u0442\u0430\u0435\u0442 \u0432\u0441\u0435
@@ -78184,9 +78780,9 @@ MonoBehaviour:
     cityPerson: "\u0418\u0440\u043A\u0443\u0442\u0441\u043A"
     doneTask: 0
     targetCity: 32
-    rewardTask: 150
+    rewardTask: 0
     wagonTask: 0000000002000000
-    miniGame: 
+    miniGame: 0000
   - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u0421\u043E\u043A\u043E\u043B\u043E\u0432"
     textQuest: "\u041F\u0440\u0438\u0435\u043C\u043D\u0438\u043A \u0441\u0438\u043B\u044C\u043D\u043E
       \u0448\u0438\u043F\u0438\u0442. \u0421 \u0442\u0440\u0443\u0434\u043E\u043C,
@@ -78200,9 +78796,9 @@ MonoBehaviour:
     cityPerson: "\u0423\u043B\u0430\u043D-\u0423\u0434\u044D"
     doneTask: 0
     targetCity: 33
-    rewardTask: 150
+    rewardTask: 0
     wagonTask: 0000000002000000
-    miniGame: 
+    miniGame: 0100
   - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u0421\u043E\u043A\u043E\u043B\u043E\u0432"
     textQuest: "\u041F\u043E\u0441\u043B\u0435 \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u0445
       \u0434\u043D\u0435\u0439 \u0431\u0443\u0440\u044C, \u043D\u0430\u043A\u043E\u043D\u0435\u0446
@@ -78223,9 +78819,9 @@ MonoBehaviour:
     cityPerson: "\u0427\u0438\u0442\u0430"
     doneTask: 0
     targetCity: 34
-    rewardTask: 150
+    rewardTask: 0
     wagonTask: 0000000002000000
-    miniGame: 
+    miniGame: 0000
   - namePerson: "\u041F\u0440\u043E\u0444\u0435\u0441\u0441\u043E\u0440 \u0421\u043E\u043A\u043E\u043B\u043E\u0432"
     textQuest: "\u041F\u0440\u0438\u0435\u043C\u043D\u0438\u043A \u043D\u0430\u0447\u0438\u043D\u0430\u0435\u0442
       \u0440\u0430\u0431\u043E\u0442\u0430\u0442\u044C, \u0438 \u0432\u044B \u043E\u0442\u0447\u0435\u0442\u043B\u0438\u0432\u043E
@@ -78268,7 +78864,7 @@ MonoBehaviour:
     targetCity: 36
     rewardTask: 0
     wagonTask: 0000000002000000
-    miniGame: 
+    miniGame: 0000
 --- !u!4 &1098089810
 Transform:
   m_ObjectHideFlags: 0
@@ -83618,7 +84214,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -86534,7 +87130,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 145.56775, y: 387.1577}
+  m_AnchoredPosition: {x: 145.56773, y: 387.1577}
   m_SizeDelta: {x: 225.8255, y: 88.8042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1299596649
@@ -89238,6 +89834,8 @@ MonoBehaviour:
   clickTrees: {fileID: 8300000, guid: f4928430e2d75fd478cb6c61dd4e1a9e, type: 3}
   takePass: {fileID: 8300000, guid: 56b464f2c35e99c429883359cc366e01, type: 3}
   notTakePass: {fileID: 8300000, guid: 51f2a75f269d86e4ab14e0f7533fe5e9, type: 3}
+  success: {fileID: 8300000, guid: cdf6986b003f8b5469f82af4b2fb2e68, type: 3}
+  enterCode: {fileID: 8300000, guid: e84a75388e57219428a54cef0cac706b, type: 3}
   soundImg: {fileID: 830048201}
   soundSprite:
   - {fileID: 21300000, guid: bc3db93051145d146bd686e6bdc1a318, type: 3}
@@ -94557,7 +95155,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -95424,6 +96022,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1444970682}
   m_CullTransparentMesh: 1
+--- !u!1 &1446894846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1446894847}
+  - component: {fileID: 1446894849}
+  - component: {fileID: 1446894848}
+  m_Layer: 5
+  m_Name: Text (Legacy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1446894847
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446894846}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 746316688}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.06160939, y: 0.272}
+  m_AnchorMax: {x: 0.9296094, y: 0.74369}
+  m_AnchoredPosition: {x: 2, y: 0.38000107}
+  m_SizeDelta: {x: -3.6599998, y: -1.1900024}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1446894848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446894846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 47c4068cd64992741890669c79feff67, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"
+--- !u!222 &1446894849
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446894846}
+  m_CullTransparentMesh: 1
 --- !u!1 &1448228526
 GameObject:
   m_ObjectHideFlags: 0
@@ -95733,7 +96411,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1459082706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97680,7 +98358,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -99539,6 +100217,86 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1523651954}
   m_CullTransparentMesh: 1
+--- !u!1 &1524333652
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1524333653}
+  - component: {fileID: 1524333655}
+  - component: {fileID: 1524333654}
+  m_Layer: 5
+  m_Name: UpdateText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1524333653
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524333652}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 701465978}
+  - {fileID: 296575391}
+  - {fileID: 925842777}
+  - {fileID: 746316688}
+  m_Father: {fileID: 232485318}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.026751393, y: 0.05}
+  m_AnchorMax: {x: 0.98220724, y: 0.9722614}
+  m_AnchoredPosition: {x: -4.8900146, y: 2}
+  m_SizeDelta: {x: -1.1400146, y: 3.4000244}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1524333654
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524333652}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.5424528, g: 0.7381148, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7329ffbdcb53652469dbe380ea211cfd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1524333655
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524333652}
+  m_CullTransparentMesh: 1
 --- !u!1 &1529338915
 GameObject:
   m_ObjectHideFlags: 0
@@ -99758,7 +100516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.39800003, y: 0}
   m_AnchorMax: {x: 0.6024984, y: 0.070521235}
-  m_AnchoredPosition: {x: 0.3300171, y: -1.3598633}
+  m_AnchoredPosition: {x: 0.3300171, y: -1.3598614}
   m_SizeDelta: {x: 2.3599854, y: -1.4400024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1534590416
@@ -107298,7 +108056,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -110561,7 +111319,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -281.19202, y: 223.78853}
+  m_AnchoredPosition: {x: -281.19202, y: 223.78851}
   m_SizeDelta: {x: 272.7972, y: 118.34811}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1669964578
@@ -112160,7 +112918,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -119569,7 +120327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.043460626, y: 0.68411297}
   m_AnchorMax: {x: 0.25500003, y: 0.77029574}
-  m_AnchoredPosition: {x: 191.14, y: 109.15}
+  m_AnchoredPosition: {x: 191.13995, y: 109.149994}
   m_SizeDelta: {x: -4.28, y: 20.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1743032768
@@ -121552,7 +122310,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -121912,6 +122670,7 @@ GameObject:
   - component: {fileID: 1803984649}
   - component: {fileID: 1803984651}
   - component: {fileID: 1803984650}
+  - component: {fileID: 1803984652}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -121981,6 +122740,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803984648}
   m_CullTransparentMesh: 1
+--- !u!114 &1803984652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803984648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
 --- !u!1 &1804749391
 GameObject:
   m_ObjectHideFlags: 0
@@ -123754,7 +124528,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -126499,6 +127273,7 @@ GameObject:
   - component: {fileID: 1892331306}
   - component: {fileID: 1892331307}
   - component: {fileID: 1892331308}
+  - component: {fileID: 1892331309}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -126591,9 +127366,110 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a279dfa27c5df3c4595217d580702190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AO: {fileID: 1335133379}
+  pan: {fileID: 788804262}
   slider: {fileID: 1892331307}
   valueText: {fileID: 205120970}
   checkValueText: {fileID: 962388876}
+  music:
+  - {fileID: 8300000, guid: 6826eab618cef044c909d4a1157b558d, type: 3}
+  - {fileID: 8300000, guid: e22d34b2a2385494389c0ba07e30235a, type: 3}
+--- !u!82 &1892331309
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892331305}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1893556085
 GameObject:
   m_ObjectHideFlags: 0
@@ -128895,7 +129771,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.028654395, y: 0.0787441}
   m_AnchorMax: {x: 0.9751728, y: 0.34}
-  m_AnchoredPosition: {x: -1.067688, y: 1.0399399}
+  m_AnchoredPosition: {x: -1.067688, y: 1.0399704}
   m_SizeDelta: {x: -0.7999878, y: 0.55000305}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1937745371
@@ -132231,7 +133107,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -3.254}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.40935904, y: 0.35285532}
-  m_AnchoredPosition: {x: -42.99994, y: -20.998566}
+  m_AnchoredPosition: {x: -42.99994, y: -20.998444}
   m_SizeDelta: {x: 83.78998, y: 55.03}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1994849146
@@ -134632,6 +135508,7 @@ GameObject:
   - component: {fileID: 2035592668}
   - component: {fileID: 2035592670}
   - component: {fileID: 2035592669}
+  - component: {fileID: 2035592671}
   m_Layer: 5
   m_Name: Text (Legacy)
   m_TagString: Untagged
@@ -134701,6 +135578,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2035592667}
   m_CullTransparentMesh: 1
+--- !u!114 &2035592671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035592667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfabb0440166ab443bba8876756fdfa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 1, g: 1, b: 1, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 0
 --- !u!1 &2035615248
 GameObject:
   m_ObjectHideFlags: 0
@@ -137108,7 +138000,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.47430882, y: 0.1572554}
   m_AnchorMax: {x: 0.9827776, y: 0.2882554}
-  m_AnchoredPosition: {x: 0.2550354, y: 0.5}
+  m_AnchoredPosition: {x: 0.2550354, y: 0.4999962}
   m_SizeDelta: {x: 0.51, y: -0.57800007}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2069445494
@@ -137658,7 +138550,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -225.3692, y: 387.1577}
+  m_AnchoredPosition: {x: -225.36919, y: 387.1577}
   m_SizeDelta: {x: 223.42264, y: 88.8042}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2091005629
@@ -139374,7 +140266,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

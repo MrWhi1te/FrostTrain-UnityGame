@@ -88,7 +88,7 @@ public class DeliveryTask : MonoBehaviour
     {
         deliveryCity.text = "Доставка до: " + GM.NameCity[cityDelivery];
         cargoWagoneTransport.text = cargoWagon.ToString();
-        cargoWagoneCoal.text = "-" + cargoWagon * 20;
+        cargoWagoneCoal.text = "-" + cargoWagon * 10;
         cargoWagoneReward.text = cargoReward + "р";
     }
     public void AddCargoTransport() // Добавить вагон доставки
@@ -118,7 +118,7 @@ public class DeliveryTask : MonoBehaviour
         GM.targetDeliveryCity = cityDelivery;
         if (cargoWagon >= 1)
         {
-            activeTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + cargoWagon + GM.NameCity[cityDelivery];
+            activeTextQuest.text = "Активно задание!" + "\n" + "Доставка вагонов: " + cargoWagon + " в " + GM.NameCity[cityDelivery];
             deliveryObj.SetActive(false);
             deliveryCity.text = "Текущая Доставка до: " + GM.NameCity[cityDelivery];
             AO.PlayAudioClickBttn();

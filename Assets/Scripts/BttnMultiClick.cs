@@ -11,7 +11,7 @@ public class BttnMultiClick : MonoBehaviour
 
     private int clickMultiplierCount;
     private int clickCount;
-    private float timer = 0f;
+    private float timer = 2f;
     private float timeText;
 
     void Update()
@@ -56,7 +56,7 @@ public class BttnMultiClick : MonoBehaviour
             GM.ResourceTextUpdate();
             GM.TextLoco();
         }
-        GM.TreesClickParticle.transform.position = Camera.main.WorldToScreenPoint(Input.mousePosition);
+        GM.TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         GM.TreesClickParticle.SetActive(false);
         GM.TreesClickParticle.SetActive(true);
         if (clickCount >= 5)

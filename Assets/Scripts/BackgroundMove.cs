@@ -20,6 +20,7 @@ public class BackgroundMove : MonoBehaviour
 
     private void Update()
     {
+        if (currentSpeed > GM.SpeedFon) currentSpeed = 0;
         if (GM.SpeedFon > 0)
         {
             currentSpeed = Mathf.Lerp(currentSpeed, GM.SpeedFon, smoothTime * Time.deltaTime);
