@@ -196,6 +196,7 @@ public class Game : MonoBehaviour
     public GameObject updatePan; 
     [HideInInspector] public GameObject PanWagon; // Открытая панель вагона
     public GameObject trailer; //
+    public string device;
 
 
     public Dictionary<string, Sprite[]> wagoneSprites = new();
@@ -655,7 +656,7 @@ public class Game : MonoBehaviour
                 PlusResources(2, 0 - Food);
                 Food = 0;
                 ResourceTextUpdate();
-                if (CicleNeedFood >= 4) // Если 4 циклов и больше люди без еды
+                if (CicleNeedFood >= 7) // Если 4 циклов и больше люди без еды
                 {
                     for(int i = 0; i < WagoneData.Count; i++)
                     {
@@ -1011,6 +1012,7 @@ public class Game : MonoBehaviour
         AO.PlayAudioClickBttn();
         AO.CheckActiveSound();
         MenuPan.SetActive(false);
+        device = YandexGame.EnvironmentData.deviceType;
         StartGame();
     }
 
@@ -1024,7 +1026,7 @@ public class Game : MonoBehaviour
         public int reward;
     }
 
-    public Tasks[] tasks = new Tasks[]
+    private Tasks[] tasks = new Tasks[]
     {
         new Tasks { index = 0, text = "Улучшите тендер Локомотива", reward = 1000},
         new Tasks { index = 2, text = "Соберите любой ресурс", reward = 150},
@@ -1055,7 +1057,9 @@ public class Game : MonoBehaviour
 
     public void TaskDoner() //
     {
-        Money += tasks[TaskCount - 1].reward;
+        int i = Array.FindIndex(tasks, task => task.index == TaskCount-1);
+        Debug.Log(i);
+        Money += tasks[i-1].reward;
         TaskCount++;
         TaskCounter();
         AO.PlayAudioTakePass();

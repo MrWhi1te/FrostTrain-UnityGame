@@ -59,6 +59,14 @@ public class PassengersScript : MonoBehaviour
         pass[passStationList[0].numberPass].statusPass = true;
         passStationList.Remove(passStationList[0]);
         GM.passCount++;
+        Debug.Log("Кол-во в листе: " + passStationList.Count);
+        for (int i = 0; i < GM.PassResourceUse.Length; i++)
+        {
+            Debug.Log("Индекс: " + i);
+            Debug.Log("Значение в GM: " + GM.PassResourceUse[i]);
+            Debug.Log("Значение в пасс: " + passStationList[0].usageResources[i]);
+            GM.PassResourceUse[i] += passStationList[0].usageResources[i];
+        }
         swipeCard.SetActive(false);
         SwipeCardCheck();
     }

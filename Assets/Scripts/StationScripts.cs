@@ -225,6 +225,10 @@ public class StationScripts : MonoBehaviour
         GM.Food = resourcesInfo[1, 0];
         GM.Water = resourcesInfo[2, 0];
         GM.Warm = resourcesInfo[3, 0];
+        for (int i = 0; i < 8; i++)
+        {
+            ActiveSlider(i);
+        }
         ResourceTextUpdate();
         AO.PlayAudioPayment();
     }

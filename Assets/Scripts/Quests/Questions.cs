@@ -48,10 +48,12 @@ public class Questions : MonoBehaviour
             if(GM.NameCity[GM.City] == "Владивосток")
             {
                 endText.text = end[0];
+                YG.YandexMetrica.Send("goodEnd");
             }
             else if(GM.NameCity[GM.City] == "Магнитогорск")
             {
                 endText.text = end[1];
+                YG.YandexMetrica.Send("badEnd");
             }
             endPan.SetActive(true);
             statisticText.text = "Статистика вашей игры:" + "\n" + "Собрано угля: " + GM.CoalPlusStatistic + "\n" + "Собрано еды: " + GM.FoodPlusStatistic + "\n" + "Собрано воды:" + GM.WaterPlusStatistic 
@@ -64,14 +66,11 @@ public class Questions : MonoBehaviour
         if (activeTask)
         {
             quest[numberQuest].doneTask = true;
-            if(numberQuest > 0)
-            {
-                GM.Money += quest[numberQuest].rewardTask;
-                ST.ResourceTextUpdate();
-                GM.CargoSpecTransportCount = 0;
-                GM.CargoSpec1TransportCount = 0;
-                AO.PlayAudioTakeResource();
-            }
+            GM.Money += quest[numberQuest].rewardTask;
+            ST.ResourceTextUpdate();
+            GM.CargoSpecTransportCount = 0;
+            GM.CargoSpec1TransportCount = 0;
+            AO.PlayAudioTakeResource();
             if (quest[numberQuest].wagonTask[0] > 0 || quest[numberQuest].wagonTask[1] > 0)
             {
                 GM.CargoSpecTransportCount = quest[numberQuest].wagonTask[0];

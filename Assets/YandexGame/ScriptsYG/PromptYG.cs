@@ -1,20 +1,22 @@
-using UnityEngine;
+п»їusing UnityEngine;
 using UnityEngine.Events;
 
 namespace YG
 {
+    [HelpURL("https://www.notion.so/PluginYG-d457b23eee604b7aa6076116aab647ed#28b70d48d9be436088f60200c99807cd")]
     public class PromptYG : MonoBehaviour
     {
         [Header("Buttons serialize")]
-        [Tooltip("Объект (отключённая кнопка или текст), который будет сообщать о том, что ярлык не поддерживается. Данный объект можно не указывать, тогда, если ярлык не будет поддерживаться - ничего не будет отображаться.")]
+        [Tooltip("РћР±СЉРµРєС‚ (РѕС‚РєР»СЋС‡С‘РЅРЅР°СЏ РєРЅРѕРїРєР° РёР»Рё С‚РµРєСЃС‚), РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕРѕР±С‰Р°С‚СЊ Рѕ С‚РѕРј, С‡С‚Рѕ СЏСЂР»С‹Рє РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚СЃСЏ. Р”Р°РЅРЅС‹Р№ РѕР±СЉРµРєС‚ РјРѕР¶РЅРѕ РЅРµ СѓРєР°Р·С‹РІР°С‚СЊ, С‚РѕРіРґР°, РµСЃР»Рё СЏСЂР»С‹Рє РЅРµ Р±СѓРґРµС‚ РїРѕРґРґРµСЂР¶РёРІР°С‚СЊСЃСЏ - РЅРёС‡РµРіРѕ РЅРµ Р±СѓРґРµС‚ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊСЃСЏ.")]
         public GameObject notSupported;
-        [Tooltip("Объект (отключённая кнопка или текст), который будет сообщать о том, что ярлык уже установлен. Данный объект можно не указывать, тогда, если ярлык уже установлен - ничего не будет отображаться.")]
+        [Tooltip("РћР±СЉРµРєС‚ (РѕС‚РєР»СЋС‡С‘РЅРЅР°СЏ РєРЅРѕРїРєР° РёР»Рё С‚РµРєСЃС‚), РєРѕС‚РѕСЂС‹Р№ Р±СѓРґРµС‚ СЃРѕРѕР±С‰Р°С‚СЊ Рѕ С‚РѕРј, С‡С‚Рѕ СЏСЂР»С‹Рє СѓР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ. Р”Р°РЅРЅС‹Р№ РѕР±СЉРµРєС‚ РјРѕР¶РЅРѕ РЅРµ СѓРєР°Р·С‹РІР°С‚СЊ, С‚РѕРіРґР°, РµСЃР»Рё СЏСЂР»С‹Рє СѓР¶Рµ СѓСЃС‚Р°РЅРѕРІР»РµРЅ - РЅРёС‡РµРіРѕ РЅРµ Р±СѓРґРµС‚ РѕС‚РѕР±СЂР°Р¶Р°С‚СЊСЃСЏ.")]
         public GameObject done;
-        [Tooltip("Объект с кнопкой, которая будет предлагать установить ярлык на рабочий стол (возможно, за вознаграждение). При клике на кнопку необходимо запускать метод PromptShow через данный скрипт или через YandexGame скрипт.")]
+        [Tooltip("РћР±СЉРµРєС‚ СЃ РєРЅРѕРїРєРѕР№, РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РїСЂРµРґР»Р°РіР°С‚СЊ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ СЏСЂР»С‹Рє РЅР° СЂР°Р±РѕС‡РёР№ СЃС‚РѕР» (РІРѕР·РјРѕР¶РЅРѕ, Р·Р° РІРѕР·РЅР°РіСЂР°Р¶РґРµРЅРёРµ). РџСЂРё РєР»РёРєРµ РЅР° РєРЅРѕРїРєСѓ РЅРµРѕР±С…РѕРґРёРјРѕ Р·Р°РїСѓСЃРєР°С‚СЊ РјРµС‚РѕРґ PromptShow С‡РµСЂРµР· РґР°РЅРЅС‹Р№ СЃРєСЂРёРїС‚ РёР»Рё С‡РµСЂРµР· YandexGame СЃРєСЂРёРїС‚.")]
         public GameObject showDialog;
         [Header("Events")]
         [Space(5)]
         public UnityEvent onPromptSuccess;
+        public UnityEvent onPromptFail;
 
         private void Awake()
         {
@@ -27,6 +29,7 @@ namespace YG
         {
             YandexGame.GetDataEvent += UpdateData;
             YandexGame.PromptSuccessEvent += OnPromptSuccess;
+            YandexGame.PromptFailEvent += OnPromptFail;
 
             if (YandexGame.SDKEnabled) UpdateData();
         }
@@ -34,6 +37,7 @@ namespace YG
         {
             YandexGame.GetDataEvent -= UpdateData;
             YandexGame.PromptSuccessEvent -= OnPromptSuccess;
+            YandexGame.PromptFailEvent -= OnPromptFail;
         }
 
         public void UpdateData()
@@ -47,7 +51,7 @@ namespace YG
                 if (done) done.SetActive(true);
                 showDialog.SetActive(false);
             }
-            else if(!YandexGame.EnvironmentData.promptCanShow)
+            else if (!YandexGame.EnvironmentData.promptCanShow)
             {
                 if (notSupported) notSupported.SetActive(true);
                 if (done) done.SetActive(false);
@@ -66,6 +70,12 @@ namespace YG
         void OnPromptSuccess()
         {
             onPromptSuccess?.Invoke();
+            UpdateData();
+        }
+        void OnPromptFail()
+        {
+            YandexGame.EnvironmentData.promptCanShow = false;
+            onPromptFail?.Invoke();
             UpdateData();
         }
     }

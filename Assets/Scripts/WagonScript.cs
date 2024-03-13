@@ -408,20 +408,20 @@ public class WagonScript : MonoBehaviour
         {
             if(GM.WagoneData[IndexWag].LevelWagone == 1)
             {
-                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 10; //
+                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 5; //
                 TimerWag = 20;
                 FoodUpgradeText.text = "2000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 2)
             {
-                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 10; //
-                TimerWag = 30;
+                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 5; //
+                TimerWag = 23;
                 FoodUpgradeText.text = "4000р";
             }
             else if (GM.WagoneData[IndexWag].LevelWagone == 3)
             {
-                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 20; //
-                TimerWag = 50;
+                ProductCount = GM.WagoneData[IndexWag].WorkerInWagone * 10; //
+                TimerWag = 32;
                 FoodUpgradeText.text = "Максимум";
             }
             FoodProdCountText.text = ProductCount + "ед. за: " + TimerWag + "сек."; //
@@ -549,8 +549,7 @@ public class WagonScript : MonoBehaviour
     {
         while (true)
         {
-            int r = GM.TemperatureOnStreet;
-            Mathf.Abs(r);
+            int r = Mathf.Abs(GM.TemperatureOnStreet);
             if (GM.Warm >= r)
             {
                 GM.Warm -= r;
@@ -571,7 +570,7 @@ public class WagonScript : MonoBehaviour
                 GM.StartMessage("Вагон замерзает!");
                 SnowWagone.SetActive(true);
             }
-            yield return new WaitForSeconds(10);
+            yield return new WaitForSeconds(30);
         }
     }
 
