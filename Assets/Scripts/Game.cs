@@ -369,8 +369,8 @@ public class Game : MonoBehaviour
     private int[,] maxWagonLoco = new int[,]
     {
         { 5, 7, 8, 10, 12 },
-        { 15, 18, 21, 27, 30 },
-        { 30, 34, 38, 44, 50 },
+        { 13, 15, 18, 20, 21 },
+        { 21, 23, 25, 28, 30 },
     };
 
     private int[,] storageCoalLoco = new int[,]
@@ -574,7 +574,7 @@ public class Game : MonoBehaviour
                 }
                 if (timeBackground >= 30 & SpeedFon <= 3)
                 {
-                    SpeedFon+= 0.1f;
+                    SpeedFon+= 0.2f;
                     timeBackground = 0;
                 }
                 if(timeADS >= 40)
@@ -612,7 +612,7 @@ public class Game : MonoBehaviour
     {
         if(Coal >= NeedCoal)
         {
-            SpeedFon = 1;
+            SpeedFon = 0.2f;
             StartLocoEnginePan.SetActive(false);
             CoalADS.SetActive(false);
             TreesFreeObj.SetActive(false);

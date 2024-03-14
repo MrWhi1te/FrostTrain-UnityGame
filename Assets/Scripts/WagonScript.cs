@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using YG;
+//using YG;
 
 public class WagonScript : MonoBehaviour
 {
@@ -64,7 +64,6 @@ public class WagonScript : MonoBehaviour
 
     private void OnEnable()
     {
-        YandexGame.RewardVideoEvent += Rewarded;
         for (int i = 0; i < GM.WagoneData.Capacity; i++) // Проверка по длине списка данных поезда
         {
             if (!GM.WagoneData[i].WagoneActive) // Если вагон не активен, то резервируем
@@ -99,7 +98,6 @@ public class WagonScript : MonoBehaviour
             }
         }
     }
-    private void OnDisable() => YandexGame.RewardVideoEvent -= Rewarded;
 
     public void ClickOnWagone() // Клик по вагону и открытие панелей
     {
@@ -662,21 +660,6 @@ public class WagonScript : MonoBehaviour
             {
                 GM.StartMessage("Не хватает денег!");
             }
-        }
-    }
-
-
-    // ADS!!!
-    public void ExampleOpenRewardAd(int id)
-    {
-        // Вызываем метод открытия видео рекламы
-        YandexGame.RewVideoShow(id);
-    }
-    void Rewarded(int id)
-    {
-        if (id == 6)
-        {
-            GM.WagoneData[IndexWag].TimerActiveProduction = 1;
         }
     }
 

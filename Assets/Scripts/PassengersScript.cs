@@ -42,6 +42,7 @@ public class PassengersScript : MonoBehaviour
         {
             passName.text = passStationList[0].namePass;
             passRequest.text = passStationList[0].requestPass;
+            passPhoto.sprite = passStationList[0].photoPass;
             for (int i = 0; i < passResource.Length; i++) passResource[i].text = passStationList[0].usageResources[i].ToString();
             swipeCard.SetActive(true);
         }
@@ -57,16 +58,9 @@ public class PassengersScript : MonoBehaviour
     {
         AO.PlayAudioTakePass();
         pass[passStationList[0].numberPass].statusPass = true;
-        passStationList.Remove(passStationList[0]);
         GM.passCount++;
-        Debug.Log("Кол-во в листе: " + passStationList.Count);
-        for (int i = 0; i < GM.PassResourceUse.Length; i++)
-        {
-            Debug.Log("Индекс: " + i);
-            Debug.Log("Значение в GM: " + GM.PassResourceUse[i]);
-            Debug.Log("Значение в пасс: " + passStationList[0].usageResources[i]);
-            GM.PassResourceUse[i] += passStationList[0].usageResources[i];
-        }
+        for (int i = 0; i < GM.PassResourceUse.Length; i++) GM.PassResourceUse[i] += passStationList[0].usageResources[i];
+        passStationList.Remove(passStationList[0]);
         swipeCard.SetActive(false);
         SwipeCardCheck();
     }

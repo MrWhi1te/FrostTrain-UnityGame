@@ -28,9 +28,9 @@ public class Map : MonoBehaviour
     {
         for (int i = 0; i < 45; i++)
         {
-            PointCity[i].color = new Color(255, 255, 255, 255);
+            PointCity[i].color = new Color32(255, 255, 255, 255);
         }
-        PointCity[GM.City].color = new Color(36, 255, 0, 255);
+        PointCity[GM.City].color = new Color32(36, 255, 0, 255);
         NextStation.enabled = false;
         TaskCityText.text = "";
         ScoreCount();
@@ -377,7 +377,7 @@ public class Map : MonoBehaviour
 
     void GetNextStation(int index)
     {
-        PointCity[index].color = new Color(36, 255, 0, 255);
+        PointCity[index].color = new Color32(255, 255, 0, 255);
         GM.ChoiceCity = index;
         NextStation.enabled = true;
         ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];

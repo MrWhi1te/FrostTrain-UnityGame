@@ -122,7 +122,7 @@ public class StationScripts : MonoBehaviour
         GM.StartNextStation();
         GM.City = GM.ChoiceCity;
         GM.ChoiceCity = 0;
-        GM.SpeedFon = 0.1f;
+        GM.SpeedFon = 0.2f;
         GM.RandomBackground();
         StationPan.SetActive(false);
         GM.SV.Save();
@@ -144,9 +144,9 @@ public class StationScripts : MonoBehaviour
         WarmText.text = GM.Warm + "/" + GM.WarmMax;
         WorkerText.text = GM.FreeWorker + "/" + GM.AllWorker; //
         CountWagon.text = "Вагонов: " + GM.WagonCol + " из " + GM.MaxWagone; //
-        BuyWagoneText.text = (200 * GM.WagonCol) + "р";
+        BuyWagoneText.text = "Добавить: " + (200 * GM.WagonCol) + "р";
         countPassWagon.text = "Мест пассажирам: " + ((GM.passWagoneCount * 3) - GM.passCount) + " из " + (GM.passWagoneCount * 3);
-        buyPassWagonText.text = (800 * GM.passWagoneCount) + "р";
+        buyPassWagonText.text = "Добавить: " + (800 * GM.passWagoneCount) + "р";
     }
 
     public void BuyWagone() // Покупка вагонов / Добавление
