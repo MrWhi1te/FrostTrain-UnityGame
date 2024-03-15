@@ -554,8 +554,8 @@ public class Game : MonoBehaviour
                 }
                 SmokeParticle.SetActive(false);
                 GamePan.SetActive(false);
-                if (YandexGame.EnvironmentData.deviceType == "mobile" & City == 0 || City == 1) YandexGame.StickyAdActivity(false);
-                YandexGame.FullscreenShow();
+                if (device == "mobile" && City == 0 || City == 1) YandexGame.StickyAdActivity(false);
+                if (City != 0) YandexGame.FullscreenShow();
                 break;
             }
             
@@ -574,7 +574,7 @@ public class Game : MonoBehaviour
                 }
                 if (timeBackground >= 30 & SpeedFon <= 3)
                 {
-                    SpeedFon+= 0.2f;
+                    SpeedFon+= 0.1f;
                     timeBackground = 0;
                 }
                 if(timeADS >= 40)
@@ -612,7 +612,7 @@ public class Game : MonoBehaviour
     {
         if(Coal >= NeedCoal)
         {
-            SpeedFon = 0.2f;
+            SpeedFon = 1f;
             StartLocoEnginePan.SetActive(false);
             CoalADS.SetActive(false);
             TreesFreeObj.SetActive(false);
@@ -1013,6 +1013,7 @@ public class Game : MonoBehaviour
         AO.CheckActiveSound();
         MenuPan.SetActive(false);
         device = YandexGame.EnvironmentData.deviceType;
+        if (device == "mobile" && City == 0) YandexGame.StickyAdActivity(false);
         StartGame();
     }
 

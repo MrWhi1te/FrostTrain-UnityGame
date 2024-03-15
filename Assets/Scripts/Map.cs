@@ -378,6 +378,7 @@ public class Map : MonoBehaviour
     void GetNextStation(int index)
     {
         PointCity[index].color = new Color32(255, 255, 0, 255);
+        PointCity[GM.City].color = new Color(36, 255, 0, 255);
         GM.ChoiceCity = index;
         NextStation.enabled = true;
         ChoiceCityNameText.text = "Следующая станция: " + GM.NameCity[GM.ChoiceCity];

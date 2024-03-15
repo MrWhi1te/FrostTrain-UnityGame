@@ -122,15 +122,12 @@ public class StationScripts : MonoBehaviour
         GM.StartNextStation();
         GM.City = GM.ChoiceCity;
         GM.ChoiceCity = 0;
-        GM.SpeedFon = 0.2f;
+        GM.SpeedFon = 1f;
         GM.RandomBackground();
         StationPan.SetActive(false);
         GM.SV.Save();
         GM.TaskCounter();
-        if (YandexGame.EnvironmentData.deviceType == "mobile")
-        {
-            YandexGame.StickyAdActivity(true);
-        }
+        if (GM.device == "mobile") YandexGame.StickyAdActivity(true);
         YandexGame.FullscreenShow();
     }
 

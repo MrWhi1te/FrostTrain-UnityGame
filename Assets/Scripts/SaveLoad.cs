@@ -11,8 +11,10 @@ public class SaveLoad : MonoBehaviour
  
     [SerializeField] private UnityEngine.UI.Text SaveText; //
     [SerializeField] private GameObject DeletePan;
+    [SerializeField] private GameObject loadPan;
     [HideInInspector] public bool Saver;
     [HideInInspector] public bool SaverNew;
+
 
     private void OnEnable() => YandexGame.GetDataEvent += GetLoad;
     private void OnDisable() => YandexGame.GetDataEvent -= GetLoad;
@@ -104,6 +106,7 @@ public class SaveLoad : MonoBehaviour
                 GM.OffFeedback();
             }
         }
+        loadPan.SetActive(false);
     }
 
     public void Save()
