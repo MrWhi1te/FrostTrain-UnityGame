@@ -178,6 +178,7 @@ public class Game : MonoBehaviour
     [Header("Thanks")]
     [SerializeField] private GameObject ThanksPan;//
     [SerializeField] private GameObject Feedback; //
+    [SerializeField] private GameObject AutorisationPan;
     [HideInInspector] public bool Thanks; //
     //
     [Header("STATISTIC")]
@@ -555,7 +556,6 @@ public class Game : MonoBehaviour
                 SmokeParticle.SetActive(false);
                 GamePan.SetActive(false);
                 if (device == "mobile" && City == 0 || City == 1) YandexGame.StickyAdActivity(false);
-                if (City != 0) YandexGame.FullscreenShow();
                 break;
             }
             
@@ -1092,9 +1092,25 @@ public class Game : MonoBehaviour
         Thanks = true;
         Time.timeScale = 1;
     }
+
+    public void OpenClosedAutorisationPan()
+    {
+        if (!AutorisationPan.activeInHierarchy)
+        {
+            ThanksPan.SetActive(false);
+            AutorisationPan.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            AutorisationPan.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
     public void OffFeedback()
     {
         Feedback.SetActive(false);
+        Thanks = true;
     }
 
 }
