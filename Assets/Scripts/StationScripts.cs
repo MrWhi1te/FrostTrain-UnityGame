@@ -102,7 +102,7 @@ public class StationScripts : MonoBehaviour
         DT.CheckDelivery();
         UpdateADSMoneyActive();
         AdsStationPan.SetActive(true);
-        AdsStationText.text = "Вы прибыли на станцию в город: " + GM.City;
+        AdsStationText.text = "Вы прибыли на станцию в город: " + GM.NameCity[GM.City];
         Invoke("OpenFullscreenAds", 0.5f);
     }
     private void OnDisable() => YandexGame.RewardVideoEvent -= Rewarded;

@@ -51,7 +51,7 @@ public class SwipeCard : MonoBehaviour
     void OnMouseDrag()
     {
         Vector3 currentScreenPoint;
-        
+
         if (GM.device == "desktop") currentScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
         else currentScreenPoint = new Vector3(endPosition.x, endPosition.y, screenPoint.z);
 
@@ -61,7 +61,7 @@ public class SwipeCard : MonoBehaviour
 
         if (Vector3.Distance(transform.position, startPoint) > dragThreshold)
         {
-            if (transform.position.x > startPoint.x && GM.passCount < (GM.passWagoneCount * 3)) 
+            if (transform.position.x > startPoint.x && GM.passCount < (GM.passWagoneCount * 3))
                 thisImage.color = new Color32(180, 255, 180, 255);
             else thisImage.color = new Color32(255, 180, 180, 255);
         }
@@ -71,7 +71,7 @@ public class SwipeCard : MonoBehaviour
     {
         if (Vector3.Distance(transform.position, startPoint) > dragThreshold) // Если карточка была перемещена больше чем dragThreshold, считаем это свайпом
         {
-            if (transform.position.x > startPoint.x && GM.passCount < (GM.passWagoneCount*3))
+            if (transform.position.x > startPoint.x && GM.passCount < (GM.passWagoneCount * 3))
                 HandleSwipe("Right");
             else HandleSwipe("Left");
         }

@@ -21,6 +21,7 @@ public class SaveLoad : MonoBehaviour
 
     public void GetLoad()
     {
+        loadPan.SetActive(true);
         Saver = YandexGame.savesData.Saver;
         SaverNew = YandexGame.savesData.SaverNew;
         if (Saver) GM.updatePan.SetActive(true);

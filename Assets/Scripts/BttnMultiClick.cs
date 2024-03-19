@@ -37,7 +37,7 @@ public class BttnMultiClick : MonoBehaviour
         if(timeText >= 1)
         {
             timeText = 0;
-            if(clickCount < 0)
+            if(clickCount <= 0)
             {
                 clickText.text = "";
             }
@@ -56,6 +56,7 @@ public class BttnMultiClick : MonoBehaviour
             GM.ResourceTextUpdate();
             GM.TextLoco();
         }
+        clickMultiplierCount++;
         GM.TreesClickParticle.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         GM.TreesClickParticle.SetActive(false);
         GM.TreesClickParticle.SetActive(true);
