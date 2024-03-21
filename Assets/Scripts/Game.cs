@@ -555,7 +555,7 @@ public class Game : MonoBehaviour
                 }
                 SmokeParticle.SetActive(false);
                 GamePan.SetActive(false);
-                if (device == "mobile" && City == 0 || City == 1) YandexGame.StickyAdActivity(false);
+                if (device == "mobile" && (City == 0 || City == 1)) YandexGame.StickyAdActivity(false);
                 break;
             }
             

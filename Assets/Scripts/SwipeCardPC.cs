@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SwipeCard : MonoBehaviour
+public class SwipeCardPC : MonoBehaviour
 {
     [SerializeField] private Game GM;
     [SerializeField] private PassengersScript PS;
@@ -8,7 +8,6 @@ public class SwipeCard : MonoBehaviour
     private Vector3 startPoint;
     private Vector3 screenPoint;
     private Vector3 offset;
-    private Vector3 endPosition;
     private float dragThreshold = 0.2f;
     private UnityEngine.UI.Image thisImage;
 
@@ -17,29 +16,6 @@ public class SwipeCard : MonoBehaviour
         startPoint = transform.position;
         thisImage = GetComponent<UnityEngine.UI.Image>();
     }
-
-    private void Update()
-    {
-        if (GM.device != "desktop" && Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-
-            if (touch.phase == TouchPhase.Began)
-            {
-                screenPoint = touch.position;
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                endPosition = touch.position;
-                OnMouseDrag();
-            }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                OnMouseUp();
-            }
-        }
-    }
-
 
     void OnMouseDown()
     {
@@ -52,8 +28,7 @@ public class SwipeCard : MonoBehaviour
     {
         Vector3 currentScreenPoint;
 
-        if (GM.device == "desktop") currentScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-        else currentScreenPoint = new Vector3(endPosition.x, endPosition.y, screenPoint.z);
+        currentScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 
         Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenPoint) + offset; // Преобразуем эту позицию в пространство игры и применяем смещение
 

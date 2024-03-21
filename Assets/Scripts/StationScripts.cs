@@ -63,6 +63,7 @@ public class StationScripts : MonoBehaviour
     [SerializeField] private GameObject ShopPan; //
     [SerializeField] private GameObject ADSMoneyActive; //
     [SerializeField] private GameObject AdsStationPan;
+    [SerializeField] private GameObject AdsStationPanBttn;
     [SerializeField] private Text AdsStationText;
     [SerializeField] private Text ADSMoneyActiveText; // текст денег за рекламу
     private int ADSMoneyCol; // награда денег за рекламу
@@ -104,6 +105,7 @@ public class StationScripts : MonoBehaviour
         AdsStationPan.SetActive(true);
         AdsStationText.text = "Вы прибыли на станцию в город: " + GM.NameCity[GM.City];
         Invoke("OpenFullscreenAds", 0.5f);
+        Invoke("ActiveAdsStationPanBttn", 1f);
     }
     private void OnDisable() => YandexGame.RewardVideoEvent -= Rewarded;
 
@@ -556,13 +558,19 @@ public class StationScripts : MonoBehaviour
         }
     }
 
-    public void OpenFullscreenAds()
+    private void OpenFullscreenAds()
     {
         YandexGame.FullscreenShow();
     }
 
+    private void ActiveAdsStationPanBttn()
+    {
+        AdsStationPanBttn.SetActive(true);
+    }
+
     public void ClosedAdsStationPan()
     {
+        AdsStationPanBttn.SetActive(false);
         AdsStationPan.SetActive(false);
     }
 }

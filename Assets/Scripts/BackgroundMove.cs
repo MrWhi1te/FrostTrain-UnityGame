@@ -6,7 +6,7 @@ public class BackgroundMove : MonoBehaviour
 
     private Transform thisTransf;
     [SerializeField] private float backgroundSpeed; // Скорость движения заднего фона
-    private Vector2 startPosition;
+    private Vector3 startPosition;
 
     private float spriteWidth;
 
@@ -14,16 +14,21 @@ public class BackgroundMove : MonoBehaviour
     {
         thisTransf = transform;
         spriteWidth = GetComponent<SpriteRenderer>().bounds.size.x;
-        startPosition = transform.position;
+        startPosition = thisTransf.position;
     }
 
     private void FixedUpdate()
     {
-        if (GM.SpeedFon > 0) thisTransf.position += (backgroundSpeed + GM.SpeedFon) * Time.deltaTime * Vector3.left;
+        //if (GM.SpeedFon > 0) thisTransf.position += (backgroundSpeed + GM.SpeedFon) * Time.deltaTime * Vector3.left;
 
-        if (thisTransf.position.x < 0)
+        if (GM.SpeedFon > 0)
         {
-            thisTransf.position += Vector3.right * spriteWidth;
+            float newPosition = Mathf.Repeat(Time.time * (backgroundSpeed + GM.SpeedFon), spriteWidth);
+            thisTransf.position = startPosition + Vector3.left * newPosition;
         }
+        //if (thisTransf.position.x < 0)
+        //{
+        //    thisTransf.position += Vector3.right * spriteWidth;
+        //}
     }
 }
