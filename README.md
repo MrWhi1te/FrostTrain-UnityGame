@@ -1,7 +1,6 @@
 # FrostTrain
-![icon](https://avatars.mds.yandex.net/get-games/2977039/2a000001859367fc920f3920d8a77a077c40/cover1)
+![icon](https://avatars.mds.yandex.net/get-games/2977039/2a0000018f29f3281e0593f6dcd921fe0323/cover1)
 
 ### [Запустить игру](https://yandex.ru/games/app/210436)
 
-![screen](https://avatars.mds.yandex.net/get-games/3006389/2a00000185c0c05b9fd5cc17bbf03dbad06f//orig)
-![screen](https://avatars.mds.yandex.net/get-games/1892995/2a00000185c0c05c68154ce988f4b5f638c4//orig)
+<img src="https://avatars.mds.yandex.net/get-games/2977039/2a0000018e328b9ad9e9741041d2ef7f6dd1//orig" alt="icon" height="220"/> <img src="https://avatars.mds.yandex.net/get-games/12797757/2a0000018e328c0e9c8c0a1d378a8c0ecdc5//orig" alt="icon" height="220"/>
